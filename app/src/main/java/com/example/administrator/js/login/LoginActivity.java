@@ -1,4 +1,4 @@
-package com.example.administrator.js;
+package com.example.administrator.js.login;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,9 +9,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.base.Navigator;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.example.administrator.js.Http;
+import com.example.administrator.js.R;
+import com.example.administrator.js.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,17 +25,13 @@ import butterknife.OnClick;
 /**
  * A login screen that offers login via email/password.
  */
+@Route(path = "/login/LoginActivity")
 public class LoginActivity extends BaseActivity {
 
 
-    @BindView(R.id.tv_phone)
-    AutoCompleteTextView mTvPhone;
-    @BindView(R.id.password)
-    EditText mPassword;
-    @BindView(R.id.bt_sure)
-    Button mBtSure;
-    @BindView(R.id.email_login_form)
-    LinearLayout mEmailLoginForm;
+    Navigator mNavigator;
+    LoginFragment mLoginFragment;
+    registerFragment mRegisterFragment;
 
     @Override
     public Toolbar getToolbar() {
@@ -39,14 +40,11 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        mLoginFragment = new LoginFragment();
+        mRegisterFragment = new registerFragment();
+        mNavigator = new Navigator(getSupportFragmentManager(), R.id.container);
+        mNavigator.showFragment(mLoginFragment);
 
-        mBtSure = findViewById(R.id.bt_sure);
-        mBtSure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View mView) {
-                onViewClicked();
-            }
-        });
     }
 
 

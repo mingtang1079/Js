@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+
+@Route(path = "/activity/MainActivity")
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
