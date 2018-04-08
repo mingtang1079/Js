@@ -1,5 +1,6 @@
 package com.example.administrator.js.login;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -8,9 +9,14 @@ import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.User;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by tangming on 2018/4/8.
@@ -19,7 +25,7 @@ import butterknife.BindView;
 public class LoginFragment extends BaseFragment {
 
     @BindView(R.id.tv_phone)
-    AutoCompleteTextView mTvPhone;
+    EditText mTvPhone;
     @BindView(R.id.password)
     EditText mPassword;
     @BindView(R.id.bt_sure)
@@ -45,6 +51,24 @@ public class LoginFragment extends BaseFragment {
                         .navigation();
             }
         });
+    }
+
+    @OnClick(R.id.bt_sure)
+    public void onViewClicked() {
+
+        Http.getDefault().login("18202820092", "123456")
+                .as(RxHelper.<User>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<User>() {
+                    @Override
+                    protected void onSucess(User mUser) {
+                        Log.d("ddd====?", "fdsfs");
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+
+                    }
+                });
     }
 
     @Override

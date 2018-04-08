@@ -14,12 +14,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@drawable/guide_bg</item>
+        <item name="android:windowBackground">@drawable/spalash</item>
         <!--<item name="android:windowAnimationStyle">@style/AnimationActivity</item>-->
     </style>
 
     <style name="ThemeFullScreen" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@drawable/spalash</item>
     </style>
 
     <style name="AnimationActivity" parent="@android:style/Animation.Activity">

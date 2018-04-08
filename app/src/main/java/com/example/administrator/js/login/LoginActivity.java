@@ -43,7 +43,7 @@ public class LoginActivity extends BaseActivity {
         mLoginFragment = new LoginFragment();
         mRegisterFragment = new registerFragment();
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.container);
-        mNavigator.showFragment(mLoginFragment);
+       mNavigator.showFragment(mLoginFragment);
 
     }
 
@@ -58,22 +58,6 @@ public class LoginActivity extends BaseActivity {
         return null;
     }
 
-    @OnClick(R.id.bt_sure)
-    public void onViewClicked() {
 
-        Http.getDefault().login("18202820092", "123456")
-                .as(RxHelper.<User>handleResult(this))
-                .subscribe(new ResponceSubscriber<User>() {
-                    @Override
-                    protected void onSucess(User mUser) {
-                        Log.d("ddd====?", "fdsfs");
-                    }
-
-                    @Override
-                    protected void onFail(String message) {
-
-                    }
-                });
-    }
 }
 

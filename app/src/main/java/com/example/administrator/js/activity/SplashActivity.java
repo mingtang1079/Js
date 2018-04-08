@@ -1,5 +1,6 @@
 package com.example.administrator.js.activity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -7,8 +8,10 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.administrator.js.App;
+import com.example.administrator.js.MainActivity;
 import com.example.administrator.js.R;
 import com.example.administrator.js.User;
+import com.example.administrator.js.login.LoginActivity;
 
 @Route(path = "/activity/SplashActivity")
 public class SplashActivity extends com.appbaselib.base.BaseActivity {
@@ -32,16 +35,17 @@ public class SplashActivity extends com.appbaselib.base.BaseActivity {
         super.onStart();
 
         if (mUser != null) {
-            ARouter.getInstance().build("/activity/MainActivity")
-                    .withTransition(R.anim.anim_enter,R.anim.anim_exit)
-                    .navigation();
+//            ARouter.getInstance().build("/activity/MainActivity")
+//                    .withTransition(R.anim.anim_enter,R.anim.anim_exit)
+//                    .navigation();
+
+            Intent m=new Intent(this, MainActivity.class);
+            startActivity(m);
             finish();
 
         } else {
-            ARouter.getInstance().build("/login/LoginActivity")
-                //    .withTransition(R.anim.anim_enter,R.anim.anim_exit)
-
-                    .navigation();
+            Intent m=new Intent(this, LoginActivity.class);
+            startActivity(m);
             finish();
         }
 
