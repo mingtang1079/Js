@@ -1,22 +1,27 @@
 package com.example.administrator.js.login;
 
+import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.User;
+import com.example.administrator.js.view.PasswordToggleEditText;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 /**
  * Created by tangming on 2018/4/8.
@@ -24,13 +29,20 @@ import butterknife.OnClick;
 
 public class LoginFragment extends BaseFragment {
 
+
     @BindView(R.id.tv_phone)
     EditText mTvPhone;
     @BindView(R.id.password)
-    EditText mPassword;
-    @BindView(R.id.bt_sure)
-    Button mBtSure;
-
+    PasswordToggleEditText mPassword;
+    @BindView(R.id.tv_wjmm)
+    TextView mTvWjmm;
+    @BindView(R.id.bt_login)
+    Button mBtLogin;
+    @BindView(R.id.bt_register)
+    Button mBtRegister;
+    @BindView(R.id.iv_weixin)
+    ImageView mIvWeixin;
+    Unbinder unbinder;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -40,18 +52,10 @@ public class LoginFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-        mBtSure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View mView) {
-                ARouter.getInstance().build("/login/LoginActivity")
-                        //    .withTransition(R.anim.anim_enter,R.anim.anim_exit)
 
-                        .navigation();
-            }
-        });
     }
 
-    @OnClick(R.id.bt_sure)
+    @OnClick(R.id.bt_login)
     public void onViewClicked() {
 
         Http.getDefault().login("18202820092", "123456")
@@ -72,5 +76,23 @@ public class LoginFragment extends BaseFragment {
     @Override
     protected View getLoadingTargetView() {
         return null;
+    }
+
+
+    @OnClick({R.id.bt_login, R.id.bt_register, R.id.iv_weixin})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.bt_login:
+
+                break;
+            case R.id.bt_register:
+
+
+                break;
+            case R.id.iv_weixin:
+
+
+                break;
+        }
     }
 }

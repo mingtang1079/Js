@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:background="@android:color/transparent"
-            android:text="登录 "
+            android:text="注册"
             android:textColor="#FFFFFFFF"
             android:textSize="28sp" />
 

@@ -81,31 +81,20 @@ public class PasswordToggleEditText extends EditText implements
                         && (event.getX() < ((getWidth() - getPaddingRight())));
                 if (touchable) {
                     //显示密码明文
-                    if (isShow) {
-                        mToggleDrawable=ContextCompat.getDrawable(getContext(), R.drawable.icon_show_password);
-                        setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                        postInvalidate();
-                        CharSequence charSequence = getText();
-                        //为了保证体验效果，需要保持输入焦点在文本最后一位
-                        if (charSequence != null) {
-                            Spannable spanText = (Spannable) charSequence;
-                            Selection.setSelection(spanText, charSequence.length());
-                        }
-                        isShow=!isShow;
+                    setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    postInvalidate();
+                    CharSequence charSequence = getText();
+                    //为了保证体验效果，需要保持输入焦点在文本最后一位
+                    if (charSequence != null) {
+                        Spannable spanText = (Spannable) charSequence;
+                        Selection.setSelection(spanText, charSequence.length());
                     }
-                    else
-                    {
-                        mToggleDrawable=ContextCompat.getDrawable(getContext(), R.drawable.icon_hide_password);
-                        //隐藏密码明文
-                        setTransformationMethod(PasswordTransformationMethod.getInstance());
-                        postInvalidate();
-                        setSelection(getText().length());
-
-                        isShow=!isShow;
-                    }
-
                 }
-
+            }else if(event.getAction() == MotionEvent.ACTION_UP){
+                //隐藏密码明文
+                setTransformationMethod(PasswordTransformationMethod.getInstance());
+                postInvalidate();
+                setSelection(getText().length());
             }
         }
 

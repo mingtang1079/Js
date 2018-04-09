@@ -10,4 +10,6 @@
     <color name="color_252424">#252424</color>
     <color name="color_333332">#333332</color>
     <color name="color_242323">#242323</color>
+    <color name="color_e6b800">#e6b800</color>
+    <color name="color_default_disabled">#BBBBBB</color>
 </resources>
