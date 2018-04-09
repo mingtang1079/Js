@@ -30,8 +30,6 @@ public class LoginFragment extends BaseFragment {
     EditText mPassword;
     @BindView(R.id.bt_sure)
     Button mBtSure;
-    @BindView(R.id.email_login_form)
-    LinearLayout mEmailLoginForm;
 
 
     @Override

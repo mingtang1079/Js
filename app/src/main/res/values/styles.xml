@@ -6,11 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:background">@color/white_color</item>
     </style>
 
     <style name="SpalashActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowFullscreen">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -19,8 +19,9 @@
     </style>
 
     <style name="ThemeFullScreen" parent="AppTheme">
-        <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@drawable/spalash</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:clipToPadding">false</item>
     </style>
 
     <style name="AnimationActivity" parent="@android:style/Animation.Activity">
@@ -28,5 +29,11 @@
         <item name="android:activityOpenExitAnimation">@anim/anim_exit</item>
         <item name="android:activityCloseEnterAnimation">@anim/back_enter</item>
         <item name="android:activityCloseExitAnimation">@anim/back_exit</item>
+    </style>
+
+    <style name="login_edit_style" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#3c3b3b</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+
     </style>
 </resources>
