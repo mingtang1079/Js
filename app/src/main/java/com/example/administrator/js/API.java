@@ -14,12 +14,7 @@ import retrofit2.http.Query;
 
 public interface API {
 
-    String AUTHEN = "spd/rest/authen/";
-
-    String INDEX = "spd/rest/index/";
-
-    String NO_AUTHEN = "spd/rest/";
-    String AUTHORIRY="http://39.107.84.49:8080";
+    String AUTHORIRY = "http://39.107.84.49:8080/sport/api";
 
     /**
      * 登录
@@ -29,8 +24,36 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/sport/api/user/login")
+    @POST(AUTHORIRY + "/user/login")
     Observable<BaseModel<User>> login(@Field("mobile") String phone, @Field("password") String password);
+
+    /**
+     * 登录
+     *
+     * @param phone
+     * @param password
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/re ")
+    Observable<BaseModel<User>> register(@Field("regtype") String type,
+                                         @Field("mobile") String phone,
+                                         @Field("code") String code,
+                                         @Field("role") String role,
+                                         @Field("password") String password);
+
+    /**
+     * 登录
+     *
+     * @param phone
+     * @param mobile
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/sms/get")
+    Observable<BaseModel<String>> getCode(@Field("type") String type,
+                                        @Field("mobile") String phone
+    );
 
 
 }

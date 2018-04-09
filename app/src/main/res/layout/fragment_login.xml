@@ -32,7 +32,7 @@
             android:background="@android:color/transparent"
             android:text="登录 "
             android:textColor="#FFFFFFFF"
-            android:textSize="28sp" />
+            android:textSize="26sp" />
 
 
         <EditText
@@ -86,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="登录"
+            android:textColor="@color/black_color"
             android:textStyle="bold" />
 
         <Button

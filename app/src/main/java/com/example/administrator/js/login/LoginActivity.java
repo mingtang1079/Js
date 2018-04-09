@@ -1,37 +1,23 @@
 package com.example.administrator.js.login;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
-import com.appbaselib.network.ResponceSubscriber;
-import com.appbaselib.rx.RxHelper;
-import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
-import com.example.administrator.js.User;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * A login screen that offers login via email/password.
  */
 @Route(path = "/login/LoginActivity")
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends BaseActivity implements OnbackClickListener {
 
 
     Navigator mNavigator;
     LoginFragment mLoginFragment;
-    registerFragment mRegisterFragment;
+    RegisterFragment mRegisterFragment;
 
     @Override
     public Toolbar getToolbar() {
@@ -41,9 +27,9 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initView() {
         mLoginFragment = new LoginFragment();
-        mRegisterFragment = new registerFragment();
+        mRegisterFragment = new RegisterFragment();
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.container);
-       mNavigator.showFragment(mLoginFragment);
+        mNavigator.showFragment(mLoginFragment);
 
     }
 
@@ -58,6 +44,23 @@ public class LoginActivity extends BaseActivity {
         return null;
     }
 
+    @Override
+    public void onBackClick(int tag) {
+        if (tag == 1) {
+            mNavigator.showFragment(mLoginFragment);
+        } else if (tag == 2) {
+            mNavigator.showFragment(mRegisterFragment);
+        }
+    }
 
+    @Override
+    public void onBackPressed() {
+
+        if (mRegisterFragment.isVisible())
+            mNavigator.showFragment(mLoginFragment);
+        else
+            finish();
+
+    }
 }
 
