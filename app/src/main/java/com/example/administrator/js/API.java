@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface API {
 
-    String AUTHORIRY = "http://39.107.84.49:8080/sport/api";
+    String AUTHORIRY = "https://www.bjwork.xyz/api";
 
     /**
      * 登录
@@ -35,7 +35,7 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/re ")
+    @POST(AUTHORIRY + "/user/reg")
     Observable<BaseModel<User>> register(@Field("regtype") String type,
                                          @Field("mobile") String phone,
                                          @Field("code") String code,

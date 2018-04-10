@@ -18,6 +18,7 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener {
     Navigator mNavigator;
     LoginFragment mLoginFragment;
     RegisterFragment mRegisterFragment;
+    UserTypeFragment mUserTypeFragment;
 
     @Override
     public Toolbar getToolbar() {
@@ -28,6 +29,7 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener {
     protected void initView() {
         mLoginFragment = new LoginFragment();
         mRegisterFragment = new RegisterFragment();
+        mUserTypeFragment = new UserTypeFragment();
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.container);
         mNavigator.showFragment(mLoginFragment);
 
@@ -50,6 +52,9 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener {
             mNavigator.showFragment(mLoginFragment);
         } else if (tag == 2) {
             mNavigator.showFragment(mRegisterFragment);
+        } else {
+            mNavigator.showFragment(mUserTypeFragment);
+
         }
     }
 
@@ -58,7 +63,9 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener {
 
         if (mRegisterFragment.isVisible())
             mNavigator.showFragment(mLoginFragment);
-        else
+        else if (mUserTypeFragment.isVisible()) {
+            mNavigator.showFragment(mRegisterFragment);
+        } else
             finish();
 
     }

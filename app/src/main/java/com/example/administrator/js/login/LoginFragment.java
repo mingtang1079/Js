@@ -1,7 +1,9 @@
 package com.example.administrator.js.login;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +13,27 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.Postcard;
+import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.User;
+import com.example.administrator.js.activity.MainActivity;
 import com.example.administrator.js.view.PasswordToggleEditText;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by tangming on 2018/4/8.
@@ -44,7 +54,6 @@ public class LoginFragment extends BaseFragment {
     Button mBtRegister;
     @BindView(R.id.iv_weixin)
     ImageView mIvWeixin;
-    Unbinder unbinder;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -54,6 +63,24 @@ public class LoginFragment extends BaseFragment {
     @Override
     protected void initView() {
 
+        if (BuildConfig.DEBUG) {
+            mTvPhone.setText("18202820092");
+            mPassword.setText("123456");
+        }
+
+        Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone).skip(1);
+        Observable<CharSequence> mCharSequenceObservablePassword = RxTextView.textChanges(mPassword).skip(1);
+        Observable.combineLatest(mObservablePhone, mCharSequenceObservablePassword, new BiFunction<CharSequence, CharSequence, Boolean>() {
+            @Override
+            public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2) throws Exception {
+                return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2);
+            }
+        }).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean mBoolean) throws Exception {
+                mBtLogin.setEnabled(mBoolean);
+            }
+        });
 
     }
 
@@ -86,13 +113,36 @@ public class LoginFragment extends BaseFragment {
     private void login() {
         Http.getDefault().login(mTvPhone.getText().toString(), mPassword.getText().toString())
                 .as(RxHelper.<User>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<User>() {
+                .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override
                     protected void onSucess(User mUser) {
 
-
                         ARouter.getInstance().build("/activity/MainActivity")
-                                .navigation();
+                                .navigation(mContext, new NavigationCallback() {
+                                    @Override
+                                    public void onFound(Postcard postcard) {
+                                        showToast(postcard.getPath());
+                                    }
+
+                                    @Override
+                                    public void onLost(Postcard postcard) {
+                                        showToast(postcard.getPath());
+
+                                    }
+
+                                    @Override
+                                    public void onArrival(Postcard postcard) {
+                                        showToast(postcard.getPath());
+
+                                    }
+
+                                    @Override
+                                    public void onInterrupt(Postcard postcard) {
+                                        showToast(postcard.getPath());
+
+                                    }
+                                });
+                        //   startActivity(new Intent(mContext, MainActivity.class));
                     }
 
                     @Override

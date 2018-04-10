@@ -1,4 +1,4 @@
-package com.example.administrator.js;
+package com.example.administrator.js.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.example.administrator.js.R;
 
 @Route(path = "/activity/MainActivity")
 public class MainActivity extends AppCompatActivity {

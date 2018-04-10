@@ -110,7 +110,7 @@ public class PasswordToggleEditText extends EditText implements
             setToggleIconVisible(getText().length() > 0);
         } else {
             setToggleIconVisible(false);
-            setShakeAnimation();
+           // setShakeAnimation();
         }
     }
 

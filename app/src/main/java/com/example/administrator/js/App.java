@@ -30,11 +30,9 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-
         initOkHttp();
-
         initBugly();
-
+        initRouter();
     }
 
     private void initBugly() {
@@ -99,7 +97,6 @@ public class App extends BaseApplication {
         });
 
         client = clientBuilder.build();
-        initRouter();
     }
 
 

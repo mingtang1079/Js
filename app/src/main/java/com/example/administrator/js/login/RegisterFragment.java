@@ -2,6 +2,7 @@ package com.example.administrator.js.login;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +17,27 @@ import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.User;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.view.PasswordToggleEditText;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Function3;
+import io.reactivex.observers.DefaultObserver;
 
 /**
  * Created by tangming on 2018/4/8.
@@ -40,7 +56,8 @@ public class RegisterFragment extends BaseFragment {
     PasswordToggleEditText mPassword;
     @BindView(R.id.bt_register)
     Button mBtRegister;
-    Unbinder unbinder;
+
+    private String role;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -50,6 +67,21 @@ public class RegisterFragment extends BaseFragment {
     @Override
     protected void initView() {
 
+        Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone).skip(1);
+        Observable<CharSequence> mCharSequenceObservablePassword = RxTextView.textChanges(mPassword).skip(1);
+        Observable<CharSequence> mObservableYzm = RxTextView.textChanges(mPassword);
+
+        Observable.combineLatest(mObservablePhone, mCharSequenceObservablePassword, mObservableYzm, new Function3<CharSequence, CharSequence, CharSequence, Boolean>() {
+            @Override
+            public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2, CharSequence mCharSequence3) throws Exception {
+                return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2) && !TextUtils.isEmpty(mCharSequence3);
+            }
+        }).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean mBoolean) throws Exception {
+                mBtRegister.setEnabled(mBoolean);
+            }
+        });
 
     }
 
@@ -73,15 +105,30 @@ public class RegisterFragment extends BaseFragment {
                 break;
             case R.id.bt_register:
 
-                register();
+                if (mOnbackClickListener instanceof OnbackClickListener)
+                    mOnbackClickListener.onBackClick(3);
 
                 break;
         }
     }
 
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMessage(EventMessage.UsertypeMessage message) {
+
+        if (message != null)
+            role = message.i + "";
+        register();
+
+    }
+
     private void register() {
 
-        Http.getDefault().register("0", mTvPhone.getText().toString(), mEdYzm.getText().toString(), "0", mPassword.getText().toString())
+        Http.getDefault().register("0", mTvPhone.getText().toString(), mEdYzm.getText().toString(), role, mPassword.getText().toString())
                 .as(RxHelper.<User>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override
@@ -98,7 +145,42 @@ public class RegisterFragment extends BaseFragment {
     }
 
     private void requestCode() {
-        Http.getDefault().getCode(mTvPhone.getText().toString(), "1")
+
+        final int count = 60;
+        Observable.interval(0, 1, TimeUnit.SECONDS)
+                .take(count + 1)
+                .map(new Function<Long, Long>() {
+                    @Override
+                    public Long apply(Long mLong) throws Exception {
+                        return count - mLong;
+                    }
+                }).doOnSubscribe(new Consumer<Disposable>() {
+            @Override
+            public void accept(Disposable mDisposable) throws Exception {
+                mBtYzm.setEnabled(false);
+
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DefaultObserver<Long>() {
+                    @Override
+                    public void onNext(Long mLong) {
+                        mBtYzm.setText("剩余" + mLong + "秒");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mBtYzm.setEnabled(true);
+                        mBtYzm.setText("获取验证码");
+                    }
+                });
+
+
+        Http.getDefault().getCode("1", mTvPhone.getText().toString())
                 .as(RxHelper.<String>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override
