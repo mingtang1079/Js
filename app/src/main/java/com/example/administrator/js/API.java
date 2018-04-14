@@ -1,12 +1,12 @@
 package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
+import com.example.administrator.js.me.model.User;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 /**
  * Created by tangming on 2017/5/11.

@@ -1,11 +1,8 @@
 package com.example.administrator.js.login;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,7 +13,7 @@ import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
-import com.example.administrator.js.User;
+import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.view.PasswordToggleEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -27,13 +24,10 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Function3;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/i_music"
+        android:checked="true"
+        android:icon="@drawable/one"
+        android:title="健身" />
+
+    <item
+        android:id="@+id/i_backup"
+        android:icon="@drawable/two"
+        android:title="会员" />
+    <!--must set the item title to empty-->
+    <item
+        android:id="@+id/i_empty"
+        android:title="" />
+    <item
+        android:id="@+id/i_favor"
+        android:icon="@drawable/three"
+        android:title="课程" />
+    <item
+        android:id="@+id/i_visibility"
+        android:icon="@drawable/four"
+        android:title="我" />
+</menu>
