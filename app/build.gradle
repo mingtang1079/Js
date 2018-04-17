@@ -63,6 +63,6 @@ dependencies {
         exclude module: 'butterknife-annotations'
     }
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
-    compile project(':core')
 }
