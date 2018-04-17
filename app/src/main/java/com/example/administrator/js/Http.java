@@ -23,10 +23,10 @@ public class Http extends AbstractRetrofitHelper<API> {
     }
 
     public static Http getInstance() {
-        if (mInstance == null) {
-            mInstance = new Http();
+        if (AbstractRetrofitHelper.mInstance == null) {
+            AbstractRetrofitHelper.mInstance = new Http();
         }
-        return (Http) mInstance;
+        return (Http) AbstractRetrofitHelper.mInstance;
     }
 
     public static API getDefault() {
