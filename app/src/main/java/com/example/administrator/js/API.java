@@ -1,7 +1,7 @@
 package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
-import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.model.User;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;

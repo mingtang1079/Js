@@ -1,4 +1,4 @@
-package com.example.administrator.js.me.model;
+package com.example.administrator.js.model;
 
 public class User {
 

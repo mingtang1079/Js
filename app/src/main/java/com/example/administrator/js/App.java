@@ -6,7 +6,7 @@ import android.util.Log;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.app.BaseApplication;
 import com.appbaselib.utils.SystemUtils;
-import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.model.User;
 import com.pangu.appbaselibrary.BuildConfig;
 import com.tencent.bugly.crashreport.CrashReport;
 
