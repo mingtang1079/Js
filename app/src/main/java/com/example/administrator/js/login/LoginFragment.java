@@ -15,9 +15,9 @@ import com.appbaselib.base.BaseFragment;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.BuildConfig;
-import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.model.User;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.view.PasswordToggleEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 

@@ -1,10 +1,7 @@
 package com.example.administrator.js.login;
 
 import android.app.Activity;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -15,7 +12,6 @@ import com.example.administrator.js.constant.EventMessage;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 

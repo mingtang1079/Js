@@ -1,7 +1,5 @@
 package com.example.administrator.js.constant;
 
-import java.util.List;
-
 public class EventMessage {
 
     public Object val;

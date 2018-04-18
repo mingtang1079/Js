@@ -1,15 +1,16 @@
 package com.example.administrator.js.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
 import com.example.administrator.js.R;
-import com.example.administrator.js.me.MeFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
@@ -52,7 +53,10 @@ public class MainActivity extends BaseActivity {
         mBnve.enableAnimation(false);
 
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.content);
-        mNavigator.showFragment(new MeFragment());
+        Fragment mFragment = (Fragment) ARouter.getInstance().build("/me/MeFragment")
+                .navigation();
+        if (mFragment != null)
+            mNavigator.showFragment(mFragment);
     }
 
     @OnClick(R.id.iv_add)
