@@ -1,4 +1,4 @@
-package com.example.administrator.js.model;
+package com.example.core.model;
 
 public class User {
 
@@ -19,7 +19,7 @@ public class User {
      * img : null
      * age : null
      * birthdate : null
-     * sex : null
+     * sex : null   // 值为1时是男性，值为2时是女性，值为0时是未知
      * email : null
      * address : null
      * areacode : null

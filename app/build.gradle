@@ -71,8 +71,7 @@ dependencies {
 
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
 
-//        if(four.toBoolean())
-//        {
-//            compile project(':me')
-//        }
+    if (four.toBoolean()) {
+        compile project(':me')
+    }
 }

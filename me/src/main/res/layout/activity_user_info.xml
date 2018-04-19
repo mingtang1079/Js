@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".me.UserInfoActivity">
 
-    <include layout="@layout/include_toolbar"/>
+    <include layout="@layout/include_toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,8 +23,7 @@
             android:layout_marginTop="8dp"
             android:background="@color/white"
             android:gravity="center_vertical"
-            android:paddingRight="16dp"
-            >
+            android:paddingRight="16dp">
 
             <TextView
                 android:layout_width="0dp"
@@ -35,26 +33,22 @@
                 android:padding="16dp"
                 android:text="头像"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/icon_user_default"
-                />
+                android:src="@drawable/icon_user_default" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_right"
-                />
+                android:src="@drawable/icon_right" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_nick"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0.5dp"
@@ -67,10 +61,10 @@
                 android:drawablePadding="8dp"
                 android:text="昵称"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -79,8 +73,7 @@
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"
-                tools:text="HebeFans"
-                />
+                tools:text="HebeFans" />
         </LinearLayout>
 
         <LinearLayout
@@ -98,10 +91,10 @@
                 android:drawablePadding="8dp"
                 android:text="性别"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_sex"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -110,8 +103,7 @@
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"
-                tools:text="男"
-                />
+                tools:text="男" />
         </LinearLayout>
 
         <LinearLayout
@@ -130,10 +122,11 @@
                 android:drawablePadding="8dp"
                 android:text="地区"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_address"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -142,8 +135,7 @@
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"
-                tools:text="四川-成都-武侯区"
-                />
+                tools:text="四川-成都-武侯区" />
         </LinearLayout>
 
         <LinearLayout
@@ -162,21 +154,18 @@
                 android:drawablePadding="8dp"
                 android:text="我的二维码"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/icon_barcode"
-                />
+                android:src="@drawable/icon_barcode" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_right"
-                />
+                android:src="@drawable/icon_right" />
         </LinearLayout>
 
         <LinearLayout
@@ -194,10 +183,11 @@
                 android:drawablePadding="8dp"
                 android:text="绑定微信号"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_weixin"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -206,8 +196,7 @@
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"
-                tools:text="sain5774"
-                />
+                tools:text="sain5774" />
         </LinearLayout>
 
         <LinearLayout
@@ -225,10 +214,11 @@
                 android:drawablePadding="8dp"
                 android:text="修改手机号"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_phone"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -237,8 +227,7 @@
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"
-                tools:text="17612870000"
-                />
+                tools:text="17612870000" />
         </LinearLayout>
 
         <LinearLayout
@@ -256,10 +245,11 @@
                 android:drawablePadding="8dp"
                 android:text="修改登陆密码"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_password"
+
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -267,10 +257,19 @@
                 android:drawableRight="@drawable/icon_right"
                 android:gravity="right"
                 android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="退出登录"
+        android:textColor="@color/white" />
 
 </LinearLayout>

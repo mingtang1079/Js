@@ -1,4 +1,4 @@
-package com.example.administrator.js;
+package com.example.core;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,7 +6,7 @@ import android.util.Log;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.app.BaseApplication;
 import com.appbaselib.utils.SystemUtils;
-import com.example.administrator.js.model.User;
+import com.example.core.model.User;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
@@ -102,7 +102,7 @@ public class App extends BaseApplication {
 
     private void initRouter() {
 
-        if (com.example.administrator.js.BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
+        if (BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog();     // 打印日志
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
