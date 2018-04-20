@@ -1,4 +1,4 @@
-include ':app', ':me', ':core'
+include ':app', ':core', ':mine'
 include ':baselibrary'
 project(':baselibrary').projectDir=new File('../CommonLibrary/baselibrary')
 include ':photopicker'
