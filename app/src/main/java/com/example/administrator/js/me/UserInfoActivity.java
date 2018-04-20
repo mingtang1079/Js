@@ -11,6 +11,8 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
+import com.example.administrator.js.me.model.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,6 +74,15 @@ public class UserInfoActivity extends BaseActivity {
     protected void initView() {
 
         mToolbar.setTitle("个人资料");
+        User mUser = UserManager.getInsatance().getUser();
+        mTvUserName.setText(mUser.nickname);
+        if ("1".equals(UserManager.getInsatance().getUser().sex))
+            mTvSex.setText("男");
+        else if ("2".equals(UserManager.getInsatance().getUser().sex))
+            mTvSex.setText("女");
+        mTvAddress.setText(mUser.address);
+        mTvPhone.setText(mUser.mobile);
+
     }
 
     @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password})

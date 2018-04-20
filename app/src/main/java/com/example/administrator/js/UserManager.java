@@ -36,10 +36,12 @@ public class UserManager implements SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     public User getUser() {
-        if (mUser == null)
-
-            return PreferenceUtils.getObjectFromGson(App.mInstance, Constants.PRE_USER, User.class);
-        else
+        if (mUser == null) {
+            User mUser = PreferenceUtils.getObjectFromGson(App.mInstance, Constants.PRE_USER, User.class);
+            this.mUser=mUser;
             return mUser;
+        } else {
+            return mUser;
+        }
     }
 }

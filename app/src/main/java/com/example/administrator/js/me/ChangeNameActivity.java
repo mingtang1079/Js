@@ -10,8 +10,11 @@ import android.widget.EditText;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.constant.Constants;
+import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.presenter.UserPresenter;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
@@ -41,12 +44,11 @@ public class ChangeNameActivity extends BaseActivity implements UserPresenter.Us
     @Override
     public void initView() {
 
-        mToolbar.setTitle("修改姓名");
+        mToolbar.setTitle("修改昵称");
 
         mUserPresenter = new UserPresenter(this);
         mEditTextName.setText(UserManager.getInsatance().getUser().nickname);
 
-        mEditTextName.setText(name);
     }
 
     @Override
@@ -95,6 +97,10 @@ public class ChangeNameActivity extends BaseActivity implements UserPresenter.Us
 
     @Override
     public void onSuccess() {
+
+        User mUser = UserManager.getInsatance().getUser();
+        mUser.nickname = mEditTextName.getText().toString();
+        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
         setResult(Activity.RESULT_OK);
         finish();
     }

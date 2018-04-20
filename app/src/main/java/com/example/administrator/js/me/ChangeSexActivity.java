@@ -10,8 +10,11 @@ import android.widget.RelativeLayout;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.constant.Constants;
+import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.presenter.UserPresenter;
 
 import butterknife.BindView;
@@ -114,6 +117,9 @@ public class ChangeSexActivity extends BaseActivity implements  UserPresenter.Us
 
     @Override
     public void onSuccess() {
+        User mUser = UserManager.getInsatance().getUser();
+        mUser.sex = sex;
+        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
         setResult(Activity.RESULT_OK);
         finish();
     }
