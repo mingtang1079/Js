@@ -8,14 +8,19 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TabHost;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.base.BaseModel;
 import com.appbaselib.common.ImageLoader;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DateUtils;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.presenter.UserPresenter;
@@ -25,17 +30,32 @@ import com.foamtrace.photopicker.intent.PhotoPickerIntent;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yalantis.ucrop.UCrop;
 
+import org.reactivestreams.Publisher;
+
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import top.zibin.luban.Luban;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 @Route(path = "/me/ChangeUserHeadActivity")
 
-public class ChangeUserHeadActivity extends BaseActivity implements UserPresenter.UserResponse, Toolbar.OnMenuItemClickListener {
+public class ChangeUserHeadActivity extends BaseActivity implements UserPresenter.UserResponse {
 
     private static final int PHOTO_REQUEST_GALLERY = 20;// 从相册中选择
 
@@ -87,21 +107,54 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
         mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
         mMenuItem.setEnabled(false);
         mMenuItem.setTitle("完成");
-    }
-
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-
-        if (item.getItemId() == R.id.btn_common) {
-            uploadPortriat();
-        }
-        return true;
+        mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem mMenuItem) {
+                uploadPortriat();
+                return false;
+            }
+        });
     }
 
     private void uploadPortriat() {
 
         File mFile = new File(URI.create(mPortriat.toString()));
+//        Observable.just(mFile)
+//                .observeOn(Schedulers.io())
+        List<String> mStrings = new ArrayList<>();
+        mStrings.add(mPortriat.toString());
+        Observable.just(mStrings)
+                .observeOn(Schedulers.io())
+                .map(new Function<List<String>, List<File>>() {
+                    @Override
+                    public List<File> apply(@NonNull List<String> list) throws Exception {
+                        return Luban.with(mContext).load(list).get();
+                    }
+                })
+                .flatMap(new Function<List<File>, ObservableSource<BaseModel<String>>>() {
+                    @Override
+                    public ObservableSource<BaseModel<String>> apply(List<File> mFiles) throws Exception {
+                        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), mFiles.get(0));
+                        // MultipartBody.Part is used to send also the actual file name
+                        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", mFiles.get(0).getName(), requestFile);
 
+                        return Http.getDefault().uploadImage(filePart);
+                    }
+                })
+                .compose(RxHelper.<String>handleResult())
+                .subscribe(new ResponceSubscriber<String>(mContext) {
+                    @Override
+                    protected void onSucess(String mS) {
+
+                        finish();
+
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
 
     }
 

@@ -6,10 +6,13 @@ import com.example.administrator.js.me.model.User;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 /**
  * Created by tangming on 2017/5/11.
@@ -76,8 +79,12 @@ public interface API {
                                           @Field("mobile") String phone
     );
 
-    @FormUrlEncoded
+    /**
+     * @param mPart  上传的文件
+     * @return
+     */
+    @Multipart
     @POST(AUTHORIRY + "/upload")
-    Observable<BaseModel<String>> upload(@Field("url") String url);
+    Observable<BaseModel<String>> uploadImage( @Part() MultipartBody.Part mPart);
 
 }
