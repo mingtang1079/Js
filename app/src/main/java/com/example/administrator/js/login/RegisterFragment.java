@@ -9,8 +9,10 @@ import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
+import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.me.model.User;
@@ -127,6 +129,8 @@ public class RegisterFragment extends BaseFragment {
                 .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override
                     protected void onSucess(User mUser) {
+                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
+
                         ARouter.getInstance().build("/activity/MainActivity")
                                 .navigation();
                     }

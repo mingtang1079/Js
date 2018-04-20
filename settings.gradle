@@ -1,3 +1,5 @@
 include ':app'
 include ':baselibrary'
 project(':baselibrary').projectDir=new File('../CommonLibrary/baselibrary')
+include ':photopicker'
+project(':photopicker').projectDir=new File('../CommonLibrary/photopicker')

@@ -7,7 +7,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.app.BaseApplication;
 import com.appbaselib.utils.SystemUtils;
 import com.example.administrator.js.me.model.User;
-import com.pangu.appbaselibrary.BuildConfig;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
@@ -45,7 +44,7 @@ public class App extends BaseApplication {
         CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
         strategy.setUploadProcess(processName == null || processName.equals(packageName));
         // 初始化Bugly
-        boolean isDebug = com.pangu.appbaselibrary.BuildConfig.DEBUG;
+        boolean isDebug = BuildConfig.DEBUG;
         /**
          * 配置Bugly,第三个参数为SDK调试模式开关，调试模式的行为特性如下：
          * 输出详细的Bugly SDK的Log；

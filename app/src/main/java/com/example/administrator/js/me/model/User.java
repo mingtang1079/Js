@@ -64,6 +64,6 @@ public class User {
     public String beginBirthdate;
     public String endBirthdate;
     public String mobile;
-    public Long longitude;
-    public Long latitude;
+    public Double longitude;
+    public Double latitude;
 }

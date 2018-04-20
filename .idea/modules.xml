@@ -3,8 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Js.iml" filepath="$PROJECT_DIR$/Js.iml" />
+      <module fileurl="file://C:\Users\tangming\Desktop\demo\Js\Js.iml" filepath="C:\Users\tangming\Desktop\demo\Js\Js.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\tangming\Desktop\demo\Js\app\app.iml" filepath="C:\Users\tangming\Desktop\demo\Js\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../CommonLibrary/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/../CommonLibrary/baselibrary/baselibrary.iml" />
+      <module fileurl="file://C:\Users\tangming\Desktop\demo\CommonLibrary\baselibrary\baselibrary.iml" filepath="C:\Users\tangming\Desktop\demo\CommonLibrary\baselibrary\baselibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../CommonLibrary/photopicker/photopicker.iml" filepath="$PROJECT_DIR$/../CommonLibrary/photopicker/photopicker.iml" />
     </modules>
   </component>
 </project>

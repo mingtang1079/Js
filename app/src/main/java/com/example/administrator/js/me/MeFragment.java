@@ -29,7 +29,6 @@ public class MeFragment extends BaseFragment {
     TextView mTvId;
     @BindView(R.id.iv_barcode)
     ImageView mIvBarcode;
-    Unbinder unbinder;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -51,6 +50,8 @@ public class MeFragment extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_add:
+
+
                 break;
             case R.id.iv_mes:
                 break;
@@ -58,15 +59,12 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.tv_name:
 
-                start(UserInfoActivity.class);
-
-//                ARouter.getInstance().build("/me/RealNameVerifyActivity")
-//                        .navigation();
+                ARouter.getInstance().build("/me/UserInfoActivity")
+                        .navigation();
                 break;
             case R.id.tv_id:
-//                ARouter.getInstance().build("/me/RealNameVerifyActivity")
-//                        .navigation();
-                start(RealNameVerifyActivity.class);
+                ARouter.getInstance().build("/me/RealNameVerifyActivity")
+                        .navigation();
                 break;
             case R.id.iv_barcode:
                 break;

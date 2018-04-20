@@ -12,8 +12,10 @@ import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
+import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
@@ -60,8 +62,8 @@ public class LoginFragment extends BaseFragment {
             mPassword.setText("123456");
         }
 
-        Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone).skip(1);
-        Observable<CharSequence> mCharSequenceObservablePassword = RxTextView.textChanges(mPassword).skip(1);
+        Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone);
+        Observable<CharSequence> mCharSequenceObservablePassword = RxTextView.textChanges(mPassword);
         Observable.combineLatest(mObservablePhone, mCharSequenceObservablePassword, new BiFunction<CharSequence, CharSequence, Boolean>() {
             @Override
             public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2) throws Exception {
@@ -109,31 +111,9 @@ public class LoginFragment extends BaseFragment {
                     @Override
                     protected void onSucess(User mUser) {
 
+                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
                         ARouter.getInstance().build("/activity/MainActivity")
-                                .navigation(mContext, new NavigationCallback() {
-                                    @Override
-                                    public void onFound(Postcard postcard) {
-                                        showToast(postcard.getPath());
-                                    }
-
-                                    @Override
-                                    public void onLost(Postcard postcard) {
-                                        showToast(postcard.getPath());
-
-                                    }
-
-                                    @Override
-                                    public void onArrival(Postcard postcard) {
-                                        showToast(postcard.getPath());
-
-                                    }
-
-                                    @Override
-                                    public void onInterrupt(Postcard postcard) {
-                                        showToast(postcard.getPath());
-
-                                    }
-                                });
+                                .navigation();
                         //   startActivity(new Intent(mContext, MainActivity.class));
                     }
 
