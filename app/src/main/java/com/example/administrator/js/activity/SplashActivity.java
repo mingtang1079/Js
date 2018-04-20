@@ -7,6 +7,7 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.administrator.js.App;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.login.LoginActivity;
 @Route(path = "/activity/SplashActivity")
@@ -23,7 +24,7 @@ public class SplashActivity extends com.appbaselib.base.BaseActivity {
     @Override
     protected void initView() {
 
-        mUser = ((App) App.mInstance).getUser();
+        mUser = UserManager.getInsatance().getUser();
     }
 
     @Override

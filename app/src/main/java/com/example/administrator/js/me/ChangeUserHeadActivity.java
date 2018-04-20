@@ -17,6 +17,7 @@ import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DateUtils;
+import com.appbaselib.utils.FileUtlis;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
@@ -118,11 +119,10 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
 
     private void uploadPortriat() {
 
-        File mFile = new File(URI.create(mPortriat.toString()));
 //        Observable.just(mFile)
 //                .observeOn(Schedulers.io())
         List<String> mStrings = new ArrayList<>();
-        mStrings.add(mPortriat.toString());
+        mStrings.add(FileUtlis.getRealFilePath(mContext,mPortriat));
         Observable.just(mStrings)
                 .observeOn(Schedulers.io())
                 .map(new Function<List<String>, List<File>>() {
@@ -155,6 +155,7 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
                         showToast(message);
                     }
                 });
+
 
     }
 
