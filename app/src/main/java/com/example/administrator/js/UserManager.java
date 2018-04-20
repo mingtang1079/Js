@@ -1,6 +1,7 @@
 package com.example.administrator.js;
 
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.appbaselib.constant.Constants;
 import com.appbaselib.utils.PreferenceUtils;
@@ -29,6 +30,7 @@ public class UserManager implements SharedPreferences.OnSharedPreferenceChangeLi
     }
 
     private UserManager() {
+        PreferenceManager.getDefaultSharedPreferences(App.mInstance).registerOnSharedPreferenceChangeListener(this);
     }
 
     public static final UserManager getInsatance() {
@@ -38,7 +40,7 @@ public class UserManager implements SharedPreferences.OnSharedPreferenceChangeLi
     public User getUser() {
         if (mUser == null) {
             User mUser = PreferenceUtils.getObjectFromGson(App.mInstance, Constants.PRE_USER, User.class);
-            this.mUser=mUser;
+            this.mUser = mUser;
             return mUser;
         } else {
             return mUser;

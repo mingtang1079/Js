@@ -74,6 +74,17 @@ public class UserInfoActivity extends BaseActivity {
     protected void initView() {
 
         mToolbar.setTitle("个人资料");
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUser();
+    }
+
+    private void updateUser() {
         User mUser = UserManager.getInsatance().getUser();
         mTvUserName.setText(mUser.nickname);
         if ("1".equals(UserManager.getInsatance().getUser().sex))
@@ -82,7 +93,6 @@ public class UserInfoActivity extends BaseActivity {
             mTvSex.setText("女");
         mTvAddress.setText(mUser.address);
         mTvPhone.setText(mUser.mobile);
-
     }
 
     @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password})

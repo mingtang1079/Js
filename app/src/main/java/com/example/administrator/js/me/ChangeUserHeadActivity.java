@@ -26,6 +26,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
+import java.net.URI;
 
 import butterknife.BindView;
 import io.reactivex.functions.Consumer;
@@ -98,6 +99,8 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
     }
 
     private void uploadPortriat() {
+
+        File mFile = new File(URI.create(mPortriat.toString()));
 
 
     }

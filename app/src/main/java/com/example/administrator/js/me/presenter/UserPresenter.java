@@ -3,8 +3,10 @@ package com.example.administrator.js.me.presenter;
 
 import android.content.Context;
 
+import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
@@ -30,9 +32,11 @@ public class UserPresenter {
 
         Http.getDefault().userEdit(mStringStringMap)
                 .as(RxHelper.<User>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<User>() {
+                .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override
                     protected void onSucess(User mUser) {
+                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
+
                         if (mUserResponse != null)
                             mUserResponse.onSuccess();
                     }
@@ -53,9 +57,10 @@ public class UserPresenter {
         mStringStringMap.put(key, value);
         Http.getDefault().userEdit(mStringStringMap)
                 .as(RxHelper.<User>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<User>() {
+                .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override
                     protected void onSucess(User mUser) {
+                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
                         if (mUserResponse != null)
                             mUserResponse.onSuccess();
                     }
@@ -70,7 +75,7 @@ public class UserPresenter {
 
     }
 
-   public interface UserResponse {
+    public interface UserResponse {
         void onSuccess();
 
         void onFail(String mes);

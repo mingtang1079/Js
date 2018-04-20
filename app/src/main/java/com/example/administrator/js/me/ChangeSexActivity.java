@@ -117,9 +117,9 @@ public class ChangeSexActivity extends BaseActivity implements  UserPresenter.Us
 
     @Override
     public void onSuccess() {
-        User mUser = UserManager.getInsatance().getUser();
-        mUser.sex = sex;
-        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
+//        User mUser = UserManager.getInsatance().getUser();
+//        mUser.sex = sex;
+//        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
         setResult(Activity.RESULT_OK);
         finish();
     }
