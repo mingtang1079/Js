@@ -14,16 +14,19 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseModel;
 import com.appbaselib.common.ImageLoader;
+import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DateUtils;
 import com.appbaselib.utils.FileUtlis;
+import com.appbaselib.utils.PreferenceUtils;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.presenter.UserPresenter;
 import com.foamtrace.photopicker.PhotoPickerActivity;
 import com.foamtrace.photopicker.SelectModel;
@@ -36,7 +39,9 @@ import org.reactivestreams.Publisher;
 import java.io.File;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import io.reactivex.Flowable;
@@ -122,7 +127,7 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
 //        Observable.just(mFile)
 //                .observeOn(Schedulers.io())
         List<String> mStrings = new ArrayList<>();
-        mStrings.add(FileUtlis.getRealFilePath(mContext,mPortriat));
+        mStrings.add(FileUtlis.getRealFilePath(mContext, mPortriat));
         Observable.just(mStrings)
                 .observeOn(Schedulers.io())
                 .map(new Function<List<String>, List<File>>() {
@@ -141,11 +146,22 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
                         return Http.getDefault().uploadImage(filePart);
                     }
                 })
-                .compose(RxHelper.<String>handleResult())
-                .subscribe(new ResponceSubscriber<String>(mContext) {
+                .flatMap(new Function<BaseModel<String>, ObservableSource<BaseModel<User>>>() {
                     @Override
-                    protected void onSucess(String mS) {
+                    public ObservableSource<BaseModel<User>> apply(BaseModel<String> mStringBaseModel) throws Exception {
 
+                        Map<String, String> mStringStringMap = new HashMap<>();
+                        mStringStringMap.put("id",UserManager.getInsatance().getUser().id);
+                        mStringStringMap.put("img", mStringBaseModel.data);
+                        return Http.getDefault().userEdit(mStringStringMap);
+                    }
+                })
+                .compose(RxHelper.<User>handleResult())
+                .subscribe(new ResponceSubscriber<User>(mContext) {
+                    @Override
+                    protected void onSucess(User mS) {
+
+                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mS);
                         finish();
 
                     }

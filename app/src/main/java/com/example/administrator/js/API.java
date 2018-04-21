@@ -1,18 +1,22 @@
 package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
+import com.example.administrator.js.me.model.UploadResult;
 import com.example.administrator.js.me.model.User;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 
 /**
  * Created by tangming on 2017/5/11.
@@ -80,11 +84,20 @@ public interface API {
     );
 
     /**
-     * @param mPart  上传的文件
+     * @param mPart 上传的文件
      * @return
      */
     @Multipart
     @POST(AUTHORIRY + "/upload")
-    Observable<BaseModel<String>> uploadImage( @Part() MultipartBody.Part mPart);
+    Observable<BaseModel<String>> uploadImage(@Part() MultipartBody.Part mPart);
+
+
+    /**
+     * @param mPart 教练资质
+     * @return
+     */
+    @Multipart
+    @POST(AUTHORIRY + "/upload")
+    Observable<BaseModel<String>> verifyzizhi(@PartMap Map<String, RequestBody> map, @Part List<MultipartBody.Part> parts);
 
 }

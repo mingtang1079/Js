@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.common.ImageLoader;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
@@ -54,6 +56,8 @@ public class UserInfoActivity extends BaseActivity {
     TextView mTvPassword;
     @BindView(R.id.tv_exit)
     TextView mTextViewExit;
+    @BindView(R.id.iv_head)
+    ImageView head;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -87,6 +91,7 @@ public class UserInfoActivity extends BaseActivity {
     private void updateUser() {
         User mUser = UserManager.getInsatance().getUser();
         mTvUserName.setText(mUser.nickname);
+        ImageLoader.load(mContext,mUser.img,head);
         if ("1".equals(UserManager.getInsatance().getUser().sex))
             mTvSex.setText("男");
         else if ("2".equals(UserManager.getInsatance().getUser().sex))
