@@ -1,5 +1,8 @@
 package com.example.administrator.js.me;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +17,7 @@ import com.appbaselib.base.BaseModel;
 import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.DateUtils;
 import com.appbaselib.utils.FileUtlis;
 import com.appbaselib.utils.PreferenceUtils;
 import com.appbaselib.view.RatioImageView;
@@ -21,7 +25,12 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
+import com.foamtrace.photopicker.PhotoPickerActivity;
+import com.foamtrace.photopicker.SelectModel;
+import com.foamtrace.photopicker.intent.PhotoPickerIntent;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -33,6 +42,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
+import io.reactivex.ObservableConverter;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.BiFunction;
@@ -105,6 +115,26 @@ public class RealNameVerifyActivity extends BaseActivity {
                 mTvSure.setEnabled(mBoolean);
             }
         });
+
+        mIvShenfengzheng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                onViewClicked(20);
+            }
+        });
+        mIvShengfenzhengback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                onViewClicked(30);
+            }
+        });
+        mIvGongpai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                onViewClicked(40);
+            }
+        });
+
     }
 
     @OnClick(R.id.tv_sure)
@@ -131,16 +161,41 @@ public class RealNameVerifyActivity extends BaseActivity {
                         return Luban.with(mContext).load(list).get();
                     }
                 })
-                .flatMap(new Function<List<File>, ObservableSource<BaseModel<String>>>() {
+                .map(new Function<List<File>, List<String>>() {
                     @Override
-                    public ObservableSource<BaseModel<String>> apply(List<File> mFiles) throws Exception {
-                        Map<String, RequestBody> params = new HashMap<>();
-                        //以下参数是伪代码，参数需要换成自己服务器支持的
-                        params.put("realname", convertToRequestBody(mEtName.getText().toString()));
-                        params.put("idnumber", convertToRequestBody(mEtShenfenzheng.getText().toString()));
+                    public List<String> apply(List<File> mFiles) throws Exception {
 
-                        List<MultipartBody.Part> partList = filesToMultipartBodyParts(mFiles);
-                        return Http.getDefault().verifyzizhi(params, partList);
+                        final List<String> results = new ArrayList();
+                        for (File mFile : mFiles) {
+                            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
+                            // MultipartBody.Part is used to send also the actual file name
+                            MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", mFile.getName(), requestFile);
+                            Observable<BaseModel<String>> mObservable = Http.getDefault().uploadImage(filePart);
+                            mObservable.subscribe(new Consumer<BaseModel<String>>() {
+                                @Override
+                                public void accept(BaseModel<String> mStringBaseModel) throws Exception {
+                                    results.add(mStringBaseModel.data);
+                                }
+                            });
+
+                        }
+
+                        return results;
+                    }
+                })
+                .flatMap(new Function<List<String>, ObservableSource<BaseModel<String>>>() {
+                    @Override
+                    public ObservableSource<BaseModel<String>> apply(List<String> mFiles) throws Exception {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("id", UserManager.getInsatance().getUser().id);
+                        params.put("realname", mEtName.getText().toString());
+                        params.put("idnumber", UserManager.getInsatance().getUser().id);
+
+                        params.put("idimgpath", mFiles.get(0));//正面身份证
+
+                        params.put("photopath", mFiles.get(2));//从业证明
+
+                        return Http.getDefault().verifyzizhi(params);
                     }
                 })
                 .compose(RxHelper.<String>handleResult())
@@ -161,18 +216,52 @@ public class RealNameVerifyActivity extends BaseActivity {
 
     }
 
-    private RequestBody convertToRequestBody(String param) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("text/plain"), param);
-        return requestBody;
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if ( resultCode == Activity.RESULT_OK) {
+            // 从相册返回的数据
+
+            if (requestCode==20)
+            {
+                sfzz = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
+
+            }
+            else  if (requestCode==30)
+            {
+                sfzf = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
+
+            }
+
+            else {
+                zm = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
+
+            }
+        }
+    }
+    public void onViewClicked(final int requstcode) {
+        RxPermissions mRxPermissions = new RxPermissions((Activity) mContext);
+        mRxPermissions
+                .request(Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean mBoolean) throws Exception {
+                        if (mBoolean) {
+
+                            PhotoPickerIntent intent = new PhotoPickerIntent(mContext);
+                            intent.setSelectModel(SelectModel.SINGLE);
+                            intent.setShowCarema(true); // 是否显示拍照
+                            //    intent.setMaxTotal(1); // 最多选择照片数量，默认为9
+                            startActivityForResult(intent, requstcode);
+
+
+                        } else {
+                            showToast("请开启相关权限");
+                        }
+                    }
+                });
     }
 
-    private List<MultipartBody.Part> filesToMultipartBodyParts(List<File> files) {
-        List<MultipartBody.Part> parts = new ArrayList<>(files.size());
-        for (File file : files) {
-            RequestBody requestBody = RequestBody.create(MediaType.parse("image/png"), file);
-            MultipartBody.Part part = MultipartBody.Part.createFormData("multipartFiles", file.getName(), requestBody);
-            parts.add(part);
-        }
-        return parts;
-    }
 }

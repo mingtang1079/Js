@@ -96,8 +96,7 @@ public interface API {
      * @param mPart 教练资质
      * @return
      */
-    @Multipart
-    @POST(AUTHORIRY + "/upload")
-    Observable<BaseModel<String>> verifyzizhi(@PartMap Map<String, RequestBody> map, @Part List<MultipartBody.Part> parts);
+    @POST(AUTHORIRY + "/user/auth")
+    Observable<BaseModel<String>> verifyzizhi(@FieldMap Map<String, String> map);
 
 }
