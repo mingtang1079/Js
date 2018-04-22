@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseModel;
+import com.appbaselib.common.ImageLoader;
 import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
@@ -25,6 +27,7 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.me.model.VerifyUser;
 import com.foamtrace.photopicker.PhotoPickerActivity;
 import com.foamtrace.photopicker.SelectModel;
 import com.foamtrace.photopicker.intent.PhotoPickerIntent;
@@ -52,6 +55,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Retrofit;
 import top.zibin.luban.Luban;
 
 @Route(path = "/me/RealNameVerifyActivity")
@@ -60,6 +64,9 @@ public class RealNameVerifyActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.content)
+    NestedScrollView mNestedScrollView;
+
     @BindView(R.id.et_name)
     EditText mEtName;
     @BindView(R.id.et_shenfenzheng)
@@ -81,6 +88,8 @@ public class RealNameVerifyActivity extends BaseActivity {
     Uri zm;//证明
     Uri zs;//整数
 
+    VerifyUser mVerifyUser;
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_real_name_verify;
@@ -88,7 +97,7 @@ public class RealNameVerifyActivity extends BaseActivity {
 
     @Override
     protected View getLoadingTargetView() {
-        return null;
+        return mNestedScrollView;
     }
 
     @Override
@@ -135,6 +144,9 @@ public class RealNameVerifyActivity extends BaseActivity {
             }
         });
 
+
+        requestData();
+
     }
 
     @OnClick(R.id.tv_sure)
@@ -143,6 +155,42 @@ public class RealNameVerifyActivity extends BaseActivity {
 
         submit();
 
+    }
+
+    @Override
+    protected void requestData() {
+        super.requestData();
+        Http.getDefault().getAuth(UserManager.getInsatance().getUser().id)
+                .as(RxHelper.<VerifyUser>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<VerifyUser>() {
+                    @Override
+                    protected void onSucess(VerifyUser mVerifyUser) {
+                        RealNameVerifyActivity.this.mVerifyUser = mVerifyUser;
+                        toggleShowLoading(false);
+                        setData(mVerifyUser);
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        loadError();
+                    }
+                });
+    }
+
+    private void setData(VerifyUser mVerifyUser) {
+
+        if (mVerifyUser != null) {
+            mEtName.setText(mVerifyUser.realname);
+            mEtShenfenzheng.setText(mVerifyUser.idnumber);
+            if (!TextUtils.isEmpty(mVerifyUser.idimgpath))
+                ImageLoader.load(mContext, mVerifyUser.idimgpath, mIvShenfengzheng);
+            if (!TextUtils.isEmpty(mVerifyUser.idimgbackpath))
+                ImageLoader.load(mContext, mVerifyUser.idimgbackpath, mIvShengfenzhengback);
+            if (!TextUtils.isEmpty(mVerifyUser.photopath))
+                ImageLoader.load(mContext, mVerifyUser.photopath, mIvGongpai);
+
+
+        }
     }
 
     private void submit() {
@@ -187,12 +235,15 @@ public class RealNameVerifyActivity extends BaseActivity {
                     @Override
                     public ObservableSource<BaseModel<String>> apply(List<String> mFiles) throws Exception {
                         Map<String, String> params = new HashMap<>();
-                        params.put("id", UserManager.getInsatance().getUser().id);
+                        User mUser = UserManager.getInsatance().getUser();
+                        if (mVerifyUser != null)
+                            params.put("id", mUser.id);
+
+                        params.put("userid", mUser.id);
                         params.put("realname", mEtName.getText().toString());
-                        params.put("idnumber", UserManager.getInsatance().getUser().id);
-
+                        params.put("idnumber", mEtShenfenzheng.getText().toString());
                         params.put("idimgpath", mFiles.get(0));//正面身份证
-
+                        params.put("idimgbackpath", mFiles.get(1));//反面身份证
                         params.put("photopath", mFiles.get(2));//从业证明
 
                         return Http.getDefault().verifyzizhi(params);
@@ -220,26 +271,25 @@ public class RealNameVerifyActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if ( resultCode == Activity.RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             // 从相册返回的数据
 
-            if (requestCode==20)
-            {
+            if (requestCode == 20) {
                 sfzz = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
+                ImageLoader.load(mContext, sfzz, mIvShenfengzheng);
 
-            }
-            else  if (requestCode==30)
-            {
+            } else if (requestCode == 30) {
                 sfzf = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
+                ImageLoader.load(mContext, sfzf, mIvShengfenzhengback);
 
-            }
-
-            else {
+            } else {
                 zm = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
+                ImageLoader.load(mContext, zm, mIvGongpai);
 
             }
         }
     }
+
     public void onViewClicked(final int requstcode) {
         RxPermissions mRxPermissions = new RxPermissions((Activity) mContext);
         mRxPermissions

@@ -3,6 +3,7 @@ package com.example.administrator.js;
 import com.appbaselib.base.BaseModel;
 import com.example.administrator.js.me.model.UploadResult;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.me.model.VerifyUser;
 
 import java.util.List;
 import java.util.Map;
@@ -84,7 +85,6 @@ public interface API {
     );
 
     /**
-     * @param mPart 上传的文件
      * @return
      */
     @Multipart
@@ -93,10 +93,14 @@ public interface API {
 
 
     /**
-     * @param mPart 教练资质
      * @return
      */
-    @POST(AUTHORIRY + "/user/auth")
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/saveauth")
     Observable<BaseModel<String>> verifyzizhi(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/getauth")
+    Observable<BaseModel<VerifyUser>> getAuth(@Field("userid") String id);
 
 }
