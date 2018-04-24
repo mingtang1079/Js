@@ -115,6 +115,8 @@ public class LoginFragment extends BaseFragment {
                         ARouter.getInstance().build("/activity/MainActivity")
                                 .navigation();
                         //   startActivity(new Intent(mContext, MainActivity.class));
+                        getActivity().finish();
+
                     }
 
                     @Override

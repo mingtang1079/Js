@@ -133,6 +133,7 @@ public class RegisterFragment extends BaseFragment {
 
                         ARouter.getInstance().build("/activity/MainActivity")
                                 .navigation();
+                        getActivity().finish();
                     }
 
                     @Override

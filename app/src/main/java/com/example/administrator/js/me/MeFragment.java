@@ -9,12 +9,16 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
+import com.appbaselib.common.ImageLoader;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
+import com.example.administrator.js.me.model.User;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MeFragment extends BaseFragment {
     @BindView(R.id.iv_add)
@@ -29,6 +33,8 @@ public class MeFragment extends BaseFragment {
     TextView mTvId;
     @BindView(R.id.iv_barcode)
     ImageView mIvBarcode;
+    @BindView(R.id.iv_head)
+    CircleImageView mImageViewHead;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -37,6 +43,15 @@ public class MeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+
+        User mUser= UserManager.getInsatance().getUser();
+        if (mUser!=null)
+        {
+            ImageLoader.load(mContext,mUser.img,mImageViewHead);
+            mTvName.setText(mUser.nickname);
+            mTvId.setText(mUser.no);
+
+        }
 
     }
 

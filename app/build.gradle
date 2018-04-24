@@ -68,6 +68,8 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
 
+    compile(rootProject.ext.dependencies["circleimageview"]) {
+    }
     compile project(':photopicker')
     compile 'top.zibin:Luban:1.1.3'
     compile rootProject.ext.dependencies["ucop"]

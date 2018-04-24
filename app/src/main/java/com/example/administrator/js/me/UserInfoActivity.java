@@ -19,6 +19,7 @@ import com.example.administrator.js.me.model.User;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 @Route(path = "/me/UserInfoActivity")
 public class UserInfoActivity extends BaseActivity {
@@ -57,7 +58,7 @@ public class UserInfoActivity extends BaseActivity {
     @BindView(R.id.tv_exit)
     TextView mTextViewExit;
     @BindView(R.id.iv_head)
-    ImageView head;
+    CircleImageView head;
 
     @Override
     protected int getContentViewLayoutID() {
