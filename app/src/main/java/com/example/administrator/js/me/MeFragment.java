@@ -1,10 +1,8 @@
 package com.example.administrator.js.me;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -15,9 +13,7 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MeFragment extends BaseFragment {
@@ -35,6 +31,9 @@ public class MeFragment extends BaseFragment {
     ImageView mIvBarcode;
     @BindView(R.id.iv_head)
     CircleImageView mImageViewHead;
+
+    @BindView(R.id.ll_zizhi)
+    LinearLayout mLinearLayoutZizhi;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -61,7 +60,7 @@ public class MeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode})
+    @OnClick({R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode,R.id.ll_zizhi})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_add:
@@ -82,6 +81,11 @@ public class MeFragment extends BaseFragment {
                         .navigation();
                 break;
             case R.id.iv_barcode:
+                break;
+
+            case R.id.ll_zizhi:
+
+                start(ZizhiActivity.class);
                 break;
         }
     }

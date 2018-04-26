@@ -27,7 +27,7 @@ android {
         }
     }
     configurations.all {
-        resolutionStrategy.force"com.android.support:support-annotations:26.1.0"
+        resolutionStrategy.force "com.android.support:support-annotations:26.1.0"
     }
 }
 
@@ -73,4 +73,6 @@ dependencies {
     compile project(':photopicker')
     compile 'top.zibin:Luban:1.1.3'
     compile rootProject.ext.dependencies["ucop"]
+    compile 'com.google.android:flexbox:0.3.2'
+
 }

@@ -4,6 +4,7 @@ import com.appbaselib.base.BaseModel;
 import com.example.administrator.js.me.model.UploadResult;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.VerifyUser;
+import com.example.administrator.js.me.model.Zizhi;
 
 import java.util.List;
 import java.util.Map;
@@ -102,5 +103,10 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/getauth")
     Observable<BaseModel<VerifyUser>> getAuth(@Field("userid") String id);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/teachingQualificationSave")
+    Observable<BaseModel<Zizhi>> editZizhi(@FieldMap Map<String, String> map);
 
 }
