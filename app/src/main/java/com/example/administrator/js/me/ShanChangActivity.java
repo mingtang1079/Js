@@ -1,9 +1,7 @@
 package com.example.administrator.js.me;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.SparseBooleanArray;
+import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,12 +10,9 @@ import android.widget.LinearLayout;
 import com.appbaselib.base.BaseActivity;
 import com.example.administrator.js.R;
 import com.example.administrator.js.me.presenter.ZizhiPresenter;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.functions.Consumer;
 
 public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.ZizhiResponse {
 
@@ -53,7 +48,7 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
     @BindView(R.id.iv_seven)
     ImageView mIvSeven;
 
-    SparseBooleanArray mSparseBooleanArray = new SparseBooleanArray(7);
+    SparseArray<String> mStringSparseArray = new SparseArray<>(7);
     MenuItem mMenuItem;
 
     ZizhiPresenter mZizhiPresenter;
@@ -86,14 +81,24 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
         super.initToolbar();
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
         mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
-        mMenuItem.setEnabled(false);
         mMenuItem.setTitle("确定");
 
         mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem mMenuItem) {
+                StringBuilder mStringBuilder = new StringBuilder();
 
+                for (int i = 0, nsize = mStringSparseArray.size(); i < nsize; i++) {
+                    String value = mStringSparseArray.valueAt(i);
+                    if (i == 0) {
+                        mStringBuilder.append(value);
+                    } else {
+                        mStringBuilder.append("," + value);
+                    }
 
+                }
+
+                mZizhiPresenter.updateZizhi("skillname", mStringBuilder.toString());
 
                 return true;
             }
@@ -108,10 +113,10 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
 
                 if (mIvOne.getVisibility() == View.VISIBLE) {
                     mIvOne.setVisibility(View.GONE);
-                    mSparseBooleanArray.delete(0);
+                    mStringSparseArray.delete(0);
 
                 } else {
-                    mSparseBooleanArray.put(0, true);
+                    mStringSparseArray.put(0, "肌肉");
                     mIvOne.setVisibility(View.VISIBLE);
 
                 }
@@ -121,10 +126,10 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
 
                 if (mIvTwo.getVisibility() == View.VISIBLE) {
                     mIvTwo.setVisibility(View.GONE);
-                    mSparseBooleanArray.delete(1);
+                    mStringSparseArray.delete(1);
 
                 } else {
-                    mSparseBooleanArray.put(1, true);
+                    mStringSparseArray.put(1, "减脂");
 
                     mIvTwo.setVisibility(View.VISIBLE);
 
@@ -135,10 +140,10 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
 
                 if (mIvThree.getVisibility() == View.VISIBLE) {
                     mIvThree.setVisibility(View.GONE);
-                    mSparseBooleanArray.delete(2);
+                    mStringSparseArray.delete(2);
 
                 } else {
-                    mSparseBooleanArray.put(2, true);
+                    mStringSparseArray.put(2, "塑形");
 
                     mIvThree.setVisibility(View.VISIBLE);
 
@@ -149,10 +154,10 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
 
                 if (mIvFour.getVisibility() == View.VISIBLE) {
                     mIvFour.setVisibility(View.GONE);
-                    mSparseBooleanArray.delete(3);
+                    mStringSparseArray.delete(3);
 
                 } else {
-                    mSparseBooleanArray.put(3, true);
+                    mStringSparseArray.put(3, "康复");
 
                     mIvFour.setVisibility(View.VISIBLE);
 
@@ -163,10 +168,10 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
 
                 if (mIvFive.getVisibility() == View.VISIBLE) {
                     mIvFive.setVisibility(View.GONE);
-                    mSparseBooleanArray.delete(4);
+                    mStringSparseArray.delete(4);
 
                 } else {
-                    mSparseBooleanArray.put(4, true);
+                    mStringSparseArray.put(4, "拳击");
 
                     mIvFive.setVisibility(View.VISIBLE);
 
@@ -177,10 +182,10 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
 
                 if (mIvSix.getVisibility() == View.VISIBLE) {
                     mIvSix.setVisibility(View.GONE);
-                    mSparseBooleanArray.delete(5);
+                    mStringSparseArray.delete(5);
 
                 } else {
-                    mSparseBooleanArray.put(5, true);
+                    mStringSparseArray.put(5, "拉伸放松");
 
                     mIvSix.setVisibility(View.VISIBLE);
 
@@ -191,10 +196,10 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
 
                 if (mIvSeven.getVisibility() == View.VISIBLE) {
                     mIvSeven.setVisibility(View.GONE);
-                    mSparseBooleanArray.delete(6);
+                    mStringSparseArray.delete(6);
 
                 } else {
-                    mSparseBooleanArray.put(6, true);
+                    mStringSparseArray.put(6, "瑜伽");
 
                     mIvSeven.setVisibility(View.VISIBLE);
 
