@@ -67,7 +67,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".me.ZizhiActivity" />
-        <activity android:name=".me.ShanChangActivity"></activity>
+        <activity android:name=".me.ShanChangActivity" />
+        <activity android:name=".me.GeyanActivity"></activity>
     </application>
 
 </manifest>
