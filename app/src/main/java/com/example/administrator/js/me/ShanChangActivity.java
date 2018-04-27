@@ -81,7 +81,7 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
         super.initToolbar();
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
         mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
-        mMenuItem.setTitle("确定");
+        mMenuItem.setTitle("保存");
 
         mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

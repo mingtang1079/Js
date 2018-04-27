@@ -31,7 +31,7 @@ public class ZizhiPresenter {
 
     public void updateZizhi(String key, String value) {
         Map<String, String> mStringStringMap = new HashMap<>();
-        mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
+        mStringStringMap.put("userid", UserManager.getInsatance().getUser().id);
         mStringStringMap.put(key, value);
         Http.getDefault().editZizhi(mStringStringMap)
                 .as(RxHelper.<Zizhi>handleResult(mContext))
