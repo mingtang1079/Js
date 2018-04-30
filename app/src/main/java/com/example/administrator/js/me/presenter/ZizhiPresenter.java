@@ -35,7 +35,7 @@ public class ZizhiPresenter {
         mStringStringMap.put(key, value);
         Http.getDefault().editZizhi(mStringStringMap)
                 .as(RxHelper.<Zizhi>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<Zizhi>() {
+                .subscribe(new ResponceSubscriber<Zizhi>(mContext) {
                     @Override
                     protected void onSucess(Zizhi mZizhi) {
 
@@ -46,7 +46,7 @@ public class ZizhiPresenter {
 
                     @Override
                     protected void onFail(String message) {
-                        ToastUtils.showShort(mContext, "保存失败！");
+                        ToastUtils.showShort(mContext, message);
 
                         if (mZizhiResponse != null)
                             mZizhiResponse.onFail(message);

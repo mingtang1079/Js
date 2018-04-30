@@ -3,10 +3,17 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/color_4a576a</item>
+        <item name="colorPrimaryDark">@color/white_color</item>
+        <item name="colorAccent">@color/white_color</item>
         <!--<item name="android:background">@color/default_bg</item>-->
+    </style>
+
+    <style name="toolbar_style" parent="Base.Widget.AppCompat.Light.ActionBar.TabText">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_color</item>
+
     </style>
 
     <style name="SpalashActivityTheme" parent="Theme.AppCompat.Light.NoActionBar">

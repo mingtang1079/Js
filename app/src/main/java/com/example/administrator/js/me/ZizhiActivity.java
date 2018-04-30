@@ -6,12 +6,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DatePickerDialogUtils;
 import com.appbaselib.utils.DateUtils;
 import com.appbaselib.view.datepicker.view.GregorianLunarCalendarView;
 import com.appbaselib.view.datepicker.view.OnDateSelectedListener;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
+import com.example.administrator.js.me.model.VerifyUser;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +47,11 @@ public class ZizhiActivity extends BaseActivity {
     LinearLayout mLlJinsheng;
     @BindView(R.id.ll_jianli)
     LinearLayout mLlJianli;
+    @BindView(R.id.content)
+    LinearLayout mLinearLayout;
     private long time;
+
+    VerifyUser mVerifyUser;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -50,7 +60,7 @@ public class ZizhiActivity extends BaseActivity {
 
     @Override
     protected View getLoadingTargetView() {
-        return null;
+        return mLinearLayout;
     }
 
     @Override
@@ -61,8 +71,33 @@ public class ZizhiActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        mToolbar.setTitle("资质教学");
+        mToolbar.setTitle("教学资质");
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestData();
+    }
+
+    @Override
+    protected void requestData() {
+        super.requestData();
+        Http.getDefault().getAuth(UserManager.getInsatance().getUser().id)
+                .as(RxHelper.<VerifyUser>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<VerifyUser>() {
+                    @Override
+                    protected void onSucess(VerifyUser mVerifyUser) {
+                        ZizhiActivity.this.mVerifyUser = mVerifyUser;
+                        toggleShowLoading(false);
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        loadError();
+                    }
+                });
     }
 
     @OnClick({R.id.ll_time, R.id.ll_lingyu, R.id.ll_anlie, R.id.ll_zhengshu, R.id.ll_geyan, R.id.ll_xinxiang, R.id.ll_jinsheng, R.id.ll_jianli})
@@ -89,6 +124,10 @@ public class ZizhiActivity extends BaseActivity {
             case R.id.ll_geyan:
                 break;
             case R.id.ll_xinxiang:
+
+                ARouter.getInstance().build("/me/XingxiangzhaoActivity")
+                        .withObject("mVerifyUser", mVerifyUser)
+                        .navigation();
                 break;
             case R.id.ll_jinsheng:
                 break;
