@@ -29,6 +29,31 @@ public class ZizhiPresenter {
         mZizhiResponse = (ZizhiResponse) mContext;
     }
 
+    public void updateZizhi(Map<String, String> mStringStringMap) {
+
+        mStringStringMap.put("userid", UserManager.getInsatance().getUser().id);
+        Http.getDefault().editZizhi(mStringStringMap)
+                .as(RxHelper.<Zizhi>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<Zizhi>(mContext) {
+                    @Override
+                    protected void onSucess(Zizhi mZizhi) {
+
+                        ToastUtils.showShort(mContext, "保存成功！");
+                        if (mZizhiResponse != null)
+                            mZizhiResponse.onSuccess();
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        ToastUtils.showShort(mContext, message);
+
+                        if (mZizhiResponse != null)
+                            mZizhiResponse.onFail(message);
+                    }
+                });
+
+    }
+
     public void updateZizhi(String key, String value) {
         Map<String, String> mStringStringMap = new HashMap<>();
         mStringStringMap.put("userid", UserManager.getInsatance().getUser().id);

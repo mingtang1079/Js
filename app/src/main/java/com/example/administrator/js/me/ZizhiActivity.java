@@ -18,12 +18,13 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.VerifyUser;
+import com.example.administrator.js.me.presenter.ZizhiPresenter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ZizhiActivity extends BaseActivity {
+public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiResponse {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -52,6 +53,7 @@ public class ZizhiActivity extends BaseActivity {
     private long time;
 
     VerifyUser mVerifyUser;
+    ZizhiPresenter mZizhiPresenter;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -72,6 +74,7 @@ public class ZizhiActivity extends BaseActivity {
     protected void initView() {
 
         mToolbar.setTitle("教学资质");
+        mZizhiPresenter = new ZizhiPresenter(mContext);
 
     }
 
@@ -90,6 +93,7 @@ public class ZizhiActivity extends BaseActivity {
                     @Override
                     protected void onSucess(VerifyUser mVerifyUser) {
                         ZizhiActivity.this.mVerifyUser = mVerifyUser;
+                        setData();
                         toggleShowLoading(false);
                     }
 
@@ -98,6 +102,13 @@ public class ZizhiActivity extends BaseActivity {
                         loadError();
                     }
                 });
+    }
+
+    private void setData() {
+
+        mTvTime.setText(mVerifyUser.workdate);
+
+
     }
 
     @OnClick({R.id.ll_time, R.id.ll_lingyu, R.id.ll_anlie, R.id.ll_zhengshu, R.id.ll_geyan, R.id.ll_xinxiang, R.id.ll_jinsheng, R.id.ll_jianli})
@@ -110,18 +121,34 @@ public class ZizhiActivity extends BaseActivity {
                     public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
                         time = DateUtils.getTimeLongYmd(mCalendarData.getTime());
                         mTvTime.setText(mCalendarData.getTime());
+                        mZizhiPresenter.updateZizhi("workdate", mCalendarData.getTime());
+
                     }
                 }).show();
                 break;
             case R.id.ll_lingyu:
-                start(ShanChangActivity.class);
+                ARouter.getInstance().build("/me/ShanChangActivity")
+                        .withObject("mVerifyUser", mVerifyUser)
+                        .navigation();
 
                 break;
             case R.id.ll_anlie:
+
+                ARouter.getInstance().build("/me/SuceessExampleActivity")
+                        .withObject("mVerifyUser", mVerifyUser)
+                        .navigation();
                 break;
             case R.id.ll_zhengshu:
+
+
+
                 break;
             case R.id.ll_geyan:
+
+                ARouter.getInstance().build("/me/GeyanActivity")
+                        .withObject("mVerifyUser", mVerifyUser)
+                        .navigation();
+
                 break;
             case R.id.ll_xinxiang:
 
@@ -134,5 +161,15 @@ public class ZizhiActivity extends BaseActivity {
             case R.id.ll_jianli:
                 break;
         }
+    }
+
+    @Override
+    public void onSuccess() {
+
+    }
+
+    @Override
+    public void onFail(String mes) {
+
     }
 }

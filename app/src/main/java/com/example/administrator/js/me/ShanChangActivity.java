@@ -7,13 +7,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
 import com.example.administrator.js.R;
+import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.presenter.ZizhiPresenter;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
+@Route(path = "/me/ShanChangActivity")
 public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.ZizhiResponse {
 
 
@@ -51,6 +55,9 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
     SparseArray<String> mStringSparseArray = new SparseArray<>(7);
     MenuItem mMenuItem;
 
+    @Autowired
+    VerifyUser mVerifyUser;
+
     ZizhiPresenter mZizhiPresenter;
 
     @Override
@@ -73,6 +80,35 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
 
         mToolbar.setTitle("擅长领域");
         mZizhiPresenter = new ZizhiPresenter(this);
+        if (mVerifyUser != null && mVerifyUser.skillname != null) {
+            String[] mStrings = mVerifyUser.skillname.split(",");
+            for (String mS : mStrings) {
+                if (mS.equals("肌肉")) {
+                    mStringSparseArray.put(0, "肌肉");
+                    mIvOne.setVisibility(View.VISIBLE);
+                } else if (mS.equals("减脂")) {
+                    mStringSparseArray.put(1, "减脂");
+                    mIvTwo.setVisibility(View.VISIBLE);
+                } else if (mS.equals("塑形")) {
+                    mStringSparseArray.put(2, "塑形");
+                    mIvThree.setVisibility(View.VISIBLE);
+                } else if (mS.equals("康复")) {
+                    mStringSparseArray.put(3, "康复");
+                    mIvFour.setVisibility(View.VISIBLE);
+                } else if (mS.equals("拳击")) {
+                    mStringSparseArray.put(4, "拳击");
+                    mIvFive.setVisibility(View.VISIBLE);
+                } else if (mS.equals("拉伸放松")) {
+                    mStringSparseArray.put(5, "拉伸放松");
+                    mIvSix.setVisibility(View.VISIBLE);
+                } else if (mS.equals("瑜伽")) {
+                    mStringSparseArray.put(6, "瑜伽");
+                    mIvSeven.setVisibility(View.VISIBLE);
+                }
+            }
+
+        }
+
 
     }
 

@@ -1,10 +1,11 @@
 package com.example.administrator.js.me;
 
-import android.os.Bundle;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -12,17 +13,23 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
+import com.appbaselib.utils.AdressHelper;
+import com.appbaselib.utils.DialogUtils;
+import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.login.LoginActivity;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.me.presenter.UserPresenter;
+import com.mic.adressselectorlib.City;
+import com.mic.adressselectorlib.OnItemClickListener;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 @Route(path = "/me/UserInfoActivity")
-public class UserInfoActivity extends BaseActivity {
+public class UserInfoActivity extends BaseActivity implements UserPresenter.UserResponse {
 
 
     @BindView(R.id.toolbar)
@@ -60,6 +67,8 @@ public class UserInfoActivity extends BaseActivity {
     @BindView(R.id.iv_head)
     CircleImageView head;
 
+    UserPresenter mUserPresenter;
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_user_info;
@@ -80,6 +89,7 @@ public class UserInfoActivity extends BaseActivity {
 
         mToolbar.setTitle("个人资料");
 
+        mUserPresenter = new UserPresenter(this);
 
     }
 
@@ -92,7 +102,7 @@ public class UserInfoActivity extends BaseActivity {
     private void updateUser() {
         User mUser = UserManager.getInsatance().getUser();
         mTvUserName.setText(mUser.nickname);
-        ImageLoader.load(mContext,mUser.img,head);
+        ImageLoader.load(mContext, mUser.img, head);
         if ("1".equals(UserManager.getInsatance().getUser().sex))
             mTvSex.setText("男");
         else if ("2".equals(UserManager.getInsatance().getUser().sex))
@@ -101,7 +111,7 @@ public class UserInfoActivity extends BaseActivity {
         mTvPhone.setText(mUser.mobile);
     }
 
-    @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password})
+    @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_head:
@@ -129,6 +139,16 @@ public class UserInfoActivity extends BaseActivity {
                         .navigation();
                 break;
             case R.id.ll_area:
+                AdressHelper.showAddressSelector(mContext, new OnItemClickListener() {
+                    @Override
+                    public void itemClick(City mProvice, City mCity, City mCounty) {
+                        mTvAddress.setText(mProvice.name + " " + mCity.name + " " + mCounty.name);
+
+                        mUserPresenter.updateUser("areacode", mCounty.id);
+
+                    }
+                });
+
                 break;
             case R.id.ll_barcode:
                 break;
@@ -138,6 +158,32 @@ public class UserInfoActivity extends BaseActivity {
                 break;
             case R.id.ll_password:
                 break;
+
+            case R.id.tv_exit:
+
+                DialogUtils.getDefaultDialog(mContext, "提示", "确定退出吗？", "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface mDialogInterface, int mI) {
+                        PreferenceUtils.clearDefaultPreference(mContext);
+                        Intent intent = new Intent(mContext, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                }).show();
+
+
+
+                break;
         }
+    }
+
+    @Override
+    public void onSuccess() {
+
+    }
+
+    @Override
+    public void onFail(String mes) {
+        showToast(mes);
     }
 }

@@ -2,10 +2,12 @@ package com.example.administrator.js.me;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -17,6 +19,7 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseModel;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.DialogUtils;
 import com.appbaselib.utils.FileUtlis;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
@@ -45,6 +48,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -104,7 +108,7 @@ public class XingxiangzhaoActivity extends BaseActivity implements ZizhiPresente
 
         mToolbar.setTitle("形象照");
         initMenu();
-        if (mVerifyUser != null) {
+        if (mVerifyUser != null && !TextUtils.isEmpty(mVerifyUser.photopath)) {
             ArrayList<String> mStrings = new ArrayList<>(Arrays.asList(mVerifyUser.photopath.split(",")));
             mSelected = mStrings;
         } else {
@@ -151,87 +155,88 @@ public class XingxiangzhaoActivity extends BaseActivity implements ZizhiPresente
     }
 
     private void save() {
-            if (mMenuItem.getItemId() == R.id.btn_common) {
+        if (mMenuItem.getItemId() == R.id.btn_common) {
 
+            final ProgressDialog mProgressDialog = new ProgressDialog(mContext);
+            mProgressDialog.setMessage("图片上传中……");
+            mProgressDialog.show();
+            Observable.just(mSelected)
+                    .map(new Function<ArrayList<String>, ArrayList<String>>() {
+                        @Override
+                        public ArrayList<String> apply(ArrayList<String> mStrings) throws Exception {
+                            //筛选已经上传过的数据（编辑状态会存在上传过的照片）
 
-                Observable.just(mSelected)
-                        .map(new Function<ArrayList<String>, ArrayList<String>>() {
-                            @Override
-                            public ArrayList<String> apply(ArrayList<String> mStrings) throws Exception {
-                                //筛选已经上传过的数据（编辑状态会存在上传过的照片）
+                            ArrayList<String> m = new ArrayList<>();
+                            for (String mS :
+                                    mStrings) {
+                                if (!mS.startsWith("http")) {
+                                    m.add(mS);
+                                }
+                            }
 
-                                ArrayList<String> m=new ArrayList<>();
+                            return m;
+                        }
+                    })
+                    .observeOn(Schedulers.io())
+                    .map(new Function<List<String>, List<File>>() {
+                        @Override
+                        public List<File> apply(@NonNull List<String> list) throws Exception {
+                            return Luban.with(mContext).load(list).get();
+                        }
+                    })
+                    .map(new Function<List<File>, List<String>>() {
+                        @Override
+                        public List<String> apply(List<File> mFiles) throws Exception {
+
+                            final List<String> results = new ArrayList();
+                            for (File mFile : mFiles) {
+                                RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
+                                // MultipartBody.Part is used to send also the actual file name
+                                MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", mFile.getName(), requestFile);
+                                Observable<BaseModel<String>> mObservable = Http.getDefault().uploadImage(filePart);
+                                mObservable.subscribe(new Consumer<BaseModel<String>>() {
+                                    @Override
+                                    public void accept(BaseModel<String> mStringBaseModel) throws Exception {
+                                        results.add(mStringBaseModel.data);
+                                    }
+                                });
+
+                            }
+                            return results;
+                        }
+                    }).observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<List<String>>() {
+                        @Override
+                        public void accept(List<String> mStrings) throws Exception {
+
+                            //mstrings 此时有可能比 mselected小
+                            if (mStrings.size() < mSelected.size()) {
+                                ArrayList<String> mOrigin = new ArrayList<>();
                                 for (String mS :
-                                        mStrings) {
-                                    if (!mS.startsWith("http")){
-                                        m.add(mS);
+                                        mSelected) {
+                                    if (mS.startsWith("http")) {
+                                        mOrigin.add(mS);
                                     }
                                 }
 
-                                return m;
+                                mStrings.addAll(0, mOrigin);
                             }
-                        })
-                        .observeOn(Schedulers.io())
-                        .map(new Function<List<String>, List<File>>() {
-                            @Override
-                            public List<File> apply(@NonNull List<String> list) throws Exception {
-                                return Luban.with(mContext).load(list).get();
-                            }
-                        })
-                        .map(new Function<List<File>, List<String>>() {
-                            @Override
-                            public List<String> apply(List<File> mFiles) throws Exception {
-
-                                final List<String> results = new ArrayList();
-                                for (File mFile : mFiles) {
-                                    RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
-                                    // MultipartBody.Part is used to send also the actual file name
-                                    MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", mFile.getName(), requestFile);
-                                    Observable<BaseModel<String>> mObservable = Http.getDefault().uploadImage(filePart);
-                                    mObservable.subscribe(new Consumer<BaseModel<String>>() {
-                                        @Override
-                                        public void accept(BaseModel<String> mStringBaseModel) throws Exception {
-                                            results.add(mStringBaseModel.data);
-                                        }
-                                    });
-
-                                }
-                                return results;
-                            }
-                        }).observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Consumer<List<String>>() {
-                            @Override
-                            public void accept(List<String> mStrings) throws Exception {
-
-                                //mstrings 此时有可能比 mselected小
-                                if (mStrings.size()<mSelected.size())
-                                {
-                                    ArrayList<String> mOrigin=new ArrayList<>();
-                                    for (String mS :
-                                            mSelected) {
-                                        if (mS.startsWith("http")){
-                                            mOrigin.add(mS);
-                                        }
-                                    }
-
-                                    mStrings.addAll(0,mOrigin);
-                                }
-                                StringBuilder mStringBuilder = new StringBuilder();
-                                for (int i = 0, nsize = mStrings.size(); i < nsize; i++) {
-                                    String value = mStrings.get(i);
-                                    if (i == 0) {
-                                        mStringBuilder.append(value);
-                                    } else {
-                                        mStringBuilder.append("," + value);
-                                    }
-
+                            StringBuilder mStringBuilder = new StringBuilder();
+                            for (int i = 0, nsize = mStrings.size(); i < nsize; i++) {
+                                String value = mStrings.get(i);
+                                if (i == 0) {
+                                    mStringBuilder.append(value);
+                                } else {
+                                    mStringBuilder.append("," + value);
                                 }
 
-                                mZizhiPresenter.updateZizhi("photopath", mStringBuilder.toString());
-
                             }
-                        });
-            }
+                            mProgressDialog.dismiss();
+                            mZizhiPresenter.updateZizhi("photopath", mStringBuilder.toString());
+
+                        }
+                    });
+        }
     }
 
     @Override
