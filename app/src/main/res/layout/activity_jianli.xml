@@ -17,7 +17,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/white_color"
         android:gravity="top|left"
-        android:hint="请简述您的健身简历"
+        android:hint="请简述您的健身经历事迹"
         android:padding="8dp"
         android:textSize="14sp" />
 

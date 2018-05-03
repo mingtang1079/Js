@@ -1,5 +1,6 @@
 package com.example.administrator.js.me;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DatePickerDialogUtils;
 import com.appbaselib.utils.DateUtils;
+import com.appbaselib.utils.DialogUtils;
 import com.appbaselib.view.datepicker.view.GregorianLunarCalendarView;
 import com.appbaselib.view.datepicker.view.OnDateSelectedListener;
 import com.example.administrator.js.Http;
@@ -141,7 +143,6 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
             case R.id.ll_zhengshu:
 
 
-
                 break;
             case R.id.ll_geyan:
 
@@ -157,15 +158,33 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                         .navigation();
                 break;
             case R.id.ll_jinsheng:
+                DialogUtils.getDefaultDialog(mContext, "提示", "确定申请晋升？", "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                        shenqing();
+
+                    }
+                }).show();
+
                 break;
             case R.id.ll_jianli:
+
+                ARouter.getInstance().build("/me/JianliActivity")
+                        .withObject("mVerifyUser", mVerifyUser)
+                        .navigation();
                 break;
         }
     }
 
+    private void shenqing() {
+
+
+    }
+
     @Override
     public void onSuccess() {
-
+        finish();
     }
 
     @Override

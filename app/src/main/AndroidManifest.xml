@@ -66,11 +66,24 @@
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".me.ZizhiActivity" />
-        <activity android:name=".me.ShanChangActivity" />
-        <activity android:name=".me.GeyanActivity" />
-        <activity android:name=".me.XingxiangzhaoActivity"></activity>
-        <activity android:name=".me.SuceessExampleActivity"></activity>
+        <activity
+            android:name=".me.ZizhiActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me.ShanChangActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me.GeyanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".me.XingxiangzhaoActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".me.SuceessExampleActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".me.JianliActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
