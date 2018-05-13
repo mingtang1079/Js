@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/color_4a576a"
+            android:textSize="16sp"
+            tools:text="古代书法大赛"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:scaleType="centerCrop"
+                android:id="@+id/iv_head"
+                android:layout_width="32dp"
+                android:layout_height="32dp"/>
+
+            <TextView
+                android:layout_marginLeft="8dp"
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/color_8996aa"
+                android:textSize="14sp"
+                tools:text="hebefan"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

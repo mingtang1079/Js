@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import io.rong.imlib.RongIMClient;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -33,6 +34,11 @@ public class App extends BaseApplication {
         initOkHttp();
         initBugly();
         initRouter();
+        initIM();
+    }
+
+    private void initIM() {
+        RongIMClient.init(this);
     }
 
     private void initBugly() {
@@ -108,6 +114,7 @@ public class App extends BaseApplication {
         }
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
     }
+
     public User getUser() {
 
         return null;

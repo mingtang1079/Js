@@ -29,15 +29,8 @@
             android:background="@android:color/white"
             app:itemIconTint="@color/selector_item_primary_color"
             app:itemTextColor="@color/selector_item_primary_color"
-            app:menu="@menu/main_menu_navigation"/>
+            app:menu="@menu/main_menu_navigation_teacher"/>
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="4dp"
-        android:src="@drawable/icon_main_add"/>
 </FrameLayout>

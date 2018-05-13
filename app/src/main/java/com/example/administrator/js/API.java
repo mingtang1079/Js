@@ -1,24 +1,23 @@
 package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
-import com.example.administrator.js.me.model.UploadResult;
+import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.exercise.model.Main;
+import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.Zizhi;
 
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 
 /**
  * Created by tangming on 2017/5/11.
@@ -109,4 +108,14 @@ public interface API {
     @POST(AUTHORIRY + "/user/teachingQualificationSave")
     Observable<BaseModel<Zizhi>> editZizhi(@FieldMap Map<String, String> map);
 
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/news/list")
+    Observable<BaseModel<WrapperModel<Main>>> getMain(@Field("type") int type, @Field("pageNo") int pageNo, @Field("pageSize") int pageSize);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/contact/search")
+    Observable<BaseModel<WrapperModel<VipUser>>> seacrchUser(@FieldMap Map<String, String> mStringStringMap);
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/contact/list")
+    Observable<BaseModel<WrapperModel<VipUser>>> getUser(@FieldMap Map<String, String> mStringStringMap);
 }

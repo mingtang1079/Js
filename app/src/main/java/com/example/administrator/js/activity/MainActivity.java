@@ -12,8 +12,11 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
+import com.example.administrator.js.course.CourseFragment;
 import com.example.administrator.js.exercise.ExerciseFragment;
 import com.example.administrator.js.me.MeFragment;
+import com.example.administrator.js.vip.VipFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
@@ -25,21 +28,33 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.bnve)
     BottomNavigationViewEx mBnve;
-    @BindView(R.id.iv_add)
-    ImageView mIvAdd;
+
     @BindView(R.id.content)
     FrameLayout mContent;
     @BindView(R.id.container)
     FrameLayout mContainer;
 
     Navigator mNavigator;
+    ImageView mIvAdd;
 
     MeFragment mMeFragment;
     ExerciseFragment mExerciseFragment;
+    VipFragment mVipFragment;
+    CourseFragment mCourseFragment;
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_main;
+        if (UserManager.getInsatance().getUser() != null) {
+            if ("0".equals(UserManager.getInsatance().getUser().role)) {
+
+                return R.layout.activity_main_teacher;
+
+            } else {
+                return R.layout.activity_main_student;
+
+            }
+        }
+        return 0;
     }
 
     @Override
@@ -54,12 +69,31 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+
+
+        if (UserManager.getInsatance().getUser() != null) {
+            if ("0".equals(UserManager.getInsatance().getUser().role)) {
+
+                //        mIvAdd.setVisibility(View.GONE);
+            } else {
+                mIvAdd = findViewById(R.id.iv_add);
+                mIvAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View mView) {
+                        onAddClicked();
+                    }
+                });
+                mIvAdd.setVisibility(View.VISIBLE);
+
+            }
+        }
         mBnve.enableItemShiftingMode(false);
         mBnve.enableShiftingMode(false);
         mBnve.enableAnimation(false);
-
         mMeFragment = new MeFragment();
         mExerciseFragment = new ExerciseFragment();
+        mVipFragment = new VipFragment();
+        mCourseFragment = new CourseFragment();
 
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.content);
         mNavigator.showFragment(mExerciseFragment);
@@ -73,9 +107,11 @@ public class MainActivity extends BaseActivity {
                     mNavigator.showFragment(mExerciseFragment);
                 } else if (item.getItemId() == R.id.vip) {
 
+                    mNavigator.showFragment(mVipFragment);
+
                 } else if (item.getItemId() == R.id.course) {
 
-
+                    mNavigator.showFragment(mCourseFragment);
                 } else {
 
                     mNavigator.showFragment(mMeFragment);
@@ -87,8 +123,7 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    @OnClick(R.id.iv_add)
-    public void onViewClicked() {
+    public void onAddClicked() {
 
     }
 }

@@ -1,7 +1,9 @@
 package com.example.administrator.js.base.adapter;
 
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.LifecycleOwner;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
@@ -41,5 +43,16 @@ public class BaseLifeCycleView extends FrameLayout implements LifecycleObserver 
             mLifecycleOwnerm.getLifecycle().addObserver(this);
         }
     }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    public void onCreate() {
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestory() {
+
+    }
+
 
 }

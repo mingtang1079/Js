@@ -6,12 +6,12 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/iv_vip_result"
+        android:id="@+id/iv_skill"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/icon_next"
         android:paddingBottom="16dp"
-        android:text="会员成果"
+        android:text="训练技巧"
         android:textColor="@color/color_4a576a" />
 
     <android.support.v7.widget.RecyclerView

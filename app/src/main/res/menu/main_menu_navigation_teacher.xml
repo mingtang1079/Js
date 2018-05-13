@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/js"
+        android:checked="true"
+        android:icon="@drawable/one"
+        android:title="健身" />
+
+    <item
+        android:id="@+id/vip"
+        android:icon="@drawable/two"
+        android:title="会员" />
+
+    <item
+        android:id="@+id/course"
+        android:icon="@drawable/three"
+        android:title="课程" />
+    <item
+        android:id="@+id/me"
+        android:icon="@drawable/four"
+        android:title="我" />
+</menu>

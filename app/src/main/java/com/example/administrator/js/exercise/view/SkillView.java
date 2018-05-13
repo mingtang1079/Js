@@ -9,12 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.base.adapter.BaseLifeCycleView;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.exercise.adapter.ExerciseSkillAdapter;
+import com.example.administrator.js.exercise.adapter.KnowledgeAdapter;
 import com.example.administrator.js.exercise.adapter.VipResultAdapter;
 import com.example.administrator.js.exercise.model.Main;
 
@@ -23,48 +26,46 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-/**
- * Created by tangming on 2018/5/3.
- */
+public class SkillView extends BaseLifeCycleView {
+    public SkillView(Context context) {
+        super(context);
+    }
 
-public class VipResultView extends BaseLifeCycleView {
+    public SkillView(Context context, @Nullable AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-    @BindView(R.id.iv_vip_result)
+    public SkillView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    @BindView(R.id.iv_skill)
     TextView mTvVipResult;
     @BindView(R.id.recyclerview_vip)
     RecyclerView mRecyclerView;
 
-    VipResultAdapter mVipResultAdapter;
+    ExerciseSkillAdapter mExerciseSkillAdapter;
     List<Main> mMains = new ArrayList<>();
 
-    public VipResultView(Context context) {
-        super(context);
-    }
-
-    public VipResultView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public VipResultView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
 
     @Override
     public void init(Context mContext) {
         super.init(mContext);
-        View mView = LayoutInflater.from(getContext()).inflate(R.layout.view_vip_result, this, false);
+        View mView = LayoutInflater.from(getContext()).inflate(R.layout.view_exercise_skill, this, false);
         ButterKnife.bind(this, mView);
         addView(mView);
 
         LinearLayoutManager mLinearLayoutManage = new LinearLayoutManager(getContext());
-        mLinearLayoutManage.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mVipResultAdapter = new VipResultAdapter(R.layout.item_main_vip_result, mMains);
+        mLinearLayoutManage.setOrientation(LinearLayoutManager.VERTICAL);
+        mExerciseSkillAdapter = new ExerciseSkillAdapter(R.layout.item_exercise_skill, mMains);
         mRecyclerView.setLayoutManager(mLinearLayoutManage);
-        mRecyclerView.setAdapter(mVipResultAdapter);
+        mRecyclerView.setAdapter(mExerciseSkillAdapter);
         mRecyclerView.setNestedScrollingEnabled(true);
-        mRecyclerView.addItemDecoration(new VipResultAdapter.VipgeDividerItemDecoration());
+        mRecyclerView.addItemDecoration(new KnowledgeAdapter.KnowledgeDividerItemDecoration());
         mRecyclerView.setNestedScrollingEnabled(false);
+
         requestData();
 
     }
@@ -78,7 +79,7 @@ public class VipResultView extends BaseLifeCycleView {
                     protected void onSucess(WrapperModel<Main> mMainWrapperModel) {
 
                         if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
-                            mVipResultAdapter.addData(mMainWrapperModel.list);
+                            mExerciseSkillAdapter.addData(mMainWrapperModel.list);
                         }
                     }
 
@@ -90,4 +91,12 @@ public class VipResultView extends BaseLifeCycleView {
 
     }
 
+
+    @OnClick(R.id.iv_skill)
+    public void onViewClicked() {
+
+        ARouter.getInstance().build("/exercise/ExerciseSkillActivity")
+                .navigation();
+
+    }
 }
