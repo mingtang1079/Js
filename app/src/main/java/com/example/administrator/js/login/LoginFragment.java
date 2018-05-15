@@ -8,8 +8,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.android.arouter.facade.Postcard;
-import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
 import com.appbaselib.constant.Constants;
@@ -111,11 +109,9 @@ public class LoginFragment extends BaseFragment {
                     @Override
                     protected void onSucess(User mUser) {
 
-                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
-                        ARouter.getInstance().build("/activity/MainActivity")
-                                .navigation();
-                        //   startActivity(new Intent(mContext, MainActivity.class));
-                        getActivity().finish();
+                        if (mOnUserGetListener != null) {
+                            mOnUserGetListener.onUserGet(mUser);
+                        }
 
                     }
 
@@ -128,10 +124,12 @@ public class LoginFragment extends BaseFragment {
 
 
     OnbackClickListener mOnbackClickListener;
+    OnUserGetListener mOnUserGetListener;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mOnbackClickListener = (OnbackClickListener) activity;
+        mOnUserGetListener = (OnUserGetListener) activity;
     }
 }

@@ -7,6 +7,7 @@ import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.Zizhi;
+import com.google.gson.JsonObject;
 
 import java.util.Map;
 
@@ -15,9 +16,12 @@ import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 /**
  * Created by tangming on 2017/5/11.
@@ -115,7 +119,17 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/contact/search")
     Observable<BaseModel<WrapperModel<VipUser>>> seacrchUser(@FieldMap Map<String, String> mStringStringMap);
+
     @FormUrlEncoded
     @POST(AUTHORIRY + "/contact/list")
     Observable<BaseModel<WrapperModel<VipUser>>> getUser(@FieldMap Map<String, String> mStringStringMap);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY+"/user/feedback")
+    Observable<BaseModel<String>> feed(@FieldMap Map<String, String> mMap);
+
+    //融云api
+    @POST
+    @FormUrlEncoded
+    Observable<JsonObject> getUserRongYunToken(@Url String url, @Field("userId") String id, @Field("name") String name, @Field("portraitUri") String portraitUri);
 }

@@ -5,16 +5,28 @@ import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.app.BaseApplication;
+import com.appbaselib.utils.CommonUtils;
+import com.appbaselib.utils.JsonUtil;
+import com.appbaselib.utils.LogUtils;
 import com.appbaselib.utils.SystemUtils;
+import com.example.administrator.js.constant.Constans;
+import com.example.administrator.js.interceptor.RongInterceptor;
+import com.example.administrator.js.login.RongYunToken;
 import com.example.administrator.js.me.model.User;
+import com.google.gson.JsonObject;
 import com.tencent.bugly.crashreport.CrashReport;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DefaultObserver;
+import io.reactivex.schedulers.Schedulers;
+import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -26,19 +38,18 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 public class App extends BaseApplication {
 
-    private OkHttpClient client;
-
     @Override
     public void onCreate() {
         super.onCreate();
-        initOkHttp();
         initBugly();
         initRouter();
         initIM();
+        connectRongYun();
     }
 
     private void initIM() {
         RongIMClient.init(this);
+
     }
 
     private void initBugly() {
@@ -64,48 +75,6 @@ public class App extends BaseApplication {
         return "";
     }
 
-
-    private void initOkHttp() {
-        OkHttpClient.Builder clientBuilder;
-
-        clientBuilder = new OkHttpClient.Builder();
-        List<Interceptor> interceptors = getInterceptors();
-        if (interceptors != null) {
-            for (Interceptor interceptor : interceptors) {
-                clientBuilder.addInterceptor(interceptor);
-            }
-        }
-        List<Interceptor> interceptors1 = getNetworkInterceptors();
-        if (interceptors1 != null) {
-            for (Interceptor interceptor : interceptors1) {
-                clientBuilder.addInterceptor(interceptor);
-            }
-        }
-
-        clientBuilder.connectTimeout(10 * 1000L, TimeUnit.MILLISECONDS);
-        clientBuilder.readTimeout(10 * 1000L, TimeUnit.MILLISECONDS);
-        clientBuilder.retryOnConnectionFailure(true);
-        if (BuildConfig.DEBUG) {
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-                @Override
-                public void log(String message) {
-                    Log.d("HttpReponse:", message);
-                }
-            });
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-            clientBuilder.addInterceptor(loggingInterceptor);
-        }
-        clientBuilder.hostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String hostname, SSLSession session) {
-                return true;
-            }
-        });
-
-        client = clientBuilder.build();
-    }
-
-
     private void initRouter() {
 
         if (BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
@@ -115,17 +84,81 @@ public class App extends BaseApplication {
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
     }
 
-    public User getUser() {
+    public void connectRongYun() {
 
-        return null;
+        User mUser = UserManager.getInsatance().getUser();
+        if (mUser == null) {
+            return;
+        }
+
+        Http.getDefault().getUserRongYunToken(Constans.rongyunUrl, mUser.id, mUser.nickname, mUser.img)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DefaultObserver<JsonObject>() {
+                    @Override
+                    public void onNext(JsonObject mS) {
+
+                        RongYunToken mRongYunToken = JsonUtil.fromJson(mS.toString(), RongYunToken.class);
+                        connect(mRongYunToken.token);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+
+
     }
 
-    private List<Interceptor> getNetworkInterceptors() {
-        return null;
-    }
+    /**
+     * <p>连接服务器，在整个应用程序全局，只需要调用一次，需在 {#init(Context)} 之后调用。</p>
+     * <p>如果调用此接口遇到连接失败，SDK 会自动启动重连机制进行最多10次重连，分别是1, 2, 4, 8, 16, 32, 64, 128, 256, 512秒后。
+     * 在这之后如果仍没有连接成功，还会在当检测到设备网络状态变化时再次进行重连。</p>
+     *
+     * @param token 从服务端获取的用户身份令牌（Token）。
+     * @return RongIM  客户端核心类的实例。
+     */
+    private void connect(String token) {
 
-    private List<Interceptor> getInterceptors() {
-        return null;
+        if (getApplicationInfo().packageName.equals(CommonUtils.getCurProcessName(getApplicationContext()))) {
+
+            RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+                /**
+                 * Token 错误。可以从下面两点检查 1.  Token 是否过期，如果过期您需要向 App Server 重新请求一个新的 Token
+                 *                  2.  token 对应的 appKey 和工程里设置的 appKey 是否一致
+                 */
+                @Override
+                public void onTokenIncorrect() {
+                    LogUtils.d("IM token错误");
+                }
+
+                /**
+                 * 连接融云成功
+                 * @param userid 当前 token 对应的用户 id
+                 */
+                @Override
+                public void onSuccess(String userid) {
+
+                    LogUtils.d("IM连接成功");
+
+                }
+
+                /**
+                 * 连接融云失败
+                 * @param errorCode 错误码，可到官网 查看错误码对应的注释
+                 */
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+                    LogUtils.d("IM连接失败！ ---->" + errorCode);
+
+                }
+            });
+        }
     }
 
 }

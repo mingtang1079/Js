@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/default_bg"
@@ -21,8 +20,7 @@
             <ImageView
                 android:id="@+id/iv_add"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/iv_mes"
@@ -30,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_margin="16dp"
-                android:src="@drawable/icon_mes"/>
+                android:src="@drawable/icon_mes" />
 
             <ImageView
                 android:id="@+id/iv_setting"
@@ -38,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_toLeftOf="@id/iv_mes"
-                android:src="@drawable/icon_setting"/>
+                android:src="@drawable/icon_setting" />
 
 
         </RelativeLayout>
@@ -54,7 +52,7 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
 
-                android:src="@drawable/icon_ting"/>
+                android:src="@drawable/icon_ting" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -71,8 +69,7 @@
                     android:layout_marginTop="8dp"
                     android:text="登录/注册"
                     android:textColor="#FFFFFFFF"
-                    android:textSize="18sp"
-                    />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tv_id"
@@ -82,8 +79,7 @@
                     android:layout_marginTop="8dp"
                     android:text="点击进行登录/注册"
                     android:textColor="#99FFFFFF"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
             </LinearLayout>
 
 
@@ -97,13 +93,13 @@
                     android:id="@+id/iv_barcode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_barcode"/>
+                    android:src="@drawable/icon_barcode" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/icon_right"/>
+                    android:src="@drawable/icon_right" />
 
 
             </LinearLayout>
@@ -112,153 +108,178 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_zizhi"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
-        android:orientation="vertical">
+        android:layout_weight="7">
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            android:padding="16dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_zizhi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_jxzz"
-                android:drawablePadding="8dp"
-                android:drawableRight="@drawable/icon_right"
-                android:text="教学资质"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:padding="16dp">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_jxzz"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="教学资质"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_shenqing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_huiyaun"
-                android:drawablePadding="8dp"
-                android:drawableRight="@drawable/icon_right"
-                android:text="会员申请"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_huiyaun"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="会员申请"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_richeng"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_richeng"
-                android:drawablePadding="8dp"
-                android:drawableRight="@drawable/icon_right"
-                android:text="我的日程"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_richeng"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="我的日程"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_tongji"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_jxzz"
-                android:drawablePadding="8dp"
-                android:drawableRight="@drawable/icon_right"
-                android:text="统计"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_jxzz"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="统计"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_yajing"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_kefu"
-                android:drawablePadding="8dp"
-                android:drawableRight="@drawable/icon_right"
-                android:text="我的客服"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_kefu"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="押金"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            android:padding="16dp">
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_tuijian"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_jxzz"
-                android:drawablePadding="8dp"
-                android:drawableRight="@drawable/icon_right"
-                android:text="关于我们"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_kefu"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="推荐好友"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
+            </LinearLayout>
 
-            <TextView
+            <LinearLayout
+                android:id="@+id/ll_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_share"
-                android:drawablePadding="8dp"
-                android:drawableRight="@drawable/icon_right"
-                android:text="分享给朋友"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                />
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_jxzz"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="关于我们"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_fankui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_share"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="意见反馈"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

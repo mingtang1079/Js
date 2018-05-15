@@ -1,6 +1,9 @@
 package com.example.administrator.js.me;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,7 +16,9 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MeFragment extends BaseFragment {
@@ -43,10 +48,9 @@ public class MeFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-        User mUser= UserManager.getInsatance().getUser();
-        if (mUser!=null)
-        {
-            ImageLoader.load(mContext,mUser.img,mImageViewHead);
+        User mUser = UserManager.getInsatance().getUser();
+        if (mUser != null) {
+            ImageLoader.load(mContext, mUser.img, mImageViewHead);
             mTvName.setText(mUser.nickname);
             mTvId.setText(mUser.no);
 
@@ -60,7 +64,8 @@ public class MeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode,R.id.ll_zizhi})
+    @OnClick({R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode, R.id.ll_zizhi,
+            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_tuijian, R.id.ll_about, R.id.ll_fankui})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_add:
@@ -87,6 +92,30 @@ public class MeFragment extends BaseFragment {
 
                 start(ZizhiActivity.class);
                 break;
+
+            case R.id.ll_shenqing:
+
+                break;
+            case R.id.ll_richeng:
+
+                break;
+            case R.id.ll_tongji:
+
+                break;
+            case R.id.ll_yajing:
+
+                break;
+            case R.id.ll_tuijian:
+
+                break;
+            case R.id.ll_about:
+
+                break;
+            case R.id.ll_fankui:
+
+                start(FankuiActivity.class);
+                break;
         }
     }
+
 }

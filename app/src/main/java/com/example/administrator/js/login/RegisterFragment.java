@@ -129,11 +129,10 @@ public class RegisterFragment extends BaseFragment {
                 .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override
                     protected void onSucess(User mUser) {
-                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
 
-                        ARouter.getInstance().build("/activity/MainActivity")
-                                .navigation();
-                        getActivity().finish();
+                        if (mOnUserGetListener != null) {
+                            mOnUserGetListener.onUserGet(mUser);
+                        }
                     }
 
                     @Override
@@ -196,10 +195,12 @@ public class RegisterFragment extends BaseFragment {
     }
 
     OnbackClickListener mOnbackClickListener;
+    OnUserGetListener mOnUserGetListener;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mOnbackClickListener = (OnbackClickListener) activity;
+        mOnUserGetListener = (OnUserGetListener) activity;
     }
 }
