@@ -1,5 +1,6 @@
 package com.example.administrator.js.activity;
 
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -10,10 +11,14 @@ import android.view.View;
 
 import com.appbaselib.adapter.FragmentAdapter;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.utils.TablayoutUtils;
 import com.example.administrator.js.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.rong.imkit.fragment.ConversationListFragment;
+import io.rong.imlib.model.Conversation;
 
 public class MessageActivity extends BaseActivity {
 
@@ -26,14 +31,15 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void initView() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("消息");
         mTab = (TabLayout) findViewById(R.id.tab);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
 
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getFragments(), getTabTitle());
         mViewpager.setAdapter(mFragmentAdapter);
-        mTab.setTabMode(TabLayout.MODE_SCROLLABLE);
+        mTab.setTabMode(TabLayout.MODE_FIXED);
         mTab.setupWithViewPager(mViewpager);
-        //  setTabLine(mTab, 50, 50);
+        TablayoutUtils.setTabLine(mTab, 50, 50, mContext);
     }
 
 
@@ -47,14 +53,15 @@ public class MessageActivity extends BaseActivity {
     public List<Fragment> getFragments() {
 
         List<Fragment> m = new ArrayList<>();
-        MessageFragment mMessageFragment = new MessageFragment();
-        MessageFragment mMessageFragment1 = new MessageFragment();
+        Uri mUri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
+                .appendPath("conversationlist").appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false").build();
+        ConversationListFragment mMessageFragment = new ConversationListFragment();
+        mMessageFragment.setUri(mUri);
+        ConversationListFragment mMessageFragment1 = new ConversationListFragment();
         m.add(mMessageFragment);
         m.add(mMessageFragment1);
         return m;
     }
-
-    ;
 
     @Override
     public Toolbar getToolbar() {
@@ -63,7 +70,7 @@ public class MessageActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_tab;
+        return R.layout.activity_message;
     }
 
     @Override

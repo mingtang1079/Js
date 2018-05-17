@@ -14,6 +14,7 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.adapter.NearbyVipAdapter;
 import com.example.administrator.js.exercise.model.VipUser;
+import com.example.administrator.js.me.model.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +22,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class NearbyVipActivity extends BaseRefreshActivity<VipUser> {
+public class NearbyVipActivity extends BaseRefreshActivity<User> {
 
 
     @BindView(R.id.toolbar)

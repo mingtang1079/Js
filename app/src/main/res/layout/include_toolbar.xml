@@ -8,9 +8,8 @@
     android:layout_height="wrap_content"
     android:background="@color/white_color"
     android:minHeight="?attr/actionBarSize"
-    android:theme="@style/toolbar_style"
+    app:titleTextAppearance="@style/toolbar_style"
     app:layout_scrollFlags="scroll|enterAlways"
-    app:titleTextAppearance="@style/ToolbarTitleText"
     app:popupTheme="@style/Base.ThemeOverlay.AppCompat.Light">
 
 </android.support.v7.widget.Toolbar>

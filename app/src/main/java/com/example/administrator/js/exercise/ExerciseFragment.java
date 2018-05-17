@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.appbaselib.base.BaseFragment;
 import com.example.administrator.js.R;
+import com.example.administrator.js.activity.MessageActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +33,16 @@ public class ExerciseFragment extends BaseFragment {
     protected void initView() {
         mToolbar.setTitle("健身");
       //  mToolbar.setTitleTextColor(ContextCompat.getColor(R.color.));
+        mToolbar.inflateMenu(R.menu.main_exercise);
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                start(MessageActivity.class);
+
+                return false;
+            }
+        });
     }
 
     @Override
