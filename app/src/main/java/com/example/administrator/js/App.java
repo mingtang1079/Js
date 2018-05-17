@@ -15,6 +15,7 @@ import com.example.administrator.js.login.RongYunToken;
 import com.example.administrator.js.me.model.User;
 import com.google.gson.JsonObject;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,15 +42,18 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        initIM();
         initBugly();
         initRouter();
-        initIM();
-        connectRongYun();
+        //参数3:Push推送业务的secret，需要集成Push功能时必须传入Push的secret，否则传空。
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
     }
 
     private void initIM() {
-        RongIMClient.init(this);
-
+        if (getApplicationInfo().packageName.equals(CommonUtils.getCurProcessName(getApplicationContext()))) {
+            RongIM.init(this);
+            connectRongYun();
+        }
     }
 
     private void initBugly() {
@@ -91,27 +95,28 @@ public class App extends BaseApplication {
             return;
         }
 
-        Http.getDefault().getUserRongYunToken(Constans.rongyunUrl, mUser.id, mUser.nickname, mUser.img)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<JsonObject>() {
-                    @Override
-                    public void onNext(JsonObject mS) {
+//        Http.getDefault().getUserRongYunToken(Constans.rongyunUrl, mUser.id, mUser.nickname, mUser.img)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new DefaultObserver<JsonObject>() {
+//                    @Override
+//                    public void onNext(JsonObject mS) {
+//
+//                        RongYunToken mRongYunToken = JsonUtil.fromJson(mS.toString(), RongYunToken.class);
+//                        connect(mRongYunToken.token);
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                    }
+//                });
+        ;
 
-                        RongYunToken mRongYunToken = JsonUtil.fromJson(mS.toString(), RongYunToken.class);
-                        connect(mRongYunToken.token);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                    }
-
-                    @Override
-                    public void onComplete() {
-                    }
-                });
-
-
+        connect(mUser.token);
     }
 
     /**

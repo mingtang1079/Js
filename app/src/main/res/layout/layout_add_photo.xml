@@ -5,7 +5,7 @@
           android:padding="8dp"
            android:layout_height="wrap_content"
            android:orientation="vertical"
-           android:src="@drawable/icon_camera">
+           android:src="@drawable/icon_add_photo">
 
 
 </ImageView>

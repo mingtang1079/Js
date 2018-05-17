@@ -7,6 +7,6 @@ package com.example.administrator.js.constant;
 public class Constans {
 
     public static String rongyunUrl = "http://api.cn.ronghub.com/user/getToken.json";
-    public static  String rongAppKey="bmdehs6pbr2ws";
-    public  static  String rongAppScrect="wG0iJzaKub1";
+    public static  String rongAppKey="x18ywvqfxbzgc";
+    public  static  String rongAppScrect="xrlytFnWG2";
 }

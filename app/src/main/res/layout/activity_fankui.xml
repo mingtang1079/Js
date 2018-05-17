@@ -14,7 +14,8 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-
+            android:focusableInTouchMode="true"
+            android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

@@ -108,7 +108,8 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
     private void setData() {
 
-        mTvTime.setText(mVerifyUser.workdate);
+        if (mVerifyUser != null && mVerifyUser.workdate != null)
+            mTvTime.setText(mVerifyUser.workdate);
 
 
     }

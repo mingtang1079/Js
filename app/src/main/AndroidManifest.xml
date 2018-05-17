@@ -94,13 +94,62 @@
         <activity
             android:name=".me.JianliActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".exercise.KnowledgeActivity"></activity>
-        <activity android:name=".exercise.VipResultActivity"></activity>
-        <activity android:name=".exercise.ExerciseSkillActivity"></activity>
-        <activity android:name=".exercise.NearbyVipActivity"></activity>
-        <activity android:name=".activity.MessageActivity"></activity>
-        <activity android:name=".vip.VipUserDetailActivity"></activity>
-        <activity android:name=".me.FankuiActivity"></activity>
+        <activity
+            android:name=".exercise.KnowledgeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".exercise.VipResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".exercise.ExerciseSkillActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".exercise.NearbyVipActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MessageActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.administrator.js"
+                    android:pathPrefix="/conversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".vip.VipUserDetailActivity" />
+        <activity android:name=".me.FankuiActivity" />
+        <activity android:name=".me.AboutUsActivity" />
+        <activity
+            android:name=".activity.ChatActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="com.example.administrator.js"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
+        </activity>
+        <receiver
+            android:exported="true"
+            android:name=".broadcast.SealNotificationReceiver">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

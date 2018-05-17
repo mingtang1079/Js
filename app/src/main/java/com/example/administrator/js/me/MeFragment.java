@@ -36,9 +36,11 @@ public class MeFragment extends BaseFragment {
     ImageView mIvBarcode;
     @BindView(R.id.iv_head)
     CircleImageView mImageViewHead;
-
     @BindView(R.id.ll_zizhi)
     LinearLayout mLinearLayoutZizhi;
+    @BindView(R.id.tv_verify)
+    TextView mTextViewVerify;
+
 
     @Override
     protected int getContentViewLayoutID() {
@@ -52,7 +54,7 @@ public class MeFragment extends BaseFragment {
         if (mUser != null) {
             ImageLoader.load(mContext, mUser.img, mImageViewHead);
             mTvName.setText(mUser.nickname);
-            mTvId.setText(mUser.no);
+            mTvId.setText("ID：" + mUser.no);
 
         }
 
@@ -109,7 +111,7 @@ public class MeFragment extends BaseFragment {
 
                 break;
             case R.id.ll_about:
-
+                start(AboutUsActivity.class);
                 break;
             case R.id.ll_fankui:
 

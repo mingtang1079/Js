@@ -1,4 +1,4 @@
-include ':app', ':IMKit', ':IMLib'
+include ':app', ':IMKit', ':IMLib', ':share'
 include ':baselibrary'
 project(':baselibrary').projectDir=new File('../CommonLibrary/baselibrary')
 include ':photopicker'
