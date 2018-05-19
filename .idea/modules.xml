@@ -6,8 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/IMLib/IMLib.iml" filepath="$PROJECT_DIR$/IMLib/IMLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/Js.iml" filepath="$PROJECT_DIR$/Js.iml" />
       <module fileurl="file://$PROJECT_DIR$/../CommonLibrary/adressselectorlib/adressselectorlib.iml" filepath="$PROJECT_DIR$/../CommonLibrary/adressselectorlib/adressselectorlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amap/amap.iml" filepath="$PROJECT_DIR$/amap/amap.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/../CommonLibrary/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/../CommonLibrary/baselibrary/baselibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jpush/jpush.iml" filepath="$PROJECT_DIR$/jpush/jpush.iml" />
       <module fileurl="file://$PROJECT_DIR$/../CommonLibrary/photopicker/photopicker.iml" filepath="$PROJECT_DIR$/../CommonLibrary/photopicker/photopicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/share/share.iml" filepath="$PROJECT_DIR$/share/share.iml" />
     </modules>
