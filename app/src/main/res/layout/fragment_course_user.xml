@@ -5,11 +5,12 @@
     android:background="@color/default_bg"
     android:orientation="vertical">
 
-    <EditText
+    <TextView
         android:id="@+id/et_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:layout_margin="8dp"
         android:background="@drawable/com_round_corner_solid_white"
         android:hint="搜索会员昵称  ID"
