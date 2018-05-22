@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.LogUtils;
@@ -112,7 +113,9 @@ public class MainHeaderView extends BaseLifeCycleView {
 
                 break;
             case R.id.tv_shop:
-
+                ARouter.getInstance().build("/web/Html5Activity")
+                        .withString("url","http://www.qq.com")
+                        .navigation(getContext());
                 break;
             case R.id.tv_work:
 
