@@ -1,6 +1,7 @@
 package com.example.administrator.js;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -13,6 +14,7 @@ import com.example.administrator.js.constant.Constans;
 import com.example.administrator.js.interceptor.RongInterceptor;
 import com.example.administrator.js.login.RongYunToken;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.service.LocationService;
 import com.google.gson.JsonObject;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
@@ -45,8 +47,18 @@ public class App extends BaseApplication {
         initIM();
         initBugly();
         initRouter();
+        startService();
         //参数3:Push推送业务的secret，需要集成Push功能时必须传入Push的secret，否则传空。
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
+
+    }
+
+    private void startService() {
+
+        //启动位置Service
+        Intent intentFive = new Intent(this, LocationService.class);
+        startService(intentFive);
+
     }
 
     private void initIM() {

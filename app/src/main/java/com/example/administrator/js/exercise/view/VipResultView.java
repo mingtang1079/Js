@@ -71,7 +71,7 @@ public class VipResultView extends BaseLifeCycleView {
 
     private void requestData() {
 
-        Http.getDefault().getMain(1, 1, 3)
+        Http.getDefault().getMain(3, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override

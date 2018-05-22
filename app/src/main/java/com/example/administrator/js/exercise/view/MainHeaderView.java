@@ -20,6 +20,7 @@ import com.example.administrator.js.base.adapter.BaseLifeCycleView;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.me.model.Zizhi;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class MainHeaderView extends BaseLifeCycleView {
     public void init(Context mContext) {
         super.init(mContext);
         View mView = LayoutInflater.from(getContext()).inflate(R.layout.view_main_header, this, false);
-        ButterKnife.bind(this,mView);
+        ButterKnife.bind(this, mView);
         addView(mView);
     }
 
@@ -78,7 +79,7 @@ public class MainHeaderView extends BaseLifeCycleView {
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
-                    protected void onSucess(WrapperModel<Main> mMainWrapperModel) {
+                    protected void onSucess(final WrapperModel<Main> mMainWrapperModel) {
 
                         if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
                             List<String> mStrings = new ArrayList<>();
@@ -93,6 +94,14 @@ public class MainHeaderView extends BaseLifeCycleView {
                             //banner设置方法全部调用完毕时最后调用
                             mBanner.setDelayTime(3000);
                             mBanner.start();
+                            mBanner.setOnBannerListener(new OnBannerListener() {
+                                @Override
+                                public void OnBannerClick(int mI) {
+                                    ARouter.getInstance().build("/exercise/DetailActivity")
+                                            .withObject("mMain", mMainWrapperModel.list.get(mI))
+                                            .navigation(getContext());
+                                }
+                            });
                         }
                     }
 
@@ -114,7 +123,7 @@ public class MainHeaderView extends BaseLifeCycleView {
                 break;
             case R.id.tv_shop:
                 ARouter.getInstance().build("/web/Html5Activity")
-                        .withString("url","http://www.qq.com")
+                        .withString("url", "http://www.qq.com")
                         .navigation(getContext());
                 break;
             case R.id.tv_work:

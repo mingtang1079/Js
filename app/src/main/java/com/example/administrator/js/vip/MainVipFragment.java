@@ -12,8 +12,18 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.adapter.FragmentAdapter;
 import com.appbaselib.base.BaseFragment;
+import com.appbaselib.common.ImageLoader;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.LogUtils;
 import com.appbaselib.utils.TablayoutUtils;
+import com.example.administrator.js.Http;
+import com.example.administrator.js.NearByVipFragment;
 import com.example.administrator.js.R;
+import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.exercise.model.Main;
+import com.example.administrator.js.exercise.view.MainHeaderView;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +39,7 @@ import butterknife.Unbinder;
  * Created by tangming on 2018/5/3.
  */
 
-public class VipFragment extends BaseFragment {
+public class MainVipFragment extends BaseFragment {
     @BindView(R.id.iv_add)
     ImageView mIvAdd;
     @BindView(R.id.tab)
@@ -47,11 +57,35 @@ public class VipFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-        mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getFragments(), getTabTitle());
+        mFragmentAdapter = new FragmentAdapter(getChildFragmentManager(), getFragments(), getTabTitle());
         mViewpager.setAdapter(mFragmentAdapter);
         mTab.setTabMode(TabLayout.MODE_FIXED);
         mTab.setupWithViewPager(mViewpager);
-        TablayoutUtils.setTabLine(mTab,30,30,mContext);
+        mViewpager.setOffscreenPageLimit(4);
+        //   TablayoutUtils.setTabLine(mTab,50,50,mContext);
+        requestData();
+    }
+
+    @Override
+    protected void requestData() {
+
+        Http.getDefault().getMain(5, 1, 1)
+                .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
+                .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
+                    @Override
+                    protected void onSucess(final WrapperModel<Main> mMainWrapperModel) {
+                        if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
+                            ImageLoader.load(mContext,mMainWrapperModel.list.get(0).image,mIvAdd);
+                        }
+
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+
+                    }
+                });
+
     }
 
     private String[] getTabTitle() {
@@ -66,10 +100,9 @@ public class VipFragment extends BaseFragment {
 
         //one
 //        Map<String, String> mStringStringMap = new HashMap<>();
-//        VipUserFragment mVipUserFragment = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
-//                .withObject("mMap", mStringStringMap)
-//                .navigation(mContext);
-//        mFragments.add(mVipUserFragment);
+        NearByVipFragment mVipUserFragment = (NearByVipFragment) ARouter.getInstance().build("/commen/NearByVipFragment")
+                .navigation(mContext);
+        mFragments.add(mVipUserFragment);
 
         VipUserFragment mVipUserFragment1 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
                 .withString("status", "1")

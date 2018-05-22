@@ -16,11 +16,10 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.course.CourseFragment;
 import com.example.administrator.js.exercise.ExerciseFragment;
 import com.example.administrator.js.me.MeFragment;
-import com.example.administrator.js.vip.VipFragment;
+import com.example.administrator.js.vip.MainVipFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 @Route(path = "/activity/MainActivity")
 public class MainActivity extends BaseActivity {
@@ -39,7 +38,7 @@ public class MainActivity extends BaseActivity {
 
     MeFragment mMeFragment;
     ExerciseFragment mExerciseFragment;
-    VipFragment mVipFragment;
+    MainVipFragment mMainVipFragment;
     CourseFragment mCourseFragment;
 
     @Override
@@ -92,7 +91,7 @@ public class MainActivity extends BaseActivity {
         mBnve.enableAnimation(false);
         mMeFragment = new MeFragment();
         mExerciseFragment = new ExerciseFragment();
-        mVipFragment = new VipFragment();
+        mMainVipFragment = new MainVipFragment();
         mCourseFragment = new CourseFragment();
 
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.content);
@@ -107,7 +106,7 @@ public class MainActivity extends BaseActivity {
                     mNavigator.showFragment(mExerciseFragment);
                 } else if (item.getItemId() == R.id.vip) {
 
-                    mNavigator.showFragment(mVipFragment);
+                    mNavigator.showFragment(mMainVipFragment);
 
                 } else if (item.getItemId() == R.id.course) {
 

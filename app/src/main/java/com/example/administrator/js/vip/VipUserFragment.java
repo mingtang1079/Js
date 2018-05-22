@@ -15,6 +15,7 @@ import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.adapter.NearbyVipAdapter;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.service.LocationService;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;

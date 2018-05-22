@@ -40,4 +40,6 @@ public class Main implements Serializable {
     public String userid; // 用户id
     public String nickname; // 用户昵称
     public String userimg; // 用户图片
+
+    public String favorite;//0 未收藏 1 收藏
 }

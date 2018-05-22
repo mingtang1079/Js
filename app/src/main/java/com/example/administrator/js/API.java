@@ -125,11 +125,15 @@ public interface API {
     Observable<BaseModel<WrapperModel<VipUser>>> getUser(@FieldMap Map<String, String> mStringStringMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY+"/user/feedback")
+    @POST(AUTHORIRY + "/user/feedback")
     Observable<BaseModel<String>> feed(@FieldMap Map<String, String> mMap);
 
     //融云api
     @POST
     @FormUrlEncoded
     Observable<JsonObject> getUserRongYunToken(@Url String url, @Field("userId") String id, @Field("name") String name, @Field("portraitUri") String portraitUri);
+
+    @POST
+    @FormUrlEncoded
+    Observable<BaseModel<String>> collection(@Field("userId") String userId, @Field("id") String id, @Field("action") String isCollection);
 }

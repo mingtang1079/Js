@@ -74,7 +74,7 @@ public class ExerciseKnowlegaView extends BaseLifeCycleView {
 
     private void requestData() {
 
-        Http.getDefault().getMain(1, 1, 3)
+        Http.getDefault().getMain(2, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
