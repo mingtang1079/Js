@@ -36,7 +36,7 @@ public class KnowledgeActivity extends MyBaseRefreshActivity<Main> {
 
     @Override
     public void requestData() {
-        Http.getDefault().getMain(1, pageNo, pageSize)
+        Http.getDefault().getMain(2, pageNo, pageSize)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override

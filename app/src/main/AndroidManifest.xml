@@ -22,7 +22,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
 
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -31,10 +30,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-        <!-- 搞得地图-->
+
+        <!-- 搞得地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="843f6dec306f70bd7f2b3774df01b9ef"/>
+            android:value="843f6dec306f70bd7f2b3774df01b9ef" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.administrator.js.FileProvider"
@@ -44,7 +45,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/rc_file_path" />
         </provider>
-        <service android:name=".service.LocationService"/>
+
+        <service android:name=".service.LocationService" />
 
         <activity
             android:name=".activity.MainActivity"
@@ -159,7 +161,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".exercise.DetailActivity"></activity>
+        <activity android:name=".exercise.DetailActivity" />
+        <activity android:name=".course.CourDetailActivity"></activity>
     </application>
 
 </manifest>

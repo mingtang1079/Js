@@ -13,7 +13,7 @@ public class User {
     public String comfirmpsd; // 课程确认密码
     public String img; // 头像
     public Integer age; // 年龄
-    public long birthdate; // 出生日期
+    public String birthdate; // 出生日期
     public String sex; // 值为1时是男性，值为2时是女性，值为0时是未知
     public String email; // email
     public String address; // 地址

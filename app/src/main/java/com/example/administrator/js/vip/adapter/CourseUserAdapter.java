@@ -1,8 +1,7 @@
-package com.example.administrator.js.exercise.adapter;
+package com.example.administrator.js.vip.adapter;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appbaselib.base.BaseRecyclerViewAdapter;
@@ -10,14 +9,13 @@ import com.appbaselib.common.ImageLoader;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
 import com.example.administrator.js.me.model.User;
-import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class NearbyVipAdapter extends BaseRecyclerViewAdapter<User> {
-    public NearbyVipAdapter(int layoutResId, List<User> data) {
+public class CourseUserAdapter extends BaseRecyclerViewAdapter<User> {
+    public CourseUserAdapter(int layoutResId, List<User> data) {
         super(layoutResId, data);
     }
 

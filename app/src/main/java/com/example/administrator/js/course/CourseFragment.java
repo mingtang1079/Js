@@ -92,7 +92,7 @@ public class CourseFragment extends BaseFragment {
         mFragments.add(mVipUserFragment1);
 
         CourseUserFragment mVipUserFragment2 = (CourseUserFragment) ARouter.getInstance().build("/course/CourseUserFragment")
-                .withString("status", "3")
+                .withString("status", "2")
                 .navigation(mContext);
         mFragments.add(mVipUserFragment2);
 

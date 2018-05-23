@@ -105,12 +105,12 @@ public class MainVipFragment extends BaseFragment {
         mFragments.add(mVipUserFragment);
 
         VipUserFragment mVipUserFragment1 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
-                .withString("status", "1")
+                .withString("status", "3")
                 .navigation(mContext);
         mFragments.add(mVipUserFragment1);
 
         VipUserFragment mVipUserFragment2 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
-                .withString("status", "3")
+                .withString("status", "1")
                 .navigation(mContext);
         mFragments.add(mVipUserFragment2);
 

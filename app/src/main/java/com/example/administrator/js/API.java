@@ -1,14 +1,18 @@
 package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
+import com.appbaselib.base.BaseModelWrapper;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.me.model.UserDetail;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.Zizhi;
 import com.google.gson.JsonObject;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -122,7 +126,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/contact/list")
-    Observable<BaseModel<WrapperModel<VipUser>>> getUser(@FieldMap Map<String, String> mStringStringMap);
+    Observable<BaseModel<List<VipUser>>> getUser(@FieldMap Map<String, String> mStringStringMap);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/feedback")
@@ -133,7 +137,28 @@ public interface API {
     @FormUrlEncoded
     Observable<JsonObject> getUserRongYunToken(@Url String url, @Field("userId") String id, @Field("name") String name, @Field("portraitUri") String portraitUri);
 
-    @POST
+    @POST(AUTHORIRY + "/media/useraction")
     @FormUrlEncoded
     Observable<BaseModel<String>> collection(@Field("userId") String userId, @Field("id") String id, @Field("action") String isCollection);
+
+    @POST(AUTHORIRY + "/contact/studentDetail")
+    @FormUrlEncoded
+    Observable<BaseModel<UserDetail>> userDetail(@Field("tid") String jiaolianId, @Field("uid") String useId);
+
+
+    @POST(AUTHORIRY + "/course/get")
+    @FormUrlEncoded
+    Observable<BaseModel<CourseDetail>> courseDetail(@Field("tid") String jiaolianId, @Field("id") String useId);
+    /**
+     * @param jiaolianId
+     * @param status     状态 1进行中,2已结束
+     * @param pageNo     页码,默认1,用于已结束的下拉刷新
+     * @param starttime  某一天,用于我的日程 格式 2018-02-03
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/list")
+    Observable<BaseModel<WrapperModel<VipUser>>> getCourse(@Field("tid") String jiaolianId, @Field("status") String status,
+                                                               @Field("pageNo") int pageNo, @Field("starttime") String starttime);
+
 }

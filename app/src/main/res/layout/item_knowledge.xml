@@ -15,13 +15,13 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.7"
+        android:alpha="0.3"
         android:background="@color/black_color" />
     <TextView
         android:id="@+id/tv_title"
         android:layout_gravity="center"
         tools:text="发多少发多少广东省"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

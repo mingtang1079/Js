@@ -21,6 +21,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -70,12 +71,12 @@ public class VipUserFragment extends BaseRefreshFragment<User> {
         }
 
         Http.getDefault().getUser(mMap)
-                .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<WrapperModel<VipUser>>() {
+                .as(RxHelper.<List<VipUser>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<List<VipUser>>() {
                     @Override
-                    protected void onSucess(WrapperModel<VipUser> mNearbyVipWrapperModel) {
+                    protected void onSucess(List<VipUser> list) {
 
-                        loadComplete(mNearbyVipWrapperModel.list);
+                        loadComplete(list);
                     }
 
                     @Override
