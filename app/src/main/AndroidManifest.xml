@@ -162,7 +162,9 @@
         </receiver>
 
         <activity android:name=".exercise.DetailActivity" />
-        <activity android:name=".course.CourDetailActivity"></activity>
+        <activity android:name=".course.CourDetailActivity" />
+        <activity android:name=".me.TeacherBiDuActivity" />
+        <activity android:name=".me.BarcodeActivity"></activity>
     </application>
 
 </manifest>

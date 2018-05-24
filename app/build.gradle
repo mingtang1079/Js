@@ -43,8 +43,16 @@ android {
     }
     buildTypes {
         release {
+            buildConfigField "String", "BASE_URL", "\"https://www.bjwork.xyz/api\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+
+            buildConfigField "String", "BASE_URL", "\"https://www.bjwork.xyz/api\""
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
         }
     }
     configurations.all {

@@ -5,11 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.utils.ScreenUtils;
 import com.appbaselib.utils.SystemUtils;
 import com.appbaselib.view.RatioImageView;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.App;
 import com.example.administrator.js.R;
@@ -23,9 +25,19 @@ public class KnowledgeAdapter extends BaseRecyclerViewAdapter<Main> {
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Main item) {
+    protected void convert(BaseViewHolder helper, final Main item) {
         ImageLoader.load(mContext, item.image, (RatioImageView) helper.getView(R.id.image));
         helper.setText(R.id.tv_title, item.title);
+
+        setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ARouter.getInstance().build("/exercise/DetailActivity")
+                        .withObject("mMain", item)
+                        .navigation(mContext);
+            }
+        });
+
     }
 
     public static class KnowledgeDividerItemDecoration extends RecyclerView.ItemDecoration {

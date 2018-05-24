@@ -34,7 +34,7 @@ import retrofit2.http.Url;
 public interface API {
 
 
-    String AUTHORIRY = "https://www.bjwork.xyz/api";
+    String AUTHORIRY = BuildConfig.BASE_URL;
 
     /**
      * 登录
@@ -118,7 +118,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/news/list")
-    Observable<BaseModel<WrapperModel<Main>>> getMain(@Field("type") int type, @Field("pageNo") int pageNo, @Field("pageSize") int pageSize);
+    Observable<BaseModel<WrapperModel<Main>>> getMain(@Field("userid") String userId, @Field("type") int type, @Field("pageNo") int pageNo, @Field("pageSize") int pageSize);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/contact/search")
@@ -135,11 +135,11 @@ public interface API {
     //融云api
     @POST
     @FormUrlEncoded
-    Observable<JsonObject> getUserRongYunToken(@Url String url, @Field("userId") String id, @Field("name") String name, @Field("portraitUri") String portraitUri);
+    Observable<JsonObject> getUserRongYunToken(@Url String url, @Field("userid") String id, @Field("name") String name, @Field("portraitUri") String portraitUri);
 
     @POST(AUTHORIRY + "/media/useraction")
     @FormUrlEncoded
-    Observable<BaseModel<String>> collection(@Field("userId") String userId, @Field("id") String id, @Field("action") String isCollection);
+    Observable<BaseModel<String>> collection(@Field("userid") String userId, @Field("id") String id, @Field("action") String isCollection);
 
     @POST(AUTHORIRY + "/contact/studentDetail")
     @FormUrlEncoded
@@ -149,6 +149,7 @@ public interface API {
     @POST(AUTHORIRY + "/course/get")
     @FormUrlEncoded
     Observable<BaseModel<CourseDetail>> courseDetail(@Field("tid") String jiaolianId, @Field("id") String useId);
+
     /**
      * @param jiaolianId
      * @param status     状态 1进行中,2已结束
@@ -159,6 +160,15 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")
     Observable<BaseModel<WrapperModel<VipUser>>> getCourse(@Field("tid") String jiaolianId, @Field("status") String status,
-                                                               @Field("pageNo") int pageNo, @Field("starttime") String starttime);
+                                                           @Field("pageNo") int pageNo, @Field("starttime") String starttime);
 
+    /**
+     * @param id
+     * @param fid
+     * @param status 操作 0取消关注,取消拉黑,1关注,2拉黑
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/contact/handle")
+    Observable<BaseModel<String>> handleUser(@Field("id") String id, @Field("fid") String fid, @Field("status") String status);
 }

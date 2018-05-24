@@ -8,6 +8,7 @@ import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.MyBaseRefreshActivity;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.adapter.ExerciseSkillAdapter;
@@ -31,7 +32,7 @@ public class ExerciseSkillActivity extends MyBaseRefreshActivity<Main> {
 
     @Override
     public void requestData() {
-        Http.getDefault().getMain(4, pageNo, pageSize)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,4, pageNo, pageSize)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override

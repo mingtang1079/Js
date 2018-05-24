@@ -49,6 +49,7 @@ public class UserDetail implements Serializable {
 
         public String status;
 
+
     }
 
     public static class UserBody {

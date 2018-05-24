@@ -66,6 +66,10 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
     TextView mTextViewExit;
     @BindView(R.id.iv_head)
     CircleImageView head;
+    @BindView(R.id.ll_zhifubao)
+    LinearLayout mLinearLayoutZhifubao;
+    @BindView(R.id.tv_zhifubao)
+    TextView mTextViewZhifubao;
 
     UserPresenter mUserPresenter;
 
@@ -170,7 +174,6 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                         startActivity(intent);
                     }
                 }).show();
-
 
 
                 break;

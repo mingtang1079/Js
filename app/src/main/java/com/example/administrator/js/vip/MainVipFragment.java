@@ -17,9 +17,11 @@ import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.LogUtils;
 import com.appbaselib.utils.TablayoutUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.NearByVipFragment;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.view.MainHeaderView;
@@ -69,14 +71,22 @@ public class MainVipFragment extends BaseFragment {
     @Override
     protected void requestData() {
 
-        Http.getDefault().getMain(5, 1, 1)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,5, 1, 1)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
                     protected void onSucess(final WrapperModel<Main> mMainWrapperModel) {
                         if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
-                            ImageLoader.load(mContext,mMainWrapperModel.list.get(0).image,mIvAdd);
+                            ImageLoader.load(mContext, mMainWrapperModel.list.get(0).image, mIvAdd);
                         }
+                        mIvAdd.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View mView) {
+                                ARouter.getInstance().build("/exercise/DetailActivity")
+                                        .withObject("mMain", mMainWrapperModel.list.get(0))
+                                        .navigation(mContext);
+                            }
+                        });
 
                     }
 

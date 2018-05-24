@@ -1,7 +1,9 @@
 package com.example.administrator.js.exercise.adapter;
 
+import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -17,11 +19,18 @@ public class ExerciseSkillAdapter extends BaseRecyclerViewAdapter<Main> {
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Main item) {
+    protected void convert(BaseViewHolder helper, final Main item) {
 
         ImageLoader.load(mContext, item.image, (ImageView) helper.getView(R.id.image));
         helper.setText(R.id.tv_title, item.title != null ? item.title : "");
         helper.setText(R.id.tv_content, item.summary != null ? item.summary : "");
-
+        setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ARouter.getInstance().build("/exercise/DetailActivity")
+                        .withObject("mMain", item)
+                        .navigation(mContext);
+            }
+        });
     }
 }

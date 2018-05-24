@@ -201,6 +201,35 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll_zhifubao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/white"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:text="绑定支付宝账号"
+                android:textColor="#4A576A"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_zhifubao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="16dp"
+                android:drawableRight="@drawable/icon_right"
+                android:gravity="right"
+                android:textColor="#4A576A"
+                android:textSize="14sp"
+                tools:text="sain5774" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/ll_phone"
 
             android:layout_width="match_parent"

@@ -14,6 +14,7 @@ import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.adapter.BaseLifeCycleView;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.adapter.ExerciseSkillAdapter;
@@ -71,7 +72,7 @@ public class SkillView extends BaseLifeCycleView {
 
     private void requestData() {
 
-        Http.getDefault().getMain(4, 1, 3)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,4, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override

@@ -17,6 +17,7 @@ import com.appbaselib.utils.LogUtils;
 import com.appbaselib.utils.ToastUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.adapter.BaseLifeCycleView;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.adapter.KnowledgeAdapter;
@@ -74,7 +75,7 @@ public class ExerciseKnowlegaView extends BaseLifeCycleView {
 
     private void requestData() {
 
-        Http.getDefault().getMain(2, 1, 3)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,2, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override

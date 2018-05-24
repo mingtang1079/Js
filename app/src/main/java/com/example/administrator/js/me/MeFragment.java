@@ -13,6 +13,7 @@ import com.appbaselib.base.BaseFragment;
 import com.appbaselib.common.ImageLoader;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.me.model.User;
 
 import butterknife.BindView;
@@ -66,17 +67,27 @@ public class MeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode, R.id.ll_zizhi,
-            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_tuijian, R.id.ll_about, R.id.ll_fankui})
+    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode, R.id.ll_zizhi, R.id.ll_share, R.id.ll_my_collection,
+            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.ll_barcode:
+                start(BarcodeActivity.class);
+
+                break;
+
             case R.id.iv_add:
 
 
                 break;
             case R.id.iv_mes:
+
+                start(MessageActivity.class);
+
                 break;
             case R.id.iv_setting:
+
+
                 break;
             case R.id.tv_name:
 
@@ -107,7 +118,7 @@ public class MeFragment extends BaseFragment {
             case R.id.ll_yajing:
 
                 break;
-            case R.id.ll_tuijian:
+            case R.id.ll_share:
 
                 break;
             case R.id.ll_about:
@@ -116,6 +127,14 @@ public class MeFragment extends BaseFragment {
             case R.id.ll_fankui:
 
                 start(FankuiActivity.class);
+                break;
+            case R.id.ll_bidu:
+
+                start(TeacherBiDuActivity.class);
+                break;
+            case R.id.ll_my_collection:
+
+                //    start(FankuiActivity.class);
                 break;
         }
     }

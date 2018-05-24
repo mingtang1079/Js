@@ -4,6 +4,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.LogUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.adapter.BaseLifeCycleView;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.model.Main;
@@ -75,7 +77,7 @@ public class MainHeaderView extends BaseLifeCycleView {
 
     private void requestData() {
 
-        Http.getDefault().getMain(1, 1, 3)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,1, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
@@ -84,7 +86,9 @@ public class MainHeaderView extends BaseLifeCycleView {
                         if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
                             List<String> mStrings = new ArrayList<>();
                             for (Main mMain : mMainWrapperModel.list) {
-                                mStrings.add(mMain.image);
+                                if (!TextUtils.isEmpty(mMain.image)) {
+                                    mStrings.add(mMain.image);
+                                }
                             }
 
                             //设置图片加载器

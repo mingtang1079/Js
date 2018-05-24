@@ -9,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.adapter.BaseLifeCycleView;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.adapter.VipResultAdapter;
@@ -23,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by tangming on 2018/5/3.
@@ -71,7 +74,7 @@ public class VipResultView extends BaseLifeCycleView {
 
     private void requestData() {
 
-        Http.getDefault().getMain(3, 1, 3)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,3, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
@@ -89,5 +92,11 @@ public class VipResultView extends BaseLifeCycleView {
                 });
 
     }
+    @OnClick(R.id.iv_vip_result)
+    public void onViewClicked() {
 
+        ARouter.getInstance().build("/exercise/VipResultActivity")
+                .navigation();
+
+    }
 }
