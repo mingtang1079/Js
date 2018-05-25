@@ -46,7 +46,7 @@ public abstract class MutichoosePhotoActivity extends BaseActivity implements Ch
     @Override
     protected void initView() {
 
-        mChoosePhotoAdapter = new ChoosePhotoAdapter(R.layout.layout_choose_image, mSelected, this, true);
+        mChoosePhotoAdapter = new ChoosePhotoAdapter(R.layout.layout_choose_image, mSelected, this, false);
         final GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext, 4);
         mRvImages.setLayoutManager(mGridLayoutManager);
         mRvImages.setHasFixedSize(true);

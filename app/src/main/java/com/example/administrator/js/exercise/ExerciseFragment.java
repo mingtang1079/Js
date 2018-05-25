@@ -2,6 +2,7 @@ package com.example.administrator.js.exercise;
 
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,6 +24,8 @@ import butterknife.Unbinder;
 public class ExerciseFragment extends BaseFragment {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -41,6 +44,12 @@ public class ExerciseFragment extends BaseFragment {
                 start(MessageActivity.class);
 
                 return false;
+            }
+        });
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
             }
         });
     }

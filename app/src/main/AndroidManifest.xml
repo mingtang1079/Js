@@ -164,7 +164,11 @@
         <activity android:name=".exercise.DetailActivity" />
         <activity android:name=".course.CourDetailActivity" />
         <activity android:name=".me.TeacherBiDuActivity" />
-        <activity android:name=".me.BarcodeActivity"></activity>
+        <activity android:name=".me.BarcodeActivity" />
+        <activity android:name=".me.SettingActivity" />
+        <activity android:name=".course.CourseCanlenderActivity" />
+        <activity android:name=".me.AddAlipayActivity" />
+        <activity android:name=".me.ZhengshuActivity"></activity>
     </application>
 
 </manifest>

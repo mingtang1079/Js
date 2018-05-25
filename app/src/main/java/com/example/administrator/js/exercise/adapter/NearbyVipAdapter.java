@@ -2,11 +2,14 @@ package com.example.administrator.js.exercise.adapter;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
 import com.example.administrator.js.me.model.User;
@@ -22,7 +25,7 @@ public class NearbyVipAdapter extends BaseRecyclerViewAdapter<User> {
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, User item) {
+    protected void convert(BaseViewHolder helper, final User item) {
 
         if (!TextUtils.isEmpty(item.img)) {
             ImageLoader.load(mContext, item.img, (CircleImageView) helper.getView(R.id.iv_head));
@@ -55,5 +58,14 @@ public class NearbyVipAdapter extends BaseRecyclerViewAdapter<User> {
             helper.setVisible(R.id.tv_age, false);
 
         }
+
+        setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                        .withObject("mUser",item)
+                        .navigation(mContext);
+            }
+        });
     }
 }

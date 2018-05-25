@@ -78,20 +78,20 @@ public class ChoosePhotoAdapter extends BaseRecyclerViewAdapter<String> {
 
 
         SquareImageView mImageView = helper.getView(R.id.imageview);
-//        if (isShow)
-//            helper.setVisible(R.id.delele, true);
-//        else
-//            helper.setVisible(R.id.delele, false);
+        if (isShow)
+            helper.setVisible(R.id.delele, true);
+        else
+            helper.setVisible(R.id.delele, false);
         Glide.with(mContext)
                 .load(item)
                 .crossFade()
                 .into(mImageView);
-//        helper.getView(R.id.delele).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                ChoosePhotoAdapter.this.remove(getData().indexOf(item));
-//            }
-//        });
+        helper.getView(R.id.delele).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ChoosePhotoAdapter.this.remove(getData().indexOf(item));
+            }
+        });
 
     }
 

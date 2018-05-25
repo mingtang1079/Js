@@ -73,7 +73,7 @@
                                     android:layout_marginTop="8dp"
                                     android:textColor="#FF8996AA"
                                     android:textSize="13sp"
-                                    tools:text="课程类型：" />
+                                    android:text="课程类型：" />
 
                                 <TextView
                                     android:id="@+id/tv_course_type"
@@ -97,7 +97,7 @@
                                     android:layout_marginTop="16dp"
                                     android:textColor="#FF8996AA"
                                     android:textSize="13sp"
-                                    tools:text="上课时间：" />
+                                    android:text="上课时间：" />
 
                                 <TextView
                                     android:id="@+id/tv_course_time"
@@ -124,7 +124,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#FF8996AA"
                                     android:textSize="13sp"
-                                    tools:text="课程进展：" />
+                                    android:text="课程进展：" />
 
                                 <TextView
                                     android:id="@+id/tv_progress"
@@ -194,6 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:paddingBottom="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/white"
                     android:orientation="vertical">
@@ -209,7 +210,7 @@
                     <com.amap.api.maps.MapView
                         android:id="@+id/map"
                         android:layout_width="match_parent"
-                        android:layout_height="160dp"
+                        android:layout_height="180dp"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp" />
 
@@ -219,6 +220,7 @@
         </ScrollView>
 
         <LinearLayout
+            android:background="@color/colorAccent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -233,15 +235,16 @@
                 android:padding="14dp"
                 android:text="发消息"
                 android:textColor="@color/white"
-
                 android:textSize="14sp" />
 
             <View
+                android:id="@+id/view_line"
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="14dp"
                 android:layout_marginTop="14dp"
-                android:background="@color/colorGray" />
+                android:background="#77808f" />
+
 
             <TextView
                 android:id="@+id/tv_yuyue"
@@ -251,7 +254,7 @@
                 android:background="@color/colorAccent"
                 android:gravity="center"
                 android:padding="14dp"
-                android:text="取消预约"
+                android:text="预约"
                 android:textColor="@color/white"
 
                 android:textSize="14sp" />

@@ -10,18 +10,6 @@
 
     <include layout="@layout/include_toolbar" />
 
-    <EditText
-        android:id="@+id/et_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@color/white_color"
-        android:gravity="top|left"
-        android:hint="可以输入成功案例描述哦"
-        android:minHeight="100dp"
-        android:padding="8dp"
-        android:textSize="14sp" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"

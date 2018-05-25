@@ -165,7 +165,6 @@ public class XingxiangzhaoActivity extends BaseActivity implements ZizhiPresente
                         @Override
                         public ArrayList<String> apply(ArrayList<String> mStrings) throws Exception {
                             //筛选已经上传过的数据（编辑状态会存在上传过的照片）
-
                             ArrayList<String> m = new ArrayList<>();
                             for (String mS :
                                     mStrings) {
@@ -173,7 +172,6 @@ public class XingxiangzhaoActivity extends BaseActivity implements ZizhiPresente
                                     m.add(mS);
                                 }
                             }
-
                             return m;
                         }
                     })

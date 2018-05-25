@@ -20,6 +20,7 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MutichoosePhotoActivity;
 import com.example.administrator.js.base.adapter.ChoosePhotoAdapter;
 import com.example.administrator.js.me.model.Zizhi;
+import com.example.administrator.js.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -117,14 +118,8 @@ public class FankuiActivity extends MutichoosePhotoActivity {
 
     private void save() {
 
-        List<String> mStrings = new ArrayList<>();
-        for (String m :
-                mSelected) {
+        Observable.just(mSelected)
 
-            mStrings.add(m);
-        }
-
-        Observable.just(mStrings)
                 .observeOn(Schedulers.io())
                 .map(new Function<List<String>, List<File>>() {
                     @Override
@@ -163,8 +158,11 @@ public class FankuiActivity extends MutichoosePhotoActivity {
                         Map<String, String> params = new HashMap<>();
                         params.put("content", mEtText.getText().toString());
                         params.put("userid", UserManager.getInsatance().getUser().id);
+
                         if (mFiles != null && mFiles.size() != 0) {
-                            params.put("pic1", mFiles.toArray().toString());
+
+                            params.put("pic1", Utils.list2String(mFiles));
+
                         }
                         params.put("type", type);
                         return Http.getDefault().feed(params);

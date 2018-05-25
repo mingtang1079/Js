@@ -143,6 +143,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                 break;
             case R.id.ll_zhengshu:
 
+                start(ZhengshuActivity.class);
 
                 break;
             case R.id.ll_geyan:

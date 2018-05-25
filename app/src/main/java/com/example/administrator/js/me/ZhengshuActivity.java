@@ -1,42 +1,26 @@
 package com.example.administrator.js.me;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
-import com.alibaba.android.arouter.facade.annotation.Route;
-import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseModel;
-import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
-import com.appbaselib.utils.FileUtlis;
-import com.appbaselib.view.RatioImageView;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MutichoosePhotoActivity;
-import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.Zizhi;
 import com.example.administrator.js.me.presenter.ZizhiPresenter;
 import com.example.administrator.js.utils.Utils;
-import com.example.administrator.js.vip.adapter.UserdetailImageAdapter;
-import com.foamtrace.photopicker.PhotoPickerActivity;
-import com.foamtrace.photopicker.SelectModel;
-import com.foamtrace.photopicker.intent.PhotoPickerIntent;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,8 +30,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
@@ -59,14 +41,10 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import top.zibin.luban.Luban;
 
-@Route(path = "/me/SuceessExampleActivity")
-
-public class SuceessExampleActivity extends MutichoosePhotoActivity implements ZizhiPresenter.ZizhiResponse {
+public class ZhengshuActivity extends MutichoosePhotoActivity implements ZizhiPresenter.ZizhiResponse {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-    @BindView(R.id.et_text)
-    EditText mEtText;
 
     @Autowired
     VerifyUser mVerifyUser;
@@ -78,7 +56,7 @@ public class SuceessExampleActivity extends MutichoosePhotoActivity implements Z
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_suceess_example;
+        return R.layout.activity_zhengshu;
     }
 
     @Override
@@ -94,15 +72,13 @@ public class SuceessExampleActivity extends MutichoosePhotoActivity implements Z
     @Override
     protected void initView() {
         super.initView();
-        mToolbar.setTitle("成功案列");
+        mToolbar.setTitle("资质证书");
         mZizhiPresenter = new ZizhiPresenter(this);
         inteMenu();
         if (mVerifyUser != null) {
-            if (mVerifyUser.succase != null)
-                mEtText.setText(mVerifyUser.succase);
-            if (!TextUtils.isEmpty(mVerifyUser.succaseimage)) {
+            if (!TextUtils.isEmpty(mVerifyUser.certpath)) {
 
-                String[] mStrings = mVerifyUser.succaseimage.split(",");
+                String[] mStrings = mVerifyUser.certpath.split(",");
                 List<String> mList = Arrays.asList(mStrings);
                 mChoosePhotoAdapter.addData(mList);
 
@@ -183,8 +159,6 @@ public class SuceessExampleActivity extends MutichoosePhotoActivity implements Z
                     public ObservableSource<BaseModel<Zizhi>> apply(List<String> mFiles) throws Exception {
 
                         Map<String, String> params = new HashMap<>();
-                        params.put("succase", mEtText.getText().toString());
-
 
                         //mstrings 此时有可能比 mselected小,因为筛选过的
                         if (mFiles.size() < mSelected.size()) {
@@ -203,7 +177,7 @@ public class SuceessExampleActivity extends MutichoosePhotoActivity implements Z
                         if (mFiles != null && mFiles.size() != 0) {
 
                             String url = Utils.list2String(mFiles);
-                            params.put("succaseimage", url);
+                            params.put("certpath", url);
                         }
                         params.put("userid", UserManager.getInsatance().getUser().id);
                         return Http.getDefault().editZizhi(params);

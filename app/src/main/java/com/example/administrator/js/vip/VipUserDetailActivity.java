@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
@@ -122,6 +123,8 @@ public class VipUserDetailActivity extends BaseActivity {
                 return false;
             }
         });
+        toggleShowLoading(true);
+
         requestData();
     }
 
@@ -135,10 +138,12 @@ public class VipUserDetailActivity extends BaseActivity {
                     @Override
                     protected void onSucess(UserDetail mObserver) {
 
+
                         if (mObserver != null) {
                             mUserDetail = mObserver;
                             setData(mObserver);
                         }
+                        toggleShowLoading(false);
 
                     }
 
@@ -160,6 +165,7 @@ public class VipUserDetailActivity extends BaseActivity {
             mIvYuyue.setImageResource(R.drawable.icon_xingxing);
 
         }
+        ImageLoader.load(mContext,mUser.img,mIvHead);
         //年龄
         if (mUser.age != null || mUser.sex.equals("0")) {
 

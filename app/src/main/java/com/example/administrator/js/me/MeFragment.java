@@ -88,6 +88,7 @@ public class MeFragment extends BaseFragment {
             case R.id.iv_setting:
 
 
+                start(SettingActivity.class);
                 break;
             case R.id.tv_name:
 

@@ -115,7 +115,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
         mTvPhone.setText(mUser.mobile);
     }
 
-    @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit})
+    @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit, R.id.ll_zhifubao})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_head:
@@ -162,7 +162,10 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                 break;
             case R.id.ll_password:
                 break;
+            case R.id.ll_zhifubao:
 
+                start(AddAlipayActivity.class);
+                break;
             case R.id.tv_exit:
 
                 DialogUtils.getDefaultDialog(mContext, "提示", "确定退出吗？", "确定", new DialogInterface.OnClickListener() {
