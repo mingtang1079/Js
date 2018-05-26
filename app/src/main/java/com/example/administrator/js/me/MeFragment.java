@@ -15,6 +15,7 @@ import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.me.model.VipSupply;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -109,6 +110,7 @@ public class MeFragment extends BaseFragment {
 
             case R.id.ll_shenqing:
 
+                start(VipSupplyActivity.class);
                 break;
             case R.id.ll_richeng:
 
@@ -135,7 +137,7 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.ll_my_collection:
 
-                //    start(FankuiActivity.class);
+                   start(CollectionActivity.class);
                 break;
         }
     }

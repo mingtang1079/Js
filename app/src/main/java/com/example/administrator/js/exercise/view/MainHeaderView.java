@@ -124,6 +124,8 @@ public class MainHeaderView extends BaseLifeCycleView {
         switch (view.getId()) {
             case R.id.tv_vip:
 
+                ARouter.getInstance().build("/exercise/NearbyVipActivity")
+                        .navigation(getContext());
                 break;
             case R.id.tv_shop:
                 ARouter.getInstance().build("/web/Html5Activity")

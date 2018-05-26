@@ -51,12 +51,14 @@ public class SettingActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_ziliao:
-
+                start(UserInfoActivity.class);
 
                 break;
             case R.id.ll_yuyan:
                 break;
             case R.id.ll_shangke:
+
+                start(ShankeSettingActivity.class);
                 break;
             case R.id.ll_yinsi:
                 break;

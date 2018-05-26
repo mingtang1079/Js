@@ -209,7 +209,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_jxzz"
+                    android:drawableLeft="@drawable/icon_tongji"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="统计"
@@ -229,7 +229,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_kefu"
+                    android:drawableLeft="@drawable/icon_shoucang"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="我的收藏"
@@ -249,7 +249,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_kefu"
+                    android:drawableLeft="@drawable/icon_yajing"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="押金"
@@ -269,7 +269,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_kefu"
+                    android:drawableLeft="@drawable/icon_bidu"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="教练必读"
@@ -289,7 +289,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_kefu"
+                    android:drawableLeft="@drawable/icon_share"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="分享给朋友"
@@ -308,7 +308,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_share"
+                    android:drawableLeft="@drawable/icon_yijian"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="意见反馈"
@@ -329,7 +329,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_jxzz"
+                    android:drawableLeft="@drawable/icon_about"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="关于我们"

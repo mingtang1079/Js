@@ -60,6 +60,7 @@ public class CourseFragment extends BaseFragment {
 
                 if (item.getItemId() == R.id.course) {
 
+                    start(CourseCanlenderActivity.class);
                 } else {
                     start(MessageActivity.class);
                 }

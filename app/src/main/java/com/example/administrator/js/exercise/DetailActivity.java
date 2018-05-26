@@ -3,6 +3,7 @@ package com.example.administrator.js.exercise;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -30,9 +31,10 @@ public class DetailActivity extends Html5Activity {
 
     @Override
     protected void initView() {
+        mToolbar.setTitle("详情");
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
         mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
-        if (mMain != null) {
+        if (mMain != null&&!TextUtils.isEmpty(mMain.favorite)) {
             if (mMain.favorite.equals("1")) {
                 mMenuItem.setTitle("取消收藏");
             } else {

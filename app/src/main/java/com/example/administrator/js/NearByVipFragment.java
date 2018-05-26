@@ -36,11 +36,13 @@ public class NearByVipFragment extends BaseRefreshFragment<User> {
 //                        .navigation(mContext);
 //            }
 //        });
+        setLoadMoreListener();
+
     }
 
     @Override
     public void requestData() {
-        Map<String, String> mStringStringMap = new HashMap<>();
+        Map<String, Object> mStringStringMap = new HashMap<>();
         mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
         if (!TextUtils.isEmpty(LocationManager.getInsatance().longitude)) {
             mStringStringMap.put("longitude", LocationManager.getInsatance().longitude);

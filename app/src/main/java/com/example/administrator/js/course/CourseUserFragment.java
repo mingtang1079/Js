@@ -62,10 +62,10 @@ public class CourseUserFragment extends BaseRefreshFragment<User> {
     public void requestData() {
 
         Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, status, pageNo, null)
-                .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<WrapperModel<VipUser>>() {
+                .as(RxHelper.<WrapperModel<User>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<WrapperModel<User>>() {
                     @Override
-                    protected void onSucess(WrapperModel<VipUser> mVipUserBaseModelWrapper) {
+                    protected void onSucess(WrapperModel<User> mVipUserBaseModelWrapper) {
                         if (mVipUserBaseModelWrapper != null)
                             loadComplete(mVipUserBaseModelWrapper.list);
 

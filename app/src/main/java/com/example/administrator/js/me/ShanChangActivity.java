@@ -51,6 +51,14 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
     LinearLayout mLlSeven;
     @BindView(R.id.iv_seven)
     ImageView mIvSeven;
+    @BindView(R.id.ll_eight)
+    LinearLayout mLlEight;
+    @BindView(R.id.iv_eight)
+    ImageView mIvEight;
+    @BindView(R.id.ll_nine)
+    LinearLayout mLlNine;
+    @BindView(R.id.iv_nine)
+    ImageView mIvNine;
 
     SparseArray<String> mStringSparseArray = new SparseArray<>(7);
     MenuItem mMenuItem;
@@ -83,8 +91,8 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
         if (mVerifyUser != null && mVerifyUser.skillname != null) {
             String[] mStrings = mVerifyUser.skillname.split(",");
             for (String mS : mStrings) {
-                if (mS.equals("肌肉")) {
-                    mStringSparseArray.put(0, "肌肉");
+                if (mS.equals("增肌")) {
+                    mStringSparseArray.put(0, "增肌");
                     mIvOne.setVisibility(View.VISIBLE);
                 } else if (mS.equals("减脂")) {
                     mStringSparseArray.put(1, "减脂");
@@ -95,14 +103,20 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
                 } else if (mS.equals("康复")) {
                     mStringSparseArray.put(3, "康复");
                     mIvFour.setVisibility(View.VISIBLE);
-                } else if (mS.equals("拳击")) {
-                    mStringSparseArray.put(4, "拳击");
+                } else if (mS.equals("体态纠正")) {
+                    mStringSparseArray.put(4, "体态纠正");
                     mIvFive.setVisibility(View.VISIBLE);
                 } else if (mS.equals("拉伸放松")) {
                     mStringSparseArray.put(5, "拉伸放松");
                     mIvSix.setVisibility(View.VISIBLE);
-                } else if (mS.equals("瑜伽")) {
-                    mStringSparseArray.put(6, "瑜伽");
+                } else if (mS.equals("拳击")) {
+                    mStringSparseArray.put(6, "拳击");
+                    mIvSeven.setVisibility(View.VISIBLE);
+                }else if (mS.equals("功能性训练")) {
+                    mStringSparseArray.put(7, "功能性训练");
+                    mIvSix.setVisibility(View.VISIBLE);
+                } else if (mS.equals("竞技健美")) {
+                    mStringSparseArray.put(8, "竞技健美");
                     mIvSeven.setVisibility(View.VISIBLE);
                 }
             }
@@ -142,7 +156,7 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
     }
 
 
-    @OnClick({R.id.ll_one, R.id.ll_two, R.id.ll_three, R.id.ll_four, R.id.ll_five, R.id.ll_six, R.id.ll_seven})
+    @OnClick({R.id.ll_one, R.id.ll_two, R.id.ll_three, R.id.ll_four, R.id.ll_five, R.id.ll_six, R.id.ll_seven,R.id.ll_eight,R.id.ll_nine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_one:
@@ -152,7 +166,7 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
                     mStringSparseArray.delete(0);
 
                 } else {
-                    mStringSparseArray.put(0, "肌肉");
+                    mStringSparseArray.put(0, "增肌");
                     mIvOne.setVisibility(View.VISIBLE);
 
                 }
@@ -207,7 +221,7 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
                     mStringSparseArray.delete(4);
 
                 } else {
-                    mStringSparseArray.put(4, "拳击");
+                    mStringSparseArray.put(4, "体态纠正");
 
                     mIvFive.setVisibility(View.VISIBLE);
 
@@ -235,9 +249,33 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
                     mStringSparseArray.delete(6);
 
                 } else {
-                    mStringSparseArray.put(6, "瑜伽");
+                    mStringSparseArray.put(6, "拳击");
 
                     mIvSeven.setVisibility(View.VISIBLE);
+
+                }
+
+            case  R.id.ll_eight:
+                if (mIvEight.getVisibility() == View.VISIBLE) {
+                    mIvEight.setVisibility(View.GONE);
+                    mStringSparseArray.delete(7);
+
+                } else {
+                    mStringSparseArray.put(7, "功能性训练");
+
+                    mIvEight.setVisibility(View.VISIBLE);
+
+                }
+                break;
+            case  R.id.ll_nine:
+                if (mIvNine.getVisibility() == View.VISIBLE) {
+                    mIvNine.setVisibility(View.GONE);
+                    mStringSparseArray.delete(8);
+
+                } else {
+                    mStringSparseArray.put(8, "竞技健美");
+
+                    mIvNine.setVisibility(View.VISIBLE);
 
                 }
 

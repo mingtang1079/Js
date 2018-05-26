@@ -6,9 +6,11 @@ import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.VipUser;
+import com.example.administrator.js.me.model.Collection;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.UserDetail;
 import com.example.administrator.js.me.model.VerifyUser;
+import com.example.administrator.js.me.model.VipSupply;
 import com.example.administrator.js.me.model.Zizhi;
 import com.google.gson.JsonObject;
 
@@ -122,7 +124,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/contact/search")
-    Observable<BaseModel<WrapperModel<VipUser>>> seacrchUser(@FieldMap Map<String, String> mStringStringMap);
+    Observable<BaseModel<WrapperModel<VipUser>>> seacrchUser(@FieldMap Map<String, Object> mStringStringMap);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/contact/list")
@@ -159,8 +161,8 @@ public interface API {
      */
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")
-    Observable<BaseModel<WrapperModel<VipUser>>> getCourse(@Field("tid") String jiaolianId, @Field("status") String status,
-                                                           @Field("pageNo") int pageNo, @Field("starttime") String starttime);
+    Observable<BaseModel<WrapperModel<User>>> getCourse(@Field("tid") String jiaolianId, @Field("status") String status,
+                                                        @Field("pageNo") int pageNo, @Field("starttime") String starttime);
 
     /**
      * @param id
@@ -171,4 +173,16 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/contact/handle")
     Observable<BaseModel<String>> handleUser(@Field("id") String id, @Field("fid") String fid, @Field("status") String status);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/order/list")
+    Observable<BaseModel<WrapperModel<VipSupply>>> vipSupply(@FieldMap Map<String, Object> mStringObjectMap);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/media/favoritepage")
+    Observable<BaseModel<WrapperModel<Main>>> getCollection(@Field("userid") String id, @Field("pageNo") int pageNo);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/order/save")
+    Observable<BaseModel<String>> passOrRefuse(@Field("id") String id, @Field("tid") String tid,@Field("status") String status);
 }

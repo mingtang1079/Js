@@ -1,9 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.administrator.js.course.CourseCanlenderActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.example.administrator.js.course.CourseCanlenderActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/include_toolbar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:paddingBottom="16dp"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:paddingLeft="24dp"
+            android:id="@+id/iv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_left"/>
+
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:id="@+id/tv_yue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            tools:text="4月"/>
+
+        <ImageView
+            android:paddingRight="24dp"
+            android:id="@+id/iv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_right2"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="S"/>
+
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="M"/>
+
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="T"/>
+
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="W"/>
+
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="T"/>
+
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="F"/>
+
+        <TextView
+            style="@style/weekIndicatorStyle"
+            android:text="S"/>
+    </LinearLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.ldf.calendar.view.MonthPager
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:background="#fff">
+        </com.ldf.calendar.view.MonthPager>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            app:layout_behavior="com.ldf.calendar.behavior.RecyclerViewBehavior"
+            android:layout_gravity="bottom"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:layout_marginBottom="45dp"/>
+        <!-- paddingBottom或者magin距离必须是MonthPager高度的1/6-->
+        <!-- RecyclerView的高度必须是MatchParent-->
+        <!-- RecyclerView的background必须是非透明-->
+    </android.support.design.widget.CoordinatorLayout>
+
+</LinearLayout>

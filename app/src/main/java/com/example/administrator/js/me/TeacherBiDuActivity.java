@@ -53,7 +53,7 @@ public class TeacherBiDuActivity extends BaseActivity {
             case R.id.ll_zhize:
 
                 ARouter.getInstance().build("/web/Html5Activity")
-                        .withString("url", BuildConfig.BASE_URL + "/h5/news/detail?id=zhize")
+                        .withString("url",  "https://www.bjwork.xyz/h5/news/detail?id=zhize")
                         .navigation(mContext);
 
                 break;
@@ -61,14 +61,14 @@ public class TeacherBiDuActivity extends BaseActivity {
 
 
                 ARouter.getInstance().build("/web/Html5Activity")
-                        .withString("url", BuildConfig.BASE_URL + "/h5/news/detail?id=liucheng")
+                        .withString("url", "https://www.bjwork.xyz/h5/news/detail?id=liucheng")
                         .navigation(mContext);
 
                 break;
             case R.id.ll_pingjia:
 
                 ARouter.getInstance().build("/web/Html5Activity")
-                        .withString("url", BuildConfig.BASE_URL + "/h5/news/detail?id=jizhi")
+                        .withString("url", "https://www.bjwork.xyz/h5/news/detail?id=jizhi")
                         .navigation(mContext);
 
 

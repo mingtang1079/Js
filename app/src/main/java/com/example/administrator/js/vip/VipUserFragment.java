@@ -46,7 +46,9 @@ public class VipUserFragment extends BaseRefreshFragment<User> {
                     @Override
                     public void accept(TextViewTextChangeEvent mTextViewTextChangeEvent) throws Exception {
 
-                        requestData();
+                        if (!TextUtils.isEmpty(mEditTextSearch.getText().toString())) {
+                         refreshData(true);
+                        }
                     }
                 });
     }
