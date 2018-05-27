@@ -10,6 +10,7 @@
     <include layout="@layout/include_toolbar" />
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/ll_ziliao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,6 +30,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/ll_yuyan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,26 +48,6 @@
             android:textSize="14sp" />
 
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_shangke"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0.5dp"
-        android:background="@color/white"
-        android:padding="16dp">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:drawableRight="@drawable/icon_right"
-            android:text="上课提醒"
-            android:textColor="#4A576A"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/ll_yinsi"
         android:layout_width="match_parent"
@@ -84,5 +66,25 @@
             android:textSize="14sp" />
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_shangke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0.5dp"
+        android:background="@color/white"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/icon_right"
+            android:text="课程提醒设置"
+            android:textColor="#4A576A"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
 
 </LinearLayout>

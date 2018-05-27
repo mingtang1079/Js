@@ -11,4 +11,9 @@
         android:icon="@drawable/icon_message"
         android:title="消息"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/scan"
+        android:icon="@drawable/icon_saoyisao"
+        android:title="扫一扫"
+        app:showAsAction="always" />
 </menu>

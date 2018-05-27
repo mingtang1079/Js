@@ -17,6 +17,7 @@ import com.appbaselib.base.BaseFragment;
 import com.appbaselib.utils.TablayoutUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.activity.MessageActivity;
+import com.example.administrator.js.qrcode.CaptureActivity;
 import com.example.administrator.js.vip.VipUserFragment;
 
 import java.util.ArrayList;
@@ -57,6 +58,11 @@ public class CourseFragment extends BaseFragment {
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+
+                if (item.getItemId() == R.id.scan) {
+
+                    start(CaptureActivity.class);
+                }
 
                 if (item.getItemId() == R.id.course) {
 

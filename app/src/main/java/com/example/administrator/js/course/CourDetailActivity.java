@@ -1,10 +1,16 @@
 package com.example.administrator.js.course;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -29,11 +35,14 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.utils.Utils;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.functions.Consumer;
 
 @Route(path = "/course/CourDetailActivity")
 public class CourDetailActivity extends BaseActivity {
@@ -172,7 +181,6 @@ public class CourDetailActivity extends BaseActivity {
         if ("10".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.beginStarttime);
             mTvProgress.setText("已预约");
-            mTvYuyue.setText("取消预约");
 
         } else if ("11".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.beginStarttime);
@@ -181,10 +189,12 @@ public class CourDetailActivity extends BaseActivity {
         } else if ("2".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.beginStarttime + "-" + mCourseDetail.endEndtime);
             mTvProgress.setText("已结束");
+            mTvYuyue.setVisibility(View.GONE);
 
         } else {
             mTvCourseTime.setText(mCourseDetail.beginStarttime);
             mTvProgress.setText("已取消");
+            mTvYuyue.setVisibility(View.GONE);
 
         }
         mTvAddress.setText(mCourseDetail.address);
@@ -225,7 +235,63 @@ public class CourDetailActivity extends BaseActivity {
             case R.id.tv_yuyue:
 
 
+                cancelCourse();
+
                 break;
         }
+    }
+
+    private void cancelCourse() {
+
+
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
+        mBuilder.setTitle("课程取消原因");
+        View mView = LayoutInflater.from(mContext).inflate(R.layout.view_input, null, false);
+        final TextInputEditText mTextInputEditText = mView.findViewById(R.id.et);
+        mBuilder.setView(mView);
+        mBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface mDialogInterface, int mI) {
+                mDialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog mAlertDialog = mBuilder.create();
+        mBuilder.show();
+        final Button mButton = mAlertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        RxTextView.textChangeEvents(mTextInputEditText).skip(1)
+                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void accept(TextViewTextChangeEvent mTextViewTextChangeEvent) throws Exception {
+                        if (!TextUtils.isEmpty(mTextViewTextChangeEvent.text().toString())) {
+                            mButton.setEnabled(true);
+                        } else {
+                            mButton.setEnabled(false);
+                        }
+                    }
+                });
+        mBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                Http.getDefault().cancelCourse(mCourseDetail.id, UserManager.getInsatance().getUser().id, mTextInputEditText.getText().toString())
+                        .as(RxHelper.<String>handleResult(mContext))
+                        .subscribe(new ResponceSubscriber<String>() {
+                            @Override
+                            protected void onSucess(String mS) {
+                                showToast("取消成功");
+                                finish();
+                            }
+
+                            @Override
+                            protected void onFail(String message) {
+                                showToast(message);
+                            }
+                        });
+            }
+        });
+
+
+
     }
 }

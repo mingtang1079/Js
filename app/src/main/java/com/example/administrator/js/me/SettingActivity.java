@@ -61,6 +61,9 @@ public class SettingActivity extends BaseActivity {
                 start(ShankeSettingActivity.class);
                 break;
             case R.id.ll_yinsi:
+
+
+
                 break;
         }
     }
