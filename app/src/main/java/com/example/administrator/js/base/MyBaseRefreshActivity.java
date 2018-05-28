@@ -10,12 +10,13 @@ import butterknife.BindView;
 public abstract class MyBaseRefreshActivity<T> extends BaseRefreshActivity {
 
     @BindView(R.id.toolbar)
-  public   Toolbar mToolbar;
+    public Toolbar mToolbar;
 
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_refresh;
     }
+
     @Override
     public Toolbar getToolbar() {
         return mToolbar;

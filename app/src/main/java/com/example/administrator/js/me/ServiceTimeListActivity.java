@@ -62,7 +62,7 @@ public class ServiceTimeListActivity extends MyBaseRefreshActivity<ServiceTime> 
 
                 //编辑
                 ARouter.getInstance().build("/me/AddServicetimeActivity")
-                        .withObject("mServiceTime",mList.get(position))
+                        .withObject("mServiceTime", mList.get(position))
                         .navigation(mContext);
 
 
@@ -70,14 +70,14 @@ public class ServiceTimeListActivity extends MyBaseRefreshActivity<ServiceTime> 
         });
         mAdapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
+            public boolean onItemLongClick(BaseQuickAdapter adapter, View view, final int position) {
 
                 DialogUtils.getDefaultDialog(mContext, "提示", "确定删除吗？", "确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface mDialogInterface, int mI) {
 
-                        delete();
-
+                        ServiceTime mServiceTime = (ServiceTime) mList.get(position);
+                        delete(mServiceTime.id,position);
 
                     }
                 }).show();
@@ -86,15 +86,30 @@ public class ServiceTimeListActivity extends MyBaseRefreshActivity<ServiceTime> 
         });
     }
 
-    private void delete() {
+    private void delete(String id, final int p) {
 
+        Http.getDefault().servicetimeDelete(id)
+                .as(RxHelper.<String>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<String>(mContext) {
+                    @Override
+                    protected void onSucess(String mS) {
+                        mAdapter.remove(p);
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        refreshData(false);
+        if (!isFirstReresh) {
+            refreshData(false);
+        }
     }
 
     @Override

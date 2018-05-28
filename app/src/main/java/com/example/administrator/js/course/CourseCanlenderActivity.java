@@ -11,11 +11,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DateUtils;
 import com.appbaselib.utils.ScreenUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
@@ -67,6 +69,7 @@ public class CourseCanlenderActivity extends BaseActivity {
 
     CourseUserAdapter mCourseUserAdapter;
 
+    String currenttime;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -92,6 +95,14 @@ public class CourseCanlenderActivity extends BaseActivity {
         //这里用线性显示 类似于listview
         mList.setLayoutManager(new LinearLayoutManager(this));
         mCourseUserAdapter = new CourseUserAdapter(R.layout.item_course_user, null);
+        mCourseUserAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ARouter.getInstance().build("/course/CourDetailActivity")
+                        .withString("id",mCourseUserAdapter.getData().get(position).id)
+                        .navigation(mContext);
+            }
+        });
         mList.setAdapter(mCourseUserAdapter);
 
         initCurrentDate();
@@ -112,13 +123,14 @@ public class CourseCanlenderActivity extends BaseActivity {
                 mCalendarView.setCurrentItem(mCalendarView.getCurrentPosition() - 1);
             }
         });
+        currenttime= DateUtils.getCurrentTimeYmd();
         requestData();
     }
 
     @Override
     public void requestData() {
 
-        Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, "1", 1, DateUtils.getCurrentTimeYmd())
+        Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, "1", 1,currenttime)
                 .as(RxHelper.<WrapperModel<User>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<User>>() {
                     @Override
@@ -186,6 +198,8 @@ public class CourseCanlenderActivity extends BaseActivity {
             @Override
             public void onSelectDate(CalendarDate date) {
                 refreshClickDate(date);
+                currenttime=date.year+"-"+date.month+"-"+date.day;
+                requestData();
             }
 
             @Override

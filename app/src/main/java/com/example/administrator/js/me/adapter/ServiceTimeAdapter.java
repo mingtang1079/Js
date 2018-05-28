@@ -19,26 +19,40 @@ public class ServiceTimeAdapter extends BaseRecyclerViewAdapter<ServiceTime> {
 
     @Override
     protected void convert(BaseViewHolder helper, ServiceTime item) {
+        String startitme;
+        if (item.starthour < 12) {
+            startitme = "上午" + item.starttime;
+        } else {
+            startitme = "下午" + item.starttime;
 
-        helper.setText(R.id.time, item.starttime + " - " + item.endtime);
+        }
+        String endtime;
+        if (item.endhour > 12) {
+            startitme = "下午" + item.endhour;
+        }
+        {
+            endtime = "上午" + item.endhour;
+        }
+
+        helper.setText(R.id.time, startitme + " 一 " + endtime);
         StringBuilder mStringBuilder = new StringBuilder();
 
         if ("1".equals(item.day1))
             mStringBuilder.append("星期一,");
-        if ("1".equals(item.day2))
+        if ("2".equals(item.day2))
             mStringBuilder.append("星期二,");
-        if ("1".equals(item.day3))
+        if ("3".equals(item.day3))
             mStringBuilder.append("星期三,");
-        if ("1".equals(item.day4))
+        if ("4".equals(item.day4))
             mStringBuilder.append("星期四,");
-        if ("1".equals(item.day5))
+        if ("5".equals(item.day5))
             mStringBuilder.append("星期五,");
-        if ("1".equals(item.day6))
+        if ("6".equals(item.day6))
             mStringBuilder.append("星期六,");
-        if ("1".equals(item.day7))
+        if ("7".equals(item.day7))
             mStringBuilder.append("星期日");
 
-        helper.setText(R.id.tv_week, item.day1);
+        helper.setText(R.id.tv_week, mStringBuilder.toString());
 
     }
 }

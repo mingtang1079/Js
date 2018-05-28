@@ -211,4 +211,9 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/servicetimeSave")
     Observable<BaseModel<String>> servicetimeSaveAndAlter(@FieldMap Map<String, String> mStringObjectMap);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/servicetimeDelete")
+    Observable<BaseModel<String>> servicetimeDelete(@Field("id") String tid);
 }

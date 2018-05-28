@@ -103,9 +103,12 @@ public class LoginFragment extends BaseFragment {
     }
 
     private void login() {
+
+        mBtLogin.setEnabled(false);
+        mBtLogin.setText("登录中");
         Http.getDefault().login(mTvPhone.getText().toString(), mPassword.getText().toString())
                 .as(RxHelper.<User>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<User>(mContext) {
+                .subscribe(new ResponceSubscriber<User>() {
                     @Override
                     protected void onSucess(User mUser) {
 
@@ -118,7 +121,11 @@ public class LoginFragment extends BaseFragment {
                     @Override
                     protected void onFail(String message) {
                         showToast(message);
+                        mBtLogin.setEnabled(true);
+                        mBtLogin.setText("登录");
                     }
+
+
                 });
     }
 
