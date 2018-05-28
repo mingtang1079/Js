@@ -1,6 +1,5 @@
 package com.example.administrator.js.me;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -9,7 +8,6 @@ import com.appbaselib.base.BaseActivity;
 import com.example.administrator.js.R;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ShankeSettingActivity extends BaseActivity {
@@ -47,7 +45,7 @@ public class ShankeSettingActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.ll_time_setting:
 
-                start(ShankeTimeSettingActivity.class);
+                start(ServiceTimeListActivity.class);
 
                 break;
             case R.id.ll_tixing_setting:

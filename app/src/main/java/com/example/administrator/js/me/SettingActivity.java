@@ -58,7 +58,7 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.ll_shangke:
 
-                start(ShankeSettingActivity.class);
+                start(ShankeTixingSettingActivity.class);
                 break;
             case R.id.ll_yinsi:
 

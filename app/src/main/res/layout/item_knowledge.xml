@@ -15,7 +15,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.3"
+        android:alpha="0.4"
         android:background="@color/black_color" />
     <TextView
         android:id="@+id/tv_title"

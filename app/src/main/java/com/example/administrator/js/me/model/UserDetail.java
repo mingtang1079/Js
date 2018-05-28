@@ -101,6 +101,7 @@ public class UserDetail implements Serializable {
         public String writedate;
 
 
+        public String wddetail;
     }
 
     public static class Relation {

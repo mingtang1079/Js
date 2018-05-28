@@ -6,7 +6,10 @@ import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.VipUser;
+import com.example.administrator.js.me.TongjiActivity;
 import com.example.administrator.js.me.model.Collection;
+import com.example.administrator.js.me.model.ServiceTime;
+import com.example.administrator.js.me.model.Tongji;
 import com.example.administrator.js.me.model.Tuijian;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.UserDetail;
@@ -185,15 +188,27 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/save")
-    Observable<BaseModel<String>> passOrRefuse(@Field("id") String id, @Field("tid") String tid,@Field("status") String status);
+    Observable<BaseModel<String>> passOrRefuse(@Field("id") String id, @Field("tid") String tid, @Field("status") String status);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/cancel")
-    Observable<BaseModel<String>> cancelCourse(@Field("id") String id, @Field("tid") String tid,@Field("cancelreason") String cancelreason);
+    Observable<BaseModel<String>> cancelCourse(@Field("id") String id, @Field("tid") String tid, @Field("cancelreason") String cancelreason);
 
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/promotionSave")
     Observable<BaseModel<Tuijian>> promotionSave(@Field("userid") String userid, @Field("friendsname") String friendsname, @Field("friendsmoblie") String friendsmoblie);
 
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/count")
+    Observable<BaseModel<Tongji>> tongji(@Field("tid") String tid);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/servicetimeList")
+    Observable<BaseModel<List<ServiceTime>>> servicetimeList(@Field("tid") String tid);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/servicetimeSave")
+    Observable<BaseModel<String>> servicetimeSaveAndAlter(@FieldMap Map<String, String> mStringObjectMap);
 }

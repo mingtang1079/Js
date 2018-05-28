@@ -8,8 +8,9 @@
     tools:context="com.example.administrator.js.me.TeacherBiDuActivity">
 
     <include layout="@layout/include_toolbar" />
+
+
     <LinearLayout
-        android:id="@+id/ll_xuzhi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -17,35 +18,26 @@
         android:padding="16dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
-            android:drawableRight="@drawable/icon_right"
-            android:text="教练须知"
+            android:text="累计收入"
             android:textColor="#4A576A"
             android:textSize="14sp" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/ll_zhize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="16dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_shouru"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:drawableRight="@drawable/icon_right"
-            android:text="服务职责"
+            android:layout_weight="1"
+            android:gravity="right"
             android:textColor="#4A576A"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:text="1200" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_my_fuwu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="0.5dp"
@@ -53,33 +45,50 @@
         android:padding="16dp">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
-            android:drawableRight="@drawable/icon_right"
-            android:text="服务流程"
+            android:text="累计会员"
             android:textColor="#4A576A"
             android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/tv_huiyuan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textColor="#4A576A"
+            android:textSize="14sp"
+            tools:text="1200" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_pingjia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="0.5dp"
         android:background="@color/white"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:visibility="visible">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
-            android:drawableRight="@drawable/icon_right"
-            android:text="评价机制"
+            android:text="累计课时"
             android:textColor="#4A576A"
             android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/tv_keshi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:textColor="#4A576A"
+            android:textSize="14sp"
+            tools:text="1200" />
     </LinearLayout>
+
 
 </LinearLayout>

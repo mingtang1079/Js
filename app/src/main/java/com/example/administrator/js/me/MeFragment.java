@@ -1,11 +1,8 @@
 package com.example.administrator.js.me;
 
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,13 +16,9 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.course.CourseCanlenderActivity;
 import com.example.administrator.js.me.model.User;
-import com.example.administrator.js.me.model.VipSupply;
 
-import butterknife.BindBitmap;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MeFragment extends BaseFragment {
@@ -51,6 +44,7 @@ public class MeFragment extends BaseFragment {
     TextView mTextViewYajingStatus;
 
     User mUser;
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_me;
@@ -59,26 +53,20 @@ public class MeFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-         mUser = UserManager.getInsatance().getUser();
+        mUser = UserManager.getInsatance().getUser();
         if (mUser != null) {
             ImageLoader.load(mContext, mUser.img, mImageViewHead);
             mTvName.setText(mUser.nickname);
             mTvId.setText("ID：" + mUser.no);
 
-            if (!TextUtils.isEmpty(mUser.depositstatus))
-            {
+            if (!TextUtils.isEmpty(mUser.depositstatus)) {
 
-                if ("0".equals(mUser.depositstatus))
-                {
+                if ("0".equals(mUser.depositstatus)) {
                     mTextViewYajingStatus.setText("未交");
-                }
-                else if ("1".equals(mUser.depositstatus))
-                {
+                } else if ("1".equals(mUser.depositstatus)) {
                     mTextViewYajingStatus.setText("已交");
 
-                }
-                else if ("2".equals(mUser.depositstatus))
-                {
+                } else if ("2".equals(mUser.depositstatus)) {
                     mTextViewYajingStatus.setText("免押金");
 
 
@@ -95,7 +83,7 @@ public class MeFragment extends BaseFragment {
 
 
     @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode, R.id.ll_zizhi, R.id.ll_share, R.id.ll_my_collection,
-            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui,R.id.ll_wufu_time,R.id.ll_tuijian})
+            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui, R.id.ll_wufu_time, R.id.ll_tuijian})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_barcode:
@@ -144,6 +132,7 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.ll_tongji:
 
+                start(TongjiActivity.class);
                 break;
             case R.id.ll_yajing:
 
@@ -166,14 +155,15 @@ public class MeFragment extends BaseFragment {
                 break;
             case R.id.ll_my_collection:
 
-                   start(CollectionActivity.class);
+                start(CollectionActivity.class);
                 break;
 
             case R.id.ll_wufu_time:
 
+                start(ServiceTimeListActivity.class);
 
                 break;
-            case  R.id.ll_tuijian:
+            case R.id.ll_tuijian:
 
                 start(TuijianActivity.class);
 
@@ -183,11 +173,9 @@ public class MeFragment extends BaseFragment {
     }
 
     private void yajing() {
-        if (!TextUtils.isEmpty(mUser.depositstatus))
-        {
+        if (!TextUtils.isEmpty(mUser.depositstatus)) {
 
-            if ("0".equals(mUser.depositstatus))
-            {
+            if ("0".equals(mUser.depositstatus)) {
 
                 DialogUtils.getDefaultDialog(mContext, "提示", "您暂未交押金！", "交押金", new DialogInterface.OnClickListener() {
                     @Override

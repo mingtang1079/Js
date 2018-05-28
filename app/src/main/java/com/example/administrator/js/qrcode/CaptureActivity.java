@@ -208,7 +208,7 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
 
     @Override
     protected int getContentViewLayoutID() {
-        return 0;
+        return R.layout.activity_capture;
     }
 
     @Override

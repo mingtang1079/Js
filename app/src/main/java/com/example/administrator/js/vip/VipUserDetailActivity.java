@@ -249,26 +249,27 @@ public class VipUserDetailActivity extends BaseActivity {
             mTvZhibiao.setText(mUserDetail.bodydata.bmi + "");
             mTvTizhi.setText(mUserDetail.bodydata.fat + "");
             mTvNeizang.setText(mUserDetail.bodydata.visceralfat);
-            StringBuilder mStringBuilder = new StringBuilder();
-            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiong))
-                mStringBuilder.append("胸：" + mUserDetail.bodydata.wdxiong);
-            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdyao))
-                mStringBuilder.append("腰：" + mUserDetail.bodydata.wdyao);
-            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiong))
-                mStringBuilder.append("小腿：" + mUserDetail.bodydata.wdxiaotui);
-            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiong))
-                mStringBuilder.append("大腿：" + mUserDetail.bodydata.wddatui);
-
-            if (!TextUtils.isEmpty(mUserDetail.bodydata.wddabi))
-                mStringBuilder.append("大臂：" + mUserDetail.bodydata.wddabi);
-            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiaobi))
-                mStringBuilder.append("小臂：" + mUserDetail.bodydata.wdxiaobi);
-            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdtun))
-                mStringBuilder.append("臀：" + mUserDetail.bodydata.wdtun);
-            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdjian))
-                mStringBuilder.append("肩：" + mUserDetail.bodydata.wdjian);
-
-            mTvWeidu.setText(mStringBuilder);
+//            StringBuilder mStringBuilder = new StringBuilder();
+//            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiong))
+//                mStringBuilder.append("胸：" + mUserDetail.bodydata.wdxiong);
+//            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdyao))
+//                mStringBuilder.append("腰：" + mUserDetail.bodydata.wdyao);
+//            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiong))
+//                mStringBuilder.append("小腿：" + mUserDetail.bodydata.wdxiaotui);
+//            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiong))
+//                mStringBuilder.append("大腿：" + mUserDetail.bodydata.wddatui);
+//
+//            if (!TextUtils.isEmpty(mUserDetail.bodydata.wddabi))
+//                mStringBuilder.append("大臂：" + mUserDetail.bodydata.wddabi);
+//            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiaobi))
+//                mStringBuilder.append("小臂：" + mUserDetail.bodydata.wdxiaobi);
+//            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdtun))
+//                mStringBuilder.append("臀：" + mUserDetail.bodydata.wdtun);
+//            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdjian))
+//                mStringBuilder.append("肩：" + mUserDetail.bodydata.wdjian);
+//
+//            mTvWeidu.setText(mStringBuilder);
+            mTvWeidu.setText(mUserDetail.bodydata.wddetail);
         }
 
     }

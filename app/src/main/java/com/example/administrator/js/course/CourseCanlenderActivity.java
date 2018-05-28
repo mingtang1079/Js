@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -96,6 +97,9 @@ public class CourseCanlenderActivity extends BaseActivity {
         initCurrentDate();
         initCalendarView();
 
+        View mView = LayoutInflater.from(mContext).inflate(R.layout.view_header_course, mList, false);
+        mCourseUserAdapter.addHeaderView(mView);
+
         mIvRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +112,7 @@ public class CourseCanlenderActivity extends BaseActivity {
                 mCalendarView.setCurrentItem(mCalendarView.getCurrentPosition() - 1);
             }
         });
+        requestData();
     }
 
     @Override
@@ -159,7 +164,7 @@ public class CourseCanlenderActivity extends BaseActivity {
                 mList.scrollToPosition(0);
             }
         });
-      //  initMarkData();
+        //  initMarkData();
         initMonthPager();
     }
 

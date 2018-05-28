@@ -1,10 +1,13 @@
 package com.example.administrator.js.vip;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,9 +25,15 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.NearByVipFragment;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.course.CourseCanlenderActivity;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.view.MainHeaderView;
+import com.example.administrator.js.qrcode.CaptureActivity;
+import com.foamtrace.photopicker.SelectModel;
+import com.foamtrace.photopicker.intent.PhotoPickerIntent;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
@@ -36,12 +45,16 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by tangming on 2018/5/3.
  */
 
 public class MainVipFragment extends BaseFragment {
+
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     @BindView(R.id.iv_add)
     ImageView mIvAdd;
     @BindView(R.id.tab)
@@ -59,6 +72,23 @@ public class MainVipFragment extends BaseFragment {
     @Override
     protected void initView() {
 
+        mToolbar.inflateMenu(R.menu.main_vip);
+        mToolbar.setTitle("会员");
+        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if (item.getItemId() == R.id.scan) {
+
+                  saoyisao();
+                } else {
+                    start(MessageActivity.class);
+                }
+
+                return false;
+            }
+        });
+
         mFragmentAdapter = new FragmentAdapter(getChildFragmentManager(), getFragments(), getTabTitle());
         mViewpager.setAdapter(mFragmentAdapter);
         mTab.setTabMode(TabLayout.MODE_FIXED);
@@ -68,10 +98,31 @@ public class MainVipFragment extends BaseFragment {
         requestData();
     }
 
+    private void saoyisao() {
+
+        RxPermissions mRxPermissions = new RxPermissions(getActivity());
+        mRxPermissions
+                .request(Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(Boolean mBoolean) throws Exception {
+                        if (mBoolean) {
+
+                            start(CaptureActivity.class);
+
+
+                        } else {
+                            showToast("请开启摄像头权限");
+                        }
+                    }
+                });
+    }
+
     @Override
     protected void requestData() {
 
-        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,5, 1, 1)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id, 5, 1, 1)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
