@@ -43,6 +43,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.functions.Consumer;
+import io.rong.imkit.RongIM;
 
 @Route(path = "/course/CourDetailActivity")
 public class CourDetailActivity extends BaseActivity {
@@ -230,6 +231,7 @@ public class CourDetailActivity extends BaseActivity {
             case R.id.map:
                 break;
             case R.id.tv_dazhaohu:
+                RongIM.getInstance().startPrivateChat(this, mCourseDetail.uid, mCourseDetail.nickname);
 
                 break;
             case R.id.tv_yuyue:

@@ -34,6 +34,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.internal.operators.observable.ObservableSwitchIfEmpty;
+import io.rong.imkit.RongIM;
 
 @Route(path = "/vip/VipUserDetailActivity")
 public class VipUserDetailActivity extends BaseActivity {
@@ -279,7 +280,7 @@ public class VipUserDetailActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_dazhaohu:
-
+                RongIM.getInstance().startPrivateChat(this, id, mUserDetail.userinfo.nickname);
 
                 break;
             case R.id.tv_guanzhu:
