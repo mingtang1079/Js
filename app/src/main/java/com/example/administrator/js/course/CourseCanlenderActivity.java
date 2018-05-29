@@ -132,7 +132,7 @@ public class CourseCanlenderActivity extends BaseActivity {
 
         Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, "1", 1,currenttime)
                 .as(RxHelper.<WrapperModel<User>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<WrapperModel<User>>() {
+                .subscribe(new ResponceSubscriber<WrapperModel<User>>(mContext) {
                     @Override
                     protected void onSucess(WrapperModel<User> mVipUserBaseModelWrapper) {
                         if (mVipUserBaseModelWrapper != null) {

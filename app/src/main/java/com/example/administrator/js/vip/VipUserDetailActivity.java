@@ -39,7 +39,7 @@ import io.reactivex.internal.operators.observable.ObservableSwitchIfEmpty;
 public class VipUserDetailActivity extends BaseActivity {
 
     @Autowired
-    User mUser;  //获取会员id
+    String id;  //获取会员id
 
 
     @BindView(R.id.content)
@@ -132,7 +132,7 @@ public class VipUserDetailActivity extends BaseActivity {
     protected void requestData() {
         super.requestData();
 
-        Http.getDefault().userDetail(UserManager.getInsatance().getUser().id, mUser.id)
+        Http.getDefault().userDetail(UserManager.getInsatance().getUser().id, id)
                 .as(RxHelper.<UserDetail>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<UserDetail>() {
                     @Override
@@ -165,7 +165,7 @@ public class VipUserDetailActivity extends BaseActivity {
             mIvYuyue.setImageResource(R.drawable.icon_xingxing);
 
         }
-        ImageLoader.load(mContext,mUser.img,mIvHead);
+        ImageLoader.load(mContext, mUser.img, mIvHead);
         //年龄
         if (mUser.age != null || mUser.sex.equals("0")) {
 
@@ -301,7 +301,7 @@ public class VipUserDetailActivity extends BaseActivity {
     }
 
     private void handleUser(String mS) {
-        Http.getDefault().handleUser(UserManager.getInsatance().getUser().id, mUser.id, mS)
+        Http.getDefault().handleUser(UserManager.getInsatance().getUser().id, id, mS)
                 .as(RxHelper.<String>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override

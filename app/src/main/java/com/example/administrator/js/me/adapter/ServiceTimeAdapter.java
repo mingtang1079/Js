@@ -28,10 +28,9 @@ public class ServiceTimeAdapter extends BaseRecyclerViewAdapter<ServiceTime> {
         }
         String endtime;
         if (item.endhour > 12) {
-            startitme = "下午" + item.endhour;
-        }
-        {
-            endtime = "上午" + item.endhour;
+            endtime = "下午" + item.endtime;
+        } else {
+            endtime = "上午" + item.endtime;
         }
 
         helper.setText(R.id.time, startitme + " 一 " + endtime);
@@ -39,17 +38,17 @@ public class ServiceTimeAdapter extends BaseRecyclerViewAdapter<ServiceTime> {
 
         if ("1".equals(item.day1))
             mStringBuilder.append("星期一,");
-        if ("2".equals(item.day2))
+        if ("1".equals(item.day2))
             mStringBuilder.append("星期二,");
-        if ("3".equals(item.day3))
+        if ("1".equals(item.day3))
             mStringBuilder.append("星期三,");
-        if ("4".equals(item.day4))
+        if ("1".equals(item.day4))
             mStringBuilder.append("星期四,");
-        if ("5".equals(item.day5))
+        if ("1".equals(item.day5))
             mStringBuilder.append("星期五,");
-        if ("6".equals(item.day6))
+        if ("1".equals(item.day6))
             mStringBuilder.append("星期六,");
-        if ("7".equals(item.day7))
+        if ("1".equals(item.day7))
             mStringBuilder.append("星期日");
 
         helper.setText(R.id.tv_week, mStringBuilder.toString());

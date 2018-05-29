@@ -17,16 +17,17 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.utils.JsonUtil;
 import com.example.administrator.js.R;
+import com.example.administrator.js.me.model.BarcodeModel;
 import com.example.administrator.js.qrcode.camera.CameraManager;
 import com.example.administrator.js.qrcode.decode.DecodeUtils;
 import com.example.administrator.js.qrcode.utils.BeepManager;
 import com.example.administrator.js.qrcode.utils.InactivityTimer;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -250,37 +251,27 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
     //解码二维码
     public void handleDecode(String result, Bundle bundle) {
 
+        BarcodeModel mBarcodeModel = JsonUtil.fromJson(result, BarcodeModel.class);
 
 
-        System.out.print("xuehao--->" + getXuehao(result));
+//        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("学生姓名");
+//        builder.setMessage(getName(result) + " 签到成功");
+//
+//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                handler.restartPreviewAndDecode();
+//            }
+//        });
+//        builder.show();
 
-        if (numberOfStr(result, "&") != 2) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示");
-            builder.setMessage("该二维码无效");
-            builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    handler.restartPreviewAndDecode();
-                }
-            });
-            builder.show();
-            return;
+        if (mBarcodeModel != null) {
+            ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                    .withString("id", mBarcodeModel.id)
+                    .navigation(mContext);
+            finish();
         }
-
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("学生姓名");
-        builder.setMessage(getName(result) + " 签到成功");
-
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                handler.restartPreviewAndDecode();
-            }
-        });
-        builder.show();
-
     }
 
     public int numberOfStr(String str, String con) {
@@ -299,7 +290,7 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
 
     }
 
-    public String getXuehao(String s) {
+    public String gettype(String s) {
 
         int i = s.indexOf("&");
         int j = s.indexOf("&", i + 1);

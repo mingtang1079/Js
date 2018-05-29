@@ -63,7 +63,7 @@ public class NearbyVipAdapter extends BaseRecyclerViewAdapter<User> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ARouter.getInstance().build("/vip/VipUserDetailActivity")
-                        .withObject("mUser",item)
+                        .withString("id",item.id)
                         .navigation(mContext);
             }
         });

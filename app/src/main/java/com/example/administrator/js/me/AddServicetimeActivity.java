@@ -120,27 +120,27 @@ public class AddServicetimeActivity extends BaseActivity {
                 }
                 if (mXingqi.name.equals("星期二"))
                 {
-                    mMap.put("day2", "2");
+                    mMap.put("day2", "1");
                 }
                 if (mXingqi.name.equals("星期三"))
                 {
-                    mMap.put("day3", "3");
+                    mMap.put("day3", "1");
                 }
                 if (mXingqi.name.equals("星期四"))
                 {
-                    mMap.put("day4", "4");
+                    mMap.put("day4", "1");
                 }
                 if (mXingqi.name.equals("星期五"))
                 {
-                    mMap.put("day5", "5");
+                    mMap.put("day5", "1");
                 }
                 if (mXingqi.name.equals("星期六"))
                 {
-                    mMap.put("day6", "6");
+                    mMap.put("day6", "1");
                 }
                 if (mXingqi.name.equals("星期日"))
                 {
-                    mMap.put("day7", "7");
+                    mMap.put("day7", "1");
                 }
             }
         }

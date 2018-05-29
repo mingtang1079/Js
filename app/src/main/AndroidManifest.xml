@@ -36,7 +36,7 @@
         <!-- 搞得地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="843f6dec306f70bd7f2b3774df01b9ef" />
+            android:value="5e5ccc0fb69d9abdee6ca846e0fabdac" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

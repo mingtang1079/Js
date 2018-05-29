@@ -8,6 +8,6 @@ public class Constans {
 
     public static final String COURSE_TIXING = "course_tixing";
     public static String rongyunUrl = "http://api.cn.ronghub.com/user/getToken.json";
-    public static  String rongAppKey="x18ywvqfxbzgc";
-    public  static  String rongAppScrect="xrlytFnWG2";
+    public static  String rongAppKey="pgyu6atqpezeu";
+    public  static  String rongAppScrect="Z7TvAx70vkQDu";
 }

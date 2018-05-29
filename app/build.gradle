@@ -26,7 +26,7 @@ android {
     sourceSets {
         main {
             jni.srcDirs = []
-            jniLibs.srcDirs = ['src/main/libs']
+            jniLibs.srcDirs = ['libs']
         }
     }
     /*** 签名设置 */
@@ -79,7 +79,6 @@ dependencies {
     compile project(':IMKit')
     compile project(':share')
     // compile project(':IMLib')
-
     //life
     annotationProcessor("android.arch.lifecycle:compiler:1.0.0") {
         exclude group: 'com.android.support', module: 'support-v4'
