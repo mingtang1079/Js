@@ -1,6 +1,7 @@
 package com.example.administrator.js.exercise.view;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -70,16 +71,16 @@ public class SkillView extends BaseLifeCycleView {
 
     }
 
-    private void requestData() {
+    public void requestData() {
 
-        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,4, 1, 3)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id, 4, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
                     protected void onSucess(WrapperModel<Main> mMainWrapperModel) {
 
                         if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
-                            mExerciseSkillAdapter.addData(mMainWrapperModel.list);
+                            mExerciseSkillAdapter.setNewData(mMainWrapperModel.list);
                         }
                     }
 
@@ -91,6 +92,17 @@ public class SkillView extends BaseLifeCycleView {
 
     }
 
+    private boolean isShowing() {
+        Rect rect = new Rect();
+        boolean visibility = this.getGlobalVisibleRect(rect);
+        return visibility;
+    }
+
+    @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+        super.onWindowVisibilityChanged(visibility);
+        requestData();
+    }
 
     @OnClick(R.id.iv_skill)
     public void onViewClicked() {

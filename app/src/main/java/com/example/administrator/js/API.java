@@ -117,6 +117,10 @@ public interface API {
     @POST(AUTHORIRY + "/user/getauth")
     Observable<BaseModel<VerifyUser>> getAuth(@Field("userid") String id);
 
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/get")
+    Observable<BaseModel<User>> getUser(@Field("id") String id);
+
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/teachingQualificationSave")

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.appbaselib.base.BaseModel;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.LogUtils;
@@ -29,12 +30,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 
 /**
  * Created by tangming on 2018/5/3.
  */
 
 public class ExerciseKnowlegaView extends BaseLifeCycleView {
+
+    public Observable<BaseModel<WrapperModel<Main>>> mBaseModelObservable;
+
 
     @BindView(R.id.tv_knowledge)
     TextView mTvKnowledge;
@@ -73,16 +78,17 @@ public class ExerciseKnowlegaView extends BaseLifeCycleView {
         requestData();
     }
 
-    private void requestData() {
+    public void requestData() {
 
-        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,2, 1, 3)
-                .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
+        mBaseModelObservable=       Http.getDefault().getMain(UserManager.getInsatance().getUser().id,2, 1, 3);
+
+        mBaseModelObservable        .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
                     protected void onSucess(WrapperModel<Main> mMainWrapperModel) {
 
                         if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
-                            mKnowledgeAdapter.addData(mMainWrapperModel.list);
+                            mKnowledgeAdapter.setNewData(mMainWrapperModel.list);
                         }
                     }
 

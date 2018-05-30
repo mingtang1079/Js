@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.LogUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
@@ -72,7 +73,7 @@ public class VipResultView extends BaseLifeCycleView {
 
     }
 
-    private void requestData() {
+    public void requestData() {
 
         Http.getDefault().getMain(UserManager.getInsatance().getUser().id,3, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
@@ -81,7 +82,7 @@ public class VipResultView extends BaseLifeCycleView {
                     protected void onSucess(WrapperModel<Main> mMainWrapperModel) {
 
                         if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
-                            mVipResultAdapter.addData(mMainWrapperModel.list);
+                            mVipResultAdapter.setNewData(mMainWrapperModel.list);
                         }
                     }
 
@@ -98,5 +99,11 @@ public class VipResultView extends BaseLifeCycleView {
         ARouter.getInstance().build("/exercise/VipResultActivity")
                 .navigation();
 
+    }
+
+    @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+        super.onWindowVisibilityChanged(visibility);
+        LogUtils.d("visi--"+visibility);
     }
 }

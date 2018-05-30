@@ -2,10 +2,14 @@ package com.example.administrator.js;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.app.BaseApplication;
+import com.appbaselib.base.BaseModel;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.CommonUtils;
 import com.appbaselib.utils.JsonUtil;
 import com.appbaselib.utils.LogUtils;
@@ -21,6 +25,7 @@ import com.umeng.commonsdk.UMConfigure;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
@@ -31,9 +36,11 @@ import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.UserInfo;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
 
 /**
  * Created by tangming on 2018/1/18.
@@ -163,6 +170,9 @@ public class App extends BaseApplication {
 
                     LogUtils.d("IM连接成功");
 
+                    requestUserInfo();
+
+
                 }
 
                 /**
@@ -177,5 +187,25 @@ public class App extends BaseApplication {
             });
         }
     }
+
+    private void requestUserInfo() {
+        RongIM.setUserInfoProvider(mUserInfoProvider, true);
+
+
+    }
+
+    RongIM.UserInfoProvider mUserInfoProvider = new RongIM.UserInfoProvider() {
+        @Override
+        public UserInfo getUserInfo(String mS) {
+            io.reactivex.Observable<BaseModel<User>> mObservable = Http.getDefault().getUser(mS);
+            BaseModel<User> mUserBaseModel = mObservable.blockingFirst();
+            if (mUserBaseModel.status) {
+
+                return new UserInfo(mUserBaseModel.data.id, mUserBaseModel.data.nickname, Uri.parse(mUserBaseModel.data.img));
+            } else {
+                return null;
+            }
+        }
+    };
 
 }

@@ -3,6 +3,7 @@ package com.example.administrator.js.exercise.view;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.appbaselib.base.BaseModel;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.LogUtils;
@@ -31,12 +33,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 
 /**
  * Created by tangming on 2018/5/3.
  */
 
 public class MainHeaderView extends BaseLifeCycleView {
+
+
+    public Observable<BaseModel<WrapperModel<Main>>> mBaseModelObservable;
 
 
     @BindView(R.id.banner)
@@ -71,14 +77,14 @@ public class MainHeaderView extends BaseLifeCycleView {
     @Override
     public void onCreate() {
         super.onCreate();
-
         requestData();
     }
 
-    private void requestData() {
+    public void requestData() {
 
-        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,1, 1, 3)
-                .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
+        mBaseModelObservable = Http.getDefault().getMain(UserManager.getInsatance().getUser().id, 1, 1, 3);
+
+        mBaseModelObservable.as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
                     protected void onSucess(final WrapperModel<Main> mMainWrapperModel) {
@@ -144,5 +150,18 @@ public class MainHeaderView extends BaseLifeCycleView {
         public void displayImage(Context mContext, Object mO, ImageView mImageView) {
             com.appbaselib.common.ImageLoader.load(mContext, mO.toString(), mImageView);
         }
+    }
+
+    @Override
+    protected void onWindowVisibilityChanged(int visibility) {
+        super.onWindowVisibilityChanged(visibility);
+        LogUtils.d("visi--"+visibility);
+    }
+
+    @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        LogUtils.d("visi--"+visibility);
+
     }
 }
