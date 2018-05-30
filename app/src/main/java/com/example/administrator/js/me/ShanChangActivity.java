@@ -254,6 +254,7 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
                     mIvSeven.setVisibility(View.VISIBLE);
 
                 }
+                break;
 
             case  R.id.ll_eight:
                 if (mIvEight.getVisibility() == View.VISIBLE) {

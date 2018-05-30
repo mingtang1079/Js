@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseModel;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
@@ -41,6 +42,7 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import top.zibin.luban.Luban;
 
+@Route(path = "/me/ZhengshuActivity")
 public class ZhengshuActivity extends MutichoosePhotoActivity implements ZizhiPresenter.ZizhiResponse {
 
     @BindView(R.id.toolbar)

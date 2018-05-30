@@ -143,7 +143,9 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                 break;
             case R.id.ll_zhengshu:
 
-                start(ZhengshuActivity.class);
+                ARouter.getInstance().build("/me/ZhengshuActivity")
+                        .withObject("mVerifyUser", mVerifyUser)
+                        .navigation();
 
                 break;
             case R.id.ll_geyan:
