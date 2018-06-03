@@ -2,7 +2,7 @@ package com.example.administrator.js.me.model;
 
 public class User {
 
-
+    public String alipay;
     public String id; //id
     public String realname; // 真实名称
     public String nickname; // 昵称
@@ -37,4 +37,7 @@ public class User {
     public Integer courseprice;    // 课程价格
     public Integer reorder;        // 续课率
     public String distancefmt;
+    public String coursetypenames;
+    public String coursetypeids;
+    public String starttime;
 }

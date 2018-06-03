@@ -34,7 +34,7 @@ public class DetailActivity extends Html5Activity {
         mToolbar.setTitle("详情");
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
         mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
-        if (mMain != null&&!TextUtils.isEmpty(mMain.favorite)) {
+        if (mMain != null && !TextUtils.isEmpty(mMain.favorite)) {
             if (mMain.favorite.equals("1")) {
                 mMenuItem.setTitle("取消收藏");
             } else {
@@ -72,7 +72,9 @@ public class DetailActivity extends Html5Activity {
                 return false;
             }
         });
-        url = mMain.linkurl;
+        if (mMain.linkurl!=null) {
+            url = mMain.linkurl;
+        }
         super.initView();
 
     }

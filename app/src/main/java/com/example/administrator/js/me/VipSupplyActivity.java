@@ -66,7 +66,7 @@ public class VipSupplyActivity extends BaseActivity {
 
     private String[] getTabTitle() {
 
-        return new String[]{"体验课", "私教课", "申请记录"};
+        return new String[]{"体验课", "私教课","退课", "申请记录"};
     }
 
     private List<Fragment> getFragments() {
@@ -87,6 +87,10 @@ public class VipSupplyActivity extends BaseActivity {
                 .navigation(mContext);
         mFragments.add(mVipUserFragment3);
 
+        VipSupplyFragment mVipUserFragment4 = (VipSupplyFragment) ARouter.getInstance().build("/me/VipSupplyFragment")
+                .withString("status", "4")
+                .navigation(mContext);
+        mFragments.add(mVipUserFragment4);
 
         return mFragments;
     }

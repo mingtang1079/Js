@@ -32,6 +32,7 @@
                 </com.example.administrator.js.exercise.view.MainHeaderView>
 
                 <com.example.administrator.js.exercise.view.ExerciseKnowlegaView
+                    android:visibility="gone"
                     android:id="@+id/knowview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

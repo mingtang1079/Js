@@ -200,8 +200,8 @@ public interface API {
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/promotionSave")
-    Observable<BaseModel<Tuijian>> promotionSave(@Field("userid") String userid, @Field("friendsname") String friendsname, @Field("friendsmoblie") String friendsmoblie);
+    @POST(AUTHORIRY + "/user/invitelist")
+    Observable<BaseModel<Tuijian>> getTuijian(@Field("id") String userid);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/count")

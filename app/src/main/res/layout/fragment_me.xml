@@ -273,7 +273,7 @@
                     android:drawableLeft="@drawable/icon_service_time"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
-                    android:text="服务时间设置"
+                    android:text="工作时间设置"
                     android:textColor="#4A576A"
                     android:textSize="14sp"/>
 

@@ -33,7 +33,7 @@ public class KnowledgeAdapter extends BaseRecyclerViewAdapter<Main> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ARouter.getInstance().build("/exercise/DetailActivity")
-                        .withObject("mMain", item)
+                        .withObject("mMain", getData().get(position))
                         .navigation(mContext);
             }
         });

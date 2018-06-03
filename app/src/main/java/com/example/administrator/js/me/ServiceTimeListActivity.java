@@ -35,7 +35,7 @@ public class ServiceTimeListActivity extends MyBaseRefreshActivity<ServiceTime> 
     protected void initView() {
         super.initView();
 
-        mToolbar.setTitle("服务时间");
+        mToolbar.setTitle("工作时间");
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
         mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
         mMenuItem.setTitle("新增");

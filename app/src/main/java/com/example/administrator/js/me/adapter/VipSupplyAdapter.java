@@ -34,7 +34,7 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
         helper.setText(R.id.tv_name, item.nickname);
 
         //年龄
-        if (item.age != null || item.sex.equals("0")) {
+        if (item.age != null && item.sex != null) {
             TextView mTextView = helper.getView(R.id.tv_age);
             helper.setVisible(R.id.tv_age, true);
             helper.setText(R.id.tv_age, item.age + "");
@@ -79,7 +79,13 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
             mTextViewRefuse.setText("已通过");
-
+        }
+        else  if ("b56".equals(item.status))
+        {
+            mTextViewPass.setVisibility(View.GONE);
+            mTextViewRefuse.setVisibility(View.VISIBLE);
+            mTextViewRefuse.setEnabled(false);
+            mTextViewRefuse.setText("退款成功");
         }
 
         mTextViewPass.setOnClickListener(new View.OnClickListener() {
@@ -91,9 +97,19 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
         mTextViewRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                save(false,item.id,helper.getLayoutPosition());
+                save(false, item.id, helper.getLayoutPosition());
             }
         });
+
+        //退课只显示 通过按钮
+        if (!TextUtils.isEmpty(item.status)&&!TextUtils.isEmpty(item.tryflag))
+        {
+            if (item.status.equals("b55")&&item.tryflag.equals("0"))
+            {
+                mTextViewRefuse.setVisibility(View.GONE);
+            }
+        }
+
 
     }
 

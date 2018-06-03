@@ -105,14 +105,17 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
 
     private void updateUser() {
         User mUser = UserManager.getInsatance().getUser();
-        mTvUserName.setText(mUser.nickname);
-        ImageLoader.load(mContext, mUser.img, head);
-        if ("1".equals(UserManager.getInsatance().getUser().sex))
-            mTvSex.setText("男");
-        else if ("2".equals(UserManager.getInsatance().getUser().sex))
-            mTvSex.setText("女");
-        mTvAddress.setText(mUser.address);
-        mTvPhone.setText(mUser.mobile);
+        if (mUser != null) {
+            mTvUserName.setText(mUser.nickname);
+            ImageLoader.load(mContext, mUser.img, head);
+            if ("1".equals(UserManager.getInsatance().getUser().sex))
+                mTvSex.setText("男");
+            else if ("2".equals(UserManager.getInsatance().getUser().sex))
+                mTvSex.setText("女");
+            mTvAddress.setText(mUser.address);
+            mTvPhone.setText(mUser.mobile);
+            mTextViewZhifubao.setText(mUser.alipay + "");
+        }
     }
 
     @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit, R.id.ll_zhifubao})
@@ -155,6 +158,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
 
                 break;
             case R.id.ll_barcode:
+                start(BarcodeActivity.class);
                 break;
             case R.id.ll_weixin:
                 break;
@@ -173,7 +177,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                     public void onClick(DialogInterface mDialogInterface, int mI) {
                         PreferenceUtils.clearDefaultPreference(mContext);
                         Intent intent = new Intent(mContext, LoginActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }
                 }).show();

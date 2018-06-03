@@ -35,8 +35,9 @@ public class VipResultAdapter extends BaseRecyclerViewAdapter<Main> {
         setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Main mMain=getData().get(position);
                 ARouter.getInstance().build("/exercise/DetailActivity")
-                        .withObject("mMain", item)
+                        .withObject("mMain", mMain)
                         .navigation(mContext);
             }
         });

@@ -116,7 +116,6 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
             mStringStringMap.put("sex", sex);
         }
         if (!TextUtils.isEmpty(skillids)) {
-
             mStringStringMap.put("skillids", skillids);
         }
         Http.getDefault().seacrchUser(mStringStringMap)
@@ -147,7 +146,9 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
         switch (view.getId()) {
             case R.id.zonghe:
 
-
+                distance=0;
+                sex="";
+                skillids="";
                 refreshData(true);
 
                 break;

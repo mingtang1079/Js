@@ -53,6 +53,16 @@ public class MeFragment extends BaseFragment {
     @Override
     protected void initView() {
 
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUser();
+    }
+
+    private void setUser() {
         mUser = UserManager.getInsatance().getUser();
         if (mUser != null) {
             ImageLoader.load(mContext, mUser.img, mImageViewHead);
@@ -73,7 +83,6 @@ public class MeFragment extends BaseFragment {
                 }
             }
         }
-
     }
 
     @Override

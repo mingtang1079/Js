@@ -64,7 +64,7 @@ public class RegisterFragment extends BaseFragment {
     protected void initView() {
 
         Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone).skip(1);
-        Observable<CharSequence> mCharSequenceObservablePassword = RxTextView.textChanges(mPassword).skip(1);
+        Observable<CharSequence> mCharSequenceObservablePassword = RxTextView.textChanges(mEdYzm).skip(1);
         Observable<CharSequence> mObservableYzm = RxTextView.textChanges(mPassword);
 
         Observable.combineLatest(mObservablePhone, mCharSequenceObservablePassword, mObservableYzm, new Function3<CharSequence, CharSequence, CharSequence, Boolean>() {

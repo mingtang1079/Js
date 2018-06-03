@@ -243,7 +243,7 @@ public class CourseCanlenderActivity extends BaseActivity {
                 if (currentCalendars.get(position % currentCalendars.size()) != null) {
                     CalendarDate date = currentCalendars.get(position % currentCalendars.size()).getSeedDate();
                     currentDate = date;
-                    mTvYue.setText(date.getMonth() + "");
+                    mTvYue.setText(date.getMonth() + "月");
                 }
             }
 
