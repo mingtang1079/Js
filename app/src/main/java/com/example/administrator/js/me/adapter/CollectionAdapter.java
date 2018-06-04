@@ -27,8 +27,10 @@ public class CollectionAdapter extends BaseRecyclerViewAdapter<Main> {
         setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Main mMain=getData().get(position);
+                mMain.favorite="1";
                 ARouter.getInstance().build("/exercise/DetailActivity")
-                        .withObject("mMain", getData().get(position).id)
+                        .withObject("mMain", mMain)
                         .navigation(mContext);
             }
         });

@@ -8,6 +8,7 @@ import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.TongjiActivity;
 import com.example.administrator.js.me.model.Collection;
+import com.example.administrator.js.me.model.RealUserInfo;
 import com.example.administrator.js.me.model.ServiceTime;
 import com.example.administrator.js.me.model.Tongji;
 import com.example.administrator.js.me.model.Tuijian;
@@ -116,6 +117,10 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/getauth")
     Observable<BaseModel<VerifyUser>> getAuth(@Field("userid") String id);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/getRealNameauth")
+    Observable<BaseModel<RealUserInfo>> getRealNameInfo(@Field("userid") String id);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/get")

@@ -143,6 +143,12 @@ public class RealNameVerifyActivity extends BaseActivity {
                 onViewClicked(40);
             }
         });
+        mIvZhengshu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                onViewClicked(50);
+            }
+        });
 
 
         requestData();
@@ -189,6 +195,8 @@ public class RealNameVerifyActivity extends BaseActivity {
             if (!TextUtils.isEmpty(mVerifyUser.photopath))
                 ImageLoader.load(mContext, mVerifyUser.photopath, mIvGongpai);
 
+            if (!TextUtils.isEmpty(mVerifyUser.certpath))
+                ImageLoader.load(mContext, mVerifyUser.certpath, mIvZhengshu);
 
         }
     }
@@ -237,7 +245,7 @@ public class RealNameVerifyActivity extends BaseActivity {
                         Map<String, String> params = new HashMap<>();
                         User mUser = UserManager.getInsatance().getUser();
                         if (mVerifyUser != null)
-                            params.put("id", mUser.id);
+                            params.put("id", mVerifyUser.id);
 
                         params.put("userid", mUser.id);
                         params.put("realname", mEtName.getText().toString());
@@ -245,6 +253,7 @@ public class RealNameVerifyActivity extends BaseActivity {
                         params.put("idimgpath", mFiles.get(0));//正面身份证
                         params.put("idimgbackpath", mFiles.get(1));//反面身份证
                         params.put("photopath", mFiles.get(2));//从业证明
+                        params.put("certpath", mFiles.get(3));//证书地址
 
                         return Http.getDefault().verifyzizhi(params);
                     }
@@ -254,7 +263,7 @@ public class RealNameVerifyActivity extends BaseActivity {
                     @Override
                     protected void onSucess(String mS) {
 
-                        showToast("认证成功！");
+                        showToast("提交成功！");
                         finish();
 
                     }
@@ -282,10 +291,13 @@ public class RealNameVerifyActivity extends BaseActivity {
                 sfzf = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
                 ImageLoader.load(mContext, sfzf, mIvShengfenzhengback);
 
-            } else {
+            } else if (requestCode == 40) {
                 zm = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
                 ImageLoader.load(mContext, zm, mIvGongpai);
 
+            } else {
+                zs = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
+                ImageLoader.load(mContext, zs, mIvZhengshu);
             }
         }
     }

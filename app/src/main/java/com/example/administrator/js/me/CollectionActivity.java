@@ -32,6 +32,14 @@ public class CollectionActivity extends MyBaseRefreshActivity<Main> {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isFirstReresh) {
+            refreshData(true);
+        }
+    }
+
+    @Override
     public void requestData() {
 
         Http.getDefault().getCollection(UserManager.getInsatance().getUser().id, pageNo)

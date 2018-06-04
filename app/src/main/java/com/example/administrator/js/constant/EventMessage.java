@@ -31,4 +31,7 @@ public class EventMessage {
             i = mI;
         }
     }
+
+    public static class VerifyChangedMessage extends EventMessage {
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.administrator.js.me;
 
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,12 +11,23 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
 import com.appbaselib.common.ImageLoader;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DialogUtils;
+import com.example.administrator.js.BuildConfig;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.course.CourseCanlenderActivity;
+import com.example.administrator.js.me.model.RealUserInfo;
 import com.example.administrator.js.me.model.User;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,8 +54,27 @@ public class MeFragment extends BaseFragment {
     TextView mTextViewVerify;
     @BindView(R.id.tv_yajing_status)
     TextView mTextViewYajingStatus;
+    @BindView(R.id.tv_age)
+    TextView mTextViewAge;
 
     User mUser;
+    RealUserInfo mRealUserInfo;
+
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onVerifyChanged(EventMessage.VerifyChangedMessage message) {
+
+        if (mRealUserInfo != null) {
+            mRealUserInfo = new RealUserInfo();
+            mRealUserInfo.status="0";
+            mTextViewVerify.setText("审核中");
+
+        }
+    }
 
     @Override
     protected int getContentViewLayoutID() {
@@ -52,8 +83,45 @@ public class MeFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        mUser = UserManager.getInsatance().getUser();
+        requestData();
 
+    }
 
+    @Override
+    protected void requestData() {
+        super.requestData();
+
+        Http.getDefault().getRealNameInfo(mUser.id)
+                .as(RxHelper.<RealUserInfo>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<RealUserInfo>() {
+                    @Override
+                    protected void onSucess(RealUserInfo mUser) {
+
+                        if (mUser != null) {
+                            mRealUserInfo = mUser;
+                            if (!TextUtils.isEmpty(mUser.status)) {
+                                if ("1".equals(mUser.status)) {
+                                    mTextViewVerify.setText("已认证");
+                                } else if ("2".equals(mUser.status)) {
+                                    mTextViewVerify.setText("认证不通过");
+
+                                } else {
+                                    mTextViewVerify.setText("审核中");
+
+                                }
+                            }
+                        } else {
+                            mTextViewVerify.setText("未认证");
+
+                        }
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+
+                    }
+                });
     }
 
     @Override
@@ -82,6 +150,28 @@ public class MeFragment extends BaseFragment {
 
                 }
             }
+
+            //年龄
+            //年龄
+            if (mUser.age != null && mUser.sex != null) {
+                mTextViewAge.setText(mUser.age + "");
+                if (mUser.sex.equals("1")) {
+                    //男性
+                    mTextViewAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
+
+                    Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_men);
+                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                    mTextViewAge.setCompoundDrawables(drawable, null, null, null);
+                } else {
+                    Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_women);
+                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                    mTextViewAge.setCompoundDrawables(drawable, null, null, null);
+                    mTextViewAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_women));
+                }
+            } else {
+                mTextViewAge.setVisibility(View.GONE);
+
+            }
         }
     }
 
@@ -92,7 +182,7 @@ public class MeFragment extends BaseFragment {
 
 
     @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode, R.id.ll_zizhi, R.id.ll_share, R.id.ll_my_collection,
-            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui, R.id.ll_wufu_time, R.id.ll_tuijian})
+            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui, R.id.ll_wufu_time, R.id.ll_tuijian, R.id.tv_verify})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_barcode:
@@ -120,15 +210,21 @@ public class MeFragment extends BaseFragment {
                         .navigation();
                 break;
             case R.id.tv_id:
-                ARouter.getInstance().build("/me/RealNameVerifyActivity")
-                        .navigation();
+
                 break;
             case R.id.iv_barcode:
                 break;
 
             case R.id.ll_zizhi:
 
-                start(ZizhiActivity.class);
+                if (mRealUserInfo!=null) {
+                    if (mRealUserInfo.status.equals("1")) {
+                        start(ZizhiActivity.class);
+                    }
+                    else {
+                        showToast("未通过认证不能进行教学资质编辑");
+                    }
+                }
                 break;
 
             case R.id.ll_shenqing:
@@ -173,9 +269,37 @@ public class MeFragment extends BaseFragment {
 
                 break;
             case R.id.ll_tuijian:
-
                 start(TuijianActivity.class);
+                break;
 
+            case R.id.tv_verify:
+
+                if (mRealUserInfo != null) {
+                    if (!TextUtils.isEmpty(mRealUserInfo.status)) {
+                        if ("1".equals(mRealUserInfo.status)) {
+
+                            if (BuildConfig.DEBUG) {
+                                ARouter.getInstance().build("/me/RealNameVerifyActivity")
+                                        .navigation();
+                            }
+
+                        } else if ("2".equals(mRealUserInfo.status)) {
+                            ARouter.getInstance().build("/me/RealNameVerifyActivity")
+                                    .navigation();
+
+                        } else {
+                            if (BuildConfig.DEBUG) {
+                                ARouter.getInstance().build("/me/RealNameVerifyActivity")
+                                        .navigation();
+                            }
+
+                        }
+                    }
+
+                } else {
+                    ARouter.getInstance().build("/me/RealNameVerifyActivity")
+                            .navigation();
+                }
 
                 break;
         }
