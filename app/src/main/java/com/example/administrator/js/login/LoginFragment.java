@@ -17,6 +17,7 @@ import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.me.ForgetPasswordActivity;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.view.PasswordToggleEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -82,7 +83,7 @@ public class LoginFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.bt_login, R.id.bt_register, R.id.iv_weixin})
+    @OnClick({R.id.bt_login, R.id.bt_register, R.id.iv_weixin, R.id.tv_wjmm})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_login:
@@ -97,6 +98,12 @@ public class LoginFragment extends BaseFragment {
                 break;
             case R.id.iv_weixin:
 
+
+                break;
+
+            case R.id.tv_wjmm:
+
+                start(ForgetPasswordActivity.class);
 
                 break;
         }

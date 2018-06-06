@@ -2,6 +2,7 @@ package com.example.administrator.js.course;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -28,6 +29,8 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.BottomDialogUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
@@ -38,12 +41,17 @@ import com.example.administrator.js.utils.Utils;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.functions.Consumer;
 import io.rong.imkit.RongIM;
+
+import static com.appbaselib.utils.PackageUtil.isAvilible;
 
 @Route(path = "/course/CourDetailActivity")
 public class CourDetailActivity extends BaseActivity {
@@ -211,14 +219,72 @@ public class CourDetailActivity extends BaseActivity {
         }
 
         LatLng latLng = new LatLng(lat, lon);
-        final Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("石羊场客运站").snippet(""));
+        final Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title(mCourseDetail.address).snippet(""));
         //可视化区域，将指定位置指定到屏幕中心位置
 //        cameraUpdate = CameraUpdateFactory
 //                .newCameraPosition(new CameraPosition(new LatLng(30.5851693664,
 //                        104.0321159258), 18, 0, 30));
 
+
+    aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
+        @Override
+        public boolean onMarkerClick(Marker mMarker) {
+            showMap();
+            return true;
+        }
+    });
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         aMap.moveCamera(cameraUpdate);
+
+    }
+
+    private void showMap() {
+        final List<String> mStrings = new ArrayList<>();
+        //百度
+        if (isAvilible(getApplicationContext(), "com.baidu.BaiduMap")) {
+            mStrings.add("百度地图");
+        }
+        //高德
+        if (isAvilible(getApplicationContext(), "com.autonavi.minimap")) {
+            mStrings.add("高德地图");
+
+        }
+//        //腾讯
+//        if (isAvilible(getApplicationContext(), "com.tencent.map")) {
+//            mStrings.add("腾讯地图");
+//        }
+        if (mStrings.size() == 0) {
+            showToast("请安装地图软件");
+            return;
+        }
+
+        BottomDialogUtils.showBottomDialog(mContext, "请选择导航地图", mStrings, new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                if (mStrings.get(position).contains("百度")) {
+                    Intent intent = null;
+                    try {
+                        intent = Intent.getIntent("intent://map/direction?destination=latlng:" + lat + "," + lon + "|name:&origin=" + "我的位置" + "&mode=driving?ion=" + "我的位置" + "&referer=Autohome|GasStation#Intent;scheme=bdapp;package=com.baidu.BaiduMap;end");
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    startActivity(intent); // 启动调用
+                } else if (mStrings.get(position).contains("高德")) {
+
+
+                    Intent intent = new Intent("android.intent.action.VIEW",
+                            android.net.Uri.parse("androidamap://navi?sourceApplication=amap&lat=" + lat + "&lon=" + lon + "&dev=1&style=0"));
+                    intent.setPackage("com.autonavi.minimap");
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+
+                }
+
+            }
+        }).show();
+
     }
 
     @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_yuyue})
@@ -257,21 +323,6 @@ public class CourDetailActivity extends BaseActivity {
                 mDialogInterface.dismiss();
             }
         });
-
-        AlertDialog mAlertDialog = mBuilder.create();
-        mBuilder.show();
-        final Button mButton = mAlertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        RxTextView.textChangeEvents(mTextInputEditText).skip(1)
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
-                    @Override
-                    public void accept(TextViewTextChangeEvent mTextViewTextChangeEvent) throws Exception {
-                        if (!TextUtils.isEmpty(mTextViewTextChangeEvent.text().toString())) {
-                            mButton.setEnabled(true);
-                        } else {
-                            mButton.setEnabled(false);
-                        }
-                    }
-                });
         mBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface mDialogInterface, int mI) {
@@ -292,6 +343,20 @@ public class CourDetailActivity extends BaseActivity {
                         });
             }
         });
+        AlertDialog mAlertDialog = mBuilder.create();
+        mAlertDialog.show();
+        final Button mButton = mAlertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        RxTextView.textChangeEvents(mTextInputEditText).skip(1)
+                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void accept(TextViewTextChangeEvent mTextViewTextChangeEvent) throws Exception {
+                        if (!TextUtils.isEmpty(mTextViewTextChangeEvent.text().toString())) {
+                            mButton.setEnabled(true);
+                        } else {
+                            mButton.setEnabled(false);
+                        }
+                    }
+                });
 
 
 

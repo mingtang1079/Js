@@ -161,10 +161,15 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                 start(BarcodeActivity.class);
                 break;
             case R.id.ll_weixin:
+
+
                 break;
             case R.id.ll_phone:
+
+
                 break;
             case R.id.ll_password:
+                start(ForgetPasswordActivity.class);
                 break;
             case R.id.ll_zhifubao:
 

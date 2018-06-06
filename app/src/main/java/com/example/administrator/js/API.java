@@ -70,6 +70,21 @@ public interface API {
                                          @Field("password") String password);
 
     /**
+     * 忘记密码
+     *
+     * @param phone
+     * @param password
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/changepsw")
+    Observable<BaseModel<String>> alterPassword(
+            @Field("mobile") String phone,
+            @Field("code") String code,
+            @Field("password") String password);
+
+
+    /**
      * 编辑
      * <p>
      * private String nickname; // 昵称

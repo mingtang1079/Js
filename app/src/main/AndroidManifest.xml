@@ -213,10 +213,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".me.AddServicetimeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".qrcode.CaptureActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".me.ForgetPasswordActivity"
+            android:theme="@style/ThemeFullScreen"></activity>
     </application>
 
 </manifest>
