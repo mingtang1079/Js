@@ -165,7 +165,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
 
                 break;
             case R.id.ll_phone:
-
+                start(ChangeMobileActivity.class);
 
                 break;
             case R.id.ll_password:

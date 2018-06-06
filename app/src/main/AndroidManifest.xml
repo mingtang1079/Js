@@ -217,8 +217,10 @@
         <activity
             android:name=".qrcode.CaptureActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".me.ForgetPasswordActivity"
-            android:theme="@style/ThemeFullScreen"></activity>
+        <activity
+            android:name=".me.ForgetPasswordActivity"
+            android:theme="@style/ThemeFullScreen" />
+        <activity android:name=".me.ChangeMobileActivity"></activity>
     </application>
 
 </manifest>

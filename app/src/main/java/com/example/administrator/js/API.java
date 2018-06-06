@@ -73,6 +73,19 @@ public interface API {
      * 忘记密码
      *
      * @param phone
+     * @param code
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/changemobile")
+    Observable<BaseModel<String>> changemobile(
+            @Field("mobile") String phone,
+            @Field("code") String code,
+            @Field("id") String userid);
+    /**
+     * 修改手机号奥
+     *
+     * @param phone
      * @param password
      * @return
      */
@@ -82,7 +95,6 @@ public interface API {
             @Field("mobile") String phone,
             @Field("code") String code,
             @Field("password") String password);
-
 
     /**
      * 编辑
