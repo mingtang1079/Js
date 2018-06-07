@@ -131,9 +131,14 @@ public class MainHeaderView extends BaseLifeCycleView {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_vip:
+                if (UserManager.getInsatance().getRole().equals("0")) {
+                    ARouter.getInstance().build("/exercise/NearbyVipActivity")
+                            .navigation(getContext());
+                } else {
+                    ARouter.getInstance().build("/exercise/NearbyTrainerActivity")
+                            .navigation(getContext());
+                }
 
-                ARouter.getInstance().build("/exercise/NearbyVipActivity")
-                        .navigation(getContext());
                 break;
             case R.id.tv_shop:
                 ARouter.getInstance().build("/web/Html5Activity")

@@ -1,9 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.administrator.js.exercise.member.NearbyTrainerActivity">
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    tools:context=".exercise.member.NearbyTrainerActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/activity_home_appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_color"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/Base.ThemeOverlay.AppCompat.Light"
+            app:titleTextAppearance="@style/toolbar_style">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/com_round_corner_solid_f5f5f5"
+                    android:hint="搜索教练昵称  ID"
+                    android:padding="8dp"
+                    android:textColorHint="@color/color_bcc8da"
+                    android:textSize="14sp"
+                    android:visibility="visible" />
+
+                <android.support.v4.widget.Space
+                    android:layout_width="24dp"
+
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <LinearLayout
+            android:id="@+id/group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_color"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/zonghe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/icon_xiabiao"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="综合"
+                android:textColor="#FF4A576A"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/juli"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/icon_xiabiao"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="距离"
+                android:textColor="#FF4A576A"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/xiangmu"
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/icon_xiabiao"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="项目"
+                android:textColor="#FF4A576A"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/jiage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableRight="@drawable/icon_xiabiao"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="价格"
+                android:textColor="#FF4A576A"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/shaixuan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableRight="@drawable/icon_xiabiao"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="筛选"
+                android:textColor="#FF4A576A"
+                android:textSize="16sp" />
+        </LinearLayout>
+        >
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:background="@color/white_color">
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>
