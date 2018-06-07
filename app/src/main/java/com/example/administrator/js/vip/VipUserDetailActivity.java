@@ -209,6 +209,7 @@ public class VipUserDetailActivity extends BaseActivity {
 
         if (mUserDetail.relation != null) {
 
+            //已接单不能拉黑
             if (!TextUtils.isEmpty(mUserDetail.relation.tradestatus) && mUserDetail.relation.tradestatus.equals("1")) {
 
                 mMenuItem.setVisible(false);

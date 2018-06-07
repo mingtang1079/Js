@@ -18,6 +18,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.SearchUserActivity;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.adapter.NearbyVipAdapter;
 import com.example.administrator.js.exercise.model.Skill;
@@ -38,6 +39,8 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.tv_search)
+    TextView mTextViewSearch;
     @BindView(R.id.zonghe)
     TextView mZonghe;
     @BindView(R.id.juli)
@@ -95,7 +98,8 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
                 "id: \"c01\",\n" +
                 "name: \"竞技健美\"\n" +
                 "}]", Skill.class);
-
+        toggleShowLoading(true, "加载中……");
+        requestData();
     }
 
     @Override
@@ -118,6 +122,7 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
         if (!TextUtils.isEmpty(skillids)) {
             mStringStringMap.put("skillids", skillids);
         }
+        mStringStringMap.put("pageNo",pageNo);
         Http.getDefault().seacrchUser(mStringStringMap)
                 .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<VipUser>>() {
@@ -141,14 +146,17 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
     }
 
 
-    @OnClick({R.id.zonghe, R.id.juli, R.id.xingbie, R.id.type})
+    @OnClick({R.id.zonghe, R.id.juli, R.id.xingbie, R.id.type, R.id.tv_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.zonghe:
 
-                distance=0;
-                sex="";
-                skillids="";
+                distance = 0;
+                mJuli.setText("距离");
+                sex = "";
+                mXingbie.setText("性别");
+                skillids = "";
+                mType.setText("类型");
                 refreshData(true);
 
                 break;
@@ -165,6 +173,10 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
 
                 showType();
 
+                break;
+
+            case R.id.tv_search:
+                start(SearchUserActivity.class);
                 break;
         }
     }
@@ -241,7 +253,7 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
                     skillids = "";
                     mType.setText("类型");
                 } else {
-                    skillids = ((Skill)mItems.get(position)).id;
+                    skillids = ((Skill) mItems.get(position)).id;
                     mType.setText(mItems.get(position).getValue());
 
                 }

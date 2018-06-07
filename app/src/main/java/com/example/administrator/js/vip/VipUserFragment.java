@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
 @Route(path = "/vip/VipUserFragment")
@@ -40,17 +41,17 @@ public class VipUserFragment extends BaseRefreshFragment<User> {
     @Override
     protected void initView() {
         super.initView();
-        RxTextView.textChangeEvents(mEditTextSearch).skip(1)
+        RxTextView.textChanges(mEditTextSearch).skip(1)
                 .debounce(400, TimeUnit.MILLISECONDS)
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CharSequence>() {
                     @Override
-                    public void accept(TextViewTextChangeEvent mTextViewTextChangeEvent) throws Exception {
-
-                        if (!TextUtils.isEmpty(mEditTextSearch.getText().toString())) {
-                         refreshData(true);
-                        }
+                    public void accept(CharSequence mCharSequence) throws Exception {
+                        refreshData(true);
                     }
                 });
+        toggleShowLoading(true, "加载中……");
+        requestData();
     }
 
     @Override

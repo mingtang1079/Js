@@ -62,12 +62,8 @@ public class ExerciseKnowlegaView extends BaseLifeCycleView {
     }
 
     @Override
-    public void init(Context mContext) {
-        super.init(mContext);
-        View mView = LayoutInflater.from(getContext()).inflate(R.layout.view_exercise_knowledge, this, false);
-        ButterKnife.bind(this, mView);
-        addView(mView);
-
+    public void onCreate() {
+        super.onCreate();
         LinearLayoutManager mLinearLayoutManage = new LinearLayoutManager(getContext());
         mLinearLayoutManage.setOrientation(LinearLayoutManager.VERTICAL);
         mKnowledgeAdapter = new KnowledgeAdapter(R.layout.item_knowledge, mMains);
@@ -78,11 +74,16 @@ public class ExerciseKnowlegaView extends BaseLifeCycleView {
         requestData();
     }
 
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.view_exercise_knowledge;
+    }
+
     public void requestData() {
 
-        mBaseModelObservable=       Http.getDefault().getMain(UserManager.getInsatance().getUser().id,2, 1, 3);
+        mBaseModelObservable = Http.getDefault().getMain(UserManager.getInsatance().getUser().id, 2, 1, 3);
 
-        mBaseModelObservable        .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
+        mBaseModelObservable.as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
                     protected void onSucess(WrapperModel<Main> mMainWrapperModel) {
@@ -94,7 +95,7 @@ public class ExerciseKnowlegaView extends BaseLifeCycleView {
 
                     @Override
                     protected void onFail(String message) {
-                        LogUtils.d("健身知识---》"+message);
+                        LogUtils.d("健身知识---》" + message);
                     }
                 });
 
@@ -104,7 +105,7 @@ public class ExerciseKnowlegaView extends BaseLifeCycleView {
     @OnClick(R.id.tv_knowledge)
     public void onViewClicked() {
 
-       // ToastUtils.showShort(getContext(), "健身知识");
+        // ToastUtils.showShort(getContext(), "健身知识");
         ARouter.getInstance().build("/exercise/KnowledgeActivity")
                 .navigation();
 

@@ -24,7 +24,13 @@ import java.util.Map;
 @Route(path = "/commen/NearByVipFragment")
 public class NearByVipFragment extends BaseRefreshFragment<User> {
 
+    @Override
+    protected void initView() {
+        super.initView();
+        toggleShowLoading(true, "加载中……");
+        requestData();
 
+    }
     @Override
     public void initAdapter() {
         mAdapter = new NearbyVipAdapter(R.layout.item_nearby_vip, mList);
@@ -50,6 +56,7 @@ public class NearByVipFragment extends BaseRefreshFragment<User> {
         if (!TextUtils.isEmpty(LocationManager.getInsatance().latitude)) {
             mStringStringMap.put("latitude", LocationManager.getInsatance().latitude);
         }
+        mStringStringMap.put("pageNo",pageNo);
 
         Http.getDefault().seacrchUser(mStringStringMap)
                 .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))

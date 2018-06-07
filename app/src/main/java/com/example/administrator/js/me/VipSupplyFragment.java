@@ -25,6 +25,13 @@ public class VipSupplyFragment extends BaseRefreshFragment<VipSupply> {
     @Autowired
     String status;
 
+    @Override
+    protected void initView() {
+        super.initView();
+        toggleShowLoading(true, "加载中……");
+        requestData();
+
+    }
 
     @Override
     public void initAdapter() {

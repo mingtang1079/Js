@@ -46,4 +46,13 @@ public class UserManager implements SharedPreferences.OnSharedPreferenceChangeLi
             return mUser;
         }
     }
+
+    // 角色0教练1学员
+    public String getRole() {
+        if (mUser == null) {
+            User mUser = PreferenceUtils.getObjectFromGson(App.mInstance, Constants.PRE_USER, User.class);
+            this.mUser = mUser;
+        }
+        return mUser.role;
+    }
 }

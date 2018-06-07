@@ -67,16 +67,18 @@ public class MainHeaderView extends BaseLifeCycleView {
     }
 
     @Override
-    public void init(Context mContext) {
-        super.init(mContext);
-        View mView = LayoutInflater.from(getContext()).inflate(R.layout.view_main_header, this, false);
-        ButterKnife.bind(this, mView);
-        addView(mView);
+    protected int getContentViewLayoutID() {
+        return R.layout.view_main_header;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        if (UserManager.getInsatance().getRole().equals("0")) {
+            mTvVip.setText("附近会员");
+        } else {
+            mTvVip.setText("附近教练");
+        }
         requestData();
     }
 
@@ -155,13 +157,13 @@ public class MainHeaderView extends BaseLifeCycleView {
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
-        LogUtils.d("visi--"+visibility);
+        LogUtils.d("visi--" + visibility);
     }
 
     @Override
     protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
-        LogUtils.d("visi--"+visibility);
+        LogUtils.d("visi--" + visibility);
 
     }
 }

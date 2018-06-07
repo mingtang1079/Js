@@ -345,7 +345,8 @@ public class CourDetailActivity extends BaseActivity {
         });
         AlertDialog mAlertDialog = mBuilder.create();
         mAlertDialog.show();
-        final Button mButton = mAlertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        final Button mButton = mAlertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        mButton.setEnabled(false);
         RxTextView.textChangeEvents(mTextInputEditText).skip(1)
                 .subscribe(new Consumer<TextViewTextChangeEvent>() {
                     @Override

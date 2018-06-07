@@ -9,14 +9,19 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.SupportActivity;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import com.example.administrator.js.R;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by tangming on 2018/5/3.
  */
 
-public class BaseLifeCycleView extends FrameLayout implements LifecycleObserver {
+public abstract class BaseLifeCycleView extends FrameLayout implements LifecycleObserver {
 
     public BaseLifeCycleView(Context context) {
         super(context);
@@ -44,14 +49,33 @@ public class BaseLifeCycleView extends FrameLayout implements LifecycleObserver 
         }
     }
 
+    protected abstract int getContentViewLayoutID();
+
+    @CallSuper
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     public void onCreate() {
+        View mView = LayoutInflater.from(getContext()).inflate(getContentViewLayoutID(), this, false);
+        ButterKnife.bind(this, mView);
+        addView(mView);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onStart() {
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    public void onResume() {
+
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onStop() {
 
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     public void onDestory() {
-
     }
 
 

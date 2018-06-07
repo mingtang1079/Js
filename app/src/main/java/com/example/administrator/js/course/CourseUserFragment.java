@@ -46,6 +46,14 @@ public class CourseUserFragment extends BaseRefreshFragment<User> {
     }
 
     @Override
+    protected void initView() {
+        super.initView();
+        toggleShowLoading(true, "加载中……");
+        requestData();
+
+    }
+
+    @Override
     public void initAdapter() {
         mAdapter = new CourseUserAdapter(R.layout.item_course_user, mList);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

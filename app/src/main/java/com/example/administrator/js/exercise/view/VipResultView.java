@@ -55,12 +55,8 @@ public class VipResultView extends BaseLifeCycleView {
     }
 
     @Override
-    public void init(Context mContext) {
-        super.init(mContext);
-        View mView = LayoutInflater.from(getContext()).inflate(R.layout.view_vip_result, this, false);
-        ButterKnife.bind(this, mView);
-        addView(mView);
-
+    public void onCreate() {
+        super.onCreate();
         LinearLayoutManager mLinearLayoutManage = new LinearLayoutManager(getContext());
         mLinearLayoutManage.setOrientation(LinearLayoutManager.HORIZONTAL);
         mVipResultAdapter = new VipResultAdapter(R.layout.item_main_vip_result, mMains);
@@ -70,12 +66,16 @@ public class VipResultView extends BaseLifeCycleView {
         mRecyclerView.addItemDecoration(new VipResultAdapter.VipgeDividerItemDecoration());
         mRecyclerView.setNestedScrollingEnabled(false);
         requestData();
+    }
 
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.view_vip_result;
     }
 
     public void requestData() {
 
-        Http.getDefault().getMain(UserManager.getInsatance().getUser().id,3, 1, 3)
+        Http.getDefault().getMain(UserManager.getInsatance().getUser().id, 3, 1, 3)
                 .as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
@@ -93,6 +93,7 @@ public class VipResultView extends BaseLifeCycleView {
                 });
 
     }
+
     @OnClick(R.id.iv_vip_result)
     public void onViewClicked() {
 
@@ -104,6 +105,6 @@ public class VipResultView extends BaseLifeCycleView {
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
-        LogUtils.d("visi--"+visibility);
+        LogUtils.d("visi--" + visibility);
     }
 }

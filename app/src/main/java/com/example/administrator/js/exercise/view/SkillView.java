@@ -51,13 +51,14 @@ public class SkillView extends BaseLifeCycleView {
     ExerciseSkillAdapter mExerciseSkillAdapter;
     List<Main> mMains = new ArrayList<>();
 
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.view_exercise_skill;
+    }
 
     @Override
-    public void init(Context mContext) {
-        super.init(mContext);
-        View mView = LayoutInflater.from(getContext()).inflate(R.layout.view_exercise_skill, this, false);
-        ButterKnife.bind(this, mView);
-        addView(mView);
+    public void onCreate() {
+        super.onCreate();
 
         LinearLayoutManager mLinearLayoutManage = new LinearLayoutManager(getContext());
         mLinearLayoutManage.setOrientation(LinearLayoutManager.VERTICAL);
@@ -68,7 +69,6 @@ public class SkillView extends BaseLifeCycleView {
         mRecyclerView.addItemDecoration(new KnowledgeAdapter.KnowledgeDividerItemDecoration());
         mRecyclerView.setNestedScrollingEnabled(false);
         requestData();
-
     }
 
     public void requestData() {
