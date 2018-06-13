@@ -222,7 +222,10 @@
             android:theme="@style/ThemeFullScreen" />
         <activity android:name=".me.ChangeMobileActivity" />
         <activity android:name=".activity.SearchUserActivity" />
-        <activity android:name=".exercise.member.NearbyTrainerActivity"></activity>
+        <activity android:name=".exercise.member.NearbyTrainerActivity" />
+        <activity android:name=".me.PriceListActivity" />
+        <activity android:name=".me.PriceSettingActivity" />
+        <activity android:name=".me.YinsiSettingActivity"></activity>
     </application>
 
 </manifest>

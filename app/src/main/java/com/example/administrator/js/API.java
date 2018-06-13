@@ -8,6 +8,7 @@ import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.TongjiActivity;
 import com.example.administrator.js.me.model.Collection;
+import com.example.administrator.js.me.model.Price;
 import com.example.administrator.js.me.model.RealUserInfo;
 import com.example.administrator.js.me.model.ServiceTime;
 import com.example.administrator.js.me.model.Tongji;
@@ -82,6 +83,7 @@ public interface API {
             @Field("mobile") String phone,
             @Field("code") String code,
             @Field("id") String userid);
+
     /**
      * 修改手机号奥
      *
@@ -252,4 +254,12 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/servicetimeDelete")
     Observable<BaseModel<String>> servicetimeDelete(@Field("id") String tid);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/getprice")
+    Observable<BaseModel<Price>> getprice(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/saveprice")
+    Observable<BaseModel<String>> saveprice(@FieldMap Map<String, Object> mMap);
 }

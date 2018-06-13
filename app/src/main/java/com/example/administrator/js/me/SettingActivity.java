@@ -63,6 +63,7 @@ public class SettingActivity extends BaseActivity {
             case R.id.ll_yinsi:
 
 
+                start(YinsiSettingActivity.class);
 
                 break;
         }

@@ -20,6 +20,10 @@ import com.example.administrator.js.utils.QRUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class BarcodeActivity extends BaseActivity {
 
@@ -72,8 +76,16 @@ public class BarcodeActivity extends BaseActivity {
                 BarcodeModel mBarcodeModel = new BarcodeModel(mUser.role, mUser.id);
                 String content = JsonUtil.objectToString(mBarcodeModel);
                 try {
-                 Bitmap mBitmap =QRUtils.encodeToQR(content, width);
-                    mIvBarcode.setImageBitmap(mBitmap);
+
+                    Observable.just(QRUtils.encodeToQR(content, width))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Bitmap>() {
+                                @Override
+                                public void accept(Bitmap mBitmap) throws Exception {
+                                    mIvBarcode.setImageBitmap(mBitmap);
+                                }
+                            });
 
                 } catch (Exception mE) {
                     mE.printStackTrace();

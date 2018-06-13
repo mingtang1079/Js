@@ -255,7 +255,25 @@
                     android:textSize="14sp" />
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_dingjia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_price"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:text="课程定价"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_tuijian"
                 android:layout_width="match_parent"

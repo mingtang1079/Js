@@ -12,7 +12,10 @@ import android.widget.TextView;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.constant.Constans;
+import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.me.presenter.UserPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShankeTixingSettingActivity extends BaseActivity {
+public class ShankeTixingSettingActivity extends BaseActivity implements UserPresenter.UserResponse {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -30,6 +33,8 @@ public class ShankeTixingSettingActivity extends BaseActivity {
     @BindView(R.id.tv_status)
     TextView mTextViewStatus;
 
+    UserPresenter mUserPresenter;
+    User mUser;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -49,9 +54,11 @@ public class ShankeTixingSettingActivity extends BaseActivity {
     @Override
     protected void initView() {
         mToolbar.setTitle("课程提醒设置");
-
+        mUserPresenter = new UserPresenter(this);
+        mUser = UserManager.getInsatance().getUser();
         String tixing = PreferenceUtils.getPrefString(mContext, Constans.COURSE_TIXING, "上课前提醒");
         mTextViewStatus.setText(tixing);
+
     }
 
     @OnClick(R.id.ll_tixing)
@@ -80,10 +87,29 @@ public class ShankeTixingSettingActivity extends BaseActivity {
             public void onClick(DialogInterface mDialogInterface, int mI) {
                 mTextViewStatus.setText(mItems[mI]);
                 // TODO: 2018/5/26
-                PreferenceUtils.setPrefString(mContext, Constans.COURSE_TIXING, mItems[mI]);
+                  PreferenceUtils.setPrefString(mContext, Constans.COURSE_TIXING, mItems[mI]);
+                int p;
+                if (mI != 3) {
+                    p = mI;
+                } else {
+                    p = 9;
+                }
+                mUserPresenter.updateUser("remindme", String.valueOf(p));
+
+
                 mDialogInterface.dismiss();
             }
         }).show();
+
+    }
+
+    @Override
+    public void onSuccess() {
+
+    }
+
+    @Override
+    public void onFail(String mes) {
 
     }
 }

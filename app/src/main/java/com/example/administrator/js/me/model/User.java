@@ -40,5 +40,7 @@ public class User {
     public String coursetypenames;
     public String coursetypeids;
     public String starttime;
+    public String privatemode;//隐私0关  1开
+    public String remindme;//提醒 0 不提醒1 一小时提醒 2 两小时提薪
 
 }
