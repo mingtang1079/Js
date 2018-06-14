@@ -87,7 +87,7 @@ public class ShankeTixingSettingActivity extends BaseActivity implements UserPre
             public void onClick(DialogInterface mDialogInterface, int mI) {
                 mTextViewStatus.setText(mItems[mI]);
                 // TODO: 2018/5/26
-                  PreferenceUtils.setPrefString(mContext, Constans.COURSE_TIXING, mItems[mI]);
+                PreferenceUtils.setPrefString(mContext, Constans.COURSE_TIXING, mItems[mI]);
                 int p;
                 if (mI != 3) {
                     p = mI;
