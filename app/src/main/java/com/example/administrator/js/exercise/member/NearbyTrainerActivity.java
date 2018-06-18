@@ -44,6 +44,12 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     }
 
     @Override
+    protected void initView() {
+        super.initView();
+        requestData();
+    }
+
+    @Override
     public Toolbar getToolbar() {
         return mToolbar;
     }
@@ -55,7 +61,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     @Override
     public void initAdapter() {
-
+        mAdapter = new NearbyTrainerAdapter(R.layout.item_nearby_trainer, mList);
     }
 
     @Override
@@ -76,6 +82,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 //                mType.setText("类型");
 //                refreshData(true);
 
+                showZongheView();
                 break;
             case R.id.juli:
 
@@ -93,6 +100,12 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             case R.id.shaixuan:
                 break;
         }
+    }
+
+    private void showZongheView() {
+
+        View mView = getLayoutInflater().inflate(R.layout.view_trainer_zonghe, null, false);
+
     }
 
     private void showJuli() {
