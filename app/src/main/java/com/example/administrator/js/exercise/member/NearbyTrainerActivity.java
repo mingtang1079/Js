@@ -82,7 +82,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 //                mType.setText("类型");
 //                refreshData(true);
 
-                showZongheView();
+
                 break;
             case R.id.juli:
 
@@ -90,7 +90,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
                 break;
             case R.id.xiangmu:
-
+                showXiangmu();
                 break;
             case R.id.jiage:
 
@@ -98,13 +98,22 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
                 break;
             case R.id.shaixuan:
+                showXiangShaixuan();
                 break;
         }
     }
 
-    private void showZongheView() {
+    private void showXiangShaixuan() {
+        View mView = getLayoutInflater().inflate(R.layout.view_trainer_shaixuan, null, false);
+        BottomDialogUtils.showBottomDialog(mContext,mView);
 
-        View mView = getLayoutInflater().inflate(R.layout.view_trainer_zonghe, null, false);
+    }
+
+
+    private void showXiangmu() {
+
+        View mView = getLayoutInflater().inflate(R.layout.view_trainer_xiangmu, null, false);
+        BottomDialogUtils.showBottomDialog(mContext,mView);
 
     }
 
