@@ -64,4 +64,12 @@
         <item name="android:button">@null</item>
         <item name="android:layout_weight">1</item>
     </style>
+    <style name="CustomRadioBtn2">
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rb_nobtn_selector</item>
+    </style>
 </resources>

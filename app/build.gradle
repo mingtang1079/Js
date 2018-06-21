@@ -121,4 +121,5 @@ dependencies {
     compile 'com.amap.api:location:latest.integration'
 
     compile 'com.github.MagicMashRoom:SuperCalendar:1.6'
+    compile 'com.google.android:flexbox:1.0.0'
 }
