@@ -16,7 +16,7 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.course.CourseFragment;
 import com.example.administrator.js.exercise.ExerciseFragment;
 import com.example.administrator.js.me.MeFragment;
-import com.example.administrator.js.vip.MainVipFragment;
+import com.example.administrator.js.vipandtrainer.MainVipFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;

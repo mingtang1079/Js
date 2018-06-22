@@ -1,6 +1,5 @@
 package com.example.administrator.js.course;
 
-import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,11 +21,10 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
-import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.view.CustomDayView;
 import com.example.administrator.js.view.ThemeDayView;
-import com.example.administrator.js.vip.adapter.CourseUserAdapter;
+import com.example.administrator.js.vipandtrainer.adapter.CourseUserAdapter;
 import com.ldf.calendar.component.CalendarAttr;
 import com.ldf.calendar.component.CalendarViewAdapter;
 import com.ldf.calendar.interf.OnSelectDateListener;
@@ -38,9 +36,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-
-import static com.umeng.socialize.utils.DeviceConfig.context;
 
 public class CourseCanlenderActivity extends BaseActivity {
 

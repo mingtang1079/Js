@@ -1,42 +1,25 @@
 package com.example.administrator.js.me;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseModel;
-import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
-import com.appbaselib.utils.FileUtlis;
-import com.appbaselib.view.RatioImageView;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MutichoosePhotoActivity;
-import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.Zizhi;
 import com.example.administrator.js.me.presenter.ZizhiPresenter;
 import com.example.administrator.js.utils.Utils;
-import com.example.administrator.js.vip.adapter.UserdetailImageAdapter;
-import com.foamtrace.photopicker.PhotoPickerActivity;
-import com.foamtrace.photopicker.SelectModel;
-import com.foamtrace.photopicker.intent.PhotoPickerIntent;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -46,8 +29,6 @@ import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;

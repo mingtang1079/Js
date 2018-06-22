@@ -1,16 +1,11 @@
 package com.example.administrator.js.course;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.appbaselib.base.BaseFragment;
-import com.appbaselib.base.BaseModelWrapper;
 import com.appbaselib.base.BaseRefreshFragment;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
@@ -19,14 +14,11 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
-import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
-import com.example.administrator.js.vip.adapter.CourseUserAdapter;
+import com.example.administrator.js.vipandtrainer.adapter.CourseUserAdapter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * Created by tangming on 2018/5/17.

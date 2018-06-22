@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/default_bg"
     android:orientation="vertical"
-    tools:context=".exercise.member.NearbyTrainerActivity">
+    tools:context=".exercise.trainer.NearbyTrainerActivity">
 
 
     <android.support.design.widget.AppBarLayout

@@ -1,15 +1,12 @@
-package com.example.administrator.js.vip;
+package com.example.administrator.js.vipandtrainer;
 
 import android.Manifest;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -18,33 +15,22 @@ import com.appbaselib.base.BaseFragment;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
-import com.appbaselib.utils.LogUtils;
-import com.appbaselib.utils.TablayoutUtils;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.NearByVipFragment;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.base.model.WrapperModel;
-import com.example.administrator.js.course.CourseCanlenderActivity;
 import com.example.administrator.js.exercise.model.Main;
-import com.example.administrator.js.exercise.view.MainHeaderView;
+import com.example.administrator.js.exercise.trainer.NearByTrainerFragment;
 import com.example.administrator.js.qrcode.CaptureActivity;
-import com.foamtrace.photopicker.SelectModel;
-import com.foamtrace.photopicker.intent.PhotoPickerIntent;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -73,7 +59,12 @@ public class MainVipFragment extends BaseFragment {
     protected void initView() {
 
         mToolbar.inflateMenu(R.menu.main_vip);
-        mToolbar.setTitle("会员");
+        if (UserManager.getInsatance().getRole().equals("0")) {
+            mToolbar.setTitle("会员");
+
+        } else {
+            mToolbar.setTitle("教练");
+        }
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -150,36 +141,61 @@ public class MainVipFragment extends BaseFragment {
     }
 
     private String[] getTabTitle() {
+        if (UserManager.getInsatance().getRole().equals("0")) {
+            return new String[]{
+                    "附近会员", "我的会员", "我的关注", "黑名单"
+            };
 
-        return new String[]{
-                "附近会员", "我的会员", "我的关注", "黑名单"
-        };
+        } else {
+            return new String[]{
+                    "附近教练", "接单教练", "我的关注", "黑名单"
+            };
+        }
+
     }
 
     private List<Fragment> getFragments() {
         List<Fragment> mFragments = new ArrayList<>();
 
-        //one
-//        Map<String, String> mStringStringMap = new HashMap<>();
-        NearByVipFragment mVipUserFragment = (NearByVipFragment) ARouter.getInstance().build("/commen/NearByVipFragment")
-                .navigation(mContext);
-        mFragments.add(mVipUserFragment);
+        if (UserManager.getInsatance().getRole().equals("0")) {
+            NearByVipFragment mVipUserFragment = (NearByVipFragment) ARouter.getInstance().build("/commen/NearByVipFragment")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment);
 
-        VipUserFragment mVipUserFragment1 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
-                .withString("status", "3")
-                .navigation(mContext);
-        mFragments.add(mVipUserFragment1);
+            VipUserFragment mVipUserFragment1 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
+                    .withString("status", "3")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment1);
 
-        VipUserFragment mVipUserFragment2 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
-                .withString("status", "1")
-                .navigation(mContext);
-        mFragments.add(mVipUserFragment2);
+            VipUserFragment mVipUserFragment2 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
+                    .withString("status", "1")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment2);
 
-        VipUserFragment mVipUserFragment3 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
-                .withString("status", "2")
-                .navigation(mContext);
-        mFragments.add(mVipUserFragment3);
+            VipUserFragment mVipUserFragment3 = (VipUserFragment) ARouter.getInstance().build("/vip/VipUserFragment")
+                    .withString("status", "2")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment3);
+        } else {
+            NearByTrainerFragment mNearByTrainerFragment = (NearByTrainerFragment) ARouter.getInstance().build("/trainer/NearByTrainerFragment")
+                    .navigation(mContext);
+            mFragments.add(mNearByTrainerFragment);
 
+            TrainerFragment mVipUserFragment1 = (TrainerFragment) ARouter.getInstance().build("/trainer/TrainerFragment")
+                    .withString("status", "3")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment1);
+
+            TrainerFragment mVipUserFragment2 = (TrainerFragment) ARouter.getInstance().build("/trainer/TrainerFragment")
+                    .withString("status", "1")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment2);
+
+            TrainerFragment mVipUserFragment3 = (TrainerFragment) ARouter.getInstance().build("/trainer/TrainerFragment")
+                    .withString("status", "2")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment3);
+        }
 
         return mFragments;
     }

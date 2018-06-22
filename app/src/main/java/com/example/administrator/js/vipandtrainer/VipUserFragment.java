@@ -1,4 +1,4 @@
-package com.example.administrator.js.vip;
+package com.example.administrator.js.vipandtrainer;
 
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -11,14 +11,10 @@ import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
-import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.adapter.NearbyVipAdapter;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
-import com.example.administrator.js.service.LocationService;
-import com.jakewharton.rxbinding2.view.RxView;
 import com.jakewharton.rxbinding2.widget.RxTextView;
-import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
 import java.util.HashMap;
 import java.util.List;

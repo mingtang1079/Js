@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/default_bg"
     android:orientation="vertical"
-    tools:context=".vip.VipUserDetailActivity">
+    tools:context=".vipandtrainer.VipUserDetailActivity">
 
     <include layout="@layout/include_toolbar" />
 

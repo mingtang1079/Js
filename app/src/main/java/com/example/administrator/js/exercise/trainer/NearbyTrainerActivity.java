@@ -1,12 +1,10 @@
-package com.example.administrator.js.exercise.member;
+package com.example.administrator.js.exercise.trainer;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseRefreshActivity;
 import com.appbaselib.utils.BottomDialogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -17,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 @Route(path = "/exercise/NearbyTrainerActivity")

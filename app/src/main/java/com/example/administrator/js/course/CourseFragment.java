@@ -1,15 +1,11 @@
 package com.example.administrator.js.course;
 
-import android.net.Uri;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.adapter.FragmentAdapter;
@@ -18,16 +14,11 @@ import com.appbaselib.utils.TablayoutUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.qrcode.CaptureActivity;
-import com.example.administrator.js.vip.VipUserFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
-import io.rong.imkit.fragment.ConversationListFragment;
-import io.rong.imlib.model.Conversation;
 
 /**
  * Created by tangming on 2018/5/3.

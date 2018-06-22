@@ -1,8 +1,6 @@
-package com.example.administrator.js.vip;
+package com.example.administrator.js.vipandtrainer;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.os.RecoverySystem;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,16 +22,14 @@ import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.UserDetail;
-import com.example.administrator.js.vip.adapter.UserdetailImageAdapter;
+import com.example.administrator.js.vipandtrainer.adapter.UserdetailImageAdapter;
 
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-import io.reactivex.internal.operators.observable.ObservableSwitchIfEmpty;
 import io.rong.imkit.RongIM;
 
 @Route(path = "/vip/VipUserDetailActivity")

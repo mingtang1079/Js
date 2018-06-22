@@ -1,26 +1,14 @@
-package com.example.administrator.js.exercise.member;
+package com.example.administrator.js.exercise.trainer;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseRefreshActivity;
-import com.appbaselib.network.ResponceSubscriber;
-import com.appbaselib.rx.RxHelper;
-import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
-import com.example.administrator.js.UserManager;
-import com.example.administrator.js.base.model.WrapperModel;
-import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 

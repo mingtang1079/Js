@@ -1,4 +1,4 @@
-package com.example.administrator.js.vip.adapter;
+package com.example.administrator.js.vipandtrainer.adapter;
 
 import android.widget.ImageView;
 
@@ -8,8 +8,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by tangming on 2018/5/24.

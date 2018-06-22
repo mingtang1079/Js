@@ -1,4 +1,4 @@
-package com.example.administrator.js.exercise.member;
+package com.example.administrator.js.exercise.trainer;
 
 import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

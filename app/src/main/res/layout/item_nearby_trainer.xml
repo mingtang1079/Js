@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@color/white_color"
-              android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_color"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_head"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="16dp"/>
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_head"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_margin="12dp"
+                android:background="@drawable/icon_dengji"
+                android:padding="4dp"
+                android:text="V1"
+                android:textColor="@color/white"
+                android:textSize="0sp" />
+
+        </FrameLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FF4A576A"
                     android:textSize="16sp"
-                    tools:text="Mo"/>
+                    tools:text="Mo" />
 
                 <TextView
                     android:id="@+id/tv_age"
@@ -53,17 +70,16 @@
                     android:paddingRight="4dp"
                     android:textColor="@color/white_color"
                     android:textSize="11sp"
-                    tools:text="22"/>
+                    tools:text="22" />
+
 
                 <TextView
-                    android:id="@+id/tv_time_juli"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="right"
-                    android:textColor="#BCC8DA"
+                    android:textColor="#fffd506d"
                     android:textSize="14sp"
-                    tools:text="0.48km·8小时前"/>
+                    tools:text="￥159" />
 
             </LinearLayout>
 
@@ -80,17 +96,18 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FF8996AA"
                     android:textSize="13sp"
-                    tools:text="增肌  减脂  塑形"/>
+                    tools:text="增肌  减脂  塑形" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_time_juli"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="right"
                     android:paddingRight="16dp"
-                    android:textColor="#fffd506d"
+                    android:textColor="#BCC8DA"
                     android:textSize="14sp"
-                    tools:text="￥159"
-                    />
+                    tools:text="0.48km" />
             </LinearLayout>
 
 
@@ -101,6 +118,6 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="80dp"
-        android:background="@color/default_bg"/>
+        android:background="@color/default_bg" />
 
 </LinearLayout>

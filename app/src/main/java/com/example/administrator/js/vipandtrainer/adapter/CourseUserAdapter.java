@@ -1,4 +1,4 @@
-package com.example.administrator.js.vip.adapter;
+package com.example.administrator.js.vipandtrainer.adapter;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;

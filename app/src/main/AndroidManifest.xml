@@ -132,7 +132,7 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <activity android:name=".vip.VipUserDetailActivity" />
+        <activity android:name=".vipandtrainer.VipUserDetailActivity" />
         <activity android:name=".me.FankuiActivity" />
         <activity android:name=".me.AboutUsActivity" />
         <activity
@@ -222,12 +222,14 @@
             android:theme="@style/ThemeFullScreen" />
         <activity android:name=".me.ChangeMobileActivity" />
         <activity android:name=".activity.SearchUserActivity" />
-        <activity android:name=".exercise.member.NearbyTrainerActivity" />
+        <activity android:name=".exercise.trainer.NearbyTrainerActivity" />
         <activity android:name=".me.PriceListActivity" />
         <activity android:name=".me.PriceSettingActivity" />
         <activity android:name=".me.YinsiSettingActivity" />
-        <activity android:name=".exercise.member.SearchTrianerActivity"></activity>
-        <activity android:name=".activity.NewNeedActivity"></activity>
+        <activity android:name=".exercise.trainer.SearchTrianerActivity" />
+        <activity android:name=".activity.NewNeedActivity" />
+        <activity android:name=".vipandtrainer.TrainerDetailActivity" />
+        <activity android:name=".vipandtrainer.BuySiJiaoKeActivity"></activity>
     </application>
 
 </manifest>
