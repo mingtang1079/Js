@@ -23,8 +23,8 @@ import butterknife.OnClick;
 /**
  * Created by tangming on 2018/5/17.
  */
-@Route(path = "/course/CourseUserFragment")
-public class CourseUserFragment extends BaseRefreshFragment<User> {
+@Route(path = "/course/CourseTrainerFragment")
+public class CourseTrainerFragment extends BaseRefreshFragment<User> {
 
     @Autowired
     String status;

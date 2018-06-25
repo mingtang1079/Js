@@ -160,7 +160,7 @@
 
                         <TextView
                             android:id="@+id/btn_guanzhu"
-                            style="@style/default_circle_button_bg"
+                            style="@style/default_circle_solid_button_bg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"

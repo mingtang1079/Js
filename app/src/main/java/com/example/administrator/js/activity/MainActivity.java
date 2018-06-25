@@ -13,7 +13,7 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
-import com.example.administrator.js.course.CourseFragment;
+import com.example.administrator.js.course.MainCourseFragment;
 import com.example.administrator.js.exercise.ExerciseFragment;
 import com.example.administrator.js.me.MeFragment;
 import com.example.administrator.js.vipandtrainer.MainVipFragment;
@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity {
     MeFragment mMeFragment;
     ExerciseFragment mExerciseFragment;
     MainVipFragment mMainVipFragment;
-    CourseFragment mCourseFragment;
+    MainCourseFragment mMainCourseFragment;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -92,7 +92,7 @@ public class MainActivity extends BaseActivity {
         mMeFragment = new MeFragment();
         mExerciseFragment = new ExerciseFragment();
         mMainVipFragment = new MainVipFragment();
-        mCourseFragment = new CourseFragment();
+        mMainCourseFragment = new MainCourseFragment();
 
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.content);
         mNavigator.showFragment(mExerciseFragment);
@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity {
 
                 } else if (item.getItemId() == R.id.course) {
 
-                    mNavigator.showFragment(mCourseFragment);
+                    mNavigator.showFragment(mMainCourseFragment);
                 } else {
 
                     mNavigator.showFragment(mMeFragment);

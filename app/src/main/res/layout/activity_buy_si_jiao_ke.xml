@@ -372,7 +372,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:padding="16dp"
-                    android:text="确定" />
+                    android:text="提交申请" />
             </LinearLayout>
 
 

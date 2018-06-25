@@ -229,7 +229,13 @@
         <activity android:name=".exercise.trainer.SearchTrianerActivity" />
         <activity android:name=".activity.NewNeedActivity" />
         <activity android:name=".vipandtrainer.TrainerDetailActivity" />
-        <activity android:name=".vipandtrainer.BuySiJiaoKeActivity"></activity>
+        <activity android:name=".vipandtrainer.BuySiJiaoKeActivity" />
+        <activity
+            android:name=".course.member.PingjiaActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".course.member.TousuActivity" />
+        <activity android:name=".course.member.YuyueCourseActivity" />
+        <activity android:name=".course.member.YuyueSuccessActivity"></activity>
     </application>
 
 </manifest>

@@ -12,7 +12,9 @@ import com.appbaselib.adapter.FragmentAdapter;
 import com.appbaselib.base.BaseFragment;
 import com.appbaselib.utils.TablayoutUtils;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
+import com.example.administrator.js.course.member.CourseMemberFragment;
 import com.example.administrator.js.qrcode.CaptureActivity;
 
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ import butterknife.BindView;
  * Created by tangming on 2018/5/3.
  */
 
-public class CourseFragment extends BaseFragment {
+public class MainCourseFragment extends BaseFragment {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -42,8 +44,7 @@ public class CourseFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        mToolbar.setTitle("消息");
-        mToolbar.setTitle("健身");
+        mToolbar.setTitle("课程");
         //  mToolbar.setTitleTextColor(ContextCompat.getColor(R.color.));
         mToolbar.inflateMenu(R.menu.main_course);
         mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -75,7 +76,15 @@ public class CourseFragment extends BaseFragment {
 
     protected String[] getTabTitle() {
 
-        return new String[]{"进行中", "已结束"};
+        if (UserManager.getInsatance().getRole().equals("0")) {
+            return new String[]{"进行中", "已结束"};
+
+
+        } else {
+            return new String[]{"进行中", "历史订单"};
+
+        }
+
     }
 
     ;
@@ -84,15 +93,35 @@ public class CourseFragment extends BaseFragment {
 
         List<Fragment> mFragments = new ArrayList<>();
 
-        CourseUserFragment mVipUserFragment1 = (CourseUserFragment) ARouter.getInstance().build("/course/CourseUserFragment")
-                .withString("status", "1")
-                .navigation(mContext);
-        mFragments.add(mVipUserFragment1);
 
-        CourseUserFragment mVipUserFragment2 = (CourseUserFragment) ARouter.getInstance().build("/course/CourseUserFragment")
-                .withString("status", "2")
-                .navigation(mContext);
-        mFragments.add(mVipUserFragment2);
+        if (UserManager.getInsatance().getRole().equals("0")) {
+
+            CourseTrainerFragment mVipUserFragment1 = (CourseTrainerFragment) ARouter.getInstance().build("/course/CourseTrainerFragment")
+                    .withString("status", "1")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment1);
+
+            CourseTrainerFragment mVipUserFragment2 = (CourseTrainerFragment) ARouter.getInstance().build("/course/CourseTrainerFragment")
+                    .withString("status", "2")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment2);
+
+
+
+        } else {
+
+            CourseMemberFragment mVipUserFragment1 = (CourseMemberFragment) ARouter.getInstance().build("/member/CourseMemberFragment")
+                    .withString("status", "1")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment1);
+
+            CourseMemberFragment mVipUserFragment2 = (CourseMemberFragment) ARouter.getInstance().build("/member/CourseMemberFragment")
+                    .withString("status", "2")
+                    .navigation(mContext);
+            mFragments.add(mVipUserFragment2);
+
+
+        }
 
         return mFragments;
     }
