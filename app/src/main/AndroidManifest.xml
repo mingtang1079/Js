@@ -235,7 +235,12 @@
             android:screenOrientation="portrait" />
         <activity android:name=".course.member.TousuActivity" />
         <activity android:name=".course.member.YuyueCourseActivity" />
-        <activity android:name=".course.member.YuyueSuccessActivity"></activity>
+        <activity android:name=".course.member.YuyueSuccessActivity" />
+        <activity android:name=".me.member.BodyDataActivity" />
+        <activity android:name=".me.member.MyOrderActivity" />
+        <activity android:name=".me.member.OrderDetailActivity" />
+        <activity android:name=".me.member.TuikeActivity" />
+        <activity android:name=".me.member.TuikeDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -74,7 +74,6 @@ public class MeMemberFragment extends BaseFragment {
     }
 
 
-
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_me_member;
@@ -85,42 +84,6 @@ public class MeMemberFragment extends BaseFragment {
         mUser = UserManager.getInsatance().getUser();
         requestData();
 
-    }
-
-    @Override
-    protected void requestData() {
-        super.requestData();
-
-        Http.getDefault().getRealNameInfo(mUser.id)
-                .as(RxHelper.<RealUserInfo>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<RealUserInfo>() {
-                    @Override
-                    protected void onSucess(RealUserInfo mUser) {
-
-                        if (mUser != null) {
-                            mRealUserInfo = mUser;
-                            if (!TextUtils.isEmpty(mUser.status)) {
-                                if ("1".equals(mUser.status)) {
-                                    mTextViewVerify.setText("已认证");
-                                } else if ("2".equals(mUser.status)) {
-                                    mTextViewVerify.setText("认证不通过");
-
-                                } else {
-                                    mTextViewVerify.setText("审核中");
-
-                                }
-                            }
-                        } else {
-                            mTextViewVerify.setText("未认证");
-
-                        }
-                    }
-
-                    @Override
-                    protected void onFail(String message) {
-
-                    }
-                });
     }
 
     @Override
@@ -135,20 +98,6 @@ public class MeMemberFragment extends BaseFragment {
             ImageLoader.load(mContext, mUser.img, mImageViewHead);
             mTvName.setText(mUser.nickname);
             mTvId.setText("ID：" + mUser.no);
-
-            if (!TextUtils.isEmpty(mUser.depositstatus)) {
-
-                if ("0".equals(mUser.depositstatus)) {
-                    mTextViewYajingStatus.setText("未交");
-                } else if ("1".equals(mUser.depositstatus)) {
-                    mTextViewYajingStatus.setText("已交");
-
-                } else if ("2".equals(mUser.depositstatus)) {
-                    mTextViewYajingStatus.setText("免押金");
-
-
-                }
-            }
 
             //年龄
             //年龄
@@ -180,8 +129,9 @@ public class MeMemberFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode, R.id.ll_zizhi, R.id.ll_share, R.id.ll_my_collection,
-            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_dingjia, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui, R.id.ll_wufu_time, R.id.ll_tuijian, R.id.tv_verify})
+    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode,
+            R.id.my_order, R.id.ll_share, R.id.ll_my_collection,
+            R.id.shenti_shuju, R.id.ll_xuqiu, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_barcode:
@@ -214,7 +164,7 @@ public class MeMemberFragment extends BaseFragment {
             case R.id.iv_barcode:
                 break;
 
-            case R.id.ll_zizhi:
+            case R.id.my_order:
 
                 if (mRealUserInfo != null) {
                     if (mRealUserInfo.status.equals("1")) {
@@ -225,23 +175,19 @@ public class MeMemberFragment extends BaseFragment {
                 }
                 break;
 
-            case R.id.ll_shenqing:
+            case R.id.shenti_shuju:
 
-                start(VipSupplyActivity.class);
+            start(BodyDataActivity.class);
                 break;
-            case R.id.ll_richeng:
+            case R.id.ll_xuqiu:
 
-                start(CourseCanlenderActivity.class);
+                // TODO: 2018/6/26 需求
                 break;
             case R.id.ll_tongji:
 
                 start(TongjiActivity.class);
                 break;
-            case R.id.ll_yajing:
 
-                yajing();
-
-                break;
             case R.id.ll_share:
 
                 break;
@@ -252,59 +198,11 @@ public class MeMemberFragment extends BaseFragment {
 
                 start(FankuiActivity.class);
                 break;
-            case R.id.ll_bidu:
-
-                start(TeacherBiDuActivity.class);
-                break;
             case R.id.ll_my_collection:
 
                 start(CollectionActivity.class);
                 break;
 
-            case R.id.ll_wufu_time:
-
-                start(ServiceTimeListActivity.class);
-
-                break;
-            case R.id.ll_tuijian:
-                start(TuijianActivity.class);
-                break;
-
-            case R.id.tv_verify:
-
-                if (mRealUserInfo != null) {
-                    if (!TextUtils.isEmpty(mRealUserInfo.status)) {
-                        if ("1".equals(mRealUserInfo.status)) {
-
-                            if (BuildConfig.DEBUG) {
-                                ARouter.getInstance().build("/me/RealNameVerifyActivity")
-                                        .navigation();
-                            }
-
-                        } else if ("2".equals(mRealUserInfo.status)) {
-                            ARouter.getInstance().build("/me/RealNameVerifyActivity")
-                                    .navigation();
-
-                        } else {
-                            if (BuildConfig.DEBUG) {
-                                ARouter.getInstance().build("/me/RealNameVerifyActivity")
-                                        .navigation();
-                            }
-
-                        }
-                    }
-
-                } else {
-                    ARouter.getInstance().build("/me/RealNameVerifyActivity")
-                            .navigation();
-                }
-
-                break;
-
-            case R.id.ll_dingjia:
-
-                start(PriceListActivity.class);
-                break;
         }
     }
 

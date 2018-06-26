@@ -1,0 +1,82 @@
+package com.example.administrator.js.me.member;
+
+import android.net.Uri;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.appbaselib.adapter.FragmentAdapter;
+import com.appbaselib.base.BaseActivity;
+import com.appbaselib.utils.TablayoutUtils;
+import com.example.administrator.js.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.rong.imkit.fragment.ConversationListFragment;
+import io.rong.imlib.model.Conversation;
+
+public class MyOrderActivity extends BaseActivity {
+
+
+    public Toolbar mToolbar;
+    public TabLayout mTab;
+    public ViewPager mViewpager;
+
+    FragmentAdapter mFragmentAdapter;
+
+    @Override
+    protected int getContentViewLayoutID() {
+        return R.layout.activity_my_order;
+    }
+
+    protected String[] getTabTitle() {
+
+        return new String[]{"全部", "待接单", "代付款", "已完成"};
+    }
+
+    ;
+
+    public List<Fragment> getFragments() {
+
+        List<Fragment> m = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            OrderFragment mFragment = (OrderFragment) ARouter.getInstance().build("/me/member/OrderFragment")
+                    .withString("type", i + "")
+                    .navigation(mContext);
+            m.add(mFragment);
+        }
+
+        return m;
+    }
+
+    @Override
+    public Toolbar getToolbar() {
+        return mToolbar;
+    }
+
+    @Override
+    protected View getLoadingTargetView() {
+        return null;
+    }
+
+    @Override
+    protected void initView() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("我的订单");
+        mTab = (TabLayout) findViewById(R.id.tab);
+        mViewpager = (ViewPager) findViewById(R.id.viewpager);
+
+        mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getFragments(), getTabTitle());
+        mViewpager.setAdapter(mFragmentAdapter);
+        mTab.setTabMode(TabLayout.MODE_FIXED);
+        mTab.setupWithViewPager(mViewpager);
+        TablayoutUtils.setTabLine(mTab, 50, 50, mContext);
+    }
+}
