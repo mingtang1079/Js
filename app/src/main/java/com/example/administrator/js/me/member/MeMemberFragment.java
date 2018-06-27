@@ -69,12 +69,6 @@ public class MeMemberFragment extends BaseFragment {
     RealUserInfo mRealUserInfo;
 
     @Override
-    protected boolean registerEventBus() {
-        return true;
-    }
-
-
-    @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_me_member;
     }
@@ -131,7 +125,7 @@ public class MeMemberFragment extends BaseFragment {
 
     @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode,
             R.id.my_order, R.id.ll_share, R.id.ll_my_collection,
-            R.id.shenti_shuju, R.id.ll_xuqiu, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui})
+            R.id.shenti_shuju, R.id.ll_xuqiu, R.id.ll_about, R.id.ll_fankui})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_barcode:
@@ -166,13 +160,7 @@ public class MeMemberFragment extends BaseFragment {
 
             case R.id.my_order:
 
-                if (mRealUserInfo != null) {
-                    if (mRealUserInfo.status.equals("1")) {
-                        start(ZizhiActivity.class);
-                    } else {
-                        showToast("未通过认证不能进行教学资质编辑");
-                    }
-                }
+              start(MyOrderActivity.class);
                 break;
 
             case R.id.shenti_shuju:

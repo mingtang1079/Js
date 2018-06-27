@@ -240,7 +240,10 @@
         <activity android:name=".me.member.MyOrderActivity" />
         <activity android:name=".me.member.OrderDetailActivity" />
         <activity android:name=".me.member.TuikeActivity" />
-        <activity android:name=".me.member.TuikeDetailActivity"></activity>
+        <activity android:name=".me.member.TuikeDetailActivity" />
+        <activity android:name=".activity.locaiton.ChooseLocationActivity" />
+        <activity android:name=".activity.locaiton.LocationSearchActivity" />
+        <activity android:name=".me.member.AddBodyDataActivity"></activity>
     </application>
 
 </manifest>

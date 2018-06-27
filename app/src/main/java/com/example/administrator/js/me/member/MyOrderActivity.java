@@ -18,12 +18,13 @@ import com.example.administrator.js.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import io.rong.imkit.fragment.ConversationListFragment;
 import io.rong.imlib.model.Conversation;
 
 public class MyOrderActivity extends BaseActivity {
 
-
+    @BindView(R.id.toolbar)
     public Toolbar mToolbar;
     public TabLayout mTab;
     public ViewPager mViewpager;
@@ -68,7 +69,7 @@ public class MyOrderActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
         mToolbar.setTitle("我的订单");
         mTab = (TabLayout) findViewById(R.id.tab);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
@@ -77,6 +78,6 @@ public class MyOrderActivity extends BaseActivity {
         mViewpager.setAdapter(mFragmentAdapter);
         mTab.setTabMode(TabLayout.MODE_FIXED);
         mTab.setupWithViewPager(mViewpager);
-        TablayoutUtils.setTabLine(mTab, 50, 50, mContext);
+        TablayoutUtils.setTabLine(mTab, 10, 10, mContext);
     }
 }

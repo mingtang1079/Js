@@ -10,15 +10,10 @@ import com.example.administrator.js.R;
 
 public class BodyDataActivity extends BaseActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_body_data);
-    }
 
     @Override
     protected int getContentViewLayoutID() {
-        return 0;
+        return R.layout.activity_body_data;
     }
 
     @Override

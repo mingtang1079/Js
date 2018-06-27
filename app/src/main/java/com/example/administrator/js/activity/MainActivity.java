@@ -2,6 +2,7 @@ package com.example.administrator.js.activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,9 +14,11 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.locaiton.ChooseLocationActivity;
 import com.example.administrator.js.course.MainCourseFragment;
 import com.example.administrator.js.exercise.ExerciseFragment;
 import com.example.administrator.js.me.MeFragment;
+import com.example.administrator.js.me.member.MeMemberFragment;
 import com.example.administrator.js.vipandtrainer.MainVipFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
@@ -36,7 +39,7 @@ public class MainActivity extends BaseActivity {
     Navigator mNavigator;
     ImageView mIvAdd;
 
-    MeFragment mMeFragment;
+    Fragment mMeFragment;
     ExerciseFragment mExerciseFragment;
     MainVipFragment mMainVipFragment;
     MainCourseFragment mMainCourseFragment;
@@ -74,6 +77,7 @@ public class MainActivity extends BaseActivity {
             if ("0".equals(UserManager.getInsatance().getUser().role)) {
 
                 //        mIvAdd.setVisibility(View.GONE);
+                mMeFragment = new MeFragment();
             } else {
                 mIvAdd = findViewById(R.id.iv_add);
                 mIvAdd.setOnClickListener(new View.OnClickListener() {
@@ -83,13 +87,14 @@ public class MainActivity extends BaseActivity {
                     }
                 });
                 mIvAdd.setVisibility(View.VISIBLE);
-
+                mMeFragment = new MeMemberFragment();
             }
         }
         mBnve.enableItemShiftingMode(false);
         mBnve.enableShiftingMode(false);
         mBnve.enableAnimation(false);
-        mMeFragment = new MeFragment();
+
+
         mExerciseFragment = new ExerciseFragment();
         mMainVipFragment = new MainVipFragment();
         mMainCourseFragment = new MainCourseFragment();
@@ -113,6 +118,7 @@ public class MainActivity extends BaseActivity {
                     mNavigator.showFragment(mMainCourseFragment);
                 } else {
 
+
                     mNavigator.showFragment(mMeFragment);
 
                 }
@@ -124,6 +130,7 @@ public class MainActivity extends BaseActivity {
 
     public void onAddClicked() {
 
-        start(NewNeedActivity.class);
+        //   start(NewNeedActivity.class);
+        start(ChooseLocationActivity.class);
     }
 }
