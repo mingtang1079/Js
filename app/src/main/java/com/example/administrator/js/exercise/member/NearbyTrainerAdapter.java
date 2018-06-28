@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
+import com.appbaselib.utils.NullUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
@@ -34,7 +35,7 @@ public class NearbyTrainerAdapter extends BaseRecyclerViewAdapter<User> {
         helper.setText(R.id.tv_time_juli, item.distancefmt);
 
         //年龄
-        if (item.age != null || item.sex.equals("0")) {
+        if (item.age != null && !TextUtils.isEmpty(item.sex)) {
             TextView mTextView = helper.getView(R.id.tv_age);
             helper.setVisible(R.id.tv_age, true);
             helper.setText(R.id.tv_age, item.age + "");
@@ -69,6 +70,6 @@ public class NearbyTrainerAdapter extends BaseRecyclerViewAdapter<User> {
 
         helper.setText(R.id.tv_score, "评分：" + item.score);
         helper.setText(R.id.tv_degree, item.degree);
-        helper.setText(R.id.tv_price, item.courseprice);
+        helper.setText(R.id.tv_price, "￥ "+ NullUtils.filterNull(item.courseprice));
     }
 }

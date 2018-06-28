@@ -31,7 +31,7 @@
                 android:padding="4dp"
                 android:text="V1"
                 android:textColor="@color/white"
-                android:textSize="0sp" />
+                android:textSize="8sp" />
 
         </FrameLayout>
 
@@ -81,6 +81,7 @@
                     android:gravity="right"
                     android:textColor="#fffd506d"
                     android:textSize="14sp"
+                    android:textStyle="bold"
                     tools:text="￥159" />
 
             </LinearLayout>
@@ -94,32 +95,31 @@
 
                 <TextView
                     android:id="@+id/tv_skill"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textColor="#FF8996AA"
                     android:textSize="13sp"
                     tools:text="增肌  减脂  塑形" />
 
                 <TextView
                     android:id="@+id/tv_score"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="right"
                     android:paddingRight="16dp"
                     android:textColor="#BCC8DA"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     tools:text="评分4.3" />
 
                 <TextView
                     android:id="@+id/tv_time_juli"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:gravity="right"
                     android:paddingRight="16dp"
                     android:textColor="#BCC8DA"
-                    android:textSize="14sp"
+                    android:textSize="12sp"
                     tools:text="0.48km" />
             </LinearLayout>
 

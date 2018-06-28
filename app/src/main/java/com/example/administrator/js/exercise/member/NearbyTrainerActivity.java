@@ -1,18 +1,27 @@
 package com.example.administrator.js.exercise.member;
 
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseRefreshActivity;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.BottomDialogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
+import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -53,7 +62,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     @Override
     protected View getLoadingTargetView() {
-        return null;
+        return mSwipeRefreshLayout;
     }
 
     @Override
@@ -63,6 +72,35 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     @Override
     public void requestData() {
+
+
+
+        Map<String, Object> mStringStringMap = new HashMap<>();
+        mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
+//        if (distance != 0) {
+//            mStringStringMap.put("distance", distance);
+//        }
+//        if (!TextUtils.isEmpty(sex)) {
+//            mStringStringMap.put("sex", sex);
+//        }
+//        if (!TextUtils.isEmpty(skillids)) {
+//            mStringStringMap.put("skillids", skillids);
+//        }
+        mStringStringMap.put("pageNo",pageNo);
+        Http.getDefault().seacrchUser(mStringStringMap)
+                .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<WrapperModel<VipUser>>() {
+                    @Override
+                    protected void onSucess(WrapperModel<VipUser> mNearbyVipWrapperModel) {
+
+                        loadComplete(mNearbyVipWrapperModel.list);
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        loadError(message);
+                    }
+                });
 
     }
 

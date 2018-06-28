@@ -35,7 +35,7 @@ public class NearbyVipAdapter extends BaseRecyclerViewAdapter<User> {
         helper.setText(R.id.tv_time_juli, item.distancefmt);
 
         //年龄
-        if (item.age != null || item.sex.equals("0")) {
+        if (item.age != null && !TextUtils.isEmpty(item.sex)) {
             TextView mTextView = helper.getView(R.id.tv_age);
             helper.setVisible(R.id.tv_age, true);
             helper.setText(R.id.tv_age, item.age + "");

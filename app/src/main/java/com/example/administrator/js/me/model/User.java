@@ -34,8 +34,8 @@ public class User {
     public String depositstatus; //押金状态 0 未交押金 1 已交押金 2 免押金
     public String skillids;    // 专长ids
     public String skillname;    // 专长名称
-    public Integer courseprice;    // 课程价格
-    public Integer reorder;        // 续课率
+    public String courseprice;    // 课程价格
+    public String reorder;        // 续课率
     public String distancefmt;
     public String coursetypenames;
     public String coursetypeids;
