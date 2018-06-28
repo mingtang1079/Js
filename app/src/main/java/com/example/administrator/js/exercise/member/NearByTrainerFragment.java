@@ -1,4 +1,4 @@
-package com.example.administrator.js.exercise.trainer;
+package com.example.administrator.js.exercise.member;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseRefreshFragment;
@@ -26,8 +26,9 @@ public class NearByTrainerFragment extends BaseRefreshFragment<User> {
     }
 
     @Override
-    public void requestData() {
+    public void requestData() { 
 
         // TODO: 2018/6/22
+
     }
 }

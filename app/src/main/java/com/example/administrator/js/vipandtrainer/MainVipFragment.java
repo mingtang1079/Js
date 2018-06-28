@@ -22,7 +22,7 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.model.Main;
-import com.example.administrator.js.exercise.trainer.NearByTrainerFragment;
+import com.example.administrator.js.exercise.member.NearByTrainerFragment;
 import com.example.administrator.js.qrcode.CaptureActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 

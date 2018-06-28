@@ -22,6 +22,7 @@
                 android:layout_margin="16dp" />
 
             <TextView
+                android:id="@+id/tv_degree"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|bottom"
@@ -74,6 +75,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -97,6 +99,17 @@
                     android:textColor="#FF8996AA"
                     android:textSize="13sp"
                     tools:text="增肌  减脂  塑形" />
+
+                <TextView
+                    android:id="@+id/tv_score"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="16dp"
+                    android:textColor="#BCC8DA"
+                    android:textSize="14sp"
+                    tools:text="评分4.3" />
 
                 <TextView
                     android:id="@+id/tv_time_juli"

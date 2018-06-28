@@ -1,4 +1,4 @@
-package com.example.administrator.js.exercise.trainer;
+package com.example.administrator.js.exercise.member;
 
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
