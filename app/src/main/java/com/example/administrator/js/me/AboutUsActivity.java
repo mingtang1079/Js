@@ -5,20 +5,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.base.Html5Activity;
+import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AboutUsActivity extends BaseActivity {
+public class AboutUsActivity extends Html5Activity {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-
-    @Override
-    protected int getContentViewLayoutID() {
-        return R.layout.activity_about_us;
-    }
 
     @Override
     protected View getLoadingTargetView() {
@@ -33,6 +30,8 @@ public class AboutUsActivity extends BaseActivity {
     @Override
     protected void initView() {
         mToolbar.setTitle("关于我们");
+        url = "https://www.cdmuscle.com/h5/news/detail?id=about";
+        super.initView();
     }
 
 }

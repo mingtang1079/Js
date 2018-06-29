@@ -14,6 +14,7 @@ import com.appbaselib.utils.TablayoutUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
+import com.example.administrator.js.course.member.CourseHistoryOrderFragment;
 import com.example.administrator.js.course.member.CourseMemberFragment;
 import com.example.administrator.js.qrcode.CaptureActivity;
 
@@ -115,7 +116,7 @@ public class MainCourseFragment extends BaseFragment {
                     .navigation(mContext);
             mFragments.add(mVipUserFragment1);
 
-            CourseMemberFragment mVipUserFragment2 = (CourseMemberFragment) ARouter.getInstance().build("/member/CourseMemberFragment")
+            CourseHistoryOrderFragment mVipUserFragment2 = (CourseHistoryOrderFragment) ARouter.getInstance().build("/member/CourseHistoryOrderFragment")
                     .withString("status", "2")
                     .navigation(mContext);
             mFragments.add(mVipUserFragment2);

@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.SearchUserActivity;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
@@ -43,6 +44,11 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     TextView mJiage;
     @BindView(R.id.shaixuan)
     TextView mShaixuan;
+
+
+    int distance;
+    String sex;
+    String skillids;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -77,9 +83,9 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
         Map<String, Object> mStringStringMap = new HashMap<>();
         mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
-//        if (distance != 0) {
-//            mStringStringMap.put("distance", distance);
-//        }
+        if (distance != 0) {
+            mStringStringMap.put("distance", distance);
+        }
 //        if (!TextUtils.isEmpty(sex)) {
 //            mStringStringMap.put("sex", sex);
 //        }
@@ -104,7 +110,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     }
 
-    @OnClick({R.id.zonghe, R.id.juli, R.id.xiangmu, R.id.jiage, R.id.shaixuan})
+    @OnClick({R.id.zonghe, R.id.juli, R.id.xiangmu, R.id.jiage, R.id.shaixuan,R.id.tv_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.zonghe:
@@ -134,6 +140,10 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 break;
             case R.id.shaixuan:
                 showXiangShaixuan();
+                break;
+
+            case R.id.tv_search:
+                start(SearchTrianerActivity.class);
                 break;
         }
     }

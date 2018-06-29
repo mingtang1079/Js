@@ -3,6 +3,7 @@ package com.example.administrator.js;
 import com.appbaselib.base.BaseModel;
 import com.appbaselib.base.BaseModelWrapper;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.course.member.HistoryOrder;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.VipUser;
@@ -262,4 +263,9 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/saveprice")
     Observable<BaseModel<String>> saveprice(@FieldMap Map<String, Object> mMap);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/cardlist")
+    Observable<BaseModel<WrapperModel<HistoryOrder>>> cardlist(@Field("uid") String uid);
 }

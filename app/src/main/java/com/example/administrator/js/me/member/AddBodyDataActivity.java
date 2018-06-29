@@ -50,11 +50,14 @@ public class AddBodyDataActivity extends BaseActivity {
 
     @Override
     public Toolbar getToolbar() {
-        return null;
+        return mToolbar;
     }
 
     @Override
     protected void initView() {
+
+        mToolbar.setTitle("添加数据");
+
 
     }
 
