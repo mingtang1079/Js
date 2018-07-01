@@ -9,10 +9,14 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.activity.ItemAdapter;
 import com.example.administrator.js.activity.ItemDividerItemDecoration;
+import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -41,7 +45,7 @@ public class PingjiaActivity extends BaseActivity {
     Button mBtnSure;
 
     List<String> mStrings = new ArrayList<>();
-    ItemAdapter mItemAdapter;
+    PingjiaAdapter mItemAdapter;
     FlexboxLayoutManager mFlexboxLayoutManager;
 
     @Override
@@ -54,12 +58,8 @@ public class PingjiaActivity extends BaseActivity {
 
         mToolbar.setNavigationIcon(R.drawable.close);
         mToolbar.setTitle("评价");
-        mStrings.add("达到预期");
-        mStrings.add("教练有过迟到");
-        mStrings.add("任职认真");
-        mStrings.add("非正常接触");
 
-        mItemAdapter = new ItemAdapter(R.layout.item_xiangmu, mStrings);
+        mItemAdapter = new PingjiaAdapter(R.layout.item_xiangmu, mStrings);
         mFlexboxLayoutManager = new FlexboxLayoutManager(mContext, FlexDirection.ROW, FlexWrap.WRAP);
         mRecyclerview.setLayoutManager(mFlexboxLayoutManager);
         mRecyclerview.addItemDecoration(new ItemDividerItemDecoration());
@@ -70,6 +70,28 @@ public class PingjiaActivity extends BaseActivity {
                 mItemAdapter.setSingleChoosed(position);
             }
         });
+
+        requestData();
+    }
+
+
+    @Override
+    protected void requestData() {
+        super.requestData();
+
+        Http.getDefault().getPinjiatags()
+                .as(RxHelper.<List<String>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<List<String>>() {
+                    @Override
+                    protected void onSucess(List<String> mSmallCourseTypes) {
+                        mItemAdapter.setNewData(mSmallCourseTypes);
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+
+                    }
+                });
     }
 
     @Override

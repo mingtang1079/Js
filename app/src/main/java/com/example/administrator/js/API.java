@@ -6,9 +6,11 @@ import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.member.HistoryOrder;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
+import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.TongjiActivity;
 import com.example.administrator.js.me.model.Collection;
+import com.example.administrator.js.me.model.NewNeed;
 import com.example.administrator.js.me.model.Price;
 import com.example.administrator.js.me.model.RealUserInfo;
 import com.example.administrator.js.me.model.ServiceTime;
@@ -268,4 +270,22 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/cardlist")
     Observable<BaseModel<WrapperModel<HistoryOrder>>> cardlist(@Field("uid") String uid);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/getNeed")
+    Observable<BaseModel<NewNeed>> getNeed(@Field("userid") String uid);
+
+    @POST(AUTHORIRY + "/course/getcoursetypestags")
+    Observable<BaseModel<List<SmallCourseType>>> getSmallcourseType();
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/publishNeed")
+    Observable<BaseModel<NewNeed>> publishNeed(@FieldMap Map<String, Object> mStringObjectMap);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/gettags")
+    Observable<BaseModel<List<String>>> getPinjiatags();
 }

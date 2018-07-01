@@ -136,6 +136,6 @@ public class MainActivity extends BaseActivity {
     public void onAddClicked() {
 
         //   start(NewNeedActivity.class);
-        start(ChooseLocationActivity.class);
+        start(NewNeedActivity.class);
     }
 }

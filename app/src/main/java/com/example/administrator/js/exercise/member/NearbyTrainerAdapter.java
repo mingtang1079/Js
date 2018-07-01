@@ -70,6 +70,6 @@ public class NearbyTrainerAdapter extends BaseRecyclerViewAdapter<User> {
 
         helper.setText(R.id.tv_score, "评分：" + item.score);
         helper.setText(R.id.tv_degree, item.degree);
-        helper.setText(R.id.tv_price, "￥ "+ NullUtils.filterNull(item.courseprice));
+        helper.setText(R.id.tv_price, "￥ "+ NullUtils.fillNull(item.courseprice));
     }
 }
