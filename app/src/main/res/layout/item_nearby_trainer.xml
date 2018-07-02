@@ -28,6 +28,7 @@
                 android:layout_gravity="right|bottom"
                 android:layout_margin="12dp"
                 android:background="@drawable/icon_dengji"
+                android:gravity="center"
                 android:padding="4dp"
                 android:text="V1"
                 android:textColor="@color/white"

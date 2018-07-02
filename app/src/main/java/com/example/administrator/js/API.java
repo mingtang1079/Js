@@ -1,15 +1,12 @@
 package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
-import com.appbaselib.base.BaseModelWrapper;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.member.HistoryOrder;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.example.administrator.js.exercise.model.VipUser;
-import com.example.administrator.js.me.TongjiActivity;
-import com.example.administrator.js.me.model.Collection;
 import com.example.administrator.js.me.model.NewNeed;
 import com.example.administrator.js.me.model.Price;
 import com.example.administrator.js.me.model.RealUserInfo;
@@ -21,6 +18,7 @@ import com.example.administrator.js.me.model.UserDetail;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.VipSupply;
 import com.example.administrator.js.me.model.Zizhi;
+import com.example.administrator.js.vipandtrainer.trainer.TrainerDetail;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -31,11 +29,9 @@ import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 /**
@@ -288,4 +284,8 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/gettags")
     Observable<BaseModel<List<String>>> getPinjiatags();
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/contact/teacherDetail")
+    Observable<BaseModel<TrainerDetail>> teacherDetail(@Field("tid") String tid, @Field("uid") String uid);
 }

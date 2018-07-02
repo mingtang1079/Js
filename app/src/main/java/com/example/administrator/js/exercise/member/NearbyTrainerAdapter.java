@@ -59,15 +59,6 @@ public class NearbyTrainerAdapter extends BaseRecyclerViewAdapter<User> {
 
         }
 
-        setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ARouter.getInstance().build("/vip/VipUserDetailActivity")
-                        .withString("id", getData().get(position).id)
-                        .navigation(mContext);
-            }
-        });
-
         helper.setText(R.id.tv_score, "评分：" + item.score);
         helper.setText(R.id.tv_degree, item.degree);
         helper.setText(R.id.tv_price, "￥ "+ NullUtils.fillNull(item.courseprice));

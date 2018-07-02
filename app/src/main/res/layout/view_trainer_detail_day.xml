@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_name"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@drawable/calender_text_bg"
+    android:gravity="center"
+    android:padding="12dp"
+    android:textColor="@color/calender_text"
+    tools:text="fdsf">
+
+</TextView>

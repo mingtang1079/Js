@@ -1,11 +1,14 @@
 package com.example.administrator.js.exercise.member;
 
 import android.text.TextUtils;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseRefreshFragment;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.LocationManager;
 import com.example.administrator.js.R;
@@ -33,6 +36,16 @@ public class NearByTrainerFragment extends BaseRefreshFragment<User> {
     @Override
     public void initAdapter() {
         mAdapter = new NearbyTrainerAdapter(R.layout.item_nearby_trainer, mList);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                ARouter.getInstance().build("/vipandtrainer/TrainerDetailActivity")
+                        .withString("id",mList.get(position).id)
+                        .navigation(mContext);
+
+            }
+        });
         setLoadMoreListener();
 
     }
