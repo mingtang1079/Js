@@ -1,5 +1,7 @@
 package com.example.administrator.js.vipandtrainer;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -22,10 +24,13 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.DialogUtils;
+import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.course.member.YuyueCourseActivity;
+import com.example.administrator.js.login.LoginActivity;
 import com.example.administrator.js.me.model.UserDetail;
 import com.example.administrator.js.view.SquareLayout;
 import com.example.administrator.js.vipandtrainer.adapter.WorkDateAdapter;
@@ -131,7 +136,7 @@ public class TrainerDetailActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(RadioGroup mRadioGroup, int mI) {
 
-                mWorkDateAdapter.setNewData(mTrainerDetail.workdatelist.get(mI-1).timelist);
+                mWorkDateAdapter.setNewData(mTrainerDetail.workdatelist.get(mI - 1).timelist);
             }
         });
         toggleShowLoading(true);
@@ -226,7 +231,7 @@ public class TrainerDetailActivity extends BaseActivity {
                 if (mTextView != null) {
                     mTextView.setText(mWorkdate.weekindex);
                 }
-              //  final SquareLayout mSquareLayout = (SquareLayout) mLlDateTwo.getChildAt(i);
+                //  final SquareLayout mSquareLayout = (SquareLayout) mLlDateTwo.getChildAt(i);
                 TextView TextView1 = (TextView) mLlDateTwo.getChildAt(i);
                 if (TextView1 != null) {
                     TextView1.setText(mWorkdate.day);
@@ -260,13 +265,38 @@ public class TrainerDetailActivity extends BaseActivity {
                 break;
             case R.id.tv_yuyue:
 
-                start(YuyueCourseActivity.class);
+                DialogUtils.getDefaultDialog(mContext, "提示", "是否要预约体验课?", "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                        apply();
+
+                    }
+                }).show();
+
                 break;
             case R.id.tv_goumai:
                 break;
             case R.id.content:
                 break;
         }
+    }
+
+    private void apply() {
+        Http.getDefault().applyYuyueke(id, UserManager.getInsatance().getUser().id, "1")
+                .as(RxHelper.<String>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<String>(mContext) {
+                    @Override
+                    protected void onSucess(String mS) {
+                        showToast("成功预约体验课！");
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
+
     }
 
     private void handleUser(String mS) {

@@ -20,6 +20,7 @@ import com.example.administrator.js.login.RongYunToken;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.service.LocationService;
 import com.google.gson.JsonObject;
+import com.mic.adressselectorlib.CityHelper;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 
@@ -57,7 +58,7 @@ public class App extends BaseApplication {
         startService();
         //参数3:Push推送业务的secret，需要集成Push功能时必须传入Push的secret，否则传空。
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
-
+        CityHelper.getInsatance().getCities(this);//初始化
     }
 
     private void startService() {

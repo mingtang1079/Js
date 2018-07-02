@@ -288,4 +288,8 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/contact/teacherDetail")
     Observable<BaseModel<TrainerDetail>> teacherDetail(@Field("tid") String tid, @Field("uid") String uid);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/order/studentsave")
+    Observable<BaseModel<String>> applyYuyueke(@Field("tid") String tid, @Field("uid") String uid, @Field("tryflag") String tryflag);
 }

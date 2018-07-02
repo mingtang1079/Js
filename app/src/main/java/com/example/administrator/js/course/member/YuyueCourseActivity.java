@@ -7,7 +7,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.utils.AdressHelper;
 import com.example.administrator.js.R;
+import com.mic.adressselectorlib.City;
+import com.mic.adressselectorlib.OnItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +37,7 @@ public class YuyueCourseActivity extends BaseActivity {
     TextView mTvAddress;
     @BindView(R.id.ll_address)
     LinearLayout mLlAddress;
+    private String areacode;
 
 
     @Override
@@ -48,11 +52,12 @@ public class YuyueCourseActivity extends BaseActivity {
 
     @Override
     public Toolbar getToolbar() {
-        return null;
+        return mToolbar;
     }
 
     @Override
     protected void initView() {
+
 
     }
 
@@ -62,6 +67,16 @@ public class YuyueCourseActivity extends BaseActivity {
             case R.id.ll_time:
                 break;
             case R.id.ll_address:
+                AdressHelper.showAddressSelector(mContext, new OnItemClickListener() {
+                    @Override
+                    public void itemClick(City mProvice, City mCity, City mCounty) {
+                        mTvAddress.setText(mProvice.name + " " + mCity.name + " " + mCounty.name);
+
+                        areacode = mCounty.id;
+
+                    }
+                });
+
                 break;
         }
     }
