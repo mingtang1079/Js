@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
@@ -171,7 +172,6 @@ public class TrainerDetailActivity extends BaseActivity {
             ImageLoader.load(mContext, mTrainerDetail.userinfo.img, mIvHead);
             mTvName.setText(mTrainerDetail.userinfo.nickname);
             mTvShanchang.setText(mTrainerDetail.userinfo.skillname);
-            mTvDegree.setText(mTrainerDetail.userinfo.degree);
             mTvId.setText(mTrainerDetail.userinfo.no + "");
             //年龄
             if (mTrainerDetail.userinfo.age != null && mTrainerDetail.userinfo.sex != null) {
@@ -194,7 +194,9 @@ public class TrainerDetailActivity extends BaseActivity {
 
             }
             mTvArea.setText(mTrainerDetail.userinfo.address);
+            mTvArea.setText(mTrainerDetail.userinfo.address);
         }
+
         // 与我的关系          //是否接单tradestatus:0否1是, status:0没有关系,1已关注,2已拉黑
 
         if (mTrainerDetail.relation != null) {
@@ -232,9 +234,13 @@ public class TrainerDetailActivity extends BaseActivity {
                     mTextView.setText(mWorkdate.weekindex);
                 }
                 //  final SquareLayout mSquareLayout = (SquareLayout) mLlDateTwo.getChildAt(i);
-                TextView TextView1 = (TextView) mLlDateTwo.getChildAt(i);
-                if (TextView1 != null) {
-                    TextView1.setText(mWorkdate.day);
+                RadioButton mChildAt = (RadioButton) mLlDateTwo.getChildAt(i);
+                if (mChildAt != null) {
+                    mChildAt.setText(mWorkdate.day);
+                    if (i==0)
+                    {
+                        mChildAt.setChecked(true);
+                    }
                 }
 
             }
@@ -276,6 +282,11 @@ public class TrainerDetailActivity extends BaseActivity {
 
                 break;
             case R.id.tv_goumai:
+
+                ARouter.getInstance().build("/vipandtrainer/BuySiJiaoKeActivity")
+                        .withString("id",id)
+                        .navigation(mContext);
+
                 break;
             case R.id.content:
                 break;

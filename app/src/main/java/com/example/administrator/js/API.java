@@ -18,6 +18,8 @@ import com.example.administrator.js.me.model.UserDetail;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.VipSupply;
 import com.example.administrator.js.me.model.Zizhi;
+import com.example.administrator.js.vipandtrainer.adapter.BigCourse;
+import com.example.administrator.js.vipandtrainer.adapter.CourseType;
 import com.example.administrator.js.vipandtrainer.trainer.TrainerDetail;
 import com.google.gson.JsonObject;
 
@@ -292,4 +294,9 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/studentsave")
     Observable<BaseModel<String>> applyYuyueke(@Field("tid") String tid, @Field("uid") String uid, @Field("tryflag") String tryflag);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/order/getcourseinfo")
+    Observable<BaseModel<List<BigCourse>>> getcourseinfo(@Field("tid") String tid);
+
 }

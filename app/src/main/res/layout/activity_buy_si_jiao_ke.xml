@@ -316,6 +316,15 @@
                         android:text="优惠"
                         android:textColor="#4a576a"
                         android:textSize="14sp" />
+                    <TextView
+                        android:layout_marginLeft="8dp"
+                        android:id="@+id/tv_youhui_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="8dp"
+                        android:text="优惠说明XXXXX"
+                        android:textColor="#4a576a"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_youhui_price"
