@@ -6,16 +6,20 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.appbaselib.adapter.ObjectAdapter;
 import com.appbaselib.base.BaseRefreshActivity;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.BottomDialogUtils;
+import com.appbaselib.utils.JsonUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.SearchUserActivity;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.exercise.model.Skill;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
 
@@ -50,6 +54,9 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     String sex;
     String skillids;
 
+    List<Skill> mSkills = new ArrayList<>();
+
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_nearby_trainer;
@@ -58,6 +65,37 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     @Override
     protected void initView() {
         super.initView();
+
+
+        mSkills = JsonUtil.fromJsonList("[{\n" +
+                "id: \"a01\",\n" +
+                "name: \"增肌\"\n" +
+                "}, {\n" +
+                "id: \"a02\",\n" +
+                "name: \"减脂\"\n" +
+                "}, {\n" +
+                "id: \"a03\",\n" +
+                "name: \"塑形\"\n" +
+                "}, {\n" +
+                "id: \"b01\",\n" +
+                "name: \"功能性\"\n" +
+                "}, {\n" +
+                "id: \"b02\",\n" +
+                "name: \"康复\"\n" +
+                "}, {\n" +
+                "id: \"b03\",\n" +
+                "name: \"体态修正\"\n" +
+                "}, {\n" +
+                "id: \"b04\",\n" +
+                "name: \"拉伸\"\n" +
+                "}, {\n" +
+                "id: \"b05\",\n" +
+                "name: \"搏击\"\n" +
+                "}, {\n" +
+                "id: \"c01\",\n" +
+                "name: \"竞技健美\"\n" +
+                "}]", Skill.class);
+
         requestData();
     }
 
@@ -74,11 +112,19 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     @Override
     public void initAdapter() {
         mAdapter = new NearbyTrainerAdapter(R.layout.item_nearby_trainer, mList);
+        setLoadMoreListener();
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ARouter.getInstance().build("/vipandtrainer/TrainerDetailActivity")
+                        .withString("id", mList.get(position).id)
+                        .navigation(mContext);
+            }
+        });
     }
 
     @Override
     public void requestData() {
-
 
 
         Map<String, Object> mStringStringMap = new HashMap<>();
@@ -92,7 +138,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 //        if (!TextUtils.isEmpty(skillids)) {
 //            mStringStringMap.put("skillids", skillids);
 //        }
-        mStringStringMap.put("pageNo",pageNo);
+        mStringStringMap.put("pageNo", pageNo);
         Http.getDefault().seacrchUser(mStringStringMap)
                 .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<VipUser>>() {
@@ -110,7 +156,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     }
 
-    @OnClick({R.id.zonghe, R.id.juli, R.id.xiangmu, R.id.jiage, R.id.shaixuan,R.id.tv_search})
+    @OnClick({R.id.zonghe, R.id.juli, R.id.xiangmu, R.id.jiage, R.id.shaixuan, R.id.tv_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.zonghe:
@@ -131,7 +177,9 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
                 break;
             case R.id.xiangmu:
-                showXiangmu();
+                showType();
+
+                //       showXiangmu();
                 break;
             case R.id.jiage:
 
@@ -148,9 +196,35 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         }
     }
 
+
+    private void showType() {
+
+        final List<ObjectAdapter.Item> mItems = new ArrayList<>();
+        mItems.add(new Skill(null, "不限"));
+        mItems.addAll(mSkills);
+
+        BottomDialogUtils.showBottomDialog2(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                if (position == 0) {
+                    skillids = "";
+                    //   mType.setText("类型");
+                } else {
+                    skillids = ((Skill) mItems.get(position)).id;
+                    //    mType.setText(mItems.get(position).getValue());
+
+                }
+                refreshData(true);
+            }
+        }).show();
+
+    }
+
+
     private void showXiangShaixuan() {
         View mView = getLayoutInflater().inflate(R.layout.view_trainer_shaixuan, null, false);
-        BottomDialogUtils.showBottomDialog(mContext,mView);
+        BottomDialogUtils.showBottomDialog(mContext, mView);
 
     }
 
@@ -158,7 +232,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     private void showXiangmu() {
 
         View mView = getLayoutInflater().inflate(R.layout.view_trainer_xiangmu, null, false);
-        BottomDialogUtils.showBottomDialog(mContext,mView);
+        BottomDialogUtils.showBottomDialog(mContext, mView);
 
     }
 
