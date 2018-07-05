@@ -44,7 +44,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/btn_sixin"
+                        android:id="@+id/tv_yuyue"
                         style="@style/default_circle_solid_button_bg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:id="@+id/btn_guanzhu"
+                        android:id="@+id/tv_xuke"
                         style="@style/default_circle_button_bg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

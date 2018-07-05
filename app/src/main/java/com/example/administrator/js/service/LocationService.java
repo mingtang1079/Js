@@ -2,11 +2,7 @@ package com.example.administrator.js.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
@@ -17,8 +13,6 @@ import com.example.administrator.js.LocationManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static com.umeng.socialize.utils.DefaultClass.getMac;
 
 /**
  * Created by tangming on 2018/5/22.
@@ -92,6 +86,8 @@ public class LocationService extends Service {
             latitude = amapLocation.getLatitude();//获取纬度
             LocationManager.getInsatance().latitude = String.valueOf(latitude);
             LocationManager.getInsatance().longitude = String.valueOf(longitude);
+            LocationManager.getInsatance().cityCode =amapLocation.getCity();
+            LocationManager.getInsatance().city=amapLocation.getCity();
 
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = new Date(amapLocation.getTime());

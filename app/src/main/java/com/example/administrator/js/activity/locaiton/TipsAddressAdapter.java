@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by tangming on 2018/6/27.
  */
-
+@Deprecated
 public class TipsAddressAdapter extends BaseRecyclerViewAdapter<Tip> {
     public TipsAddressAdapter(int layoutResId, List<Tip> data) {
         super(layoutResId, data);

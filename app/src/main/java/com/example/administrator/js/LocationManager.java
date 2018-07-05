@@ -10,6 +10,8 @@ public class LocationManager {
 
     public String longitude;
     public String latitude;
+    public String cityCode;
+    public String city;
 
     private LocationManager() {
 

@@ -7,6 +7,8 @@ import com.example.administrator.js.R;
 
 import java.util.List;
 
+import io.reactivex.internal.operators.observable.ObservableSwitchIfEmpty;
+
 /**
  * Created by tangming on 2018/6/27.
  */
@@ -19,6 +21,12 @@ public class AddressAdapter extends BaseRecyclerViewAdapter<PoiItem> {
     @Override
     protected void convert(BaseViewHolder helper, PoiItem item) {
         helper.setText(R.id.tv_name, item.getTitle());
+        if (mSinglePosition == helper.getAdapterPosition()) {
+            helper.setVisible(R.id.image, true);
+        } else {
+            helper.setVisible(R.id.image, false);
+
+        }
         helper.setText(R.id.tv_detail, item.getCityName() + item.getAdName() + item.getSnippet());
     }
 }

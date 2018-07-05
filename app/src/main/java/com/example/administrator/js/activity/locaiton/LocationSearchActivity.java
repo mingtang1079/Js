@@ -2,8 +2,6 @@ package com.example.administrator.js.activity.locaiton;
 
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -12,23 +10,21 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.amap.api.maps2d.CameraUpdate;
-import com.amap.api.maps2d.CameraUpdateFactory;
-import com.amap.api.maps2d.model.BitmapDescriptorFactory;
-import com.amap.api.maps2d.model.LatLng;
-import com.amap.api.maps2d.model.MarkerOptions;
+import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
-import com.amap.api.services.help.Inputtips;
-import com.amap.api.services.help.InputtipsQuery;
-import com.amap.api.services.help.Tip;
+import com.amap.api.services.poisearch.PoiResult;
+import com.amap.api.services.poisearch.PoiSearch;
 import com.appbaselib.base.BaseActivity;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.administrator.js.LocationManager;
 import com.example.administrator.js.R;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.functions.Consumer;
 
 public class LocationSearchActivity extends BaseActivity {
 
@@ -37,11 +33,15 @@ public class LocationSearchActivity extends BaseActivity {
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
 
-    ArrayList<Tip> mTips = new ArrayList<>();
-    TipsAddressAdapter mAddressAdapter;
+    ArrayList<PoiItem> mPoiItems = new ArrayList<>();
+    AddressAdapter mAddressAdapter;
 
     protected SearchView mSearchView;
     protected SearchView.SearchAutoComplete mSearchAutoComplete;
+
+    private PoiSearch mPoiSearch;
+    private PoiSearch.Query mQuery;
+    private PoiSearch.OnPoiSearchListener mOnPoiSearchListener;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -71,50 +71,74 @@ public class LocationSearchActivity extends BaseActivity {
         mSearchAutoComplete = (SearchView.SearchAutoComplete) mSearchView.findViewById(R.id.search_src_text);
         mSearchAutoComplete.setTextSize(14);
         mSearchView.setQueryHint("请输入地址关键字");
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
 
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                    mTips.clear();
-                    mAddressAdapter.notifyDataSetChanged();
-                    return true;
-                } else {
-                    //第二个参数传入null或者“”代表在全国进行检索，否则按照传入的city进行检索
-                    InputtipsQuery inputquery = new InputtipsQuery(newText, "");
-                    inputquery.setCityLimit(true);//限制在当前城市
-                    Inputtips inputTips = new Inputtips(mContext, inputquery);
-                    inputTips.requestInputtipsAsyn();
-                    inputTips.setInputtipsListener(new Inputtips.InputtipsListener() {
-                        @Override
-                        public void onGetInputtips(List<Tip> list, int i) {
-                          mTips.clear();
-                          mTips.addAll(list);
-                          mAddressAdapter.notifyDataSetChanged();
+        RxTextView.textChanges(mSearchAutoComplete)
+                .skip(1)
+                .debounce(400, TimeUnit.MILLISECONDS)
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence mCharSequence) throws Exception {
+                        if (TextUtils.isEmpty(mCharSequence)) {
+                            mPoiItems.clear();
+                            mAddressAdapter.notifyDataSetChanged();
+                        } else {
+                            doSearchQuery(mCharSequence.toString(), LocationManager.getInsatance().city, new LatLonPoint(Double.valueOf(LocationManager.getInsatance().latitude), Double.valueOf(LocationManager.getInsatance().longitude)));
                         }
-                    });
+
+                    }
+                });
+
+        mOnPoiSearchListener = new PoiSearch.OnPoiSearchListener() {
+            @Override
+            public void onPoiSearched(PoiResult result, int i) {
+                if (i == 1000) {
+                    if (result != null && result.getQuery() != null) {// 搜索poi的结果
+                        if (result.getQuery().equals(mQuery)) {// 是否是同一条
+                            if (null != mPoiItems) {
+                                mPoiItems.clear();
+                            }
+                            mPoiItems.addAll(result.getPois());// 取得第一页的poiitem数据，页数从数字0开始
+                            mAddressAdapter.notifyDataSetChanged();
+                        }
+                    }
                 }
-                return false;
             }
-        });
+
+            @Override
+            public void onPoiItemSearched(PoiItem poiItem, int i) {
+
+            }
+        };
+    }
+
+    /**
+     * 开始进行poi搜索
+     */
+    protected void doSearchQuery(String keyWord, String city, LatLonPoint lpTemp) {
+        mQuery = new PoiSearch.Query(keyWord, "", city);//第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
+        mQuery.setPageSize(20);// 设置每页最多返回多少条poiitem
+        mQuery.setPageNum(0);// 设置查第一页
+
+
+        mPoiSearch = new PoiSearch(this, mQuery);
+        mPoiSearch.setOnPoiSearchListener(mOnPoiSearchListener);
+        if (lpTemp != null) {
+            mPoiSearch.setBound(new PoiSearch.SearchBound(lpTemp, 10000, true));//该范围的中心点-----半径，单位：米-----是否按照距离排序
+        }
+        mPoiSearch.searchPOIAsyn();// 异步搜索
     }
 
     @Override
     protected void initView() {
 
-        mAddressAdapter = new TipsAddressAdapter(R.layout.item_address_map, mTips);
+        mAddressAdapter = new AddressAdapter(R.layout.item_address_map, mPoiItems);
         mAddressAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-                Tip tip = mTips.get(position);
+                PoiItem tip = mPoiItems.get(position);
                 Intent intent = new Intent();
-                intent.putExtra("tip", tip);
+                intent.putExtra("PoiItem", tip);
                 setResult(1, intent);
                 finish();
 

@@ -38,7 +38,7 @@ public class MyOrderActivity extends BaseActivity {
 
     protected String[] getTabTitle() {
 
-        return new String[]{"全部", "待接单", "代付款", "已完成"};
+        return new String[]{"全部", "待接单", "待付款", "已完成", "退款中", "已退款"};
     }
 
     ;
@@ -47,9 +47,30 @@ public class MyOrderActivity extends BaseActivity {
 
         List<Fragment> m = new ArrayList<>();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 6; i++) {
+            String status = null;
+            switch (i) {
+                case 0:
+                    status = "all";
+                    break;
+                case 1:
+                    status = "b1";
+                    break;
+                case 2:
+                    status = "b2";
+                    break;
+                case 3:
+                    status = "b3";
+                    break;
+                case 4:
+                    status = "b55";
+                    break;
+                case 5:
+                    status = "b56";
+                    break;
+            }
             OrderFragment mFragment = (OrderFragment) ARouter.getInstance().build("/me/member/OrderFragment")
-                    .withString("type", i + "")
+                    .withString("status", status)
                     .navigation(mContext);
             m.add(mFragment);
         }
@@ -73,11 +94,11 @@ public class MyOrderActivity extends BaseActivity {
         mToolbar.setTitle("我的订单");
         mTab = (TabLayout) findViewById(R.id.tab);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
-
+        mViewpager.setOffscreenPageLimit(6);
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getFragments(), getTabTitle());
         mViewpager.setAdapter(mFragmentAdapter);
-        mTab.setTabMode(TabLayout.MODE_FIXED);
+        mTab.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTab.setupWithViewPager(mViewpager);
-        TablayoutUtils.setTabLine(mTab, 10, 10, mContext);
+  //      TablayoutUtils.setTabLine(mTab, 10, 10, mContext);
     }
 }

@@ -3,10 +3,12 @@ package com.example.administrator.js;
 import com.appbaselib.base.BaseModel;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.member.HistoryOrder;
+import com.example.administrator.js.course.member.YuyueInfo;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.example.administrator.js.exercise.model.VipUser;
+import com.example.administrator.js.me.member.MyOrder;
 import com.example.administrator.js.me.model.NewNeed;
 import com.example.administrator.js.me.model.Price;
 import com.example.administrator.js.me.model.RealUserInfo;
@@ -293,10 +295,30 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/studentsave")
-    Observable<BaseModel<String>> applyYuyueke(@Field("tid") String tid, @Field("uid") String uid, @Field("tryflag") String tryflag);
+    Observable<BaseModel<String>> applyYuyueke(@FieldMap Map<String, Object> mMap);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/getcourseinfo")
     Observable<BaseModel<List<BigCourse>>> getcourseinfo(@Field("tid") String tid);
 
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/order/studentsave")
+    Observable<BaseModel<String>> studentsave(@Field("tid") String tid, @Field("uid") String uid, @Field("ctype") String ctype,
+                                              @Field("coursetypeids") String coursetypeids, @Field("csum") String csum
+            , @Field("address") String address, @Field("clongtitude") String clongtitude, @Field("clatitude") String clatitude);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/subscribepage")
+    Observable<BaseModel<YuyueInfo>> getYuyuTime(@Field("uid") String uid, @Field("cardid") String cardid);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/subscribesave")
+    Observable<BaseModel<String>> saveYuekeCourse(@Field("uid") String uid, @Field("cardid") String cardid,
+                                                  @Field("startdate") String startdate, @Field("starttime") String starttime
+            , @Field("address") String address, @Field("latitude") String latitude, @Field("longtitude") String longtitude);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/order/list")
+    Observable<BaseModel<WrapperModel<MyOrder>>> getOrderlist(@Field("uid") String uid, @Field("status") String status, @Field("pageNo") String pageNo);
 }

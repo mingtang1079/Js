@@ -27,6 +27,7 @@
         tools:text="中国" />
 
     <ImageView
+        android:id="@+id/image"
         android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

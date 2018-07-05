@@ -6,8 +6,10 @@ package com.example.administrator.js.activity.locaiton;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.amap.api.location.AMapLocation;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.geocoder.GeocodeAddress;
 import com.amap.api.services.geocoder.GeocodeQuery;
 import com.amap.api.services.geocoder.GeocodeResult;
@@ -15,6 +17,7 @@ import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeAddress;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
+import com.amap.api.services.help.Tip;
 
 public class GeoCoderUtil implements GeocodeSearch.OnGeocodeSearchListener{
     private GeocodeSearch geocodeSearch;
@@ -57,7 +60,7 @@ public class GeoCoderUtil implements GeocodeSearch.OnGeocodeSearchListener{
 
         LatLonPoint latLonPoint = new LatLonPoint(latLngEntity.getLatitude(), latLngEntity.getLongitude());
         // 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
-        RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 200, GeocodeSearch.AMAP);
+        RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 1000, GeocodeSearch.AMAP);
         geocodeSearch.getFromLocationAsyn(query);// 设置异步逆地理编码请求
 
     }
@@ -126,6 +129,7 @@ public class GeoCoderUtil implements GeocodeSearch.OnGeocodeSearchListener{
 
     }
 
+
     public interface GeoCoderAddressListener {
         void onAddressResult(String result);
     }
@@ -134,6 +138,37 @@ public class GeoCoderUtil implements GeocodeSearch.OnGeocodeSearchListener{
         void onLatLngResult(LatLngEntity latLng);
     }
 
+    public static PoiItem changeToPoiItem(AMapLocation data) {
+        if (null != data) {
+            try {
+                String title = data.getDescription();
+                if (TextUtils.isEmpty(title)) {
+                    title = data.getPoiName();
+                }
+                if (TextUtils.isEmpty(title)) {
+                    title = data.getStreet();
+                }
+                if (TextUtils.isEmpty(title)) {
+                    title = "[位置]";
+                }
+
+                PoiItem poiItem = new PoiItem(data.getBuildingId(), new LatLonPoint(data.getLatitude(), data.getLongitude()), title, data.getAddress());
+
+                poiItem.setAdCode(data.getAdCode());
+                poiItem.setAdName(data.getDistrict());
+                poiItem.setBusinessArea(data.getStreet());
+                poiItem.setCityCode(data.getCityCode());
+                poiItem.setCityName(data.getCity());
+                poiItem.setProvinceName(data.getProvince());
+
+                return poiItem;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return null;
+            }
+        }
+        return null;
+    }
 
 
 }

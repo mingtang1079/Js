@@ -41,7 +41,9 @@ import com.example.administrator.js.vipandtrainer.trainer.Workdate;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -172,7 +174,7 @@ public class TrainerDetailActivity extends BaseActivity {
             ImageLoader.load(mContext, mTrainerDetail.userinfo.img, mIvHead);
             mTvName.setText(mTrainerDetail.userinfo.nickname);
             mTvShanchang.setText(mTrainerDetail.userinfo.skillname);
-            mTvId.setText(mTrainerDetail.userinfo.no + "");
+            mTvId.setText("ID"+mTrainerDetail.userinfo.no + "");
             //年龄
             if (mTrainerDetail.userinfo.age != null && mTrainerDetail.userinfo.sex != null) {
                 mTvAge.setText(mTrainerDetail.userinfo.age + "");
@@ -227,6 +229,8 @@ public class TrainerDetailActivity extends BaseActivity {
         if (mTrainerDetail.workdatelist != null && mTrainerDetail.workdatelist.size() != 0) {
             for (int i = 0; i < mTrainerDetail.workdatelist.size(); i++) {
 
+                if (i > 7)
+                    return;//虽然不应该大于7
                 Workdate mWorkdate = mTrainerDetail.workdatelist.get(i);
                 //添加日期
                 TextView mTextView = (TextView) mLlDateOne.getChildAt(i);
@@ -237,8 +241,7 @@ public class TrainerDetailActivity extends BaseActivity {
                 RadioButton mChildAt = (RadioButton) mLlDateTwo.getChildAt(i);
                 if (mChildAt != null) {
                     mChildAt.setText(mWorkdate.day);
-                    if (i==0)
-                    {
+                    if (i == 0) {
                         mChildAt.setChecked(true);
                     }
                 }
@@ -284,7 +287,7 @@ public class TrainerDetailActivity extends BaseActivity {
             case R.id.tv_goumai:
 
                 ARouter.getInstance().build("/vipandtrainer/BuySiJiaoKeActivity")
-                        .withString("id",id)
+                        .withString("id", id)
                         .navigation(mContext);
 
                 break;
@@ -294,7 +297,13 @@ public class TrainerDetailActivity extends BaseActivity {
     }
 
     private void apply() {
-        Http.getDefault().applyYuyueke(id, UserManager.getInsatance().getUser().id, "1")
+
+        Map<String,Object> mMap=new HashMap<>();
+        mMap.put("tid",id);
+        mMap.put("uid",UserManager.getInsatance().getUser().id);
+        mMap.put("tryflag","1");
+
+        Http.getDefault().applyYuyueke(mMap)
                 .as(RxHelper.<String>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override

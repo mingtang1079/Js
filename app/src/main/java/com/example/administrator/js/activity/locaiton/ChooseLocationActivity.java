@@ -1,12 +1,16 @@
 package com.example.administrator.js.activity.locaiton;
 
+import android.animation.ObjectAnimator;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +28,10 @@ import com.amap.api.maps2d.model.MarkerOptions;
 import com.amap.api.maps2d.model.MyLocationStyle;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
+import com.amap.api.services.geocoder.GeocodeResult;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeQuery;
+import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
@@ -55,7 +63,8 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
     MapView mMapView;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
-
+    @BindView(R.id.iv_center_location)
+    ImageView mImageViewCenter;
 
     MyLocationStyle myLocationStyle;
     //声明mlocationClient对象
@@ -70,9 +79,35 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
     private PoiSearch poiSearch;
     private double mCurrentLat;
     private double mCurrentLng;
+    private float zoom = 14;//地图缩放级别
 
     ArrayList<PoiItem> poiItemsList = new ArrayList<>();
+    private PoiItem userSelectPoiItem;
+
     AddressAdapter mAddressAdapter;
+
+    private ObjectAnimator mTransAnimator;//地图中心标志动态
+
+    MenuItem mMenuItem;
+
+    protected void initMenu() {
+        mToolbar.inflateMenu(R.menu.toolbar_menu_common);
+        mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
+        mMenuItem.setTitle("确定");
+        mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem mMenuItem) {
+
+
+                Intent intent = new Intent();
+                intent.putExtra("data", userSelectPoiItem);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+
+                return true;
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +127,7 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
         // 是否可触发定位并显示定位层
         aMap.setMyLocationEnabled(true);
         aMap.setOnCameraChangeListener(this); // 添加移动地图事件监听器
+        settings.setZoomControlsEnabled(false);//缩放按钮
         initMap();
     }
 
@@ -189,32 +225,60 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
     protected void initView() {
 
         mToolbar.setTitle("选择位置");
+        initMenu();
         mAddressAdapter = new AddressAdapter(R.layout.item_address_map, poiItemsList);
         mAddressAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 mAddressAdapter.setSingleChoosed(position);
-                PoiItem poiItem = poiItemsList.get(position);
+                userSelectPoiItem = mAddressAdapter.getData().get(position);
                 //设置图钉选项
-                MarkerOptions markerOptions = new MarkerOptions();
-//                options.icon(BitmapDescriptorFactory.defaultMarker());//默认图标
-                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_address)); //图标
-                markerOptions.position(new LatLng(poiItem.getLatLonPoint().getLatitude(), poiItem.getLatLonPoint().getLongitude())); //位置
-                markerOptions.title(poiItem.getProvinceName() + "" + poiItem.getCityName() + "" + poiItem.getAdName()); //标题
-                markerOptions.snippet(poiItem.getSnippet()); //子标题
-                markerOptions.period(60); //设置多少帧刷新一次图片资源
+//                MarkerOptions markerOptions = new MarkerOptions();
+////                options.icon(BitmapDescriptorFactory.defaultMarker());//默认图标
+//                markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_address)); //图标
+//                markerOptions.position(new LatLng(poiItem.getLatLonPoint().getLatitude(), poiItem.getLatLonPoint().getLongitude())); //位置
+//                markerOptions.title(poiItem.getProvinceName() + "" + poiItem.getCityName() + "" + poiItem.getAdName()); //标题
+//                markerOptions.snippet(poiItem.getSnippet()); //子标题
+//                markerOptions.period(60); //设置多少帧刷新一次图片资源
+//                aMap.addMarker(markerOptions);
+
                 aMap.clear();
-                CameraUpdate cu = CameraUpdateFactory.newLatLng(new LatLng(poiItem.getLatLonPoint().getLatitude(), poiItem.getLatLonPoint().getLongitude()));
+                CameraUpdate cu = CameraUpdateFactory.newLatLng(new LatLng(userSelectPoiItem.getLatLonPoint().getLatitude(), userSelectPoiItem.getLatLonPoint().getLongitude()));
                 aMap.animateCamera(cu);
-                aMap.addMarker(markerOptions);
-                aMap.moveCamera(CameraUpdateFactory.zoomTo(17));
+                aMap.moveCamera(CameraUpdateFactory.zoomTo(zoom));
             }
         });
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(mContext);
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerview.setLayoutManager(mLinearLayoutManager);
-
         mRecyclerview.setAdapter(mAddressAdapter);
+        mTransAnimator = ObjectAnimator.ofFloat(mImageViewCenter, "translationY", 0f, -80f, 0f);
+        mTransAnimator.setDuration(800);
+
+        //逆地址搜索监听器
+        mOnGeocodeSearchListener = new GeocodeSearch.OnGeocodeSearchListener() {
+            @Override
+            public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
+                if (i == 1000) {
+                    mAddressAdapter.setNewData(regeocodeResult.getRegeocodeAddress().getPois());
+                }
+
+            }
+
+            @Override
+            public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
+
+            }
+        };
+    }
+
+    /**
+     * 移动动画
+     */
+    private void startTransAnimator() {
+        if (null != mTransAnimator && !mTransAnimator.isRunning()) {
+            mTransAnimator.start();
+        }
     }
 
     @OnClick(R.id.et_search)
@@ -240,18 +304,7 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date date = new Date(amapLocation.getTime());
                 df.format(date);//定位时间
-                if (isFirstLoc) {
-                    //设置缩放级别
-                    aMap.moveCamera(CameraUpdateFactory.zoomBy(17));
-                    //将地图移动到定位点
-                    aMap.moveCamera(CameraUpdateFactory.changeLatLng(new LatLng(amapLocation.getLatitude(), amapLocation.getLongitude())));
-                    //点击定位按钮 能够将地图的中心移动到定位点
-                    mListener.onLocationChanged(amapLocation);
-                    //添加图钉
-                    aMap.addMarker(getMarkerOptions(amapLocation));
-                    searchPoi("", 2, "", true);
-                    isFirstLoc = false;
-                }
+                doWhenLocationSucess(amapLocation);
             }
         } else {
             //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
@@ -259,6 +312,15 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
                     + amapLocation.getErrorCode() + ", errInfo:"
                     + amapLocation.getErrorInfo());
         }
+    }
+
+    /**
+     * 当定位成功需要做的事情
+     */
+    private void doWhenLocationSucess(AMapLocation location) {
+        userSelectPoiItem = GeoCoderUtil.changeToPoiItem(location);
+       // searchPoi("", 1, userSelectPoiItem.getCityCode(), true);
+        aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(userSelectPoiItem.getLatLonPoint().getLatitude(), userSelectPoiItem.getLatLonPoint().getLongitude()), zoom));
     }
 
     //自定义一个图钉，并且设置图标，当我们点击图钉时，显示设置的信息
@@ -286,15 +348,8 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
 
     @Override
     public void onPoiSearched(PoiResult mPoiResult, int mI) {
-        //填充数据，并更新listview
         poiItemsList = mPoiResult.getPois();
         mAddressAdapter.setNewData(poiItemsList);
-
-        for (PoiItem item : mPoiResult.getPois()) {
-            Log.e("aaa", item.toString());
-            Log.e("aaa", item.getDirection());
-            Log.e("aaa", item.getAdName());
-        }
     }
 
     @Override
@@ -305,9 +360,10 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 20 && resultCode == 1) {
-            Tip tip = data.getParcelableExtra("tip");
-            searchPoi(tip.getName(), 0, "", true);
+        if (requestCode == 20 && resultCode == Activity.RESULT_OK) {
+            userSelectPoiItem = data.getParcelableExtra("PoiItem");
+            aMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(userSelectPoiItem.getLatLonPoint().getLatitude(), userSelectPoiItem.getLatLonPoint().getLongitude()), zoom));
+            searchPoi("", 0, userSelectPoiItem.getCityCode(), true);
         }
     }
 
@@ -319,13 +375,30 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
     @Override
     public void onCameraChangeFinish(final CameraPosition cameraPosition) {
         LatLngEntity latLngEntity = new LatLngEntity(cameraPosition.target.latitude, cameraPosition.target.longitude);
-        //地理反编码工具类，代码在后面
-        GeoCoderUtil.getInstance(mContext).geoAddress(latLngEntity, new GeoCoderUtil.GeoCoderAddressListener() {
-            @Override
-            public void onAddressResult(String result) {
-                searchPoi(result, 0, "", true);
+        getAddressInfoByLatLong(cameraPosition.target.latitude, cameraPosition.target.longitude);
 
-            }
-        });
+        startTransAnimator();
+
     }
+
+    private GeocodeSearch.OnGeocodeSearchListener mOnGeocodeSearchListener;
+
+    /**
+     * 通过经纬度获取当前地址详细信息，逆地址编码
+     *
+     * @param latitude
+     * @param longitude
+     */
+    private void getAddressInfoByLatLong(double latitude, double longitude) {
+        GeocodeSearch geocodeSearch = new GeocodeSearch(this);
+        /*
+        point - 要进行逆地理编码的地理坐标点。
+        radius - 查找范围。默认值为1000，取值范围1-3000，单位米。
+        latLonType - 输入参数坐标类型。包含GPS坐标和高德坐标。 可以参考RegeocodeQuery.setLatLonType(String)
+        */
+        RegeocodeQuery query = new RegeocodeQuery(new LatLonPoint(latitude, longitude), 3000, GeocodeSearch.AMAP);
+        geocodeSearch.getFromLocationAsyn(query);
+        geocodeSearch.setOnGeocodeSearchListener(mOnGeocodeSearchListener);
+    }
+
 }

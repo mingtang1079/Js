@@ -8,8 +8,11 @@ import java.util.List;
  */
 
 public class HistoryOrder implements Serializable {
-
     /**
+     * "no":"001",//教练ID
+     * "img":"http://39.104.67.37/rImage.png",//头像
+     * "sex":"2",//性别1时是男性，值为2时是女性
+     * "nickname":"教练昵称",//教练昵称
      * "updateDate":"2018-06-14 15:39:48",
      * "coursetypeids":"b01",
      * "coursetypenames":"塑形",
@@ -25,20 +28,43 @@ public class HistoryOrder implements Serializable {
      * "createDate":"2018-06-14 15:39:44",
      * "status":"0",
      */
+
+    public String no;
+
+    public String img;
+
+    public String sex;
+
+    public String nickname;
+
     public String updateDate;
+
     public String coursetypeids;
+
     public String coursetypenames;
-    public String csum;
-    public String cuse;
-    public String isNewRecord;
+
+    public int csum;
+
+    public int cuse;
+
+    public boolean isNewRecord;
+
     public String tid;
+
     public String uid;
+
     public String tryflag;
+
     public String ctype;
+
     public String ctypename;
+
     public String id;
+
     public String createDate;
+
     public String status;
+
     public List<OrderList> orderlist;
 
 

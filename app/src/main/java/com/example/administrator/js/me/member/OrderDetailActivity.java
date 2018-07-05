@@ -8,7 +8,9 @@ import android.view.View;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 
 @Route(path = "/me/member/OrderDetailActivity")
 public class OrderDetailActivity extends BaseActivity {

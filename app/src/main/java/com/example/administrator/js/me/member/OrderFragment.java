@@ -1,18 +1,34 @@
 package com.example.administrator.js.me.member;
 
+import android.content.DialogInterface;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseRefreshFragment;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.DialogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
+import com.example.administrator.js.base.model.WrapperModel;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by tangming on 2018/6/26.
  */
 @Route(path = "/me/member/OrderFragment")
 public class OrderFragment extends BaseRefreshFragment<MyOrder> {
+
+
+    @Autowired
+    String status;//状态a1提交b2已通过未付款b3完成付款,b4不通过,b55退款中,b56退款成功
 
     @Override
     protected void initView() {
@@ -34,11 +50,76 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
 
             }
         });
+
+        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, final int position) {
+                if (view.getId()==R.id.tv_cancel)
+                {
+                    DialogUtils.getDefaultDialog(mContext, "提示", "确定取消该订单吗？", "确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                            cancel(position);
+
+
+                        }
+                    }).show();
+                }
+                else  if (view.getId()==R.id.tv_delete)
+                {
+
+                }
+                else  if (view.getId()==R.id.tv_pay)
+                {
+
+                }
+                else if (view.getId()==R.id.tv_tuikuan){
+
+                }
+            }
+        });
+    }
+
+    private void cancel(final int mPosition) {
+
+        Map<String,Object> mMap=new HashMap<>();
+        mMap.put("uid",UserManager.getInsatance().getUser().id);
+        mMap.put("id",mList.get(mPosition).id);
+        mMap.put("status","c70");
+
+        Http.getDefault().applyYuyueke(mMap)
+                .as(RxHelper.<String>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<String>(mContext) {
+                    @Override
+                    protected void onSucess(String mS) {
+                       mAdapter.remove(mPosition);
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
+
     }
 
     @Override
     public void requestData() {
 
+        Http.getDefault().getOrderlist(UserManager.getInsatance().getUser().id, status, String.valueOf(pageNo))
+                .as(RxHelper.<WrapperModel<MyOrder>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<WrapperModel<MyOrder>>() {
+                    @Override
+                    protected void onSucess(WrapperModel<MyOrder> mMyOrders) {
+                        loadComplete(mMyOrders.list);
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        loadError(message);
+                    }
+                });
 
     }
 }

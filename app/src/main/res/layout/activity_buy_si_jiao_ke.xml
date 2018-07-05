@@ -123,6 +123,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="left"
+                android:visibility="gone"
                 android:paddingLeft="80dp"
                 android:textColor="#fd506d"
                 android:textSize="14sp"
@@ -196,7 +197,7 @@
                         android:drawableRight="@drawable/icon_right"
                         android:gravity="right"
                         android:hint="请选择"
-                        android:textColor="#bcc8da"
+                        android:textColor="@color/colorAccent"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -281,7 +282,7 @@
                             android:paddingLeft="8dp"
                             android:paddingRight="8dp"
                             android:paddingTop="4dp"
-                            android:text="12"
+                            android:text="1"
                             android:textSize="14sp" />
 
                         <TextView
@@ -304,6 +305,7 @@
                     android:background="#f9fafa" />
 
                 <LinearLayout
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -322,7 +324,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
-                        android:text="优惠说明XXXXX"
+                        tools:text="优惠说明XXXXX"
                         android:textColor="#4a576a"
                         android:textSize="12sp" />
 

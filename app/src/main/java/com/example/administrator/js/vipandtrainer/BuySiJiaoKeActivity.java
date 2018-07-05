@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.amap.api.services.core.PoiItem;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
@@ -27,11 +28,14 @@ import com.appbaselib.rx.RxHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.ChooseLocationActivity;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.utils.StringUtils;
 import com.example.administrator.js.vipandtrainer.adapter.BigCourse;
 import com.example.administrator.js.vipandtrainer.adapter.CourseType;
 import com.example.administrator.js.vipandtrainer.adapter.CourseTypeAdapter;
+import com.example.administrator.js.vipandtrainer.trainer.ApplySuccessActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +97,11 @@ public class BuySiJiaoKeActivity extends BaseActivity {
     CourseTypeAdapter mCourseTypeAdapterBig;
     CourseTypeAdapter mCourseTypeAdapterSmall;
 
-    int youhuiType;
+    BigCourse mBigCourse;//选中的大课
+    private String bigType;
+    private String address;
+    private String lon;
+    private String lat;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -124,15 +132,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-                mCourseTypeAdapterBig.setSingleChoosed(position);
-                mTvCourseName.setText(mBigCourses.get(position).name);
-                mTextViewYouhiuInfo.setText("(" + mBigCourses.get(position).onsalelabel + ")");
-                mTvPrice.setText("￥ " + mBigCourses.get(position).price);
-                youhuiType = Integer.parseInt(mBigCourses.get(position).onsaletype);
-                BigCourse mCourseType = (BigCourse) mCourseTypeAdapterBig.getData().get(position);
-                if (mCourseType.list != null) {
-                    mCourseTypeAdapterSmall.setNewData2(mCourseType.list);
-                }
+                initSmallCourse(position);
 
             }
         });
@@ -174,6 +174,19 @@ public class BuySiJiaoKeActivity extends BaseActivity {
         requestData();
     }
 
+    private void initSmallCourse(int position) {
+        mCourseTypeAdapterBig.setSingleChoosed(position);
+        mTvCourseName.setText(mBigCourses.get(position).name);
+        mTextViewYouhiuInfo.setText("(" + mBigCourses.get(position).onsalelabel + ")");
+        mBigCourse = mBigCourses.get(position);
+        mTvPrice.setText("￥ " + mBigCourses.get(position).price);
+        caculatePrice(1);
+        BigCourse mCourseType = (BigCourse) mCourseTypeAdapterBig.getData().get(position);
+        if (mCourseType.list != null) {
+            mCourseTypeAdapterSmall.setNewData2(mCourseType.list);
+        }
+    }
+
     List<BigCourse> mBigCourses;
 
     @Override
@@ -203,6 +216,13 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                         if (mCourseTypes != null) {
                             mBigCourses = mCourseTypes;
                             mCourseTypeAdapterBig.setNewData2(mCourseTypes);
+                            //默认选中第一个
+                            if (mCourseTypes.size()>0)
+                            {
+                                mCourseTypeAdapterBig.setSingleChoosed(0);
+                                initSmallCourse(0);
+
+                            }
                         }
                         toggleShowLoading(false);
 
@@ -262,10 +282,14 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                 int m = Integer.parseInt(mEtCount.getText().toString());
                 if (m > 1) {
                     mEtCount.setText(m - 1 + "");
+                    caculatePrice(m - 1);
+
                 } else {
                     mEtCount.setText("1");
+                    caculatePrice(1);
 
                 }
+
                 break;
             case R.id.tv_add:
 
@@ -273,21 +297,94 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                 mEtCount.setText(m2 + 1 + "");
                 //计算价格
 
-
+                caculatePrice(m2 + 1);
 
                 break;
             case R.id.btn_sure:
+
+                apply();
                 break;
         }
+    }
+
+    private void apply() {
+
+        List<String> mStrings = new ArrayList<>();
+        for (CourseType mSmallCourse : mCourseTypeAdapterSmall.getSelectedItems()) {
+            mStrings.add(((BigCourse.SmallCourse) mSmallCourse).id);
+        }
+        String mS = StringUtils.listToString(mStrings);
+
+        Http.getDefault().studentsave(id, UserManager.getInsatance().getUser().id, mBigCourse.id, mS, mEtCount.getText().toString(), address, lon, lat)
+                .as(RxHelper.<String>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<String>(mContext) {
+                    @Override
+                    protected void onSucess(String mS) {
+
+                        start(ApplySuccessActivity.class);
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
+
+
+    }
+
+    private void caculatePrice(int mI) {
+
+        double totalPrice = Integer.valueOf(mBigCourse.price) * mI;
+
+        if ("1".equals(mBigCourse.onsaletype)) {
+            totalPrice = totalPrice * Double.valueOf(mBigCourse.onsaledata);
+            //打折
+
+        } else if ("2".equals(mBigCourse.onsaletype)) {
+            //满减
+            if (mBigCourse.onsaledataforapp != null) {
+                for (int i = 0; i < mBigCourse.onsaledataforapp.size(); i++) {
+                    if (i < mBigCourse.onsaledataforapp.size() - 1) {
+                        //对比两个
+                        BigCourse.OnsaledataforappBean m = mBigCourse.onsaledataforapp.get(i);
+                        BigCourse.OnsaledataforappBean m2 = mBigCourse.onsaledataforapp.get(i + 1);
+                        int money = m.total;
+                        int money2 = m2.total;
+                        if ((money > totalPrice && totalPrice > money2) || totalPrice > money) {
+                            totalPrice = totalPrice - m.money;
+                            break;
+                        }
+                    } else {
+                        //只跟最后一个对比
+                        BigCourse.OnsaledataforappBean m = mBigCourse.onsaledataforapp.get(i);
+                        int money = m.total;
+                        if (totalPrice > money) {
+                            totalPrice = totalPrice - m.money;
+                        }
+                    }
+                }
+            }
+
+        } else {
+            //无优惠
+        }
+        mTvAllPrice.setText("￥ " + totalPrice);
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 20 && resultCode == Activity.RESULT_OK) {
-            //设置经纬度
-
-
+            //经纬度
+            if (data != null) {
+                PoiItem mPoiItem = (PoiItem) data.getParcelableExtra("data");
+                lon = String.valueOf(mPoiItem.getLatLonPoint().getLongitude());
+                lat = String.valueOf(mPoiItem.getLatLonPoint().getLatitude());
+                address = mPoiItem.getSnippet() + mPoiItem.getTitle();
+                mTvAddress.setText(address);
+            }
         }
 
     }

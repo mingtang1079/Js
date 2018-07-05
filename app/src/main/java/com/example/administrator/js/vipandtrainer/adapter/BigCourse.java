@@ -52,7 +52,7 @@ public class BigCourse implements Serializable, CourseType {
     public String id;
     public String createDate;
     public String status;
-  //  public List<OnsaledataforappBean> onsaledataforapp;
+    public List<OnsaledataforappBean> onsaledataforapp;
     public List<SmallCourse> list;
 
     @Override

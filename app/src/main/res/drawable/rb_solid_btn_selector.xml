@@ -2,6 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/rb_solid_pressed_bg" android:state_selected="true"></item>
     <item android:drawable="@drawable/rb_solid_pressed_bg" android:state_pressed="true"></item>
+    <item android:drawable="@drawable/rb_enable_bg" android:state_enabled="false"></item>
 
     <item android:drawable="@drawable/rb_normal_bg" android:state_selected="false"></item>
 </selector>

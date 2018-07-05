@@ -243,7 +243,9 @@
         <activity android:name=".me.member.TuikeDetailActivity" />
         <activity android:name=".activity.locaiton.ChooseLocationActivity" />
         <activity android:name=".activity.locaiton.LocationSearchActivity" />
-        <activity android:name=".me.member.AddBodyDataActivity"></activity>
+        <activity android:name=".me.member.AddBodyDataActivity" />
+        <activity android:name=".vipandtrainer.trainer.ApplySuccessActivity" />
+        <activity android:name=".course.member.ChooseYuyueTimeActivity"></activity>
     </application>
 
 </manifest>
