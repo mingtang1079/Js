@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:background="@color/white_color"
-    android:orientation="vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:background="@color/white_color"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_weight="1"
             android:textColor="#ff8996aa"
             android:textSize="12sp"
-            tools:text="订单号：5019482455" />
+            tools:text="订单号：5019482455"/>
 
         <TextView
             android:id="@+id/tv_status"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="待接单"
             android:textColor="#fffecd01"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,7 +43,7 @@
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FF4A576A"
                     android:textSize="16sp"
-                    tools:text="Mo" />
+                    tools:text="Mo"/>
 
                 <TextView
                     android:id="@+id/tv_age"
@@ -78,17 +78,17 @@
                     android:paddingRight="4dp"
                     android:textColor="@color/white_color"
                     android:textSize="11sp"
-                    tools:text="22" />
+                    tools:text="22"/>
 
                 <TextView
-                    android:gravity="right"
                     android:id="@+id/tv_danjia"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="right"
                     android:text="￥159.00"
                     android:textColor="#ff4a576a"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -106,7 +106,7 @@
                     android:layout_weight="1"
                     android:textColor="#FF8996AA"
                     android:textSize="13sp"
-                    tools:text="ID:235343" />
+                    tools:text="ID:235343"/>
 
             </LinearLayout>
 
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ff4a576a"
                     android:textSize="14sp"
-                    tools:text="常规课(增肌  减脂  脂塑形)" />
+                    tools:text="常规课(增肌  减脂  脂塑形)"/>
 
                 <TextView
                     android:id="@+id/tv_count"
@@ -134,7 +134,7 @@
                     android:gravity="right"
                     android:textColor="#ff8996aa"
                     android:textSize="13sp"
-                    tools:text="x1" />
+                    tools:text="x1"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -148,7 +148,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:background="#f5f5f5" />
+        android:background="#f5f5f5"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:textColor="#ff4a576a"
             android:textSize="14sp"
-            tools:text="共1节课  合计" />
+            tools:text="共1节课  合计"/>
 
         <TextView
             android:id="@+id/tv_all_price"
@@ -171,7 +171,7 @@
             android:text="￥ 123.21"
             android:textColor="#FD516E"
             android:textSize="14sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
     </LinearLayout>
 
 
@@ -188,15 +188,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text="取消订单" />
+            android:text="取消订单"/>
 
         <TextView
-            android:id="@+id/tv_delete"
+            android:id="@+id/tv_quxiao_tuikuan"
             style="@style/default_circle_button_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text="删除" />
+            android:text="取消退款"
+            android:visibility="visible"/>
 
         <TextView
             android:id="@+id/tv_pay"
@@ -204,7 +205,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text="付款" />
+            android:text="付款"/>
 
         <TextView
             android:id="@+id/tv_tuikuan"
@@ -212,7 +213,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:text="退款" />
+            android:text="退款"/>
 
     </com.google.android.flexbox.FlexboxLayout>
 

@@ -69,4 +69,12 @@ public class MyOrder implements Serializable {
     public String distance;//距离
 
     public String no;
+    public String address;
+    public String createDate;
+    public String paydate;
+
+    public String tuikePrice;//b本地的
+    public String refundtype;
+    public String refunddetail;
+    public String tuikeTime;
 }

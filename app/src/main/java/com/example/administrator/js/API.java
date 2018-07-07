@@ -321,4 +321,13 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/list")
     Observable<BaseModel<WrapperModel<MyOrder>>> getOrderlist(@Field("uid") String uid, @Field("status") String status, @Field("pageNo") String pageNo);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/order/detail")
+    Observable<BaseModel<MyOrder>> getOrderDetail(@Field("uid") String uid, @Field("id") String id);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/order/gettuikereasons")
+    Observable<BaseModel<List<String>>> gettuikereasons(@Field("uid") String uid);
 }

@@ -34,4 +34,8 @@ public class EventMessage {
 
     public static class VerifyChangedMessage extends EventMessage {
     }
+
+    public static  class  ListStatusChange extends EventMessage{
+
+    }
 }

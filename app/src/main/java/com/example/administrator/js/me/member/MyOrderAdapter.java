@@ -2,6 +2,7 @@ package com.example.administrator.js.me.member;
 
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
 
 import com.appbaselib.base.BaseRecyclerViewAdapter;
@@ -57,30 +58,63 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         }
 
         //单价
-        helper.setText(R.id.tv_danjia, item.cprice + "");
+        helper.setText(R.id.tv_danjia, "￥ " + item.cprice / 100 + "");
         helper.setText(R.id.tv_course_count, "共" + item.csum + "节课  合计");
         helper.setText(R.id.tv_course_type, item.ctypename + "(" + item.coursetypenames + ")");
         helper.setText(R.id.tv_count, "x" + item.csum);
-        helper.setText(R.id.tv_all_price, "￥ " + item.crealprice + "");
+        helper.setText(R.id.tv_all_price, "￥ " + item.crealprice / 100 + "");
 
-        if ("b1".equals(item.status)) {
+        TextView mTextViewCancel = helper.getView(R.id.tv_cancel);
+        TextView mTextViewPay = helper.getView(R.id.tv_pay);
+        TextView mTextViewTuikuan = helper.getView(R.id.tv_tuikuan);
+        TextView mTextViewQuxiaoTuikuan = helper.getView(R.id.tv_quxiao_tuikuan);
+
+
+        if ("a1".equals(item.status)) {
             helper.setText(R.id.tv_status, "待接单");
+            mTextViewCancel.setVisibility(View.VISIBLE);
+            mTextViewPay.setVisibility(View.GONE);
+            mTextViewTuikuan.setVisibility(View.GONE);
+            mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
         } else if ("b2".equals(item.status)) {
             helper.setText(R.id.tv_status, "待付款");
+            mTextViewCancel.setVisibility(View.VISIBLE);
+            mTextViewPay.setVisibility(View.GONE);
+            mTextViewTuikuan.setVisibility(View.GONE);
+            mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
+
 
         } else if ("b3".equals(item.status)) {
             helper.setText(R.id.tv_status, "已完成");
+            mTextViewCancel.setVisibility(View.GONE);
+            mTextViewPay.setVisibility(View.GONE);
+            mTextViewTuikuan.setVisibility(View.VISIBLE);
+            mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
+
 
         } else if ("b55".equals(item.status)) {
             helper.setText(R.id.tv_status, "退款中");
+            mTextViewCancel.setVisibility(View.GONE);
+            mTextViewPay.setVisibility(View.GONE);
+            mTextViewTuikuan.setVisibility(View.GONE);
+            mTextViewQuxiaoTuikuan.setVisibility(View.VISIBLE);
+
 
         } else if ("b56".equals(item.status)) {
             helper.setText(R.id.tv_status, "已退款");
-
+            mTextViewCancel.setVisibility(View.GONE);
+            mTextViewPay.setVisibility(View.GONE);
+            mTextViewTuikuan.setVisibility(View.GONE);
+            mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
+        } else {
+            mTextViewCancel.setVisibility(View.GONE);
+            mTextViewPay.setVisibility(View.GONE);
+            mTextViewTuikuan.setVisibility(View.GONE);
+            mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
         }
 
         helper.addOnClickListener(R.id.tv_cancel);
-        helper.addOnClickListener(R.id.tv_delete);
+        helper.addOnClickListener(R.id.tv_quxiao_tuikuan);
         helper.addOnClickListener(R.id.tv_pay);
         helper.addOnClickListener(R.id.tv_tuikuan);
 

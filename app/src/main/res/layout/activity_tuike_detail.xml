@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white_color"
-    android:orientation="vertical"
-    tools:context="com.example.administrator.js.me.member.TuikeDetailActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white_color"
+              android:orientation="vertical"
+              tools:context="com.example.administrator.js.me.member.TuikeDetailActivity">
 
 
-    <include layout="@layout/include_toolbar" />
+    <include layout="@layout/include_toolbar"/>
 
 
     <android.support.v4.widget.NestedScrollView
@@ -30,7 +30,7 @@
                 android:gravity="center"
                 android:padding="12dp"
                 android:text="申请提交成功"
-                android:textColor="@color/white_color" />
+                android:textColor="@color/white_color"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,24 +45,24 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="实付款"
+                    android:text="退款金额"
                     android:textColor="#ff4a576a"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <TextView
-                    android:id="@+id/tv_shiji_price"
+                    android:id="@+id/tv_tuikuan_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￥ 123.21"
                     android:textColor="#FD516E"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:background="@color/default_bg" />
+                android:background="@color/default_bg"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -77,7 +77,7 @@
                     android:layout_height="48dp"
                     android:layout_marginBottom="16dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp" />
+                    android:layout_marginRight="16dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -98,15 +98,31 @@
                             android:layout_weight="1"
                             android:textColor="#FF4A576A"
                             android:textSize="16sp"
-                            tools:text="Mo" />
+                            tools:text="Mo"/>
+
+                        <TextView
+                            android:id="@+id/tv_age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:background="@drawable/com_round_corner_solid_women"
+                            android:drawableLeft="@drawable/icon_women"
+                            android:drawablePadding="4dp"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            android:textColor="@color/white_color"
+                            android:textSize="11sp"
+                            tools:text="22"/>
 
                         <TextView
                             android:id="@+id/tv_id"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
                             android:textColor="#FF8996AA"
                             android:textSize="13sp"
-                            tools:text="ID:235343" />
+                            tools:text="ID:235343"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -127,7 +143,7 @@
                         android:layout_marginTop="12dp"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp"
-                        tools:text="常规课(增肌  减脂  脂塑形)" />
+                        tools:text="常规课(增肌  减脂  脂塑形)"/>
 
 
                 </LinearLayout>
@@ -139,7 +155,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_margin="16dp"
-                android:background="#f5f5f5" />
+                android:background="#f5f5f5"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ff8996aa"
                     android:textSize="13sp"
-                    tools:text="退课原因：地点变更/太远了" />
+                    tools:text="退课原因：地点变更/太远了"/>
 
 
             </LinearLayout>
@@ -175,7 +191,7 @@
                     android:layout_height="wrap_content"
                     android:text="申请时间：2018-5-21 21:43"
                     android:textColor="#ff8996aa"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
 
 
             </LinearLayout>
@@ -192,9 +208,9 @@
                     android:id="@+id/tv_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="内容退款编号：47924158719891"
+                    android:text="订单号：47924158719891"
                     android:textColor="#ff8996aa"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"/>
 
 
             </LinearLayout>
@@ -205,7 +221,7 @@
                 android:padding="16dp"
                 android:text="退款流程"
                 android:textColor="#ff4a576a"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
             <View
                 android:layout_width="match_parent"
@@ -213,7 +229,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
-                android:background="#f5f5f5" />
+                android:background="#f5f5f5"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -239,12 +255,12 @@
                             android:background="@drawable/circle_calender"
                             android:gravity="center"
                             android:text="1"
-                            android:textColor="@color/white_color" />
+                            android:textColor="@color/white_color"/>
 
                         <View
                             android:layout_width="1dp"
                             android:layout_height="40dp"
-                            android:background="#f5f5f5" />
+                            android:background="#f5f5f5"/>
 
                     </LinearLayout>
 
@@ -260,7 +276,7 @@
                             android:text="申请已提交"
                             android:textColor="#ff4a576a"
                             android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -268,7 +284,7 @@
                             android:layout_marginTop="8dp"
                             android:text="您的退课申请已提交，请耐心等待工作人员的审核"
                             android:textColor="#ff8996aa"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -292,12 +308,12 @@
                             android:background="@drawable/circle_calender"
                             android:gravity="center"
                             android:text="2"
-                            android:textColor="@color/white_color" />
+                            android:textColor="@color/white_color"/>
 
                         <View
                             android:layout_width="1dp"
                             android:layout_height="60dp"
-                            android:background="#f5f5f5" />
+                            android:background="#f5f5f5"/>
 
                     </LinearLayout>
 
@@ -313,7 +329,7 @@
                             android:text="退款中"
                             android:textColor="#ff4a576a"
                             android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -322,7 +338,7 @@
                             android:lineSpacingExtra="4dp"
                             android:text="您的退课申请正在等待教练通过，如果3天之后教练未处理我们将自动把钱退给您"
                             android:textColor="#ff8996aa"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -342,15 +358,15 @@
                             android:id="@+id/tv_step_three"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:background="@drawable/circle_calender"
+                            android:background="@drawable/circle_gray"
                             android:gravity="center"
                             android:text="3"
-                            android:textColor="@color/white_color" />
+                            android:textColor="@color/white_color"/>
 
                         <View
                             android:layout_width="1dp"
                             android:layout_height="40dp"
-                            android:background="#f5f5f5" />
+                            android:background="#f5f5f5"/>
 
                     </LinearLayout>
 
@@ -366,7 +382,7 @@
                             android:text="退款成功"
                             android:textColor="#ff4a576a"
                             android:textSize="14sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"/>
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -374,7 +390,7 @@
                             android:layout_marginTop="8dp"
                             android:text="您的退课由已转入到您的银行账户，请耐心等待。"
                             android:textColor="#ff8996aa"
-                            android:textSize="12sp" />
+                            android:textSize="12sp"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -387,7 +403,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_margin="16dp"
-                android:background="#f5f5f5" />
+                android:background="#f5f5f5"/>
 
         </LinearLayout>
 
