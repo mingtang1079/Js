@@ -41,6 +41,7 @@
             android:layout_weight="2">
 
             <TextView
+                android:background="@color/white"
                 android:id="@+id/tv_record"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

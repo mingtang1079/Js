@@ -252,20 +252,6 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
     public void handleDecode(String result, Bundle bundle) {
 
         BarcodeModel mBarcodeModel = JsonUtil.fromJson(result, BarcodeModel.class);
-
-
-//        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("学生姓名");
-//        builder.setMessage(getName(result) + " 签到成功");
-//
-//        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                handler.restartPreviewAndDecode();
-//            }
-//        });
-//        builder.show();
-
         if (mBarcodeModel != null) {
             ARouter.getInstance().build("/vip/VipUserDetailActivity")
                     .withString("id", mBarcodeModel.id)

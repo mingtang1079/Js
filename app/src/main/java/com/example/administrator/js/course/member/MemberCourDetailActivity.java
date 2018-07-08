@@ -1,11 +1,9 @@
-package com.example.administrator.js.course;
+package com.example.administrator.js.course.member;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -21,7 +19,6 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
@@ -30,8 +27,8 @@ import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.BottomDialogUtils;
+import com.appbaselib.utils.DialogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
@@ -45,7 +42,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.functions.Consumer;
@@ -53,8 +49,8 @@ import io.rong.imkit.RongIM;
 
 import static com.appbaselib.utils.PackageUtil.isAvilible;
 
-@Route(path = "/course/CourDetailActivity")
-public class CourDetailActivity extends BaseActivity {
+@Route(path = "/course/MemberCourDetailActivity")
+public class MemberCourDetailActivity extends BaseActivity {
 
     @Autowired
     String id;
@@ -81,8 +77,8 @@ public class CourDetailActivity extends BaseActivity {
     MapView mMapView;
     @BindView(R.id.tv_dazhaohu)
     TextView mTvDazhaohu;
-    @BindView(R.id.tv_yuyue)
-    TextView mTvYuyue;
+    @BindView(R.id.tv_shangke)
+    TextView mTvShangke;
 
     CourseDetail mCourseDetail;
     double lat;
@@ -93,7 +89,7 @@ public class CourDetailActivity extends BaseActivity {
 
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_cour_detail;
+        return R.layout.activity_member_cour_detail;
     }
 
     @Override
@@ -198,12 +194,12 @@ public class CourDetailActivity extends BaseActivity {
         } else if ("2".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.beginStarttime + "-" + mCourseDetail.endEndtime);
             mTvProgress.setText("已结束");
-            mTvYuyue.setVisibility(View.GONE);
+            mTvShangke.setVisibility(View.GONE);
 
         } else {
             mTvCourseTime.setText(mCourseDetail.beginStarttime);
             mTvProgress.setText("已取消");
-            mTvYuyue.setVisibility(View.GONE);
+            mTvShangke.setVisibility(View.GONE);
 
         }
         mTvAddress.setText(mCourseDetail.address);
@@ -226,13 +222,13 @@ public class CourDetailActivity extends BaseActivity {
 //                        104.0321159258), 18, 0, 30));
 
 
-    aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
-        @Override
-        public boolean onMarkerClick(Marker mMarker) {
-            showMap();
-            return true;
-        }
-    });
+        aMap.setOnMarkerClickListener(new AMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker mMarker) {
+                showMap();
+                return true;
+            }
+        });
         aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         aMap.moveCamera(cameraUpdate);
 
@@ -287,7 +283,7 @@ public class CourDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_yuyue})
+    @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_shangke})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_call:
@@ -300,40 +296,41 @@ public class CourDetailActivity extends BaseActivity {
                 RongIM.getInstance().startPrivateChat(this, mCourseDetail.uid, mCourseDetail.nickname);
 
                 break;
-            case R.id.tv_yuyue:
+            case R.id.tv_shangke:
 
 
-                cancelCourse();
+                xiake();
 
                 break;
         }
     }
 
-    private void cancelCourse() {
+    private void xiake() {
 
+        String status = "";
+        if (mTvShangke.getText().toString().equals("开始上课")) {
+            status = "11";
+        } else if (mTvShangke.getText().toString().equals("下课")) {
+            status = "2";
+        } else {
+            start(PingjiaActivity.class);
+        }
 
-        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
-        mBuilder.setTitle("课程取消原因");
-        View mView = LayoutInflater.from(mContext).inflate(R.layout.view_input, null, false);
-        final TextInputEditText mTextInputEditText = mView.findViewById(R.id.et);
-        mBuilder.setView(mView);
-        mBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+        final String finalStatus = status;
+        DialogUtils.getDefaultDialog(mContext, "提示", "确定开始上课吗？", "确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface mDialogInterface, int mI) {
-                mDialogInterface.dismiss();
-            }
-        });
-        mBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface mDialogInterface, int mI) {
-
-                Http.getDefault().cancelCourse(mCourseDetail.id, UserManager.getInsatance().getUser().id, mTextInputEditText.getText().toString())
+//上课11,下课2
+                Http.getDefault().xiake(UserManager.getInsatance().getUser().id, id, finalStatus)
                         .as(RxHelper.<String>handleResult(mContext))
-                        .subscribe(new ResponceSubscriber<String>() {
+                        .subscribe(new ResponceSubscriber<String>(mContext) {
                             @Override
                             protected void onSucess(String mS) {
-                                showToast("取消成功");
-                                finish();
+                                if (mTvShangke.getText().toString().equals("开始上课")) {
+                                    mTvShangke.setText("下课");
+                                } else {
+                                    mTvShangke.setText("评价");
+                                }
                             }
 
                             @Override
@@ -341,25 +338,9 @@ public class CourDetailActivity extends BaseActivity {
                                 showToast(message);
                             }
                         });
+
             }
-        });
-        AlertDialog mAlertDialog = mBuilder.create();
-        mAlertDialog.show();
-        final Button mButton = mAlertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
-        mButton.setEnabled(false);
-        RxTextView.textChangeEvents(mTextInputEditText).skip(1)
-                .subscribe(new Consumer<TextViewTextChangeEvent>() {
-                    @Override
-                    public void accept(TextViewTextChangeEvent mTextViewTextChangeEvent) throws Exception {
-                        if (!TextUtils.isEmpty(mTextViewTextChangeEvent.text().toString())) {
-                            mButton.setEnabled(true);
-                        } else {
-                            mButton.setEnabled(false);
-                        }
-                    }
-                });
-
-
+        }).show();
 
     }
 }

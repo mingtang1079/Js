@@ -70,7 +70,13 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
                         }
                     }).show();
                 } else if (view.getId() == R.id.tv_quxiao_tuikuan) {
-                    cancel(position, "b3");
+                    DialogUtils.getDefaultDialog(mContext, "提示", "确定取消退款吗？", "确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                            cancel(position, "b3");
+                        }
+                    }).show();
 
 
                 } else if (view.getId() == R.id.tv_pay) {

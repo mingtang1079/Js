@@ -1,6 +1,7 @@
 package com.example.administrator.js.me;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -21,10 +22,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+//教练端 二维码界面
 public class BarcodeActivity extends BaseActivity {
 
     @BindView(R.id.toolbar)
@@ -68,17 +72,32 @@ public class BarcodeActivity extends BaseActivity {
 
         }
 
+
         mIvBarcode.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 mIvBarcode.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                int width = mIvBarcode.getWidth();
-                BarcodeModel mBarcodeModel = new BarcodeModel(mUser.role, mUser.id);
-                String content = JsonUtil.objectToString(mBarcodeModel);
+                final int width = mIvBarcode.getWidth();
+                final BarcodeModel mBarcodeModel = new BarcodeModel(mUser.role, mUser.id);
+                final String content = JsonUtil.objectToString(mBarcodeModel);
                 try {
 
-                    Observable.just(QRUtils.encodeToQR(content, width))
-                            .subscribeOn(Schedulers.io())
+//                    Observable.just(QRUtils.encodeToQR(content, width))
+//                            .subscribeOn(Schedulers.io())
+//                            .observeOn(AndroidSchedulers.mainThread())
+//                            .subscribe(new Consumer<Bitmap>() {
+//                                @Override
+//                                public void accept(Bitmap mBitmap) throws Exception {
+//                                    mIvBarcode.setImageBitmap(mBitmap);
+//                                }
+//                            });
+
+                    Observable.create(new ObservableOnSubscribe<Bitmap>() {
+                        @Override
+                        public void subscribe(ObservableEmitter<Bitmap> e) throws Exception {
+                            e.onNext(QRUtils.encodeToQR(content, width));
+                        }
+                    }).subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(new Consumer<Bitmap>() {
                                 @Override
@@ -90,8 +109,11 @@ public class BarcodeActivity extends BaseActivity {
                 } catch (Exception mE) {
                     mE.printStackTrace();
                 }
+
+
             }
         });
+
 
     }
 }

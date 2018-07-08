@@ -213,6 +213,8 @@ public class OrderDetailActivity extends BaseActivity {
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.VISIBLE);
 
+            mTvTuikuan.setVisibility(View.VISIBLE);
+            mTvTuikuan.setText("退课详情");
 
         } else if ("b56".equals(mOrder.status)) {
             mTvOrderStatus.setText("已退款");
@@ -236,9 +238,15 @@ public class OrderDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.tv_tuike:
 
-                ARouter.getInstance().build("/member/TuikeActivity")
+                //    if ("b55".equals(mOrder.status)) {
+                ARouter.getInstance().build("/member/TuikeDetailActivity")
                         .withObject("mMyOrder", mOrder)
                         .navigation(mContext);
+//                } else {
+//                    ARouter.getInstance().build("/member/TuikeActivity")
+//                            .withObject("mMyOrder", mOrder)
+//                            .navigation(mContext);
+//                }
                 break;
             case R.id.tv_cancel:
 
@@ -254,7 +262,9 @@ public class OrderDetailActivity extends BaseActivity {
 
                 break;
             case R.id.tv_tuikuan:
-
+                ARouter.getInstance().build("/member/TuikeActivity")
+                        .withObject("mMyOrder", mOrder)
+                        .navigation(mContext);
 
                 break;
         }

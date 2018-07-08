@@ -38,4 +38,7 @@ public class EventMessage {
     public static  class  ListStatusChange extends EventMessage{
 
     }
+    public static  class  BodyDataListChange extends EventMessage{
+
+    }
 }

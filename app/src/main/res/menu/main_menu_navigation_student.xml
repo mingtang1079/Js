@@ -8,8 +8,8 @@
 
     <item
         android:id="@+id/vip"
-        android:icon="@drawable/two"
-        android:title="会员" />
+        android:icon="@drawable/twotwo"
+        android:title="教练" />
     <!--must set the item title to empty-->
     <item
         android:id="@+id/i_empty"

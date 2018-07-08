@@ -91,14 +91,12 @@ public class TuikeDetailActivity extends BaseActivity {
                 drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
                 mTvAge.setCompoundDrawables(drawable, null, null, null);
                 mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_women));
-
             }
         } else {
             mTvAge.setVisibility(View.GONE);
-
         }
-        mTvTuikuanPrice.setText("￥ "+mOrder.tuikePrice);
-        mTvReason.setText("退课原因："+mOrder.refundtype);
+        mTvTuikuanPrice.setText("￥ " + mOrder.tuikePrice);
+        mTvReason.setText("退课原因：" + mOrder.refundtype);
         mTvTime.setText("申请时间：" + mOrder.tuikeTime);
         mTvNumber.setText(mOrder.payno + "");
 

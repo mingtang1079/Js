@@ -49,10 +49,14 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
                 TextView mTextViewKeshi = mView.findViewById(R.id.tv_shengyukeshi);
                 TextView mTextViewPrice = mView.findViewById(R.id.tv_price);
                 mTextViewTime.setText(mOrderList.createDate);
-                mTextViewKeshi.setText("("+mOrderList.cuse + "/" + mOrderList.csum + ")");
+                mTextViewKeshi.setText("(" + mOrderList.cuse + "/" + mOrderList.csum + ")");
                 mTextViewPrice.setText(mOrderList.cprice + "元");
                 mLinearLayout.addView(mView);
             }
+        }
+
+        if (item.cuse == item.csum) {
+            helper.setVisible(R.id.tv_yuyue, false);
         }
 
         helper.addOnClickListener(R.id.tv_yuyue);

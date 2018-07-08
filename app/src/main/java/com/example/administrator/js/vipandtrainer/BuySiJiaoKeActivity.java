@@ -33,6 +33,7 @@ import com.example.administrator.js.activity.locaiton.ChooseLocationActivity;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.utils.StringUtils;
 import com.example.administrator.js.vipandtrainer.adapter.BigCourse;
+import com.example.administrator.js.vipandtrainer.adapter.CourseInfo;
 import com.example.administrator.js.vipandtrainer.adapter.CourseType;
 import com.example.administrator.js.vipandtrainer.adapter.CourseTypeAdapter;
 import com.example.administrator.js.vipandtrainer.trainer.ApplySuccessActivity;
@@ -50,6 +51,8 @@ public class BuySiJiaoKeActivity extends BaseActivity {
 
     @Autowired
     String id;
+    @Autowired
+    String cardid;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -193,36 +196,37 @@ public class BuySiJiaoKeActivity extends BaseActivity {
     protected void requestData() {
         super.requestData();
 
-        Http.getDefault().getUser(id)
-                .as(RxHelper.<User>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<User>() {
-                    @Override
-                    protected void onSucess(User mUser) {
-                        setUserData(mUser);
-                    }
+//        Http.getDefault().getUser(id)
+//                .as(RxHelper.<User>handleResult(mContext))
+//                .subscribe(new ResponceSubscriber<User>() {
+//                    @Override
+//                    protected void onSucess(User mUser) {
+//                        setUserData(mUser);
+//                    }
+//
+//                    @Override
+//                    protected void onFail(String message) {
+//                        loadError();
+//                    }
+//                });
 
+        Http.getDefault().getcourseinfo("",cardid)
+                .as(RxHelper.<CourseInfo>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<CourseInfo>() {
                     @Override
-                    protected void onFail(String message) {
-                        loadError();
-                    }
-                });
-
-        Http.getDefault().getcourseinfo(id)
-                .as(RxHelper.<List<BigCourse>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<List<BigCourse>>() {
-                    @Override
-                    protected void onSucess(List<BigCourse> mCourseTypes) {
+                    protected void onSucess(CourseInfo mCourseTypes) {
 
                         if (mCourseTypes != null) {
-                            mBigCourses = mCourseTypes;
-                            mCourseTypeAdapterBig.setNewData2(mCourseTypes);
+                            mBigCourses = mCourseTypes.ctypes;
+                            mCourseTypeAdapterBig.setNewData2(mCourseTypes.ctypes);
                             //默认选中第一个
-                            if (mCourseTypes.size()>0)
+                            if (mCourseTypes.ctypes.size()>0)
                             {
                                 mCourseTypeAdapterBig.setSingleChoosed(0);
                                 initSmallCourse(0);
 
                             }
+                            setUserData(mCourseTypes.teacher);
                         }
                         toggleShowLoading(false);
 

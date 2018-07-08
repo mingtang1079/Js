@@ -17,6 +17,7 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
+import com.example.administrator.js.activity.NewNeedActivity;
 import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.course.CourseCanlenderActivity;
 import com.example.administrator.js.me.AboutUsActivity;
@@ -123,7 +124,7 @@ public class MeMemberFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id, R.id.iv_barcode,
+    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id,
             R.id.my_order, R.id.ll_share, R.id.ll_my_collection,
             R.id.shenti_shuju, R.id.ll_xuqiu, R.id.ll_about, R.id.ll_fankui})
     public void onViewClicked(View view) {
@@ -155,8 +156,6 @@ public class MeMemberFragment extends BaseFragment {
             case R.id.tv_id:
 
                 break;
-            case R.id.iv_barcode:
-                break;
 
             case R.id.my_order:
 
@@ -170,6 +169,7 @@ public class MeMemberFragment extends BaseFragment {
             case R.id.ll_xuqiu:
 
                 // TODO: 2018/6/26 需求
+                start(NewNeedActivity.class);
                 break;
             case R.id.ll_tongji:
 

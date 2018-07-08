@@ -158,7 +158,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="16dp"
-                            android:text="退课"/>
+                            android:visibility="gone"
+                            android:text="退课详情"/>
 
                     </LinearLayout>
 

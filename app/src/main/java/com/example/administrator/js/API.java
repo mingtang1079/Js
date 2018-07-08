@@ -8,6 +8,7 @@ import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.example.administrator.js.exercise.model.VipUser;
+import com.example.administrator.js.me.member.BodyData;
 import com.example.administrator.js.me.member.MyOrder;
 import com.example.administrator.js.me.model.NewNeed;
 import com.example.administrator.js.me.model.Price;
@@ -21,6 +22,7 @@ import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.VipSupply;
 import com.example.administrator.js.me.model.Zizhi;
 import com.example.administrator.js.vipandtrainer.adapter.BigCourse;
+import com.example.administrator.js.vipandtrainer.adapter.CourseInfo;
 import com.example.administrator.js.vipandtrainer.adapter.CourseType;
 import com.example.administrator.js.vipandtrainer.trainer.TrainerDetail;
 import com.google.gson.JsonObject;
@@ -299,7 +301,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/getcourseinfo")
-    Observable<BaseModel<List<BigCourse>>> getcourseinfo(@Field("tid") String tid);
+    Observable<BaseModel<CourseInfo>> getcourseinfo(@Field("tid") String tid, @Field("cardid") String cardid);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/studentsave")
@@ -330,4 +332,16 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/gettuikereasons")
     Observable<BaseModel<List<String>>> gettuikereasons(@Field("uid") String uid);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/bodydataList")
+    Observable<BaseModel<WrapperModel<BodyData>>> getBodyList(@Field("userid") String userid, @Field("pageNo") int pageNo);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/bodydataSave")
+    Observable<BaseModel<String>> bodydataSave(@FieldMap Map<String, String> mStringStringMap);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/handle")
+    Observable<BaseModel<String>> xiake(@Field("uid") String uid, @Field("id") String id,@Field("status") String status);
 }

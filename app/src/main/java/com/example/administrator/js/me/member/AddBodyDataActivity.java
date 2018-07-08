@@ -1,27 +1,56 @@
 package com.example.administrator.js.me.member;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.DatePickerDialogUtils;
+import com.appbaselib.utils.DateUtils;
+import com.appbaselib.view.datepicker.view.GregorianLunarCalendarView;
+import com.appbaselib.view.datepicker.view.OnDateSelectedListener;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function5;
 
+@Route(path = "/member/AddBodyDataActivity")
 public class AddBodyDataActivity extends BaseActivity {
+
+
+    @Autowired
+    BodyData mBodyData;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.tv_time)
     TextView mTvTime;
-    @BindView(R.id.ll_reason)
+    @BindView(R.id.ll_time)
     LinearLayout mLlReason;
     @BindView(R.id.et_tizhong)
     EditText mEtTizhong;
@@ -37,6 +66,8 @@ public class AddBodyDataActivity extends BaseActivity {
     TextView mTvWeidu;
     @BindView(R.id.btn_sure)
     Button mBtnSure;
+
+    String date;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -57,20 +88,154 @@ public class AddBodyDataActivity extends BaseActivity {
     protected void initView() {
 
         mToolbar.setTitle("添加数据");
+        if (mBodyData != null) {
+            mTvTime.setText(mBodyData.writedate);
+            mEtTizhong.setText(mBodyData.weight);
+            mEtShengao.setText(mBodyData.height);
+            mEtTizhi.setText(mBodyData.fat);
+            mEtDaixie.setText(mBodyData.bmr);
+            mEtShuifeng.setText(mBodyData.bodywater);
+            date = mBodyData.writedate;
+            mTvTime.setText(date);
+        } else {
+            date = DateUtils.getCurrentTimeInString();
+
+        }
+
+        Observable<CharSequence> mObservable1 = RxTextView.textChanges(mEtTizhong);
+        Observable<CharSequence> mObservable2 = RxTextView.textChanges(mEtShengao);
+        Observable<CharSequence> mObservable3 = RxTextView.textChanges(mEtTizhi);
+        Observable<CharSequence> mObservable4 = RxTextView.textChanges(mEtDaixie);
+        Observable<CharSequence> mObservable5 = RxTextView.textChanges(mEtShuifeng);
+
+        Observable.combineLatest(mObservable1, mObservable2, mObservable3, mObservable4, mObservable5,
+                new Function5<CharSequence, CharSequence, CharSequence, CharSequence, CharSequence, Boolean>() {
+                    @Override
+                    public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2, CharSequence mCharSequence3, CharSequence mCharSequence4, CharSequence mCharSequence5) throws Exception {
+
+                        return !TextUtils.isEmpty(mCharSequence) || !TextUtils.isEmpty(mCharSequence2) || !TextUtils.isEmpty(mCharSequence3) ||
+                                !TextUtils.isEmpty(mCharSequence4) || !TextUtils.isEmpty(mCharSequence5);
+                    }
+                }).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean mBoolean) throws Exception {
+                mBtnSure.setEnabled(mBoolean);
+            }
+        });
 
 
     }
 
-    @OnClick({R.id.tv_weidu, R.id.btn_sure})
+    @OnClick({R.id.tv_weidu, R.id.btn_sure, R.id.ll_time})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_weidu:
 
+                ARouter.getInstance().build("/member/AddWeiduActivity")
+                        .withObject("mBodyData", mBodyData)
+                        .navigation((Activity) mContext,20);
                 break;
             case R.id.btn_sure:
 
+                save();
 
                 break;
+            case R.id.ll_time:
+
+                DatePickerDialogUtils.getDefaultDatePickerDialog(mContext, new OnDateSelectedListener() {
+                    @Override
+                    public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
+                        date = mCalendarData.getTime();
+                        mTvTime.setText(date);
+                    }
+                }).show();
+
+                break;
+        }
+    }
+
+    private void save() {
+
+        Map<String, String> mStringStringMap = new HashMap<>();
+
+        mStringStringMap.put("userid", UserManager.getInsatance().getUser().id);
+        mStringStringMap.put("writedate", date);
+        if (mBodyData != null && !TextUtils.isEmpty(mBodyData.id)) {
+            mStringStringMap.put("id", mBodyData.id);
+        }
+
+
+        if (!TextUtils.isEmpty(mEtTizhong.getText().toString())) {
+            mStringStringMap.put("weight", mEtTizhong.getText().toString());
+        }
+        if (!TextUtils.isEmpty(mEtShengao.getText().toString())) {
+            mStringStringMap.put("height", mEtShengao.getText().toString());
+
+        }
+        if (!TextUtils.isEmpty(mEtTizhi.getText().toString())) {
+            mStringStringMap.put("fat", mEtTizhi.getText().toString());
+
+        }
+        if (!TextUtils.isEmpty(mEtDaixie.getText().toString())) {
+            mStringStringMap.put("bmr", mEtDaixie.getText().toString());
+
+        }
+        if (!TextUtils.isEmpty(mEtShuifeng.getText().toString())) {
+            mStringStringMap.put("bodywater", mEtShuifeng.getText().toString());
+
+        }
+
+        //第二个页面的数据
+        if (mBodyData != null) {
+            if (!TextUtils.isEmpty(mBodyData.wdxiong)) {
+                mStringStringMap.put("wdxiong", mBodyData.wdxiong);
+            }
+            if (!TextUtils.isEmpty(mBodyData.wdyao)) {
+                mStringStringMap.put("wdyao", mBodyData.wdyao);
+            }
+            if (!TextUtils.isEmpty(mBodyData.wdxiaotui)) {
+                mStringStringMap.put("wdxiaotui", mBodyData.wdxiaotui);
+            }
+            if (!TextUtils.isEmpty(mBodyData.wddatui)) {
+                mStringStringMap.put("wddatui", mBodyData.wddatui);
+            }
+            if (!TextUtils.isEmpty(mBodyData.wddabi)) {
+                mStringStringMap.put("wddabi", mBodyData.wddabi);
+            }
+            if (!TextUtils.isEmpty(mBodyData.wdxiaobi)) {
+                mStringStringMap.put("wdxiaobi", mBodyData.wdxiaobi);
+            }
+            if (!TextUtils.isEmpty(mBodyData.wdtun)) {
+                mStringStringMap.put("wdtun", mBodyData.wdtun);
+            }
+        }
+
+
+        Http.getDefault().bodydataSave(mStringStringMap)
+                .as(RxHelper.<String>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<String>() {
+                    @Override
+                    protected void onSucess(String mS) {
+                        EventBus.getDefault().post(new EventMessage.BodyDataListChange());
+                        showToast("保存成功");
+                        finish();
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==20&&resultCode==Activity.RESULT_OK)
+        {
+            mBodyData= (BodyData) data.getSerializableExtra("data");
         }
     }
 }

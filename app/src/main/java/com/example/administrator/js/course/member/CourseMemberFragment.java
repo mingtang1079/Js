@@ -44,7 +44,7 @@ public class CourseMemberFragment extends BaseRefreshFragment<User> {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ARouter.getInstance().build("/course/CourDetailActivity")
+                ARouter.getInstance().build("/course/MemberCourDetailActivity")
                         .withString("id", mList.get(position).id)
                         .navigation(mContext);
             }

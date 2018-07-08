@@ -116,7 +116,12 @@ public class VipUserDetailActivity extends BaseActivity {
         mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem mMenuItem) {
-                handleUser("2");
+                if (mMenuItem.getTitle().equals("加入黑名单")) {
+                    handleUser("2");
+                } else {
+                    handleUser("0");
+
+                }
                 return false;
             }
         });
@@ -204,7 +209,20 @@ public class VipUserDetailActivity extends BaseActivity {
 // 与我的关系          //是否接单tradestatus:0否1是, status:0没有关系,1已关注,2已拉黑
 
         if (mUserDetail.relation != null) {
-
+            if (mUserDetail.relation.status.equals("2")) {
+                mTvGuanzhu.setVisibility(View.GONE);
+                mTvDazhaohu.setVisibility(View.GONE);
+                mMenuItem.setTitle("取消黑名单");
+//黑名单不显示
+                mTvDazhaohu.setVisibility(View.GONE);
+                mViewLine.setVisibility(View.GONE);
+                mLinearLayoutDetail.setVisibility(View.GONE);
+                mLinearLayoutBody.setVisibility(View.GONE);
+            } else {
+                mTvGuanzhu.setVisibility(View.VISIBLE);
+                mMenuItem.setTitle("加入黑名单");
+                mTvDazhaohu.setVisibility(View.VISIBLE);
+            }
             //已接单不能拉黑
             if (!TextUtils.isEmpty(mUserDetail.relation.tradestatus) && mUserDetail.relation.tradestatus.equals("1")) {
 
@@ -216,26 +234,17 @@ public class VipUserDetailActivity extends BaseActivity {
                     mTvGuanzhu.setText("关注");
                 }
 
-            } else {
+            }
+
                 if (mUserDetail.relation.status.equals("1")) {
                     mTvGuanzhu.setText("取消关注");
-                    mMenuItem.setVisible(false);
                     mLinearLayoutDetail.setVisibility(View.VISIBLE);
                     mLinearLayoutBody.setVisibility(View.VISIBLE);
-                } else if (mUserDetail.relation.status.equals("2")) {
-                    mTvGuanzhu.setText("从黑名单中删除");
-                    mTvDazhaohu.setVisibility(View.GONE);
-                    mViewLine.setVisibility(View.GONE);
-                    mMenuItem.setVisible(false);
-                    mLinearLayoutDetail.setVisibility(View.GONE);
-                    mLinearLayoutBody.setVisibility(View.GONE);
-                } else {
+                }  else {
                     mTvGuanzhu.setText("关注");
-                    mMenuItem.setVisible(false);
                     mLinearLayoutDetail.setVisibility(View.VISIBLE);
                     mLinearLayoutBody.setVisibility(View.VISIBLE);
                 }
-            }
 
         }
         //身体数据

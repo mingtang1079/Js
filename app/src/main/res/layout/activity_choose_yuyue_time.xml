@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white_color"
-    android:orientation="vertical"
-    tools:context="com.example.administrator.js.course.member.ChooseYuyueTimeActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white_color"
+              android:orientation="vertical"
+              tools:context="com.example.administrator.js.course.member.ChooseYuyueTimeActivity">
 
-    <include layout="@layout/include_toolbar" />
+    <include layout="@layout/include_toolbar"/>
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"
+        android:padding="16dp"
+        tools:text="星期一"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="0dp"></android.support.v7.widget.RecyclerView>
+        android:layout_height="0dp"
+        android:layout_weight="1"></android.support.v7.widget.RecyclerView>
 
     <Button
         android:id="@+id/btn_sure"
@@ -22,5 +32,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:text="确定" />
+        android:text="确定"/>
 </LinearLayout>

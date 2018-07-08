@@ -125,7 +125,12 @@ public class TrainerDetailActivity extends BaseActivity {
         mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem mMenuItem) {
-                handleUser("2");
+                if (mMenuItem.getTitle().equals("加入黑名单")) {
+                    handleUser("2");
+                } else {
+                    handleUser("0");
+
+                }
                 return false;
             }
         });
@@ -134,12 +139,12 @@ public class TrainerDetailActivity extends BaseActivity {
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerview.setLayoutManager(mLinearLayoutManager);
         mRecyclerview.setAdapter(mWorkDateAdapter);
-
+       // mLlDateTwo.removeAllViews();
         mLlDateTwo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup mRadioGroup, int mI) {
 
-                mWorkDateAdapter.setNewData(mTrainerDetail.workdatelist.get(mI - 1).timelist);
+                mWorkDateAdapter.setNewData(mTrainerDetail.workdatelist.get(mI).timelist);
             }
         });
         toggleShowLoading(true);
@@ -174,7 +179,7 @@ public class TrainerDetailActivity extends BaseActivity {
             ImageLoader.load(mContext, mTrainerDetail.userinfo.img, mIvHead);
             mTvName.setText(mTrainerDetail.userinfo.nickname);
             mTvShanchang.setText(mTrainerDetail.userinfo.skillname);
-            mTvId.setText("ID"+mTrainerDetail.userinfo.no + "");
+            mTvId.setText("ID" + mTrainerDetail.userinfo.no + "");
             //年龄
             if (mTrainerDetail.userinfo.age != null && mTrainerDetail.userinfo.sex != null) {
                 mTvAge.setText(mTrainerDetail.userinfo.age + "");
@@ -203,24 +208,27 @@ public class TrainerDetailActivity extends BaseActivity {
 
         if (mTrainerDetail.relation != null) {
 
+
+            if (mTrainerDetail.relation.status.equals("2")) {
+                mBtnGuanzhu.setVisibility(View.GONE);
+                mBtnSixin.setVisibility(View.GONE);
+                mMenuItem.setTitle("取消黑名单");
+            } else {
+                mBtnGuanzhu.setVisibility(View.VISIBLE);
+                mMenuItem.setTitle("加入黑名单");
+                mBtnSixin.setVisibility(View.VISIBLE);
+            }
             //已接单不能拉黑
             if (!TextUtils.isEmpty(mTrainerDetail.relation.tradestatus) && mTrainerDetail.relation.tradestatus.equals("1")) {
 
                 mMenuItem.setVisible(false);
 
-                if (mTrainerDetail.relation.status.equals("1")) {
-                    mBtnGuanzhu.setText("取消关注");
-                } else {
-                    mBtnGuanzhu.setText("关注");
-                }
+            }
 
+            if (mTrainerDetail.relation.status.equals("1")) {
+                mBtnGuanzhu.setText("取消关注");
             } else {
-                if (mTrainerDetail.relation.status.equals("1")) {
-                    mBtnGuanzhu.setText("取消关注");
-                } else if (mTrainerDetail.relation.status.equals("2")) {
-                } else {
-                    mBtnGuanzhu.setText("关注");
-                }
+                mBtnGuanzhu.setText("关注");
             }
 
         }
@@ -241,6 +249,7 @@ public class TrainerDetailActivity extends BaseActivity {
                 RadioButton mChildAt = (RadioButton) mLlDateTwo.getChildAt(i);
                 if (mChildAt != null) {
                     mChildAt.setText(mWorkdate.day);
+                    mChildAt.setId(i);
                     if (i == 0) {
                         mChildAt.setChecked(true);
                     }
@@ -298,10 +307,10 @@ public class TrainerDetailActivity extends BaseActivity {
 
     private void apply() {
 
-        Map<String,Object> mMap=new HashMap<>();
-        mMap.put("tid",id);
-        mMap.put("uid",UserManager.getInsatance().getUser().id);
-        mMap.put("tryflag","1");
+        Map<String, Object> mMap = new HashMap<>();
+        mMap.put("tid", id);
+        mMap.put("uid", UserManager.getInsatance().getUser().id);
+        mMap.put("tryflag", "1");
 
         Http.getDefault().applyYuyueke(mMap)
                 .as(RxHelper.<String>handleResult(mContext))

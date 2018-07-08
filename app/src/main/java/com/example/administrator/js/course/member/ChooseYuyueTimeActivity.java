@@ -46,6 +46,8 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
     RecyclerView mRecyclerView;
     @BindView(R.id.btn_sure)
     Button mButtonSure;
+    @BindView(R.id.tv_name)
+    TextView mTextViewName;
 
     ItemAdapter mItemAdapter;
     Integer position = null;//第几列
@@ -75,7 +77,7 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
 
         mToolbar.setTitle("选择时间");
         mItemAdapter = new ItemAdapter(R.layout.item_recycleview, mWeekTimeLists);
-        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(manager);// 将SnapHelper attach 到RecyclrView
         mRecyclerView.setAdapter(mItemAdapter);
@@ -93,6 +95,26 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
                 finish();
             }
         });
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    int p = manager.findLastCompletelyVisibleItemPosition();
+                    if (p != -1 && p < mWeekTimeLists.size()) {
+                        mTextViewName.setText("周"+mWeekTimeLists.get(p).weekindex +" "+ mWeekTimeLists.get(p).month + "." + mWeekTimeLists.get(p).day);
+                    }
+
+                }
+            }
+        });
+        mTextViewName.setText(mWeekTimeLists.get(0).weekindex + mWeekTimeLists.get(0).month + "." + mWeekTimeLists.get(0).day);
     }
 
 
@@ -189,7 +211,7 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
                     ChooseYuyueTimeActivity.this.position = helper.getAdapterPosition();
 
                     startdate = mTimeChooseAdapter.getData().get(position).date;
-                    time=mTimeChooseAdapter.getData().get(position).time;
+                    time = mTimeChooseAdapter.getData().get(position).time;
                     String mS = mTimeChooseAdapter.getData().get(position).starttime;//starttime前半段
                     String bortherTime = mTimeChooseAdapter.getData().get(position).brothertime;
                     String mS1 = null;//starttime后半段
