@@ -15,8 +15,13 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.constant.EventMessage;
+import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.vipandtrainer.adapter.CourseUserAdapter;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -24,7 +29,7 @@ import butterknife.BindView;
  * Created by tangming on 2018/6/23.
  */
 @Route(path = "/member/CourseMemberFragment")
-public class CourseMemberFragment extends BaseRefreshFragment<User> {
+public class CourseMemberFragment extends BaseRefreshFragment<CourseModel> {
 
 
     @Autowired
@@ -45,7 +50,7 @@ public class CourseMemberFragment extends BaseRefreshFragment<User> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ARouter.getInstance().build("/course/MemberCourDetailActivity")
-                        .withString("id", mList.get(position).id)
+                        .withObject("mCourseModel", mList.get(position))
                         .navigation(mContext);
             }
         });
@@ -54,11 +59,11 @@ public class CourseMemberFragment extends BaseRefreshFragment<User> {
     @Override
     public void requestData() {
 
-        Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, status, pageNo, null)
-                .as(RxHelper.<WrapperModel<User>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<WrapperModel<User>>() {
+        Http.getDefault().getCourse2(UserManager.getInsatance().getUser().id, status, pageNo, null)
+                .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<WrapperModel<CourseModel>>() {
                     @Override
-                    protected void onSucess(WrapperModel<User> mVipUserBaseModelWrapper) {
+                    protected void onSucess(WrapperModel<CourseModel> mVipUserBaseModelWrapper) {
                         if (mVipUserBaseModelWrapper != null)
                             loadComplete(mVipUserBaseModelWrapper.list);
 
@@ -76,6 +81,16 @@ public class CourseMemberFragment extends BaseRefreshFragment<User> {
     @Override
     protected View getLoadingTargetView() {
         return mSwipeRefreshLayout;
+    }
+
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.CourseListStatusChange mListStatusChange) {
+        refreshData(false);
     }
 
 }

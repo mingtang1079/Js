@@ -53,6 +53,9 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     int distance;
     String sex;
     String skillids;
+    String beginprice;
+    String endprice;
+    String orderby;
 
     List<Skill> mSkills = new ArrayList<>();
 
@@ -132,12 +135,12 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         if (distance != 0) {
             mStringStringMap.put("distance", distance);
         }
-//        if (!TextUtils.isEmpty(sex)) {
-//            mStringStringMap.put("sex", sex);
-//        }
-//        if (!TextUtils.isEmpty(skillids)) {
-//            mStringStringMap.put("skillids", skillids);
-//        }
+        if (!TextUtils.isEmpty(sex)) {
+            mStringStringMap.put("sex", sex);
+        }
+        if (!TextUtils.isEmpty(skillids)) {
+            mStringStringMap.put("skillids", skillids);
+        }
         mStringStringMap.put("pageNo", pageNo);
         Http.getDefault().seacrchUser(mStringStringMap)
                 .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))
@@ -161,13 +164,18 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         switch (view.getId()) {
             case R.id.zonghe:
 
-//                distance = 0;
-//                mJuli.setText("距离");
-//                sex = "";
-//                mXingbie.setText("性别");
-//                skillids = "";
-//                mType.setText("类型");
-//                refreshData(true);
+
+                mJuli.setText("距离");
+                mXiangmu.setText("项目");
+                mJiage.setText("价格");
+
+                skillids = "";
+                distance = 0;
+                sex = "";
+                beginprice = "";
+                endprice = "";
+
+                refreshData(true);
 
 
                 break;
@@ -209,10 +217,10 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
                 if (position == 0) {
                     skillids = "";
-                    //   mType.setText("类型");
+                    mXiangmu.setText("项目");
                 } else {
                     skillids = ((Skill) mItems.get(position)).id;
-                    //    mType.setText(mItems.get(position).getValue());
+                    mXiangmu.setText(mItems.get(position).getValue());
 
                 }
                 refreshData(true);
@@ -228,7 +236,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     }
 
-
+    @Deprecated
     private void showXiangmu() {
 
         View mView = getLayoutInflater().inflate(R.layout.view_trainer_xiangmu, null, false);
@@ -250,15 +258,15 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         BottomDialogUtils.showBottomDialog(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//
-//                if (position == 0) {
-//                    distance = 0;
-//                    mJuli.setText("距离");
-//                } else {
-//                    distance = position * 1000;
-//                    mJuli.setText(mItems.get(position));
-//
-//                }
+
+                if (position == 0) {
+                    distance = 0;
+                    mJuli.setText("距离");
+                } else {
+                    distance = position * 1000;
+                    mJuli.setText(mItems.get(position));
+
+                }
 
                 refreshData(true);
             }
@@ -277,16 +285,20 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-//                if (position == 0) {
-//                    distance = 0;
-//                    mJuli.setText("距离");
-//                } else {
-//                    distance = position * 1000;
-//                    mJuli.setText(mItems.get(position));
-//
-//                }
-//
-//                refreshData(true);
+                if (position == 0) {
+                    orderby = "";
+                    mJiage.setText("价格");
+                } else if (position == 1) {
+                    orderby = "a.courseprice";
+                    mJiage.setText("价格升序");
+                }
+                else {
+
+                    orderby = "a.a.courseprice desc";
+                    mJiage.setText("价格降序");
+                }
+
+                refreshData(true);
             }
         }).show();
 

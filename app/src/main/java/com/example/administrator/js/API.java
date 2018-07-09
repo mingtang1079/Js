@@ -2,6 +2,7 @@ package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.course.member.HistoryOrder;
 import com.example.administrator.js.course.member.YuyueInfo;
 import com.example.administrator.js.course.model.CourseDetail;
@@ -194,12 +195,26 @@ public interface API {
     @FormUrlEncoded
     Observable<BaseModel<UserDetail>> userDetail(@Field("tid") String jiaolianId, @Field("uid") String useId);
 
-
+    /**
+     * 教练端 课程详细
+     * @param jiaolianId
+     * @param useId
+     * @return
+     */
     @POST(AUTHORIRY + "/course/get")
     @FormUrlEncoded
     Observable<BaseModel<CourseDetail>> courseDetail(@Field("tid") String jiaolianId, @Field("id") String useId);
-
     /**
+     * 会员端 课程详细
+     * @param userId
+     * @param useId
+     * @return
+     */
+    @POST(AUTHORIRY + "/course/get")
+    @FormUrlEncoded
+    Observable<BaseModel<CourseDetail>> courseDetail2(@Field("uid") String userId, @Field("id") String courseID);
+
+    /** J教练端
      * @param jiaolianId
      * @param status     状态 1进行中,2已结束
      * @param pageNo     页码,默认1,用于已结束的下拉刷新
@@ -208,7 +223,20 @@ public interface API {
      */
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")
-    Observable<BaseModel<WrapperModel<User>>> getCourse(@Field("tid") String jiaolianId, @Field("status") String status,
+    Observable<BaseModel<WrapperModel<CourseModel>>> getCourse(@Field("tid") String jiaolianId, @Field("status") String status,
+                                                               @Field("pageNo") int pageNo, @Field("starttime") String starttime);
+
+
+    /** J会员端
+     * @param jiaolianId
+     * @param status     状态 1进行中,2已结束
+     * @param pageNo     页码,默认1,用于已结束的下拉刷新
+     * @param starttime  某一天,用于我的日程 格式 2018-02-03
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/list")
+    Observable<BaseModel<WrapperModel<CourseModel>>> getCourse2(@Field("uid") String jiaolianId, @Field("status") String status,
                                                         @Field("pageNo") int pageNo, @Field("starttime") String starttime);
 
     /**
@@ -287,7 +315,6 @@ public interface API {
     Observable<BaseModel<NewNeed>> publishNeed(@FieldMap Map<String, Object> mStringObjectMap);
 
 
-    @FormUrlEncoded
     @POST(AUTHORIRY + "/course/gettags")
     Observable<BaseModel<List<String>>> getPinjiatags();
 
@@ -305,7 +332,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/studentsave")
-    Observable<BaseModel<String>> studentsave(@Field("tid") String tid, @Field("uid") String uid, @Field("ctype") String ctype,
+    Observable<BaseModel<String>> studentsave(@Field("tid") String tid,@Field("cardid") String cardid, @Field("uid") String uid, @Field("ctype") String ctype,
                                               @Field("coursetypeids") String coursetypeids, @Field("csum") String csum
             , @Field("address") String address, @Field("clongtitude") String clongtitude, @Field("clatitude") String clatitude);
 
@@ -343,5 +370,9 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/handle")
-    Observable<BaseModel<String>> xiake(@Field("uid") String uid, @Field("id") String id,@Field("status") String status);
+    Observable<BaseModel<String>> xiake(@Field("uid") String uid, @Field("id") String id, @Field("status") String status);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/appraiseSave")
+    Observable<BaseModel<JsonObject>> savePingjia(@FieldMap Map<String, Object> mMap);
 }

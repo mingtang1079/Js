@@ -8,19 +8,20 @@ import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
+import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.me.model.User;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CourseUserAdapter extends BaseRecyclerViewAdapter<User> {
-    public CourseUserAdapter(int layoutResId, List<User> data) {
+public class CourseUserAdapter extends BaseRecyclerViewAdapter<CourseModel> {
+    public CourseUserAdapter(int layoutResId, List<CourseModel> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, User item) {
+    protected void convert(BaseViewHolder helper, CourseModel item) {
 
         if (!TextUtils.isEmpty(item.img)) {
             ImageLoader.load(mContext, item.img, (CircleImageView) helper.getView(R.id.iv_head));

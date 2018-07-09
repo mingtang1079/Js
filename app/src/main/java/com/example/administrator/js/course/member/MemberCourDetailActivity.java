@@ -8,6 +8,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -22,6 +24,7 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps2d.UiSettings;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
@@ -32,6 +35,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.utils.Utils;
@@ -53,7 +57,7 @@ import static com.appbaselib.utils.PackageUtil.isAvilible;
 public class MemberCourDetailActivity extends BaseActivity {
 
     @Autowired
-    String id;
+    CourseModel mCourseModel;
 
     @BindView(R.id.content)
     LinearLayout mLinearLayoutContent;
@@ -87,6 +91,9 @@ public class MemberCourDetailActivity extends BaseActivity {
     private CameraUpdate cameraUpdate;
     AMap aMap = null;
 
+    MenuItem mMenuItem;
+
+
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.activity_member_cour_detail;
@@ -110,7 +117,11 @@ public class MemberCourDetailActivity extends BaseActivity {
 
         if (aMap == null) {
             aMap = mMapView.getMap();
+
         }
+        //设置显示定位按钮 并且可以点击
+        com.amap.api.maps.UiSettings settings = aMap.getUiSettings();
+        settings.setZoomControlsEnabled(false);//缩放按钮
 
     }
 
@@ -132,6 +143,17 @@ public class MemberCourDetailActivity extends BaseActivity {
     protected void initView() {
 
         mToolbar.setTitle("课程详情");
+        mToolbar.inflateMenu(R.menu.toolbar_menu_common);
+        mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
+        mMenuItem.setTitle("投诉");
+        mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem mMenuItem) {
+                start(TousuActivity.class);
+                return false;
+            }
+        });
+
         toggleShowLoading(true);
         requestData();
 
@@ -154,7 +176,7 @@ public class MemberCourDetailActivity extends BaseActivity {
         super.requestData();
         User mUser = UserManager.getInsatance().getUser();
 
-        Http.getDefault().courseDetail(mUser.id, id)
+        Http.getDefault().courseDetail2(mUser.id, this.mCourseModel.id)
                 .as(RxHelper.<CourseDetail>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<CourseDetail>() {
                     @Override
@@ -175,36 +197,47 @@ public class MemberCourDetailActivity extends BaseActivity {
     }
 
     private void setData() {
-        lat = Double.valueOf(mCourseDetail.latitude);
-        lon = Double.valueOf(mCourseDetail.longtitude);
+        if (!TextUtils.isEmpty(mCourseDetail.latitude)) {
+            lat = Double.valueOf(mCourseDetail.latitude);
+        }
+        if (!TextUtils.isEmpty(mCourseDetail.longtitude)) {
+            lon = Double.valueOf(mCourseDetail.longtitude);
+        }
         // TODO: 2018/5/23
         mTvName.setText(mCourseDetail.nickname);
         ImageLoader.load(mContext, mCourseDetail.img, mIvHead);
 
         mTvCourseType.setText(mCourseDetail.coursetypenames);
         //  "status": "0", // 课程状态10已预约11进行中2已结束3已取消
+
+        mTvAddress.setText(mCourseDetail.address);
+
+        setStatus();
+        setMapLocation();
+    }
+
+    void setStatus() {
         if ("10".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.beginStarttime);
             mTvProgress.setText("已预约");
-
+            mTvShangke.setVisibility(View.VISIBLE);
+            mTvShangke.setText("取消预约");
         } else if ("11".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.beginStarttime);
             mTvProgress.setText("进行中");
-
+            mTvShangke.setText("下课");
+            mTvShangke.setVisibility(View.VISIBLE);
         } else if ("2".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.beginStarttime + "-" + mCourseDetail.endEndtime);
             mTvProgress.setText("已结束");
-            mTvShangke.setVisibility(View.GONE);
+            mTvShangke.setVisibility(View.VISIBLE);
+            mTvShangke.setText("评价");
 
         } else {
             mTvCourseTime.setText(mCourseDetail.beginStarttime);
             mTvProgress.setText("已取消");
             mTvShangke.setVisibility(View.GONE);
-
         }
-        mTvAddress.setText(mCourseDetail.address);
-
-        setMapLocation();
     }
 
     private void setMapLocation() {
@@ -308,29 +341,37 @@ public class MemberCourDetailActivity extends BaseActivity {
     private void xiake() {
 
         String status = "";
+        String title = "";
         if (mTvShangke.getText().toString().equals("开始上课")) {
             status = "11";
+            title = "确定开始上课吗？";
         } else if (mTvShangke.getText().toString().equals("下课")) {
             status = "2";
-        } else {
-            start(PingjiaActivity.class);
-        }
+            title = "确定下课吗？";
+        } else if (mTvShangke.getText().toString().equals("取消预约")) {
+            cancelCourse();
+            return;
+        } else if (mTvShangke.getText().toString().equals("评价")) {
+            ARouter.getInstance().build("/member/PingjiaActivity")
+                    .withString("tid", this.mCourseModel.tid)
+                    .withString("id", mCourseDetail.id)
+                    .navigation(mContext);
 
+            return;
+        }
         final String finalStatus = status;
-        DialogUtils.getDefaultDialog(mContext, "提示", "确定开始上课吗？", "确定", new DialogInterface.OnClickListener() {
+        final String finalStatus1 = status;
+        DialogUtils.getDefaultDialog(mContext, "提示", title, "确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface mDialogInterface, int mI) {
 //上课11,下课2
-                Http.getDefault().xiake(UserManager.getInsatance().getUser().id, id, finalStatus)
+                Http.getDefault().xiake(UserManager.getInsatance().getUser().id, MemberCourDetailActivity.this.mCourseModel.id, finalStatus)
                         .as(RxHelper.<String>handleResult(mContext))
                         .subscribe(new ResponceSubscriber<String>(mContext) {
                             @Override
                             protected void onSucess(String mS) {
-                                if (mTvShangke.getText().toString().equals("开始上课")) {
-                                    mTvShangke.setText("下课");
-                                } else {
-                                    mTvShangke.setText("评价");
-                                }
+                                mCourseDetail.status = finalStatus1;
+                                setStatus();
                             }
 
                             @Override
@@ -343,4 +384,58 @@ public class MemberCourDetailActivity extends BaseActivity {
         }).show();
 
     }
+
+    private void cancelCourse() {
+
+
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
+        mBuilder.setTitle("课程取消原因");
+        View mView = LayoutInflater.from(mContext).inflate(R.layout.view_input, null, false);
+        final TextInputEditText mTextInputEditText = mView.findViewById(R.id.et);
+        mBuilder.setView(mView);
+        mBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface mDialogInterface, int mI) {
+                mDialogInterface.dismiss();
+            }
+        });
+        mBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                Http.getDefault().cancelCourse(mCourseDetail.id, UserManager.getInsatance().getUser().id, mTextInputEditText.getText().toString())
+                        .as(RxHelper.<String>handleResult(mContext))
+                        .subscribe(new ResponceSubscriber<String>() {
+                            @Override
+                            protected void onSucess(String mS) {
+                                showToast("取消成功");
+                                finish();
+                            }
+
+                            @Override
+                            protected void onFail(String message) {
+                                showToast(message);
+                            }
+                        });
+            }
+        });
+        AlertDialog mAlertDialog = mBuilder.create();
+        mAlertDialog.show();
+        final Button mButton = mAlertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        mButton.setEnabled(false);
+        RxTextView.textChangeEvents(mTextInputEditText).skip(1)
+                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void accept(TextViewTextChangeEvent mTextViewTextChangeEvent) throws Exception {
+                        if (!TextUtils.isEmpty(mTextViewTextChangeEvent.text().toString())) {
+                            mButton.setEnabled(true);
+                        } else {
+                            mButton.setEnabled(false);
+                        }
+                    }
+                });
+
+
+    }
+
 }

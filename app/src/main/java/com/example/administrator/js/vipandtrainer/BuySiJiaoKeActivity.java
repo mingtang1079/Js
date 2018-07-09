@@ -50,9 +50,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class BuySiJiaoKeActivity extends BaseActivity {
 
     @Autowired
-    String id;
+    String id;//教练id
     @Autowired
-    String cardid;
+    String cardid;//续课用的
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -210,7 +210,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
 //                    }
 //                });
 
-        Http.getDefault().getcourseinfo("",cardid)
+        Http.getDefault().getcourseinfo(id,cardid)
                 .as(RxHelper.<CourseInfo>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<CourseInfo>() {
                     @Override
@@ -319,13 +319,14 @@ public class BuySiJiaoKeActivity extends BaseActivity {
         }
         String mS = StringUtils.listToString(mStrings);
 
-        Http.getDefault().studentsave(id, UserManager.getInsatance().getUser().id, mBigCourse.id, mS, mEtCount.getText().toString(), address, lon, lat)
+        Http.getDefault().studentsave(id,cardid, UserManager.getInsatance().getUser().id, mBigCourse.id, mS, mEtCount.getText().toString(), address, lon, lat)
                 .as(RxHelper.<String>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override
                     protected void onSucess(String mS) {
 
                         start(ApplySuccessActivity.class);
+                        finish();
                     }
 
                     @Override

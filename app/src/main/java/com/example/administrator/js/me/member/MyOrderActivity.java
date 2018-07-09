@@ -54,7 +54,7 @@ public class MyOrderActivity extends BaseActivity {
                     status = "all";
                     break;
                 case 1:
-                    status = "b1";
+                    status = "a1";
                     break;
                 case 2:
                     status = "b2";

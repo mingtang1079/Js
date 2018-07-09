@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.appbaselib.base.BaseActivity;
 import com.example.administrator.js.R;
+import com.example.administrator.js.me.member.MyOrderActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,8 +47,10 @@ public class ApplySuccessActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_back_home:
+                finish();
                 break;
             case R.id.tv_back_top:
+                start(MyOrderActivity.class);
                 break;
         }
     }

@@ -126,10 +126,10 @@ public class CourseCanlenderActivity extends BaseActivity {
     public void requestData() {
 
         Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, "1", 1,currenttime)
-                .as(RxHelper.<WrapperModel<User>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<WrapperModel<User>>(mContext) {
+                .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<WrapperModel<CourseModel>>(mContext) {
                     @Override
-                    protected void onSucess(WrapperModel<User> mVipUserBaseModelWrapper) {
+                    protected void onSucess(WrapperModel<CourseModel> mVipUserBaseModelWrapper) {
                         if (mVipUserBaseModelWrapper != null) {
                             mCourseUserAdapter.setNewData(mVipUserBaseModelWrapper.list);
                         }

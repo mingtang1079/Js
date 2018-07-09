@@ -57,8 +57,10 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
 
         if (item.cuse == item.csum) {
             helper.setVisible(R.id.tv_yuyue, false);
-        }
+        } else {
+            helper.setVisible(R.id.tv_yuyue, true);
 
+        }
         helper.addOnClickListener(R.id.tv_yuyue);
         helper.addOnClickListener(R.id.tv_xuke);
 

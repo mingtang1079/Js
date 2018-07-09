@@ -56,7 +56,8 @@ public class TrainerDetailActivity extends BaseActivity {
 
 
     @Autowired
-    String id;
+    String id;//教练Id
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.tv_name)

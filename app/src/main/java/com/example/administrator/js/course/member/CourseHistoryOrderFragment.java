@@ -43,7 +43,7 @@ public class CourseHistoryOrderFragment extends BaseRefreshFragment<HistoryOrder
                 } else if (view.getId() == R.id.tv_xuke) {
 
                     ARouter.getInstance().build("/vipandtrainer/BuySiJiaoKeActivity")
-                            .withString("id", mList.get(position).no)
+                            .withString("id", mList.get(position).tid)
                             .withString("cardid", mList.get(position).id)
                             .navigation(mContext);
 

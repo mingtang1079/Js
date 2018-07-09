@@ -24,7 +24,7 @@ import butterknife.OnClick;
  * Created by tangming on 2018/5/17.
  */
 @Route(path = "/course/CourseTrainerFragment")
-public class CourseTrainerFragment extends BaseRefreshFragment<User> {
+public class CourseTrainerFragment extends BaseRefreshFragment<CourseModel> {
 
     @Autowired
     String status;
@@ -62,10 +62,10 @@ public class CourseTrainerFragment extends BaseRefreshFragment<User> {
     public void requestData() {
 
         Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, status, pageNo, null)
-                .as(RxHelper.<WrapperModel<User>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<WrapperModel<User>>() {
+                .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<WrapperModel<CourseModel>>() {
                     @Override
-                    protected void onSucess(WrapperModel<User> mVipUserBaseModelWrapper) {
+                    protected void onSucess(WrapperModel<CourseModel> mVipUserBaseModelWrapper) {
                         if (mVipUserBaseModelWrapper != null)
                             loadComplete(mVipUserBaseModelWrapper.list);
 

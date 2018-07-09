@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -23,14 +24,19 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.ChooseLocationActivity;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.me.model.User;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.OnItemClickListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.functions.Consumer;
 
 @Route(path = "/member/YuyueCourseActivity")
 public class YuyueCourseActivity extends BaseActivity {
@@ -90,11 +96,13 @@ public class YuyueCourseActivity extends BaseActivity {
             @Override
             public void onClick(View mView) {
 
+
                 Http.getDefault().saveYuekeCourse(UserManager.getInsatance().getUser().id, id, startdate, starttime, address, lat, lon)
                         .as(RxHelper.<String>handleResult(mContext))
                         .subscribe(new ResponceSubscriber<String>(mContext) {
                             @Override
                             protected void onSucess(String mS) {
+                                EventBus.getDefault().post(new EventMessage.CourseListStatusChange());
                                 start(YuyueSuccessActivity.class);
                                 finish();
                             }
@@ -107,6 +115,14 @@ public class YuyueCourseActivity extends BaseActivity {
 
             }
         });
+
+        RxTextView.textChanges(mTvTime)
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence mCharSequence) throws Exception {
+                   mButtonSure.setEnabled(!TextUtils.isEmpty(mCharSequence.toString()));
+                    }
+                });
         toggleShowLoading(true);
         requestData();
     }
