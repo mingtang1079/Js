@@ -124,15 +124,17 @@ public class PingjiaActivity extends BaseActivity {
         mMap.put("courseid", id);
         mMap.put("userid", UserManager.getInsatance().getUser().id);
         mMap.put("tid", tid);
-        mMap.put("score", mRbPingfen.getRating());
+        mMap.put("score",Integer.valueOf((int) mRbPingfen.getRating()));
         mMap.put("keyword", mItemAdapter.getSingleSelectedItems());
         mMap.put("praisedesc", mEtContent.getText().toString());
 
-        Http.getDefault().savePingjia(mMap).as(RxHelper.<JsonObject>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<JsonObject>() {
+        Http.getDefault().savePingjia(mMap)
+                .as(RxHelper.<Pingjia>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<Pingjia>(mContext) {
                     @Override
-                    protected void onSucess(JsonObject mJsonObject) {
+                    protected void onSucess(Pingjia mJsonObject) {
                         showToast("评价成功");
+                        finish();
                     }
 
                     @Override

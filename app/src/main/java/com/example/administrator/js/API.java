@@ -4,6 +4,7 @@ import com.appbaselib.base.BaseModel;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.course.member.HistoryOrder;
+import com.example.administrator.js.course.member.Pingjia;
 import com.example.administrator.js.course.member.YuyueInfo;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.exercise.model.Main;
@@ -374,5 +375,5 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/appraiseSave")
-    Observable<BaseModel<JsonObject>> savePingjia(@FieldMap Map<String, Object> mMap);
+    Observable<BaseModel<Pingjia>> savePingjia(@FieldMap Map<String, Object> mMap);
 }

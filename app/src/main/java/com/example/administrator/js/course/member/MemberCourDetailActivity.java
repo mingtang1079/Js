@@ -356,7 +356,7 @@ public class MemberCourDetailActivity extends BaseActivity {
                     .withString("tid", this.mCourseModel.tid)
                     .withString("id", mCourseDetail.id)
                     .navigation(mContext);
-
+            finish();
             return;
         }
         final String finalStatus = status;

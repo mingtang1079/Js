@@ -251,6 +251,8 @@
         <activity android:name=".me.member.AddWeiduActivity">
         </activity>
         <activity android:name=".course.member.MemberCourDetailActivity"/>
+        <activity android:name=".course.member.ShangkeRecordActivity">
+        </activity>
     </application>
 
 </manifest>

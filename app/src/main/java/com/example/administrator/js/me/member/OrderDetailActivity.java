@@ -20,6 +20,8 @@ import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.constant.EventMessage;
+import com.example.administrator.js.course.member.ShangkeRecord;
+import com.example.administrator.js.course.member.ShangkeRecordActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -83,6 +85,8 @@ public class OrderDetailActivity extends BaseActivity {
     TextView mTextViewShengyekeshi;
     @BindView(R.id.content)
     NestedScrollView mNestedScrollView;
+    @BindView(R.id.tv_record)
+    TextView mTextViewRecord;
 
 
     @Override
@@ -107,6 +111,12 @@ public class OrderDetailActivity extends BaseActivity {
         toggleShowLoading(true);
         requestData();
 
+        mTextViewRecord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                start(ShangkeRecordActivity.class);
+            }
+        });
     }
 
     @Override
@@ -212,9 +222,9 @@ public class OrderDetailActivity extends BaseActivity {
             mTvPay.setVisibility(View.GONE);
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.VISIBLE);
-
-            mTvTuikuan.setVisibility(View.VISIBLE);
-            mTvTuikuan.setText("退课详情");
+            mTvTuike.setVisibility(View.VISIBLE);
+            mTvTuikuan.setVisibility(View.GONE);
+         //   mTvTuikuan.setText("退课详情");
 
         } else if ("b56".equals(mOrder.status)) {
             mTvOrderStatus.setText("已退款");
