@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Html5Activity;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.constant.EventMessage;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -64,7 +65,7 @@ public class BodyDataActivity extends Html5Activity {
             }
         });
 
-        url = "https://www.cdmuscle.com/h5/bodydata/detail";
+        url = "https://www.cdmuscle.com/h5/bodydata/detail?userid="+ UserManager.getInsatance().getUser().id;
         super.initView();
     }
 

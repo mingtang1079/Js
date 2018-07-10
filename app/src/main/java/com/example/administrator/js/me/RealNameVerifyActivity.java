@@ -252,8 +252,8 @@ public class RealNameVerifyActivity extends BaseActivity {
                         params.put("idnumber", mEtShenfenzheng.getText().toString());
                         params.put("idimgpath", mFiles.get(0));//正面身份证
                         params.put("idimgbackpath", mFiles.get(1));//反面身份证
-                        params.put("photopath", mFiles.get(2));//从业证明
-                        params.put("certpath", mFiles.get(3));//证书地址
+//                        params.put("photopath", mFiles.get(2));//从业证明
+//                        params.put("certpath", mFiles.get(3));//证书地址
 
                         return Http.getDefault().verifyzizhi(params);
                     }

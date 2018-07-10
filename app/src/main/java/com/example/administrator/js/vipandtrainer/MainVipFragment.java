@@ -118,7 +118,7 @@ public class MainVipFragment extends BaseFragment {
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
                     protected void onSucess(final WrapperModel<Main> mMainWrapperModel) {
-                        if (mMainWrapperModel != null && mMainWrapperModel.list != null) {
+                        if (mMainWrapperModel != null && mMainWrapperModel.list != null&&mMainWrapperModel.list.size()!=0) {
                             ImageLoader.load(mContext, mMainWrapperModel.list.get(0).image, mIvAdd);
                         }
                         mIvAdd.setOnClickListener(new View.OnClickListener() {

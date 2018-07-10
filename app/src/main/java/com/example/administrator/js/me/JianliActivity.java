@@ -78,6 +78,7 @@ public class JianliActivity extends BaseActivity implements ZizhiPresenter.Zizhi
         });
 
     }
+
     private void submit() {
 
         mZizhiPresenter.updateZizhi("intro", mEtText.getText().toString());
@@ -86,7 +87,7 @@ public class JianliActivity extends BaseActivity implements ZizhiPresenter.Zizhi
 
     @Override
     public void onSuccess() {
-
+        finish();
     }
 
     @Override

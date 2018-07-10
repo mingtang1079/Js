@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/default_bg"
-    android:orientation="vertical"
-    tools:context=".vipandtrainer.TrainerDetailActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical"
+              tools:context=".vipandtrainer.TrainerDetailActivity">
 
-    <include layout="@layout/include_toolbar" />
+    <include layout="@layout/include_toolbar"/>
 
     <LinearLayout
         android:id="@+id/content"
@@ -59,7 +59,7 @@
                                     android:textSize="18sp"
                                     android:textStyle="bold"
 
-                                    tools:text="Mo" />
+                                    tools:text="Mo"/>
 
                                 <TextView
                                     android:id="@+id/tv_degree"
@@ -70,7 +70,7 @@
                                     android:gravity="center"
                                     android:text="V1"
                                     android:textColor="@color/white"
-                                    android:textSize="8sp" />
+                                    android:textSize="8sp"/>
 
                                 <TextView
                                     android:id="@+id/tv_age"
@@ -84,7 +84,7 @@
                                     android:paddingRight="4dp"
                                     android:textColor="@color/white_color"
                                     android:textSize="11sp"
-                                    tools:text="22" />
+                                    tools:text="22"/>
 
                                 <TextView
                                     android:id="@+id/tv_id"
@@ -92,7 +92,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:textColor="@color/normal_day"
-                                    tools:text="ID:2323422" />
+                                    tools:text="ID:2323422"/>
 
                             </LinearLayout>
 
@@ -107,7 +107,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="擅长："
                                     android:textColor="#FF8996AA"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"/>
 
                                 <TextView
                                     android:id="@+id/tv_shanchang"
@@ -115,7 +115,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="增肌  减脂  塑形" />
+                                    tools:text="增肌  减脂  塑形"/>
 
                             </LinearLayout>
 
@@ -132,7 +132,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="地区："
                                     android:textColor="#FF8996AA"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"/>
 
                                 <TextView
                                     android:id="@+id/tv_area"
@@ -140,7 +140,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="四川-成都-武侯区" />
+                                    tools:text="四川-成都-武侯区"/>
 
                             </LinearLayout>
 
@@ -158,7 +158,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="私信"
-                                    android:textSize="12sp" />
+                                    android:textSize="12sp"/>
 
                                 <TextView
                                     android:id="@+id/btn_guanzhu"
@@ -167,7 +167,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:text="关注"
-                                    android:textSize="12sp" />
+                                    android:textSize="12sp"/>
 
 
                             </LinearLayout>
@@ -183,7 +183,7 @@
                         android:layout_height="48dp"
                         android:layout_gravity="right|top"
                         android:layout_margin="16dp"
-                        android:src="@drawable/icon_user_default" />
+                        android:src="@drawable/icon_user_default"/>
 
 
                 </FrameLayout>
@@ -221,7 +221,7 @@
                                 android:layout_weight="1"
                                 android:text="教练日程"
                                 android:textColor="#4A576A"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"/>
 
                             <TextView
                                 android:id="@+id/tv_time"
@@ -229,7 +229,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="5月   2018"
                                 android:textColor="#ff8996aa"
-                                android:textSize="14sp" />
+                                android:textSize="14sp"/>
                         </LinearLayout>
 
 
@@ -248,9 +248,10 @@
                                 android:layout_weight="1"
                                 android:background="@color/white_color"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/colorAccent"
-                                tools:text="f" />
+                                tools:text="f"/>
 
                             <TextView
                                 android:layout_width="0dp"
@@ -258,9 +259,10 @@
                                 android:layout_weight="1"
                                 android:background="@color/white_color"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/colorAccent"
-                                tools:text="f" />
+                                tools:text="f"/>
 
                             <TextView
                                 android:layout_width="0dp"
@@ -268,9 +270,10 @@
                                 android:layout_weight="1"
                                 android:background="@color/white_color"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/colorAccent"
-                                tools:text="f" />
+                                tools:text="f"/>
 
                             <TextView
                                 android:layout_width="0dp"
@@ -278,9 +281,10 @@
                                 android:layout_weight="1"
                                 android:background="@color/white_color"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/colorAccent"
-                                tools:text="f" />
+                                tools:text="f"/>
 
                             <TextView
                                 android:layout_width="0dp"
@@ -288,9 +292,10 @@
                                 android:layout_weight="1"
                                 android:background="@color/white_color"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/colorAccent"
-                                tools:text="f" />
+                                tools:text="f"/>
 
                             <TextView
                                 android:layout_width="0dp"
@@ -298,9 +303,10 @@
                                 android:layout_weight="1"
                                 android:background="@color/white_color"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/colorAccent"
-                                tools:text="f" />
+                                tools:text="f"/>
 
                             <TextView
                                 android:layout_width="0dp"
@@ -308,9 +314,10 @@
                                 android:layout_weight="1"
                                 android:background="@color/white_color"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/colorAccent"
-                                tools:text="f" />
+                                tools:text="f"/>
 
                         </LinearLayout>
 
@@ -319,7 +326,7 @@
                             android:layout_height="1dp"
                             android:layout_marginLeft="16dp"
                             android:layout_marginRight="16dp"
-                            android:background="#f7f7f7" />
+                            android:background="#f7f7f7"/>
 
                         <RadioGroup
                             android:id="@+id/ll_date_two"
@@ -338,9 +345,11 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
-                                tools:text="f" />
+                                tools:text="f"/>
+
                             <RadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -349,9 +358,11 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
-                                tools:text="f" />
+                                tools:text="ffdf"/>
+
                             <RadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -360,9 +371,11 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
-                                tools:text="f" />
+                                tools:text="fff"/>
+
                             <RadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -371,9 +384,11 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
-                                tools:text="f" />
+                                tools:text="f"/>
+
                             <RadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -382,9 +397,11 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
-                                tools:text="f" />
+                                tools:text="f"/>
+
                             <RadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -393,9 +410,11 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
-                                tools:text="f" />
+                                tools:text="f"/>
+
                             <RadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -404,9 +423,10 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:padding="8dp"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
-                                tools:text="f" />
+                                tools:text="f"/>
 
                         </RadioGroup>
 
@@ -445,7 +465,7 @@
                 android:text="预约体验课"
                 android:textColor="@color/white"
 
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <View
                 android:id="@+id/view_line"
@@ -453,7 +473,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="14dp"
                 android:layout_marginTop="14dp"
-                android:background="#77808f" />
+                android:background="#77808f"/>
 
             <TextView
                 android:id="@+id/tv_goumai"
@@ -466,7 +486,7 @@
                 android:text="购买私教课"
                 android:textColor="@color/white"
 
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -7,5 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@drawable/rb_solid_btn_selector"
+    android:ellipsize="end"
+    android:maxLines="1"
     android:text="拉伸"
     android:textColor="@color/course_text"/>

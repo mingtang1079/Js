@@ -37,6 +37,10 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="5e5ccc0fb69d9abdee6ca846e0fabdac"/>
+        <!-- 配置APP ID -->
+        <meta-data
+            android:name="BUGLY_APPID"
+            android:value="b10f100f0d"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

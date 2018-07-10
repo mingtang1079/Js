@@ -188,7 +188,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
     @Override
     public void onSuccess() {
-        finish();
+      //  finish();
     }
 
     @Override

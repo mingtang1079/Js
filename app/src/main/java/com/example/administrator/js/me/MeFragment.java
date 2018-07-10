@@ -29,6 +29,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
+import butterknife.BindBitmap;
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -56,6 +57,9 @@ public class MeFragment extends BaseFragment {
     TextView mTextViewYajingStatus;
     @BindView(R.id.tv_age)
     TextView mTextViewAge;
+
+    @BindView(R.id.tv_degree)
+    TextView mTextViewDegree;
 
 
     User mUser;
@@ -131,6 +135,18 @@ public class MeFragment extends BaseFragment {
         setUser();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {   // 不在最前端显示 相当于调用了onPause();
+            requestData();
+            return;
+        } else {  // 在最前端显示 相当于调用了onResume();
+            //网络数据刷新
+
+        }
+    }
+
     private void setUser() {
         mUser = UserManager.getInsatance().getUser();
         if (mUser != null) {
@@ -173,6 +189,14 @@ public class MeFragment extends BaseFragment {
                 mTextViewAge.setVisibility(View.GONE);
 
             }
+        }
+
+        if (!TextUtils.isEmpty(mUser.degree)) {
+            mTextViewDegree.setText(mUser.degree);
+            mTextViewDegree.setVisibility(View.VISIBLE);
+        } else {
+            mTextViewDegree.setVisibility(View.GONE);
+
         }
     }
 
