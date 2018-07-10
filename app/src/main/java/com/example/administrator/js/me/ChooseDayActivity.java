@@ -24,6 +24,7 @@ public class ChooseDayActivity extends MyBaseRefreshActivity<Xingqi> {
     protected void initView() {
         super.initView();
         mToolbar.setTitle("选择星期");
+        requestData();
     }
 
     @Override

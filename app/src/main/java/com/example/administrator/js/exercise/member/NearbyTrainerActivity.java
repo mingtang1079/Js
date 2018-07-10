@@ -1,8 +1,11 @@
 package com.example.administrator.js.exercise.member;
 
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -17,11 +20,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
-import com.example.administrator.js.activity.SearchUserActivity;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.model.Skill;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +33,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 @Route(path = "/exercise/NearbyTrainerActivity")
 public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
@@ -44,8 +48,6 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     TextView mJuli;
     @BindView(R.id.xiangmu)
     TextView mXiangmu;
-    @BindView(R.id.jiage)
-    TextView mJiage;
     @BindView(R.id.shaixuan)
     TextView mShaixuan;
 
@@ -132,14 +134,25 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
         Map<String, Object> mStringStringMap = new HashMap<>();
         mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
+
+        if (!TextUtils.isEmpty(orderby)) {
+            mStringStringMap.put("orderby", orderby);
+        }
         if (distance != 0) {
             mStringStringMap.put("distance", distance);
         }
+        if (!TextUtils.isEmpty(skillids)) {
+            mStringStringMap.put("skillids", skillids);
+        }
+
         if (!TextUtils.isEmpty(sex)) {
             mStringStringMap.put("sex", sex);
         }
-        if (!TextUtils.isEmpty(skillids)) {
-            mStringStringMap.put("skillids", skillids);
+        if (!TextUtils.isEmpty(beginprice)) {
+            mStringStringMap.put("beginprice", beginprice);
+        }
+        if (!TextUtils.isEmpty(endprice)) {
+            mStringStringMap.put("endprice", endprice);
         }
         mStringStringMap.put("pageNo", pageNo);
         Http.getDefault().seacrchUser(mStringStringMap)
@@ -159,23 +172,12 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     }
 
-    @OnClick({R.id.zonghe, R.id.juli, R.id.xiangmu, R.id.jiage, R.id.shaixuan, R.id.tv_search})
+    @OnClick({R.id.zonghe, R.id.juli, R.id.xiangmu, R.id.shaixuan, R.id.tv_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.zonghe:
 
-
-                mJuli.setText("距离");
-                mXiangmu.setText("项目");
-                mJiage.setText("价格");
-
-                skillids = "";
-                distance = 0;
-                sex = "";
-                beginprice = "";
-                endprice = "";
-
-                refreshData(true);
+                showZonghe();
 
 
                 break;
@@ -188,11 +190,6 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 showType();
 
                 //       showXiangmu();
-                break;
-            case R.id.jiage:
-
-                showJiage();
-
                 break;
             case R.id.shaixuan:
                 showXiangShaixuan();
@@ -232,8 +229,45 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     private void showXiangShaixuan() {
         View mView = getLayoutInflater().inflate(R.layout.view_trainer_shaixuan, null, false);
-        BottomDialogUtils.showBottomDialog(mContext, mView);
+        final BottomSheetDialog mBottomSheetDialog = BottomDialogUtils.showBottomDialog(mContext, mView);
+        RadioGroup mRadioGroup = mView.findViewById(R.id.rg);
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup mRadioGroup, int mI) {
+                if (mI == R.id.rb_nan) {
+                    sex = "1";
+                } else {
+                    sex = "2";
+                }
+            }
+        });
+        EditText mEditText = mView.findViewById(R.id.et_pricedi);
+        mEditText.setText(beginprice);
+        EditText mEditText2 = mView.findViewById(R.id.et_pricegao);
+        mEditText2.setText(endprice);
+        RxTextView.textChanges(mEditText)
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence mCharSequence) throws Exception {
+                        beginprice = mCharSequence.toString();
+                    }
+                });
+        RxTextView.textChanges(mEditText2)
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence mCharSequence) throws Exception {
+                        endprice = mCharSequence.toString();
+                    }
+                });
 
+        TextView mTextView = mView.findViewById(R.id.tv_wancheng);
+        mTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                mBottomSheetDialog.dismiss();
+                refreshData(true);
+            }
+        });
     }
 
     @Deprecated
@@ -274,28 +308,52 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     }
 
-    private void showJiage() {
+    private void showZonghe() {
 
         final List<String> mItems = new ArrayList<>();
-        mItems.add("不限");
+        mItems.add("综合");
         mItems.add("价格升序");
         mItems.add("价格降序");
+        mItems.add("续课率升序");
+        mItems.add("续课率降序");
+        mItems.add("好评升序");
+        mItems.add("好评降序");
+        mItems.add("等级升序");
+        mItems.add("等级降序");
 
         BottomDialogUtils.showBottomDialog(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+                mZonghe.setText(mItems.get(position));
                 if (position == 0) {
+                    //清空所有的条件
+                    mJuli.setText("距离");
+                    mXiangmu.setText("项目");
+                    distance = 0;
+                    skillids = "";
+
+                    sex = "";
+                    beginprice = "";
+                    endprice = "";
                     orderby = "";
-                    mJiage.setText("价格");
+
                 } else if (position == 1) {
                     orderby = "a.courseprice";
-                    mJiage.setText("价格升序");
-                }
-                else {
-
+                } else if (position == 2) {
                     orderby = "a.a.courseprice desc";
-                    mJiage.setText("价格降序");
+                } else if (position == 3) {
+                    orderby = "a.reorder";
+                } else if (position == 4) {
+                    orderby = "a.reorder desc";
+                } else if (position == 5) {
+                    orderby = "a.score";
+                } else if (position == 6) {
+                    orderby = "a.score desc";
+                } else if (position == 7) {
+                    orderby = "a.degree";
+                } else if (position == 8) {
+                    orderby = "a.degree desc";
                 }
 
                 refreshData(true);
@@ -303,4 +361,5 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         }).show();
 
     }
+
 }

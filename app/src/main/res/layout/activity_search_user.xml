@@ -40,6 +40,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/com_round_corner_solid_f5f5f5"
                     android:hint="搜索会员昵称  ID"
+                    android:maxLines="1"
                     android:textColor="@color/color_333333"
                     android:padding="8dp"
                     android:textColorHint="@color/color_bcc8da"

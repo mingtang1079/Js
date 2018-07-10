@@ -17,12 +17,14 @@ import com.example.administrator.js.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import io.rong.imkit.fragment.ConversationListFragment;
 import io.rong.imlib.model.Conversation;
 
 public class MessageActivity extends BaseActivity {
 
-    public Toolbar mToolbar;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     public TabLayout mTab;
     public ViewPager mViewpager;
 

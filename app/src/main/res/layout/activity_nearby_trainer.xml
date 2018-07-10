@@ -98,18 +98,6 @@
                 android:textColor="#FF4A576A"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/jiage"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:button="@null"
-                android:drawableRight="@drawable/icon_xiabiao"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="价格"
-                android:textColor="#FF4A576A"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/shaixuan"
