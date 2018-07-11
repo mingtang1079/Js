@@ -21,6 +21,8 @@ import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.service.LocationService;
 import com.google.gson.JsonObject;
 import com.mic.adressselectorlib.CityHelper;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 
@@ -92,13 +94,8 @@ public class App extends BaseApplication {
          * 每一条Crash都会被立即上报；
          * 自定义日志将会在Logcat中输出。
          * 建议在测试阶段建议设置成true，发布时设置为false */
-        CrashReport.initCrashReport(getApplicationContext());
+        Bugly.init(getApplicationContext(), "b10f100f0d", false);
     }
-
-    protected String buglyAppId() {
-        return "";
-    }
-
     private void initRouter() {
 
         if (BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
@@ -209,4 +206,10 @@ public class App extends BaseApplication {
         }
     };
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // 安装tinker
+        Beta.installTinker();
+    }
 }

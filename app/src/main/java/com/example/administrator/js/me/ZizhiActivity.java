@@ -1,9 +1,15 @@
 package com.example.administrator.js.me;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,10 +27,13 @@ import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.presenter.ZizhiPresenter;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiResponse {
 
@@ -53,6 +62,8 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
     @BindView(R.id.content)
     LinearLayout mLinearLayout;
     private long time;
+    @BindView(R.id.ll_yaoqingma)
+    LinearLayout mLinearLayoutYao;
 
     VerifyUser mVerifyUser;
     ZizhiPresenter mZizhiPresenter;
@@ -114,7 +125,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
     }
 
-    @OnClick({R.id.ll_time, R.id.ll_lingyu, R.id.ll_anlie, R.id.ll_zhengshu, R.id.ll_geyan, R.id.ll_xinxiang, R.id.ll_jinsheng, R.id.ll_jianli})
+    @OnClick({R.id.ll_time, R.id.ll_lingyu, R.id.ll_anlie, R.id.ll_zhengshu, R.id.ll_geyan, R.id.ll_xinxiang, R.id.ll_jinsheng, R.id.ll_jianli, R.id.ll_yaoqingma})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_time:
@@ -178,8 +189,58 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                         .withObject("mVerifyUser", mVerifyUser)
                         .navigation();
                 break;
+
+            case R.id.ll_yaoqingma:
+
+                tianxie();
+
+                break;
         }
     }
+
+    private void tianxie() {
+
+
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
+        View mView = LayoutInflater.from(mContext).inflate(R.layout.view_input, null, false);
+        final TextInputEditText mTextInputEditText = mView.findViewById(R.id.et);
+        mBuilder.setTitle("提示");
+        mTextInputEditText.setHint("请填写邀请码");
+        mTextInputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        mBuilder.setView(mView);
+        mBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface mDialogInterface, int mI) {
+                mDialogInterface.dismiss();
+            }
+        });
+        mBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                mZizhiPresenter.updateZizhi("invitecode", mTextInputEditText.getText().toString());
+
+            }
+        });
+        AlertDialog mAlertDialog = mBuilder.create();
+        mAlertDialog.show();
+        final Button mButton = mAlertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        mButton.setEnabled(false);
+        RxTextView.textChangeEvents(mTextInputEditText).skip(1)
+                .subscribe(new Consumer<TextViewTextChangeEvent>() {
+                    @Override
+                    public void accept(TextViewTextChangeEvent mTextViewTextChangeEvent) throws Exception {
+                        if (!TextUtils.isEmpty(mTextViewTextChangeEvent.text().toString())) {
+                            mButton.setEnabled(true);
+                        } else {
+                            mButton.setEnabled(false);
+                        }
+                    }
+                });
+
+
+    }
+
 
     private void shenqing() {
 
@@ -188,7 +249,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
     @Override
     public void onSuccess() {
-      //  finish();
+        //  finish();
     }
 
     @Override

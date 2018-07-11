@@ -1,5 +1,6 @@
 package com.example.administrator.js.activity;
 
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,11 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.LogUtils;
+import com.example.administrator.js.Http;
+import com.example.administrator.js.LocationManager;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.ChooseLocationActivity;
@@ -19,8 +25,13 @@ import com.example.administrator.js.course.MainCourseFragment;
 import com.example.administrator.js.exercise.ExerciseFragment;
 import com.example.administrator.js.me.MeFragment;
 import com.example.administrator.js.me.member.MeMemberFragment;
+import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.vipandtrainer.MainVipFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -131,6 +142,29 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+    }
+
+    private void upadateLocation() {
+
+        Map<String, String> mStringStringMap = new HashMap<>();
+        mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
+        mStringStringMap.put("longitude", LocationManager.getInsatance().longitude);
+        mStringStringMap.put("latitude", LocationManager.getInsatance().latitude);
+        Http.getDefault().userEdit(mStringStringMap)
+                .as(RxHelper.<User>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<User>() {
+                    @Override
+                    protected void onSucess(User mUser) {
+                        LogUtils.d("成功上传用户经纬度");
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        LogUtils.d("上传用户经纬度失败了");
+
+                    }
+                });
+
     }
 
     public void onAddClicked() {

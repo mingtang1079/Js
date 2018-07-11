@@ -25,6 +25,7 @@ import com.example.administrator.js.me.model.ServiceTime;
 import com.example.administrator.js.me.model.Xingqi;
 import com.example.administrator.js.utils.MyDateUtils;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +54,7 @@ public class AddServicetimeActivity extends BaseActivity {
     String endTime;
 
     MenuItem mMenuItem;
+    List<Xingqi> mXingqis;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -76,7 +78,29 @@ public class AddServicetimeActivity extends BaseActivity {
             mToolbar.setTitle("添加服务时间");
         } else {
             mToolbar.setTitle("编辑服务时间");
+            mTvStartTime.setText(mServiceTime.starttime);
+            mTvEndTime.setText(mServiceTime.endtime);
+//组装数据....
+            startTime = mServiceTime.starttime;
+            endTime = mServiceTime.endtime;
 
+            mXingqis = new ArrayList<>();
+            if ("1".equals(mServiceTime.day1))
+                mXingqis.add(new Xingqi("星期一,"));
+            if ("1".equals(mServiceTime.day2))
+                mXingqis.add(new Xingqi("星期二,"));
+            if ("1".equals(mServiceTime.day3))
+                mXingqis.add(new Xingqi("星期三,"));
+            if ("1".equals(mServiceTime.day4))
+                mXingqis.add(new Xingqi("星期四,"));
+            if ("1".equals(mServiceTime.day5))
+                mXingqis.add(new Xingqi("星期五,"));
+            if ("1".equals(mServiceTime.day6))
+                mXingqis.add(new Xingqi("星期六,"));
+            if ("1".equals(mServiceTime.day7))
+                mXingqis.add(new Xingqi("星期日"));
+
+            convert();
         }
 
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
@@ -200,7 +224,6 @@ public class AddServicetimeActivity extends BaseActivity {
         }
     }
 
-    List<Xingqi> mXingqis;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -209,13 +232,17 @@ public class AddServicetimeActivity extends BaseActivity {
         if (requestCode == 20 && resultCode == Activity.RESULT_OK) {
 
             mXingqis = (List<Xingqi>) data.getSerializableExtra("data");
-            if (mXingqis != null) {
-                StringBuilder mStringBuilder = new StringBuilder();
-                for (int i = 0; i < mXingqis.size(); i++) {
-                    mStringBuilder.append(mXingqis.get(i).name + " ");
-                    mTvDays.setText(mStringBuilder.toString());
+            convert();
 
-                }
+        }
+    }
+
+    private void convert() {
+        if (mXingqis != null) {
+            StringBuilder mStringBuilder = new StringBuilder();
+            for (int i = 0; i < mXingqis.size(); i++) {
+                mStringBuilder.append(mXingqis.get(i).name + " ");
+                mTvDays.setText(mStringBuilder.toString());
 
             }
 
