@@ -50,6 +50,8 @@ public class ServiceTimeListActivity extends MyBaseRefreshActivity<ServiceTime> 
                 return true;
             }
         });
+        toggleShowLoading(true);
+        requestData();
     }
 
     @Override
@@ -77,7 +79,7 @@ public class ServiceTimeListActivity extends MyBaseRefreshActivity<ServiceTime> 
                     public void onClick(DialogInterface mDialogInterface, int mI) {
 
                         ServiceTime mServiceTime = (ServiceTime) mList.get(position);
-                        delete(mServiceTime.id,position);
+                        delete(mServiceTime.id, position);
 
                     }
                 }).show();

@@ -23,6 +23,7 @@ import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.ServiceTime;
 import com.example.administrator.js.me.model.Xingqi;
+import com.example.administrator.js.utils.MyDateUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -86,7 +87,14 @@ public class AddServicetimeActivity extends BaseActivity {
             @Override
             public boolean onMenuItemClick(MenuItem mMenuItem) {
                 if (mMenuItem.getItemId() == R.id.btn_common) {
-                    save();
+
+                    int s1 = Integer.parseInt(startTime.replace(":", ""));
+                    int s2 = Integer.parseInt(endTime.replace(":", ""));
+                    if (s2 - s1 >= 100) {
+                        save();
+                    } else {
+                        showToast("时间至少间隔一小时哦");
+                    }
                 }
                 return true;
             }
@@ -109,37 +117,28 @@ public class AddServicetimeActivity extends BaseActivity {
         if (mXingqis == null) {
             showToast("请选择星期");
             return;
-        }
-        else {
+        } else {
 
-            for (Xingqi mXingqi:mXingqis)
-            {
-                if (mXingqi.name.equals("星期一"))
-                {
+            for (Xingqi mXingqi : mXingqis) {
+                if (mXingqi.name.equals("星期一")) {
                     mMap.put("day1", "1");
                 }
-                if (mXingqi.name.equals("星期二"))
-                {
+                if (mXingqi.name.equals("星期二")) {
                     mMap.put("day2", "1");
                 }
-                if (mXingqi.name.equals("星期三"))
-                {
+                if (mXingqi.name.equals("星期三")) {
                     mMap.put("day3", "1");
                 }
-                if (mXingqi.name.equals("星期四"))
-                {
+                if (mXingqi.name.equals("星期四")) {
                     mMap.put("day4", "1");
                 }
-                if (mXingqi.name.equals("星期五"))
-                {
+                if (mXingqi.name.equals("星期五")) {
                     mMap.put("day5", "1");
                 }
-                if (mXingqi.name.equals("星期六"))
-                {
+                if (mXingqi.name.equals("星期六")) {
                     mMap.put("day6", "1");
                 }
-                if (mXingqi.name.equals("星期日"))
-                {
+                if (mXingqi.name.equals("星期日")) {
                     mMap.put("day7", "1");
                 }
             }
@@ -171,10 +170,10 @@ public class AddServicetimeActivity extends BaseActivity {
             case R.id.tv_start_time:
 
 
-                DatePickerDialogUtils.getDefaultDatePickerDialog2(mContext, new OnDateSelectedListener() {
+                MyDateUtils.getDefaultDatePickerDialog2(mContext, new OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
-                        startTime = mCalendarData.hour + ":" + mCalendarData.minute + ":" + mCalendarData.second;
+                        startTime = mCalendarData.hour + ":" + mCalendarData.minute2;
                         mTvStartTime.setText(startTime);
 
 
@@ -183,10 +182,10 @@ public class AddServicetimeActivity extends BaseActivity {
                 break;
             case R.id.tv_end_time:
 
-                DatePickerDialogUtils.getDefaultDatePickerDialog2(mContext, new OnDateSelectedListener() {
+                MyDateUtils.getDefaultDatePickerDialog2(mContext, new OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
-                        endTime = mCalendarData.hour + ":" + mCalendarData.minute + ":" + mCalendarData.second;
+                        endTime = mCalendarData.hour + ":" + mCalendarData.minute2;
 
                         mTvEndTime.setText(endTime);
 
