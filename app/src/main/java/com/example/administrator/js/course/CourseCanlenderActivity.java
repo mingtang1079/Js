@@ -21,6 +21,8 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.me.MeFragment;
+import com.example.administrator.js.me.member.MeMemberFragment;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.view.CustomDayView;
 import com.example.administrator.js.view.ThemeDayView;
@@ -93,9 +95,19 @@ public class CourseCanlenderActivity extends BaseActivity {
         mCourseUserAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ARouter.getInstance().build("/course/CourDetailActivity")
-                        .withString("id",mCourseUserAdapter.getData().get(position).id)
-                        .navigation(mContext);
+
+
+
+                if ("0".equals(UserManager.getInsatance().getUser().role)) {
+
+                    ARouter.getInstance().build("/course/CourDetailActivity")
+                            .withString("id",mCourseUserAdapter.getData().get(position).id)
+                            .navigation(mContext);
+                } else {
+                    ARouter.getInstance().build("/course/MemberCourDetailActivity")
+                            .withObject("mCourseModel",mCourseUserAdapter.getData().get(position))
+                            .navigation(mContext);
+                }
             }
         });
         mList.setAdapter(mCourseUserAdapter);

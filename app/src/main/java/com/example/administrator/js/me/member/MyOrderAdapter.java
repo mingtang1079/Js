@@ -79,7 +79,7 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         } else if ("b2".equals(item.status)) {
             helper.setText(R.id.tv_status, "待付款");
             mTextViewCancel.setVisibility(View.VISIBLE);
-            mTextViewPay.setVisibility(View.GONE);
+            mTextViewPay.setVisibility(View.VISIBLE);
             mTextViewTuikuan.setVisibility(View.GONE);
             mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
 

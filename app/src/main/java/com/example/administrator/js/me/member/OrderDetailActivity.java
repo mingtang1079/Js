@@ -201,7 +201,7 @@ public class OrderDetailActivity extends BaseActivity {
         } else if ("b2".equals(mOrder.status)) {
             mTvOrderStatus.setText("待付款");
             mTvCancel.setVisibility(View.VISIBLE);
-            mTvPay.setVisibility(View.GONE);
+            mTvPay.setVisibility(View.VISIBLE);
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
 
