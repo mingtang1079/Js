@@ -40,6 +40,7 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
         super.initView();
         toggleShowLoading(true);
         requestData();
+        setLoadMoreListener();
     }
 
     @Override
