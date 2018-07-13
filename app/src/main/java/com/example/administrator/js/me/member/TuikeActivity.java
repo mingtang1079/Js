@@ -191,6 +191,7 @@ public class TuikeActivity extends BaseActivity {
                         mMyOrder.refunddetail=mEtReason.getText().toString();
 
                         ARouter.getInstance().build("/member/TuikeDetailActivity")
+                                .withBoolean("isFirst",true)
                                 .withObject("mMyOrder", mMyOrder)
                                 .navigation(mContext);
                         finish();

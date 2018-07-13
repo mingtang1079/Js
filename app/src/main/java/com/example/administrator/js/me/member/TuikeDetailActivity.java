@@ -12,6 +12,10 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
 import com.example.administrator.js.R;
 
+import org.w3c.dom.Text;
+
+import java.math.BigDecimal;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -21,6 +25,8 @@ public class TuikeDetailActivity extends BaseActivity {
 
     @Autowired
     MyOrder mMyOrder;
+    @Autowired
+    boolean isFirst;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -49,6 +55,8 @@ public class TuikeDetailActivity extends BaseActivity {
     TextView mTvStepThree;
     @BindView(R.id.tv_age)
     TextView mTvAge;
+    @BindView(R.id.tv_tips)
+    TextView mTextViewTips;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -71,6 +79,10 @@ public class TuikeDetailActivity extends BaseActivity {
         mToolbar.setTitle("退课详情");
 
         setData(mMyOrder);
+        if (isFirst)
+            mTextViewTips.setVisibility(View.VISIBLE);
+        else
+            mTextViewTips.setVisibility(View.GONE);
     }
 
     private void setData(MyOrder mOrder) {
@@ -95,10 +107,12 @@ public class TuikeDetailActivity extends BaseActivity {
         } else {
             mTvAge.setVisibility(View.GONE);
         }
-        mTvTuikuanPrice.setText("￥ " + mOrder.tuikePrice);
         mTvReason.setText("退课原因：" + mOrder.refundtype);
         mTvTime.setText("申请时间：" + mOrder.tuikeTime);
         mTvNumber.setText(mOrder.payno + "");
+
+        int price = new BigDecimal(mOrder.crealprice / 100).divide(new BigDecimal(mOrder.csum), 0, BigDecimal.ROUND_UP).intValue();
+        mTvTuikuanPrice.setText("￥ " + price);
 
     }
 }
