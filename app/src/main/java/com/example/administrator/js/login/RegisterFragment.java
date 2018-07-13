@@ -19,6 +19,7 @@ import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.view.PasswordToggleEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.uber.autodispose.AutoDispose;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -34,6 +35,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Function3;
 import io.reactivex.observers.DefaultObserver;
+import io.reactivex.observers.DisposableObserver;
 
 /**
  * Created by tangming on 2018/4/8.
@@ -141,11 +143,12 @@ public class RegisterFragment extends BaseFragment {
                     }
                 });
     }
-
+    Disposable mDisposable;
     private void requestCode() {
 
         final int count = 60;
-        Observable.interval(0, 1, TimeUnit.SECONDS)
+         mDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
+
                 .take(count + 1)
                 .map(new Function<Long, Long>() {
                     @Override
@@ -153,13 +156,13 @@ public class RegisterFragment extends BaseFragment {
                         return count - mLong;
                     }
                 }).doOnSubscribe(new Consumer<Disposable>() {
-            @Override
-            public void accept(Disposable mDisposable) throws Exception {
-                mBtYzm.setEnabled(false);
+                    @Override
+                    public void accept(Disposable mDisposable) throws Exception {
+                        mBtYzm.setEnabled(false);
 
-            }
-        }).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<Long>() {
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long mLong) {
                         mBtYzm.setText("剩余" + mLong + "秒");
@@ -202,5 +205,11 @@ public class RegisterFragment extends BaseFragment {
         super.onAttach(activity);
         mOnbackClickListener = (OnbackClickListener) activity;
         mOnUserGetListener = (OnUserGetListener) activity;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mDisposable.dispose();
     }
 }
