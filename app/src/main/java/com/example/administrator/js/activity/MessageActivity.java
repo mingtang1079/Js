@@ -47,7 +47,7 @@ public class MessageActivity extends BaseActivity {
 
     protected String[] getTabTitle() {
 
-        return new String[]{"私信", "系统"};
+        return new String[]{"私信"};
     }
 
     ;
@@ -59,9 +59,7 @@ public class MessageActivity extends BaseActivity {
                 .appendPath("conversationlist").appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false").build();
         ConversationListFragment mMessageFragment = new ConversationListFragment();
         mMessageFragment.setUri(mUri);
-        ConversationListFragment mMessageFragment1 = new ConversationListFragment();
         m.add(mMessageFragment);
-        m.add(mMessageFragment1);
         return m;
     }
 

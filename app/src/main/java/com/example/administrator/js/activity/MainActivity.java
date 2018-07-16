@@ -70,10 +70,10 @@ public class MainActivity extends BaseActivity {
         return 0;
     }
 
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
+//    @Override
+//    public void onBackPressed() {
+//        moveTaskToBack(true);
+//    }
 
     @Override
     protected View getLoadingTargetView() {

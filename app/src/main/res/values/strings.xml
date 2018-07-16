@@ -17,4 +17,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string-array name="minute_display2">
+        <item>00</item>
+        <item>30</item>
+    </string-array>
 </resources>
