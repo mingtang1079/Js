@@ -198,6 +198,7 @@ public interface API {
 
     /**
      * 教练端 课程详细
+     *
      * @param jiaolianId
      * @param useId
      * @return
@@ -205,8 +206,10 @@ public interface API {
     @POST(AUTHORIRY + "/course/get")
     @FormUrlEncoded
     Observable<BaseModel<CourseDetail>> courseDetail(@Field("tid") String jiaolianId, @Field("id") String useId);
+
     /**
      * 会员端 课程详细
+     *
      * @param userId
      * @param useId
      * @return
@@ -215,7 +218,9 @@ public interface API {
     @FormUrlEncoded
     Observable<BaseModel<CourseDetail>> courseDetail2(@Field("uid") String userId, @Field("id") String courseID);
 
-    /** J教练端
+    /**
+     * J教练端
+     *
      * @param jiaolianId
      * @param status     状态 1进行中,2已结束
      * @param pageNo     页码,默认1,用于已结束的下拉刷新
@@ -228,7 +233,9 @@ public interface API {
                                                                @Field("pageNo") int pageNo, @Field("starttime") String starttime);
 
 
-    /** J会员端
+    /**
+     * J会员端
+     *
      * @param jiaolianId
      * @param status     状态 1进行中,2已结束
      * @param pageNo     页码,默认1,用于已结束的下拉刷新
@@ -238,7 +245,7 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")
     Observable<BaseModel<WrapperModel<CourseModel>>> getCourse2(@Field("uid") String jiaolianId, @Field("status") String status,
-                                                        @Field("pageNo") int pageNo, @Field("starttime") String starttime);
+                                                                @Field("pageNo") int pageNo, @Field("starttime") String starttime);
 
     /**
      * @param id
@@ -333,7 +340,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/order/studentsave")
-    Observable<BaseModel<String>> studentsave(@Field("tid") String tid,@Field("cardid") String cardid, @Field("uid") String uid, @Field("ctype") String ctype,
+    Observable<BaseModel<String>> studentsave(@Field("tid") String tid, @Field("cardid") String cardid, @Field("uid") String uid, @Field("ctype") String ctype,
                                               @Field("coursetypeids") String coursetypeids, @Field("csum") String csum
             , @Field("address") String address, @Field("clongtitude") String clongtitude, @Field("clatitude") String clatitude);
 
@@ -376,4 +383,17 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/appraiseSave")
     Observable<BaseModel<Pingjia>> savePingjia(@FieldMap Map<String, Object> mMap);
+
+    /**
+     * ordertype	是	string	支付用途 0买课,1押金
+     paytype	是	string	支付方式0支付宝,1微信
+     * @param uid
+     * @param orderid
+     * @param paytype
+     * @param ordertype
+     * @return
+     */
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/pay/submit")
+    Observable<BaseModel<String>> pay(@Field("uid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
 }

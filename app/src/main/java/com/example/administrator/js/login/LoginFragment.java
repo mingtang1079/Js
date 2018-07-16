@@ -57,8 +57,8 @@ public class LoginFragment extends BaseFragment {
     protected void initView() {
 
         if (BuildConfig.DEBUG) {
-            mTvPhone.setText("18202820092");
-            mPassword.setText("123456");
+            mTvPhone.setText("18613222350");
+            mPassword.setText("12345678");
         }
 
         Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone);

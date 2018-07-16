@@ -40,9 +40,26 @@
             android:name="com.amap.api.v2.apikey"
             android:value="5e5ccc0fb69d9abdee6ca846e0fabdac" />
         <!-- 配置APP ID -->
-        <!--<meta-data-->
-            <!--android:name="BUGLY_APPID"-->
-            <!--android:value="b10f100f0d" />-->
+        <!-- <meta-data -->
+        <!-- android:name="BUGLY_APPID" -->
+        <!-- android:value="b10f100f0d" /> -->
+        <!-- 支付宝 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+
+            <!-- 支付宝 -->
+
+        </activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -53,24 +70,25 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/rc_file_path" />
         </provider>
-        <!--<provider-->
-            <!--android:name=".utils.BuglyFileProvider"-->
-            <!--android:authorities="${applicationId}.fileProvider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true"-->
-            <!--tools:replace="name,authorities,exported,grantUriPermissions">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/provider_paths"-->
-                <!--tools:replace="name,resource" />-->
-        <!--</provider>-->
+        <!-- <provider -->
+        <!-- android:name=".utils.BuglyFileProvider" -->
+        <!-- android:authorities="${applicationId}.fileProvider" -->
+        <!-- android:exported="false" -->
+        <!-- android:grantUriPermissions="true" -->
+        <!-- tools:replace="name,authorities,exported,grantUriPermissions"> -->
+        <!-- <meta-data -->
+        <!-- android:name="android.support.FILE_PROVIDER_PATHS" -->
+        <!-- android:resource="@xml/provider_paths" -->
+        <!-- tools:replace="name,resource" /> -->
+        <!-- </provider> -->
 
-        <!-- 腾讯bugly-->
+
+        <!-- 腾讯bugly -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
-        <!-- service-->
+        <!-- service -->
         <service android:name=".service.LocationService" />
 
         <activity
@@ -269,10 +287,15 @@
         <activity android:name=".me.member.AddBodyDataActivity" />
         <activity android:name=".vipandtrainer.trainer.ApplySuccessActivity" />
         <activity android:name=".course.member.ChooseYuyueTimeActivity" />
-        <activity android:name=".me.member.BodyListActivity"></activity>
-        <activity android:name=".me.member.AddWeiduActivity"></activity>
+        <activity android:name=".me.member.BodyListActivity" />
+        <activity android:name=".me.member.AddWeiduActivity" />
         <activity android:name=".course.member.MemberCourDetailActivity" />
-        <activity android:name=".course.member.ShangkeRecordActivity"></activity>
+        <activity android:name=".course.member.ShangkeRecordActivity" />
+        <activity android:name=".activity.PayActivity" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"></activity>
     </application>
 
 </manifest>

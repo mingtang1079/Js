@@ -82,6 +82,12 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
 
                 } else if (view.getId() == R.id.tv_pay) {
 
+                    ARouter.getInstance().build("/activity/PayActivity")
+                            .withString("orderId", mList.get(position).id)
+                            .withString("orderType", "0")
+                            .navigation(mContext);
+
+
                 } else if (view.getId() == R.id.tv_tuikuan) {
                     ARouter.getInstance().build("/member/TuikeActivity")
                             .withObject("mMyOrder", mList.get(position))
