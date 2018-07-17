@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -18,7 +19,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by tangming on 2018/6/26.
  */
-
 class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
     public MyOrderAdapter(int layoutResId, List<MyOrder> data) {
         super(layoutResId, data);
@@ -58,6 +58,7 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         }
 
         //单价
+        helper.setText(R.id.tv_number,"订单号："+item.payno);
         helper.setText(R.id.tv_danjia, "￥ " + item.cprice / 100 + "");
         helper.setText(R.id.tv_course_count, "共" + item.csum + "节课  合计");
         helper.setText(R.id.tv_course_type, item.ctypename + "(" + item.coursetypenames + ")");

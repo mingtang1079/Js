@@ -35,10 +35,12 @@ public class NearbyTrainerAdapter extends BaseRecyclerViewAdapter<User> {
         helper.setText(R.id.tv_time_juli, item.distancefmt);
 
         //年龄
-        if (item.age != null && !TextUtils.isEmpty(item.sex)) {
+        if ( !TextUtils.isEmpty(item.sex)) {
             TextView mTextView = helper.getView(R.id.tv_age);
             helper.setVisible(R.id.tv_age, true);
-            helper.setText(R.id.tv_age, item.age + "");
+            if (item.age!=null) {
+                helper.setText(R.id.tv_age, item.age + "");
+            }
             if (item.sex.equals("1")) {
                 //男性
                 mTextView.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));

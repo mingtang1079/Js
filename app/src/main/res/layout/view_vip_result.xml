@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:drawableRight="@drawable/icon_next"
         android:paddingBottom="16dp"
-        android:text="会员成果"
+        android:text="铁友圈"
         android:textColor="@color/color_4a576a" />
 
     <android.support.v7.widget.RecyclerView

@@ -1,5 +1,6 @@
 package com.example.administrator.js.vipandtrainer;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
@@ -16,12 +17,16 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.exercise.member.NearbyTrainerAdapter;
 import com.example.administrator.js.me.model.User;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by tangming on 2018/6/22.
@@ -42,6 +47,15 @@ public class TrainerFragment extends BaseRefreshFragment<User> {
     @Override
     protected void initView() {
         super.initView();
+        RxTextView.textChanges(mEditTextSearch).skip(1)
+                .debounce(400, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence mCharSequence) throws Exception {
+                        refreshData(true);
+                    }
+                });
         toggleShowLoading(true, "加载中……");
         requestData();
 
@@ -68,6 +82,9 @@ public class TrainerFragment extends BaseRefreshFragment<User> {
         Map<String, String> mMap = new HashMap<>();
         mMap.put("id", UserManager.getInsatance().getUser().id);
         mMap.put("status", status);
+        if (!TextUtils.isEmpty(mEditTextSearch.getText().toString())) {
+            mMap.put("condition", mEditTextSearch.getText().toString());
+        }
         // TODO: 2018/6/22
         Http.getDefault().getUser(mMap)
                 .as(RxHelper.<List<VipUser>>handleResult(mContext))

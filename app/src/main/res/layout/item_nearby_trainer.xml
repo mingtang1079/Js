@@ -98,7 +98,10 @@
                     android:id="@+id/tv_skill"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
                     android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
                     android:textColor="#FF8996AA"
                     android:textSize="13sp"
                     tools:text="增肌  减脂  塑形" />
@@ -111,6 +114,7 @@
                     android:paddingRight="16dp"
                     android:textColor="#BCC8DA"
                     android:textSize="12sp"
+                    android:visibility="gone"
                     tools:text="评分4.3" />
 
                 <TextView

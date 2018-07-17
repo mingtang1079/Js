@@ -21,6 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
+                android:maxLines="1"
                 android:background="@drawable/com_round_corner_solid_white"
                 android:hint="搜索会员昵称  ID"
                 android:padding="8dp"

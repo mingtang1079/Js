@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/default_bg"
-              android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
 
 
     <LinearLayout
@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/iv_add"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <ImageView
                 android:id="@+id/iv_mes"
@@ -29,15 +29,15 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_margin="16dp"
-                android:src="@drawable/icon_mes"/>
+                android:src="@drawable/icon_mes" />
 
             <ImageView
                 android:id="@+id/iv_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_toLeftOf="@id/iv_mes"
-                android:src="@drawable/icon_setting"/>
+                android:src="@drawable/icon_setting" />
 
 
         </RelativeLayout>
@@ -56,8 +56,7 @@
                     android:id="@+id/iv_head"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:src="@drawable/icon_ting"
-                    />
+                    android:src="@drawable/icon_ting" />
 
                 <TextView
                     android:id="@+id/tv_degree"
@@ -70,7 +69,7 @@
                     android:text="V1"
                     android:textColor="@color/white"
                     android:textSize="8sp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
             </FrameLayout>
 
@@ -97,7 +96,7 @@
                         android:maxLength="10"
                         android:text="登录"
                         android:textColor="#FFFFFFFF"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/tv_age"
@@ -111,7 +110,7 @@
                         android:paddingRight="4dp"
                         android:textColor="@color/white_color"
                         android:textSize="11sp"
-                        tools:text="22"/>
+                        tools:text="22" />
 
                     <TextView
                         android:id="@+id/tv_verify"
@@ -124,7 +123,7 @@
                         android:text="未认证"
                         android:textColor="#FFFFFFFF"
                         android:textSize="12sp"
-                        android:visibility="visible"/>
+                        android:visibility="visible" />
                 </LinearLayout>
 
                 <TextView
@@ -134,7 +133,7 @@
                     android:layout_marginTop="8dp"
                     android:textColor="#99FFFFFF"
                     android:textSize="13sp"
-                    tools:text="ID：234232323"/>
+                    tools:text="ID：234232323" />
             </LinearLayout>
 
 
@@ -150,13 +149,13 @@
                     android:id="@+id/iv_barcode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_barcode"/>
+                    android:src="@drawable/icon_barcode" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:src="@drawable/icon_right"/>
+                    android:src="@drawable/icon_right" />
 
 
             </LinearLayout>
@@ -192,7 +191,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="教学资质"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -212,7 +211,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="会员申请"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -232,7 +231,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="我的日程"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -252,7 +251,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="统计"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -272,7 +271,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="我的收藏"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -292,7 +291,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="课程定价"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -312,7 +311,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="推荐好友"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -332,7 +331,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="工作时间设置"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -351,7 +350,7 @@
                     android:drawablePadding="8dp"
                     android:text="押金"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tv_yajing_status"
@@ -363,7 +362,7 @@
                     android:gravity="right"
                     android:text="未交"
                     android:textColor="#FF999999"
-                    android:textSize="13sp"/>
+                    android:textSize="13sp" />
 
             </LinearLayout>
 
@@ -383,7 +382,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="教练必读"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -403,7 +402,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="分享给朋友"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -423,7 +422,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="意见反馈"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
@@ -444,7 +443,7 @@
                     android:drawableRight="@drawable/icon_right"
                     android:text="关于我们"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
             </LinearLayout>
 
