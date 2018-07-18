@@ -3,6 +3,7 @@ package com.example.administrator.js.activity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -84,12 +85,12 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
     @BindView(R.id.ll_address)
     LinearLayout mLlNick;
     @BindView(R.id.btn_sure)
-    Button mBtnSure;
+    TextView mBtnSure;
 
 
     List<SmallCourseType> mStrings = new ArrayList<>();
     ItemAdapter mItemAdapter;
-    FlexboxLayoutManager mFlexboxLayoutManager;
+    GridLayoutManager mFlexboxLayoutManager;
 
     NewNeed mNewNeed = new NewNeed();
 
@@ -119,9 +120,9 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
 //        mStrings.add("拉伸");
 //        mStrings.add("其他");
         mItemAdapter = new ItemAdapter(R.layout.item_xiangmu, mStrings);
-        mFlexboxLayoutManager = new FlexboxLayoutManager(mContext, FlexDirection.ROW, FlexWrap.WRAP);
+        mFlexboxLayoutManager = new GridLayoutManager(mContext, 3);
         mRecyclerviewXiangmu.setLayoutManager(mFlexboxLayoutManager);
-        mRecyclerviewXiangmu.addItemDecoration(new ItemDividerItemDecoration());
+        mRecyclerviewXiangmu.addItemDecoration(new ItemGridDividerItemDecoration());
         mRecyclerviewXiangmu.setAdapter(mItemAdapter);
         mItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -227,6 +228,7 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
 
                 if (mNewNeedAndType.mNewNeed != null) {
                     mNewNeed = mNewNeedAndType.mNewNeed;
+                    mBtnSure.setText("保存");
                 }
                 setData(mNewNeed);
             }
@@ -269,12 +271,11 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
         mTvAddress.setText(mNewNeedBaseModel.areaname);
         if (!TextUtils.isEmpty(mNewNeedBaseModel.coursetypeids)) {
             List<String> mStrings = StringUtils.stringToList(mNewNeedBaseModel.coursetypeids);
-            for (int i=0;i<mItemAdapter.getData().size();i++) {
-                for(String mS:mStrings)
-                if (mS.equals(mItemAdapter.getData().get(i).id))
-                {
-                    mItemAdapter.switchSelectedState(i);
-                }
+            for (int i = 0; i < mItemAdapter.getData().size(); i++) {
+                for (String mS : mStrings)
+                    if (mS.equals(mItemAdapter.getData().get(i).id)) {
+                        mItemAdapter.switchSelectedState(i);
+                    }
             }
         }
     }

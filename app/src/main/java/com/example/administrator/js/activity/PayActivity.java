@@ -48,6 +48,8 @@ public class PayActivity extends BaseActivity {
     String orderId;
     @Autowired
     String orderType;
+    @Autowired
+    String price;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -108,6 +110,7 @@ public class PayActivity extends BaseActivity {
         if (BuildConfig.DEBUG) {
             mTvPrice.setText("0.1");
         }
+        mTvAllPrice.setText(price);
     }
 
     @OnClick(R.id.btn_sure)

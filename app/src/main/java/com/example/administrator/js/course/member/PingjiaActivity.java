@@ -71,7 +71,7 @@ public class PingjiaActivity extends BaseActivity {
         mToolbar.setNavigationIcon(R.drawable.close);
         mToolbar.setTitle("评价");
 
-        mItemAdapter = new PingjiaAdapter(R.layout.item_xiangmu, mStrings);
+        mItemAdapter = new PingjiaAdapter(R.layout.item_pingjia, mStrings);
         mFlexboxLayoutManager = new FlexboxLayoutManager(mContext, FlexDirection.ROW, FlexWrap.WRAP);
         mRecyclerview.setLayoutManager(mFlexboxLayoutManager);
         mRecyclerview.addItemDecoration(new ItemDividerItemDecoration());

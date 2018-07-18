@@ -94,7 +94,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
     @BindView(R.id.tv_all_price)
     TextView mTvAllPrice;
     @BindView(R.id.btn_sure)
-    Button mBtnSure;
+    TextView mBtnSure;
 
 
     CourseTypeAdapter mCourseTypeAdapterBig;

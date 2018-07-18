@@ -64,12 +64,13 @@ public class AddWeiduActivity extends BaseActivity {
 
     @Override
     public Toolbar getToolbar() {
-        return null;
+        return mToolbar;
     }
 
     @Override
     protected void initView() {
 
+        mToolbar.setTitle("维度");
         if (mBodyData != null) {
             mEtXiong.setText(mBodyData.wdxiong);
             mEtYao.setText(mBodyData.wdyao);
@@ -78,55 +79,54 @@ public class AddWeiduActivity extends BaseActivity {
             mEtDabi.setText(mBodyData.wddabi);
             mEtXiaobi.setText(mBodyData.wdxiaobi);
             mEtTun.setText(mBodyData.wdtun);
-        }
-        else {
-            mBodyData=new BodyData();
+        } else {
+            mBodyData = new BodyData();
         }
         mEtXiong.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
-                mBodyData.wdxiong=mCharSequence.toString();
+                mBodyData.wdxiong = mCharSequence.toString();
             }
         });
         mEtYao.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
-                mBodyData.wdyao=mCharSequence.toString();
+                mBodyData.wdyao = mCharSequence.toString();
 
             }
         });
         mEtXiaotui.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
-                mBodyData.wdxiaotui=mCharSequence.toString();
+                mBodyData.wdxiaotui = mCharSequence.toString();
 
             }
         });
         mEtDatui.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
-                mBodyData.wddatui=mCharSequence.toString();
+                mBodyData.wddatui = mCharSequence.toString();
 
             }
         });
         mEtDabi.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
-                mBodyData.wddabi=mCharSequence.toString();
+                mBodyData.wddabi = mCharSequence.toString();
 
             }
         });
         mEtXiaobi.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
-                mBodyData.wdxiaobi=mCharSequence.toString();
+                mBodyData.wdxiaobi = mCharSequence.toString();
 
             }
         });
         mEtTun.addTextChangedListener(new SimpleTextWatcher() {
             @Override
             public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
-                mBodyData.wdtun=mCharSequence.toString();
+                mBodyData.wdtun = mCharSequence.toString();
 
             }
         });

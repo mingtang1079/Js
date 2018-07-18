@@ -114,7 +114,7 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
                 }
             }
         });
-        mTextViewName.setText(mWeekTimeLists.get(0).weekindex + mWeekTimeLists.get(0).month + "." + mWeekTimeLists.get(0).day);
+        mTextViewName.setText("周"+mWeekTimeLists.get(0).weekindex + mWeekTimeLists.get(0).month + "." + mWeekTimeLists.get(0).day);
     }
 
 

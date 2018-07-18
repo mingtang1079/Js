@@ -264,7 +264,7 @@ public class OrderDetailActivity extends BaseActivity {
                 cancel("c70");
                 break;
             case R.id.tv_quxiao_tuikuan:
-
+                cancel("b3");
 
                 break;
             case R.id.tv_pay:

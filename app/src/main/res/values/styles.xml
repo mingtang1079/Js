@@ -72,6 +72,14 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/rb_nobtn_selector</item>
     </style>
+    <style name="CustomRadioBtn3">
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/rb_nobtn_selector</item>
+    </style>
 
     <style name="default_circle_button_bg">
         <item name="android:paddingLeft">16dp</item>
@@ -82,8 +90,8 @@
         <item name="android:background">@drawable/default_circle_button</item>
     </style>
     <style name="circle_button_bg_8996aa">
-        <item name="android:paddingLeft">16dp</item>
-        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
         <item name="android:paddingTop">6dp</item>
         <item name="android:paddingBottom">6dp</item>
         <item name="android:gravity">center</item>
