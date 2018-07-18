@@ -22,9 +22,11 @@ import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.course.member.ShangkeRecord;
 import com.example.administrator.js.course.member.ShangkeRecordActivity;
+import com.example.administrator.js.utils.BigBigDecimalUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -175,11 +177,11 @@ public class OrderDetailActivity extends BaseActivity {
         mTvCourseType.setText(mOrder.ctypename + "(" + mOrder.coursetypenames + ")");
         mTextViewShengyekeshi.setText("剩余课时 (" + mOrder.cuse + "/" + mOrder.csum + ")");
         if (mOrder.ctotalprice != null)
-            mTvAllPrice.setText(mOrder.ctotalprice / 100 + "元");
+            mTvAllPrice.setText(BigBigDecimalUtils.divide(new BigDecimal(mOrder.ctotalprice), new BigDecimal(100)) + "元");
         if (mOrder.crealprice != null)
-            mTvShijiPrice.setText(mOrder.crealprice / 100 + "元");
+            mTvShijiPrice.setText(BigBigDecimalUtils.divide(new BigDecimal(mOrder.crealprice), new BigDecimal(100)) + "元");
         if (mOrder.ctotalprice != null && mOrder.crealprice != null) {
-            mTvYouhuiPrice.setText((mOrder.ctotalprice - mOrder.crealprice) / 100 + "元");
+            mTvYouhuiPrice.setText(BigBigDecimalUtils.divide(new BigDecimal(mOrder.ctotalprice - mOrder.crealprice), new BigDecimal(100)) + "元");
         }
         mTvOrderNumber.setText(mOrder.payno + "");
         if ("1".equals(mOrder.paytype))
@@ -224,7 +226,7 @@ public class OrderDetailActivity extends BaseActivity {
             mTvQuxiaoTuikuan.setVisibility(View.VISIBLE);
             mTvTuike.setVisibility(View.VISIBLE);
             mTvTuikuan.setVisibility(View.GONE);
-         //   mTvTuikuan.setText("退课详情");
+            //   mTvTuikuan.setText("退课详情");
 
         } else if ("b56".equals(mOrder.status)) {
             mTvOrderStatus.setText("已退款");

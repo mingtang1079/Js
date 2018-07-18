@@ -12,6 +12,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -63,7 +65,11 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         helper.setText(R.id.tv_course_count, "共" + item.csum + "节课  合计");
         helper.setText(R.id.tv_course_type, item.ctypename + "(" + item.coursetypenames + ")");
         helper.setText(R.id.tv_count, "x" + item.csum);
-        helper.setText(R.id.tv_all_price, "￥ " + item.crealprice / 100 + "");
+        BigDecimal a;
+        BigDecimal b;
+        a = new BigDecimal(item.crealprice );
+        b = new BigDecimal(100);
+        helper.setText(R.id.tv_all_price, "￥ " + a.divide(b, 2, RoundingMode.HALF_UP).toString());
 
         TextView mTextViewCancel = helper.getView(R.id.tv_cancel);
         TextView mTextViewPay = helper.getView(R.id.tv_pay);

@@ -23,6 +23,8 @@ public class CollectionActivity extends MyBaseRefreshActivity<Main> {
     protected void initView() {
         super.initView();
         mToolbar.setTitle("我的收藏");
+        toggleShowLoading(true);
+        requestData();
     }
 
     @Override

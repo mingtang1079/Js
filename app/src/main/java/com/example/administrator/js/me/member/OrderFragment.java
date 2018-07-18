@@ -85,7 +85,7 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
                     ARouter.getInstance().build("/activity/PayActivity")
                             .withString("orderId", mList.get(position).id)
                             .withString("orderType", "0")
-                            .withString("price", String.valueOf(mList.get(position).crealprice/100))
+                            .withInt("price", mList.get(position).crealprice)
                             .navigation(mContext);
 
 

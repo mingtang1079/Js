@@ -6,6 +6,15 @@
     android:background="@color/white_color"
     android:orientation="horizontal">
 
+    <ImageView
+        android:id="@+id/image_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"
+        android:src="@drawable/iconzhifubao"
+        android:visibility="visible" />
+
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
@@ -18,12 +27,12 @@
 
 
     <ImageView
+        android:src="@drawable/icon_select"
         android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="16dp"
-        android:src="@drawable/item_choose"
         android:visibility="visible" />
 
 </LinearLayout>

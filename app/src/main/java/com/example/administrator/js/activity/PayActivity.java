@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alipay.sdk.app.PayTask;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.network.ResponceSubscriber;
@@ -24,7 +25,12 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.PayResult;
+import com.example.administrator.js.constant.EventMessage;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -49,16 +55,12 @@ public class PayActivity extends BaseActivity {
     @Autowired
     String orderType;
     @Autowired
-    String price;
+    int price;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.tv_all_price)
     TextView mTvAllPrice;
-    @BindView(R.id.tv_youhui)
-    TextView mTvYouhui;
-    @BindView(R.id.tv_price)
-    TextView mTvPrice;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
     @BindView(R.id.btn_sure)
@@ -106,11 +108,11 @@ public class PayActivity extends BaseActivity {
         });
         //默认支付宝支付
         mPayAdapter.setSingleChoosed(0);
-
-        if (BuildConfig.DEBUG) {
-            mTvPrice.setText("0.1");
-        }
-        mTvAllPrice.setText(price);
+        BigDecimal a;
+        BigDecimal b;
+        a = new BigDecimal(price);
+        b = new BigDecimal(100);
+        mTvAllPrice.setText(a.divide(b, 2, RoundingMode.HALF_UP).toString());
     }
 
     @OnClick(R.id.btn_sure)
@@ -162,21 +164,31 @@ public class PayActivity extends BaseActivity {
                     @Override
                     public void accept(Map<String, String> mMap) throws Exception {
                         PayResult mPayResult = JsonUtil.fromJson(mMap.get("result"), PayResult.class);
-                        String resultStatus = mPayResult.resultStatus;
+                        String resultStatus = mMap.get("resultStatus");
                         if (TextUtils.equals(resultStatus, "9000")) {
                             // MyUtil.showToast("支付成功");
+                            //更新订单列表状态
+                            EventBus.getDefault().post(new EventMessage.ListStatusChange());
+                            ARouter.getInstance().build("/activity/PaySuccessfulActivity")
+                                    .withString("orderId", orderId)
+                                    .navigation(mContext);
+                            finish();
                         } else {
                             // "8000"代表支付结果因为支付渠道原因或者系统原因还在等待支付结果确认，最终交易是否成功以服				务端异步通知为准（小概率状态）
                             if (TextUtils.equals(resultStatus, "8000")) {
                             } else if (TextUtils.equals(resultStatus, "6001")) {
                                 //   MyUtil.showToast("支付取消");
+                                showToast("支付取消");
                             } else if (TextUtils.equals(resultStatus, "6002")) {
                                 //   MyUtil.showToast("网络异常");
+                                showToast("网络异常");
                             } else if (TextUtils.equals(resultStatus, "5000")) {
                                 //   MyUtil.showToast("重复请求");
                             } else {
                                 // 其他值就可以判断为支付失败
                                 //   MyUtil.showToast("支付失败");
+                                showToast("支付失败");
+
                             }
 
                         }
