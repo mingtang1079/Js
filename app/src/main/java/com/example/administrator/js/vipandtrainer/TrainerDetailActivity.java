@@ -34,6 +34,7 @@ import com.example.administrator.js.course.member.YuyueCourseActivity;
 import com.example.administrator.js.login.LoginActivity;
 import com.example.administrator.js.me.model.UserDetail;
 import com.example.administrator.js.view.SquareLayout;
+import com.example.administrator.js.view.SquareRadioButton;
 import com.example.administrator.js.vipandtrainer.adapter.WorkDateAdapter;
 import com.example.administrator.js.vipandtrainer.trainer.TrainerDetail;
 import com.example.administrator.js.vipandtrainer.trainer.Workdate;
@@ -247,7 +248,7 @@ public class TrainerDetailActivity extends BaseActivity {
                     mTextView.setText(mWorkdate.weekindex);
                 }
                 //  final SquareLayout mSquareLayout = (SquareLayout) mLlDateTwo.getChildAt(i);
-                RadioButton mChildAt = (RadioButton) mLlDateTwo.getChildAt(i);
+                SquareRadioButton mChildAt = (SquareRadioButton) mLlDateTwo.getChildAt(i);
                 if (mChildAt != null) {
                     mChildAt.setText(mWorkdate.day);
                     mChildAt.setId(i);

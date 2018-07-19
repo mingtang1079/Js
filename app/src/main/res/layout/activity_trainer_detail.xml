@@ -337,7 +337,7 @@
                             android:orientation="horizontal">
 
 
-                            <RadioButton
+                            <com.example.administrator.js.view.SquareRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -345,12 +345,10 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:paddingBottom="8dp"
-                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
                                 tools:text="f"/>
 
-                            <RadioButton
+                            <com.example.administrator.js.view.SquareRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -358,12 +356,10 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:paddingBottom="8dp"
-                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
                                 tools:text="ffdf"/>
 
-                            <RadioButton
+                            <com.example.administrator.js.view.SquareRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -371,12 +367,10 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:paddingBottom="8dp"
-                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
                                 tools:text="fff"/>
 
-                            <RadioButton
+                            <com.example.administrator.js.view.SquareRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -384,12 +378,10 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:paddingBottom="8dp"
-                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
                                 tools:text="f"/>
 
-                            <RadioButton
+                            <com.example.administrator.js.view.SquareRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -397,12 +389,10 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:paddingBottom="8dp"
-                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
                                 tools:text="f"/>
 
-                            <RadioButton
+                            <com.example.administrator.js.view.SquareRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -410,12 +400,10 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:paddingBottom="8dp"
-                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
                                 tools:text="f"/>
 
-                            <RadioButton
+                            <com.example.administrator.js.view.SquareRadioButton
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="8dp"
@@ -423,8 +411,6 @@
                                 android:background="@drawable/calender_text_bg"
                                 android:button="@null"
                                 android:gravity="center"
-                                android:paddingBottom="8dp"
-                                android:paddingTop="8dp"
                                 android:textColor="@color/calender_text"
                                 tools:text="f"/>
 
