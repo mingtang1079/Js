@@ -7,15 +7,26 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.base.Navigator;
+import com.appbaselib.utils.PreferenceUtils;
 import com.appbaselib.utils.ToastUtils;
 import com.example.administrator.js.R;
+import com.example.administrator.js.activity.fragment.PayFailFragment;
+import com.example.administrator.js.activity.fragment.PaySuccessFragment;
+import com.example.administrator.js.constant.Constans;
+import com.example.administrator.js.constant.EventMessage;
+import com.ldf.calendar.Const;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,10 +39,11 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 
     private IWXAPI api;
 
+    Navigator mNavigator;
 
     @Override
     protected int getContentViewLayoutID() {
-        return 0;
+        return R.layout.activity_wxpay_entry;
     }
 
     @Override
@@ -46,8 +58,11 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
 
     @Override
     protected void initView() {
-        //     api = WXAPIFactory.createWXAPI(this, Constants.APP_ID);
+        mToolbar.setTitle("支付结果");
+        mNavigator = new Navigator(getSupportFragmentManager(), R.id.content);
+        api = WXAPIFactory.createWXAPI(this, Constans.weixin);
         api.handleIntent(getIntent(), this);
+
     }
 
     @Override
@@ -64,20 +79,28 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
     }
 
 
-
+    //名称	描述	解决方案
+//0	成功	展示成功页面
+//-1	错误	可能的原因：签名错误、未注册APPID、项目设置APPID不正确、注册的APPID与设置的不匹配、其他异常等。
+//-2	用户取消	无需处理。发生场景：用户不支付了，点击取消，返回APP。
     @Override
     public void onResp(BaseResp resp) {
         Log.d("tag----->", "onPayFinish, errCode = " + resp.errCode);
+        int code = resp.errCode;
 
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-            int code = resp.errCode;
             switch (code) {
                 case 0:
+                    //更新订单列表状态
+                    EventBus.getDefault().post(new EventMessage.ListStatusChange());
+                    mNavigator.showFragment(new PaySuccessFragment());
                     break;
                 case -1:
-                    finish();
+
+                    mNavigator.showFragment(new PayFailFragment());
                     break;
                 case -2:
+                    showToast("取消支付");
                     finish();
                     break;
                 default:

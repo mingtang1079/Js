@@ -13,8 +13,8 @@ android {
         applicationId "com.example.administrator.js"
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
-        versionCode 8
-        versionName "1.0.8"
+        versionCode 9
+        versionName "1.0.9"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
 
@@ -44,7 +44,10 @@ android {
             keyPassword '12345678'
         }
         debug {
-
+            storeFile file('js.jks')
+            storePassword '12345678'
+            keyAlias '1'
+            keyPassword '12345678'
         }
     }
     buildTypes {

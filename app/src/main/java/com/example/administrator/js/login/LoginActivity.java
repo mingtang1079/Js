@@ -2,6 +2,7 @@ package com.example.administrator.js.login;
 
 import android.app.ProgressDialog;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -9,6 +10,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
 import com.appbaselib.constant.Constants;
+import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.CommonUtils;
 import com.appbaselib.utils.JsonUtil;
@@ -18,8 +20,12 @@ import com.example.administrator.js.App;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.constant.Constans;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.me.model.User;
 import com.google.gson.JsonObject;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DefaultObserver;
@@ -101,6 +107,42 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
 
     }
 
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.weixinLogin mListStatusChange) {
+        requestUserInfo(mListStatusChange.code);
+
+    }
+
+    private void requestUserInfo(final String mCode) {
+        Http.getDefault().getUserInfoByWxCode(mCode)
+                .as(RxHelper.<User>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<User>() {
+                    @Override
+                    protected void onSucess(User mUser) {
+                        if (mUser != null) {
+                            if (!TextUtils.isEmpty(mUser.id)) {
+                                onUserGet(mUser);
+                            }
+                            else {
+                                //走注册界面 绑定手机号
+                                mNavigator.showFragment(mRegisterFragment);
+
+                            }
+                        }
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+
+                    }
+                });
+
+    }
 
 }
 

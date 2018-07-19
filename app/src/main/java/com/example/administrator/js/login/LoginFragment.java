@@ -17,10 +17,14 @@ import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
+import com.example.administrator.js.constant.Constans;
 import com.example.administrator.js.me.ForgetPasswordActivity;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.view.PasswordToggleEditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -47,6 +51,8 @@ public class LoginFragment extends BaseFragment {
     Button mBtRegister;
     @BindView(R.id.iv_weixin)
     ImageView mIvWeixin;
+
+    private IWXAPI api;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -75,6 +81,11 @@ public class LoginFragment extends BaseFragment {
             }
         });
 
+
+        api = WXAPIFactory.createWXAPI(mContext, Constans.weixin);
+        api.registerApp(Constans.weixin);
+
+
     }
 
     @Override
@@ -97,7 +108,14 @@ public class LoginFragment extends BaseFragment {
 
                 break;
             case R.id.iv_weixin:
-
+                if (!api.isWXAppInstalled()) {
+                    showToast("请安装微信");
+                } else {
+                    final SendAuth.Req req = new SendAuth.Req();
+                    req.scope = "snsapi_userinfo";
+                    req.state = "wechat_sdk_demo_test";
+                    api.sendReq(req);
+                }
 
                 break;
 

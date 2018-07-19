@@ -1,6 +1,7 @@
 package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
+import com.example.administrator.js.activity.WeixinResult;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.course.member.HistoryOrder;
@@ -396,4 +397,13 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/pay/submit")
     Observable<BaseModel<String>> pay(@Field("uid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/pay/submit")
+    Observable<BaseModel<WeixinResult>> payWeixin(@Field("uid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/getUserInfoByWxCode")
+    Observable<BaseModel<User>> getUserInfoByWxCode(@Field("user") String code);
 }

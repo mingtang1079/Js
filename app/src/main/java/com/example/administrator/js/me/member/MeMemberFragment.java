@@ -124,7 +124,7 @@ public class MeMemberFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.tv_name, R.id.tv_id,
+    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.rl, R.id.tv_id,
             R.id.my_order, R.id.ll_share, R.id.ll_my_collection,
             R.id.shenti_shuju, R.id.ll_xuqiu, R.id.ll_about, R.id.ll_fankui})
     public void onViewClicked(View view) {
@@ -148,7 +148,7 @@ public class MeMemberFragment extends BaseFragment {
 
                 start(SettingActivity.class);
                 break;
-            case R.id.tv_name:
+            case R.id.rl:
 
                 ARouter.getInstance().build("/me/UserInfoActivity")
                         .navigation();

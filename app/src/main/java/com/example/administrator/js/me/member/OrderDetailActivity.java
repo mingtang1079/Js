@@ -271,6 +271,11 @@ public class OrderDetailActivity extends BaseActivity {
                 break;
             case R.id.tv_pay:
 
+                ARouter.getInstance().build("/activity/PayActivity")
+                        .withString("orderId", mOrder.id)
+                        .withString("orderType", "0")
+                        .withInt("price", mOrder.crealprice)
+                        .navigation(mContext);
 
                 break;
             case R.id.tv_tuikuan:

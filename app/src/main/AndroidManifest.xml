@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.administrator.js">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.administrator.js">
 
-    <uses-sdk tools:overrideLibrary="com.ldf.mi.calendar" />
+    <uses-sdk tools:overrideLibrary="com.ldf.mi.calendar"/>
 
     <!-- Required 一些系统要求的权限，如访问网络等 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Optional for location -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.MODE_WORLD_WRITEABLE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/> <!-- Optional for location -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.MODE_WORLD_WRITEABLE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
 
     <application
         android:name=".App"
@@ -38,7 +38,7 @@
         <!-- 搞得地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="5e5ccc0fb69d9abdee6ca846e0fabdac" />
+            android:value="5e5ccc0fb69d9abdee6ca846e0fabdac"/>
         <!-- 配置APP ID -->
         <!-- <meta-data -->
         <!-- android:name="BUGLY_APPID" -->
@@ -49,7 +49,7 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
@@ -68,7 +68,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/rc_file_path" />
+                android:resource="@xml/rc_file_path"/>
         </provider>
         <!-- <provider -->
         <!-- android:name=".utils.BuglyFileProvider" -->
@@ -87,109 +87,109 @@
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
-            android:theme="@android:style/Theme.Translucent" />
+            android:theme="@android:style/Theme.Translucent"/>
         <!-- service -->
-        <service android:name=".service.LocationService" />
+        <service android:name=".service.LocationService"/>
 
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SpalashActivityTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeFullScreen" />
+            android:theme="@style/ThemeFullScreen"/>
         <activity
             android:name=".me.RealNameVerifyActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.UserInfoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ChangeSexActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ChangeNameActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ChangeUserHeadActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".me.ZizhiActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ShanChangActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.GeyanActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.XingxiangzhaoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.SuceessExampleActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.JianliActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".exercise.KnowledgeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".exercise.VipResultActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".exercise.ExerciseSkillActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".exercise.NearbyVipActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activity.MessageActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
                     android:host="com.example.administrator.js"
                     android:pathPrefix="/conversationlist"
-                    android:scheme="rong" />
+                    android:scheme="rong"/>
             </intent-filter>
         </activity>
-        <activity android:name=".vipandtrainer.VipUserDetailActivity" />
-        <activity android:name=".me.FankuiActivity" />
-        <activity android:name=".me.AboutUsActivity" />
+        <activity android:name=".vipandtrainer.VipUserDetailActivity"/>
+        <activity android:name=".me.FankuiActivity"/>
+        <activity android:name=".me.AboutUsActivity"/>
         <activity
             android:name=".activity.ChatActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.DEFAULT"/>
 
                 <data
                     android:host="com.example.administrator.js"
                     android:pathPrefix="/conversation/"
-                    android:scheme="rong" />
+                    android:scheme="rong"/>
             </intent-filter>
         </activity>
 
@@ -197,107 +197,115 @@
             android:name=".broadcast.SealNotificationReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
-                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
-                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
-                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
-                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE" />
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED"/>
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED"/>
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED"/>
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED"/>
+                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE"/>
             </intent-filter>
         </receiver>
 
         <activity
             android:name=".exercise.DetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".course.CourDetailActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.TeacherBiDuActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.BarcodeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.SettingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".course.CourseCanlenderActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.AddAlipayActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ZhengshuActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ShankeSettingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ServiceTimeListActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ShankeTixingSettingActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.VipSupplyActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.CollectionActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.TuijianActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.TongjiActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ChooseDayActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.AddServicetimeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".qrcode.CaptureActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.ForgetPasswordActivity"
-            android:theme="@style/ThemeFullScreen" />
-        <activity android:name=".me.ChangeMobileActivity" />
-        <activity android:name=".activity.SearchUserActivity" />
-        <activity android:name=".exercise.member.NearbyTrainerActivity" />
-        <activity android:name=".me.PriceListActivity" />
-        <activity android:name=".me.PriceSettingActivity" />
-        <activity android:name=".me.YinsiSettingActivity" />
-        <activity android:name=".exercise.member.SearchTrianerActivity" />
-        <activity android:name=".activity.NewNeedActivity" />
-        <activity android:name=".vipandtrainer.TrainerDetailActivity" />
-        <activity android:name=".vipandtrainer.BuySiJiaoKeActivity" />
+            android:theme="@style/ThemeFullScreen"/>
+        <activity android:name=".me.ChangeMobileActivity"/>
+        <activity android:name=".activity.SearchUserActivity"/>
+        <activity android:name=".exercise.member.NearbyTrainerActivity"/>
+        <activity android:name=".me.PriceListActivity"/>
+        <activity android:name=".me.PriceSettingActivity"/>
+        <activity android:name=".me.YinsiSettingActivity"/>
+        <activity android:name=".exercise.member.SearchTrianerActivity"/>
+        <activity android:name=".activity.NewNeedActivity"/>
+        <activity android:name=".vipandtrainer.TrainerDetailActivity"/>
+        <activity android:name=".vipandtrainer.BuySiJiaoKeActivity"/>
         <activity
             android:name=".course.member.PingjiaActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".course.member.TousuActivity" />
-        <activity android:name=".course.member.YuyueCourseActivity" />
-        <activity android:name=".course.member.YuyueSuccessActivity" />
-        <activity android:name=".me.member.BodyDataActivity" />
-        <activity android:name=".me.member.MyOrderActivity" />
-        <activity android:name=".me.member.OrderDetailActivity" />
-        <activity android:name=".me.member.TuikeActivity" />
-        <activity android:name=".me.member.TuikeDetailActivity" />
-        <activity android:name=".activity.locaiton.ChooseLocationActivity" />
-        <activity android:name=".activity.locaiton.LocationSearchActivity" />
-        <activity android:name=".me.member.AddBodyDataActivity" />
-        <activity android:name=".vipandtrainer.trainer.ApplySuccessActivity" />
-        <activity android:name=".course.member.ChooseYuyueTimeActivity" />
-        <activity android:name=".me.member.BodyListActivity" />
-        <activity android:name=".me.member.AddWeiduActivity" />
-        <activity android:name=".course.member.MemberCourDetailActivity" />
-        <activity android:name=".course.member.ShangkeRecordActivity" />
-        <activity android:name=".activity.PayActivity" />
+            android:screenOrientation="portrait"/>
+        <activity android:name=".course.member.TousuActivity"/>
+        <activity android:name=".course.member.YuyueCourseActivity"/>
+        <activity android:name=".course.member.YuyueSuccessActivity"/>
+        <activity android:name=".me.member.BodyDataActivity"/>
+        <activity android:name=".me.member.MyOrderActivity"/>
+        <activity android:name=".me.member.OrderDetailActivity"/>
+        <activity android:name=".me.member.TuikeActivity"/>
+        <activity android:name=".me.member.TuikeDetailActivity"/>
+        <activity android:name=".activity.locaiton.ChooseLocationActivity"/>
+        <activity android:name=".activity.locaiton.LocationSearchActivity"/>
+        <activity android:name=".me.member.AddBodyDataActivity"/>
+        <activity android:name=".vipandtrainer.trainer.ApplySuccessActivity"/>
+        <activity android:name=".course.member.ChooseYuyueTimeActivity"/>
+        <activity android:name=".me.member.BodyListActivity"/>
+        <activity android:name=".me.member.AddWeiduActivity"/>
+        <activity android:name=".course.member.MemberCourDetailActivity"/>
+        <activity android:name=".course.member.ShangkeRecordActivity"/>
+        <activity android:name=".activity.PayActivity"/>
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop" />
-        <activity android:name=".activity.PaySuccessfulActivity"></activity>
+            android:launchMode="singleTop"/>
+        <activity android:name=".activity.PaySuccessfulActivity"/>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitleTranslucentTheme"/>
+        <activity android:name=".activity.PayFailActivity">
+        </activity>
     </application>
 
 </manifest>

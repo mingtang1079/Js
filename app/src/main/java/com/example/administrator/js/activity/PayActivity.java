@@ -1,14 +1,11 @@
 package com.example.administrator.js.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -19,26 +16,27 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.JsonUtil;
+import com.appbaselib.utils.PreferenceUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.PayResult;
+import com.example.administrator.js.constant.Constans;
 import com.example.administrator.js.constant.EventMessage;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -112,7 +110,10 @@ public class PayActivity extends BaseActivity {
         BigDecimal b;
         a = new BigDecimal(price);
         b = new BigDecimal(100);
-        mTvAllPrice.setText(a.divide(b, 2, RoundingMode.HALF_UP).toString());
+        mTvAllPrice.setText(a.divide(b, 2, RoundingMode.HALF_UP).toString()+"元");
+
+        //临时存放 orderId
+        PreferenceUtils.setPrefString(mContext,Constans.ORDERID,orderId);
     }
 
     @OnClick(R.id.btn_sure)
@@ -121,15 +122,17 @@ public class PayActivity extends BaseActivity {
         if (type == 0) {
             //支付宝
 
-            alipay();
+            startPay();
         } else {
 
+            startWeixinPay();
 
         }
 
     }
 
-    private void alipay() {
+
+    private void startPay() {
 
         Http.getDefault().pay("0".equals(orderType) ? null : UserManager.getInsatance().getUser().id, orderId, String.valueOf(type), orderType)
                 .as(RxHelper.<String>handleResult(mContext))
@@ -196,5 +199,52 @@ public class PayActivity extends BaseActivity {
                 });
 
 
+    }
+
+    private IWXAPI iwxapi; //微信支付api
+
+    private void startWeixinPay() {
+
+
+        Http.getDefault().payWeixin("0".equals(orderType) ? null : UserManager.getInsatance().getUser().id, orderId, String.valueOf(type), orderType)
+                .as(RxHelper.<WeixinResult>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<WeixinResult>(mContext) {
+                    @Override
+                    protected void onSucess(WeixinResult mS) {
+
+                        weixinPay(mS);
+
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
+    }
+
+
+    private void weixinPay(final WeixinResult mWeixinResult) {
+
+        Runnable payRunnable = new Runnable() {  //这里注意要放在子线程
+            @Override
+            public void run() {
+
+                iwxapi = WXAPIFactory.createWXAPI(PayActivity.this, null); //初始化微信api
+                iwxapi.registerApp(Constans.weixin); //注册appid  appid可以在开发平台获取
+                PayReq request = new PayReq(); //调起微信APP的对象
+                //下面是设置必要的参数，也就是前面说的参数,这几个参数从何而来请看上面说明
+                request.appId = mWeixinResult.appid;
+                request.partnerId = mWeixinResult.partnerid;
+                request.prepayId = mWeixinResult.prepayid;
+                request.packageValue = "Sign=WXPay";
+                request.nonceStr = mWeixinResult.noncestr;
+                request.timeStamp = mWeixinResult.timestamp;
+                request.sign = mWeixinResult.sign;
+                iwxapi.sendReq(request);//发送调起微信的请求
+            }
+        };
+        Thread payThread = new Thread(payRunnable);
+        payThread.start();
     }
 }
