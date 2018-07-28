@@ -29,6 +29,8 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -110,10 +112,10 @@ public class PayActivity extends BaseActivity {
         BigDecimal b;
         a = new BigDecimal(price);
         b = new BigDecimal(100);
-        mTvAllPrice.setText(a.divide(b, 2, RoundingMode.HALF_UP).toString()+"元");
+        mTvAllPrice.setText(a.divide(b, 2, RoundingMode.HALF_UP).toString() + "元");
 
         //临时存放 orderId
-        PreferenceUtils.setPrefString(mContext,Constans.ORDERID,orderId);
+        PreferenceUtils.setPrefString(mContext, Constans.ORDERID, orderId);
     }
 
     @OnClick(R.id.btn_sure)
@@ -247,4 +249,15 @@ public class PayActivity extends BaseActivity {
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
+
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.closePayActivity mListStatusChange) {
+        finish();
+    }
+
 }

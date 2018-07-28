@@ -58,10 +58,10 @@ public class YinsiSettingActivity extends BaseActivity implements UserPresenter.
             @Override
             public void onCheckedChanged(CompoundButton mCompoundButton, boolean mB) {
                 if (mB) {
-                    mUserPresenter.updateUser("privatemode", "1");
+                    mUserPresenter.updateUser("privatemode", "0");
 
                 } else {
-                    mUserPresenter.updateUser("privatemode", "0");
+                    mUserPresenter.updateUser("privatemode", "1");
 
                 }
             }

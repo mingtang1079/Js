@@ -143,11 +143,13 @@ public class RegisterFragment extends BaseFragment {
                     }
                 });
     }
+
     Disposable mDisposable;
+
     private void requestCode() {
 
         final int count = 60;
-         mDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
+        mDisposable = Observable.interval(0, 1, TimeUnit.SECONDS)
 
                 .take(count + 1)
                 .map(new Function<Long, Long>() {
@@ -210,6 +212,8 @@ public class RegisterFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mDisposable.dispose();
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
     }
 }

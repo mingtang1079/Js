@@ -116,7 +116,9 @@ public class OrderDetailActivity extends BaseActivity {
         mTextViewRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                start(ShangkeRecordActivity.class);
+                ARouter.getInstance().build("/member/ShangkeRecordActivity")
+                        .withString("orderId",mOrder.id)
+                        .navigation(mContext);
             }
         });
     }

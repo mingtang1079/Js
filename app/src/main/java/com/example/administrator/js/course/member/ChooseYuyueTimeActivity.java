@@ -31,8 +31,6 @@ import java.util.List;
 
 import butterknife.BindView;
 
-import static com.umeng.socialize.utils.ContextUtil.getContext;
-
 @Route(path = "/member/ChooseYuyueTimeActivity")
 public class ChooseYuyueTimeActivity extends BaseActivity {
 
@@ -77,7 +75,7 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
 
         mToolbar.setTitle("选择时间");
         mItemAdapter = new ItemAdapter(R.layout.item_recycleview, mWeekTimeLists);
-        final LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        final LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         mRecyclerView.setLayoutManager(manager);// 将SnapHelper attach 到RecyclrView
         mRecyclerView.setAdapter(mItemAdapter);

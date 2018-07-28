@@ -115,6 +115,13 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
             mTvAddress.setText(mUser.address);
             mTvPhone.setText(mUser.mobile);
             mTextViewZhifubao.setText(mUser.alipay + "");
+
+            if (!TextUtils.isEmpty(mUser.openid)) {
+                mTvWeixin.setText("已绑定");
+            } else {
+                mTvWeixin.setText("未绑定");
+
+            }
         }
     }
 
@@ -181,6 +188,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                     @Override
                     public void onClick(DialogInterface mDialogInterface, int mI) {
                         PreferenceUtils.clearDefaultPreference(mContext);
+                        UserManager.getInsatance().setUser(null);
                         Intent intent = new Intent(mContext, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

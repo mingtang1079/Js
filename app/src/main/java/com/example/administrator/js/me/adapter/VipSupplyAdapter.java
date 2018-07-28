@@ -79,9 +79,7 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
             mTextViewRefuse.setText("已通过");
-        }
-        else  if ("b56".equals(item.status))
-        {
+        } else if ("b56".equals(item.status)) {
             mTextViewPass.setVisibility(View.GONE);
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
@@ -91,21 +89,25 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
         mTextViewPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                save(true, item.id, helper.getLayoutPosition());
+                //通过有2状态  退课 体验课
+                if (item.status.equals("b55") && item.tryflag.equals("0")) {
+                    save("b56", item.id, helper.getLayoutPosition());
+
+                } else {
+                    save("b2", item.id, helper.getLayoutPosition());
+                }
             }
         });
         mTextViewRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                save(false, item.id, helper.getLayoutPosition());
+                save("b4", item.id, helper.getLayoutPosition());
             }
         });
 
         //退课只显示 通过按钮
-        if (!TextUtils.isEmpty(item.status)&&!TextUtils.isEmpty(item.tryflag))
-        {
-            if (item.status.equals("b55")&&item.tryflag.equals("0"))
-            {
+        if (!TextUtils.isEmpty(item.status) && !TextUtils.isEmpty(item.tryflag)) {
+            if (item.status.equals("b55") && item.tryflag.equals("0")) {
                 mTextViewRefuse.setVisibility(View.GONE);
             }
         }
@@ -113,9 +115,9 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
 
     }
 
-    private void save(boolean mB, String id, final int p) {
+    private void save(String status, String id, final int p) {
 
-        Http.getDefault().passOrRefuse(id, UserManager.getInsatance().getUser().id, mB ? "b2" : "b4")
+        Http.getDefault().passOrRefuse(id, UserManager.getInsatance().getUser().id, status)
                 .as(RxHelper.<String>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override

@@ -71,54 +71,6 @@ public class PriceSettingActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        if ("pricea".equals(type)) {
-            mToolbar.setTitle("常规课");
-            canshuName = "pricea";
-            if (mPrice != null && mPrice.userprice != null) {
-                mTvPrice.setText(mPrice.userprice.pricea);
-            }
-            if (mPrice != null && mPrice.range != null) {
-                mTextViewMinPrice.setText(mPrice.range.amin + "");
-                mTextViewMaxPrice.setText(mPrice.range.amax + "");
-                mSeekbar.setMax(mPrice.range.amax);
-                minValue = mPrice.range.amin;
-                maxValue = mPrice.range.amax;
-            }
-
-
-        } else if ("priceb".equals(type)) {
-            mToolbar.setTitle("特色课");
-            canshuName = "priceb";
-
-            if (mPrice != null && mPrice.userprice != null) {
-                mTvPrice.setText(mPrice.userprice.priceb);
-            }
-            if (mPrice != null && mPrice.range != null) {
-                mTextViewMinPrice.setText(mPrice.range.bmin + "");
-                mTextViewMaxPrice.setText(mPrice.range.bmax + "");
-                mSeekbar.setMax(mPrice.range.bmax);
-                minValue = mPrice.range.bmin;
-                maxValue = mPrice.range.bmax;
-
-            }
-
-        } else {
-            mToolbar.setTitle("专业课");
-            canshuName = "pricec";
-
-            if (mPrice != null && mPrice.userprice != null) {
-                mTvPrice.setText(mPrice.userprice.pricec);
-            }
-            if (mPrice != null && mPrice.range != null) {
-                mTextViewMinPrice.setText(mPrice.range.cmin + "");
-                mTextViewMaxPrice.setText(mPrice.range.cmax + "");
-                mSeekbar.setMax(mPrice.range.cmax);
-                minValue = mPrice.range.cmin;
-                maxValue = mPrice.range.cmax;
-
-            }
-        }
-
         mSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar mSeekBar, int mI, boolean mB) {
@@ -155,6 +107,61 @@ public class PriceSettingActivity extends BaseActivity {
                 save();
             }
         });
+
+
+        if ("pricea".equals(type)) {
+            mToolbar.setTitle("常规课");
+            canshuName = "pricea";
+            if (mPrice != null && mPrice.userprice != null) {
+                mTvPrice.setText(mPrice.userprice.pricea);
+                mSeekbar.setProgress(Integer.parseInt(mPrice.userprice.pricea));
+            }
+            if (mPrice != null && mPrice.range != null) {
+                mTextViewMinPrice.setText(mPrice.range.amin + "");
+                mTextViewMaxPrice.setText(mPrice.range.amax + "");
+                mSeekbar.setMax(mPrice.range.amax);
+                minValue = mPrice.range.amin;
+                maxValue = mPrice.range.amax;
+            }
+
+
+        } else if ("priceb".equals(type)) {
+            mToolbar.setTitle("特色课");
+            canshuName = "priceb";
+
+            if (mPrice != null && mPrice.userprice != null) {
+                mTvPrice.setText(mPrice.userprice.priceb);
+                mSeekbar.setProgress(Integer.parseInt(mPrice.userprice.priceb));
+
+            }
+            if (mPrice != null && mPrice.range != null) {
+                mTextViewMinPrice.setText(mPrice.range.bmin + "");
+                mTextViewMaxPrice.setText(mPrice.range.bmax + "");
+                mSeekbar.setMax(mPrice.range.bmax);
+                minValue = mPrice.range.bmin;
+                maxValue = mPrice.range.bmax;
+
+            }
+
+        } else {
+            mToolbar.setTitle("专业课");
+            canshuName = "pricec";
+
+            if (mPrice != null && mPrice.userprice != null) {
+                mTvPrice.setText(mPrice.userprice.pricec);
+                mSeekbar.setProgress(Integer.parseInt(mPrice.userprice.pricec));
+
+            }
+            if (mPrice != null && mPrice.range != null) {
+                mTextViewMinPrice.setText(mPrice.range.cmin + "");
+                mTextViewMaxPrice.setText(mPrice.range.cmax + "");
+                mSeekbar.setMax(mPrice.range.cmax);
+                minValue = mPrice.range.cmin;
+                maxValue = mPrice.range.cmax;
+
+            }
+        }
+
     }
 
     private void save() {

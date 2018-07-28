@@ -19,6 +19,9 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
 
+/**
+ * 微信分享相
+ */
 public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler {
 
     private IWXAPI api;
@@ -75,10 +78,26 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler 
                 case BaseResp.ErrCode.ERR_OK:
                     //用户同意
                     EventBus.getDefault().post(new EventMessage.weixinLogin(((SendAuth.Resp) resp).code));
+                    finish();
                     break;
             }
         } else if (resp.getType() == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX)//分享
         {
+
+            switch (code)
+            {
+                case BaseResp.ErrCode.ERR_OK:
+                    EventBus.getDefault().post(new EventMessage.shareSuceesState(0,null));
+                    finish();
+
+                    break;
+                case BaseResp.ErrCode.ERR_USER_CANCEL:
+                    EventBus.getDefault().post(new EventMessage.shareSuceesState(-1,null));
+                    finish();
+
+                    break;
+
+            }
 
         }
     }

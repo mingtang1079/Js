@@ -15,6 +15,9 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.constant.Constans;
+import com.example.administrator.js.constant.EventMessage;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -52,6 +55,8 @@ public class PaySuccessFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.tv_back_home:
                 getActivity().finish();
+                EventBus.getDefault().post(new EventMessage.closePayActivity());
+
                 break;
             case R.id.tv_back_top:
 
@@ -59,6 +64,9 @@ public class PaySuccessFragment extends BaseFragment {
                         .withString("id", orderId)
                         .navigation(mContext);
                 getActivity().finish();
+
+                EventBus.getDefault().post(new EventMessage.closePayActivity());
+
                 break;
         }
     }

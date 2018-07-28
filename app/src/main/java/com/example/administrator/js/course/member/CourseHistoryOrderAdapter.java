@@ -31,6 +31,10 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
 
         helper.setText(R.id.tv_type, item.ctypename);
 
+        if ("体验课".equals(item.ctypename))
+        {
+            helper.setVisible(R.id.tv_xuke,false);
+        }
         if (!TextUtils.isEmpty(item.img)) {
             ImageLoader.load(mContext, item.img, (CircleImageView) helper.getView(R.id.iv_head));
         }
@@ -59,7 +63,6 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
             helper.setVisible(R.id.tv_yuyue, false);
         } else {
             helper.setVisible(R.id.tv_yuyue, true);
-
         }
         helper.addOnClickListener(R.id.tv_yuyue);
         helper.addOnClickListener(R.id.tv_xuke);

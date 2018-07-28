@@ -70,11 +70,6 @@ public class MainActivity extends BaseActivity {
         return 0;
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        moveTaskToBack(true);
-//    }
-
     @Override
     protected View getLoadingTargetView() {
         return null;
@@ -172,4 +167,5 @@ public class MainActivity extends BaseActivity {
         //   start(NewNeedActivity.class);
         start(NewNeedActivity.class);
     }
+
 }

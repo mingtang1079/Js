@@ -38,6 +38,7 @@ import com.example.administrator.js.vipandtrainer.adapter.CourseType;
 import com.example.administrator.js.vipandtrainer.adapter.CourseTypeAdapter;
 import com.example.administrator.js.vipandtrainer.trainer.ApplySuccessActivity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -340,10 +341,11 @@ public class BuySiJiaoKeActivity extends BaseActivity {
 
     private void caculatePrice(int mI) {
 
-        double totalPrice = Integer.valueOf(mBigCourse.price) * mI;
+        BigDecimal totalPrice = new BigDecimal(Integer.valueOf(mBigCourse.price) * mI);
 
         if ("1".equals(mBigCourse.onsaletype)) {
-            totalPrice = totalPrice * Double.valueOf(mBigCourse.onsaledata);
+            BigDecimal mBigDecimal=new BigDecimal(mBigCourse.onsaledata);
+            totalPrice = totalPrice.multiply(mBigDecimal);
             //打折
 
         } else if ("2".equals(mBigCourse.onsaletype)) {
@@ -356,16 +358,17 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                         BigCourse.OnsaledataforappBean m2 = mBigCourse.onsaledataforapp.get(i + 1);
                         int money = m.total;
                         int money2 = m2.total;
-                        if ((money > totalPrice && totalPrice > money2) || totalPrice > money) {
-                            totalPrice = totalPrice - m.money;
+                        if ((money > totalPrice.doubleValue() && totalPrice.doubleValue() > money2) || totalPrice.doubleValue() > money) {
+                            totalPrice = totalPrice.subtract(new BigDecimal(m.money));
                             break;
                         }
                     } else {
                         //只跟最后一个对比
                         BigCourse.OnsaledataforappBean m = mBigCourse.onsaledataforapp.get(i);
                         int money = m.total;
-                        if (totalPrice > money) {
-                            totalPrice = totalPrice - m.money;
+                        if (totalPrice.doubleValue() > money) {
+                            totalPrice = totalPrice.subtract(new BigDecimal(m.money));
+
                         }
                     }
                 }

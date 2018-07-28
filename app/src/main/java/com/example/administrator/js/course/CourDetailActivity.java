@@ -188,20 +188,20 @@ public class CourDetailActivity extends BaseActivity {
         mTvCourseType.setText(mCourseDetail.coursetypenames);
         //  "status": "0", // 课程状态10已预约11进行中2已结束3已取消
         if ("10".equals(mCourseDetail.status)) {
-            mTvCourseTime.setText(mCourseDetail.beginStarttime);
+            mTvCourseTime.setText(mCourseDetail. starttime);
             mTvProgress.setText("已预约");
 
         } else if ("11".equals(mCourseDetail.status)) {
-            mTvCourseTime.setText(mCourseDetail.beginStarttime);
+            mTvCourseTime.setText(mCourseDetail. starttime);
             mTvProgress.setText("进行中");
 
         } else if ("2".equals(mCourseDetail.status)) {
-            mTvCourseTime.setText(mCourseDetail.beginStarttime + "-" + mCourseDetail.endEndtime);
+            mTvCourseTime.setText(mCourseDetail. starttime + "-" + mCourseDetail.endtime);
             mTvProgress.setText("已结束");
             mTvYuyue.setVisibility(View.GONE);
 
         } else {
-            mTvCourseTime.setText(mCourseDetail.beginStarttime);
+            mTvCourseTime.setText(mCourseDetail. starttime);
             mTvProgress.setText("已取消");
             mTvYuyue.setVisibility(View.GONE);
 

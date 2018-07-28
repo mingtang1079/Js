@@ -31,7 +31,7 @@ public class User {
     public String latitude; // 纬度
     public Double distance;//经纬度刻度//用于查询
     public String token;//token
-    public String depositstatus; //押金状态 0 未交押金 1 已交押金 2 免押金
+    public String depositstatus; //押金状态 0 未交押金 1 已交押金 2 免押金,3退款中
     public String skillids;    // 专长ids
     public String skillname;    // 专长名称
     public String courseprice;    // 课程价格

@@ -37,7 +37,6 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.OnItemClickListener;
-import com.umeng.socialize.media.Base;
 
 import java.io.File;
 import java.util.ArrayList;

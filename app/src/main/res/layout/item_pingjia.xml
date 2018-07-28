@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
-    <TextView
-        android:id="@+id/tv_name"
-        style="@style/CustomRadioBtn2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rb_btn_selector"
-        android:text="拉伸" />
-</android.support.constraint.ConstraintLayout>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/tv_name"
+          style="@style/CustomRadioBtn3"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/rb_solid_btn_selector"
+          android:maxLines="1"
+          android:ellipsize="end"
+          android:textColor="@color/course_text"
+          android:text="拉伸" />

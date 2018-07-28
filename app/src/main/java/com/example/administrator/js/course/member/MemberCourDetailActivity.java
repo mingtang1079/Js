@@ -218,23 +218,31 @@ public class MemberCourDetailActivity extends BaseActivity {
 
     void setStatus() {
         if ("10".equals(mCourseDetail.status)) {
-            mTvCourseTime.setText(mCourseDetail.beginStarttime);
+            mTvCourseTime.setText(mCourseDetail. starttime);
             mTvProgress.setText("已预约");
             mTvShangke.setVisibility(View.VISIBLE);
             mTvShangke.setText("取消预约");
         } else if ("11".equals(mCourseDetail.status)) {
-            mTvCourseTime.setText(mCourseDetail.beginStarttime);
+            mTvCourseTime.setText(mCourseDetail. starttime);
             mTvProgress.setText("进行中");
             mTvShangke.setText("下课");
             mTvShangke.setVisibility(View.VISIBLE);
         } else if ("2".equals(mCourseDetail.status)) {
-            mTvCourseTime.setText(mCourseDetail.beginStarttime + "-" + mCourseDetail.endEndtime);
+            mTvCourseTime.setText(mCourseDetail. starttime + "-" + mCourseDetail.endtime);
             mTvProgress.setText("已结束");
             mTvShangke.setVisibility(View.VISIBLE);
             mTvShangke.setText("评价");
 
-        } else {
-            mTvCourseTime.setText(mCourseDetail.beginStarttime);
+        }
+        else if ("14".equals(mCourseDetail.status)) {
+            mTvCourseTime.setText(mCourseDetail. starttime);
+            mTvProgress.setText("已预约");
+            mTvShangke.setVisibility(View.VISIBLE);
+            mTvShangke.setText("开始上课");
+
+        }
+        else {
+            mTvCourseTime.setText(mCourseDetail. starttime);
             mTvProgress.setText("已取消");
             mTvShangke.setVisibility(View.GONE);
         }

@@ -67,15 +67,15 @@ public class ExerciseFragment extends BaseFragment {
             @Override
             public void onRefresh() {
 
-               refresh();
+                refresh();
 
                 mSwipeRefreshLayout.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         //
-                       mSwipeRefreshLayout.setRefreshing(false);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
-                },2000);
+                }, 2000);
 
             }
         });

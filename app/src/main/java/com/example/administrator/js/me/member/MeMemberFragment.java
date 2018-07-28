@@ -1,42 +1,28 @@
 package com.example.administrator.js.me.member;
 
 import android.graphics.drawable.Drawable;
-import android.text.TextUtils;
+import android.support.design.widget.BottomSheetDialog;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
 import com.appbaselib.common.ImageLoader;
-import com.appbaselib.network.ResponceSubscriber;
-import com.appbaselib.rx.RxHelper;
-import com.example.administrator.js.BuildConfig;
-import com.example.administrator.js.Http;
+import com.appbaselib.utils.BottomDialogUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.activity.NewNeedActivity;
-import com.example.administrator.js.constant.EventMessage;
-import com.example.administrator.js.course.CourseCanlenderActivity;
+import com.example.administrator.js.activity.ShareActivity;
 import com.example.administrator.js.me.AboutUsActivity;
 import com.example.administrator.js.me.BarcodeActivity;
 import com.example.administrator.js.me.CollectionActivity;
 import com.example.administrator.js.me.FankuiActivity;
-import com.example.administrator.js.me.PriceListActivity;
-import com.example.administrator.js.me.ServiceTimeListActivity;
 import com.example.administrator.js.me.SettingActivity;
-import com.example.administrator.js.me.TeacherBiDuActivity;
 import com.example.administrator.js.me.TongjiActivity;
-import com.example.administrator.js.me.TuijianActivity;
-import com.example.administrator.js.me.VipSupplyActivity;
-import com.example.administrator.js.me.ZizhiActivity;
 import com.example.administrator.js.me.model.RealUserInfo;
 import com.example.administrator.js.me.model.User;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -123,6 +109,7 @@ public class MeMemberFragment extends BaseFragment {
         return null;
     }
 
+    BottomSheetDialog mBottomSheetDialog;
 
     @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.rl, R.id.tv_id,
             R.id.my_order, R.id.ll_share, R.id.ll_my_collection,
@@ -159,12 +146,12 @@ public class MeMemberFragment extends BaseFragment {
 
             case R.id.my_order:
 
-              start(MyOrderActivity.class);
+                start(MyOrderActivity.class);
                 break;
 
             case R.id.shenti_shuju:
 
-            start(BodyDataActivity.class);
+                start(BodyDataActivity.class);
                 break;
             case R.id.ll_xuqiu:
 
@@ -177,6 +164,9 @@ public class MeMemberFragment extends BaseFragment {
                 break;
 
             case R.id.ll_share:
+
+                start(ShareActivity.class);
+                getActivity().overridePendingTransition(R.anim.alpha_enter,0);
 
                 break;
             case R.id.ll_about:

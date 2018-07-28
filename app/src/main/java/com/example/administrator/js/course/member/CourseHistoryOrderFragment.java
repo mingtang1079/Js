@@ -25,7 +25,7 @@ public class CourseHistoryOrderFragment extends BaseRefreshFragment<HistoryOrder
         super.initView();
         toggleShowLoading(true, "加载中……");
         requestData();
-
+        setLoadMoreListener();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CourseHistoryOrderFragment extends BaseRefreshFragment<HistoryOrder
     @Override
     public void requestData() {
 
-        Http.getDefault().cardlist(UserManager.getInsatance().getUser().id)
+        Http.getDefault().cardlist(UserManager.getInsatance().getUser().id, String.valueOf(pageNo))
                 .as(RxHelper.<WrapperModel<HistoryOrder>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<HistoryOrder>>() {
                     @Override

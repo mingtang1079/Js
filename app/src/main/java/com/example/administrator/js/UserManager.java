@@ -46,6 +46,10 @@ public class UserManager implements SharedPreferences.OnSharedPreferenceChangeLi
             return mUser;
         }
     }
+    public void setUser(User mUser)
+    {
+        this.mUser=mUser;
+    }
 
     // 角色0教练1学员
     public String getRole() {

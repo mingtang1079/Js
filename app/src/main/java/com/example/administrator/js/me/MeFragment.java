@@ -11,14 +11,17 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
 import com.appbaselib.common.ImageLoader;
+import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DialogUtils;
+import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
+import com.example.administrator.js.activity.ShareActivity;
 import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.course.CourseCanlenderActivity;
 import com.example.administrator.js.me.model.RealUserInfo;
@@ -27,9 +30,6 @@ import com.example.administrator.js.me.model.User;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.List;
-
-import butterknife.BindBitmap;
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -64,6 +64,7 @@ public class MeFragment extends BaseFragment {
 
     User mUser;
     RealUserInfo mRealUserInfo;
+    String yajingStatus;//压惊状态
 
     @Override
     protected boolean registerEventBus() {
@@ -90,7 +91,6 @@ public class MeFragment extends BaseFragment {
     protected void initView() {
         mUser = UserManager.getInsatance().getUser();
         requestData();
-
     }
 
     @Override
@@ -135,6 +135,37 @@ public class MeFragment extends BaseFragment {
         setUser();
     }
 
+    private void requestTuiYajin() {
+
+
+        Http.getDefault().returnDepositMoney(UserManager.getInsatance().getUser().id)
+                .as(RxHelper.<String>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<String>() {
+                    @Override
+                    protected void onSucess(String mS) {
+
+                        mUser.depositstatus = mS;
+                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
+
+
+                        if ("0".equals(mS)) {
+                            mTextViewYajingStatus.setText("未交");
+                        } else if ("1".equals(mS)) {
+                            mTextViewYajingStatus.setText("已交");
+
+                        } else if ("2".equals(mS)) {
+                            mTextViewYajingStatus.setText("免押金");
+
+                        }
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+
+                    }
+                });
+    }
+
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
@@ -163,7 +194,8 @@ public class MeFragment extends BaseFragment {
 
                 } else if ("2".equals(mUser.depositstatus)) {
                     mTextViewYajingStatus.setText("免押金");
-
+                } else {
+                    mTextViewYajingStatus.setText("退款中");
 
                 }
             }
@@ -267,6 +299,8 @@ public class MeFragment extends BaseFragment {
 
                 break;
             case R.id.ll_share:
+                start(ShareActivity.class);
+                getActivity().overridePendingTransition(R.anim.alpha_enter, 0);
 
                 break;
             case R.id.ll_about:
@@ -333,19 +367,44 @@ public class MeFragment extends BaseFragment {
     }
 
     private void yajing() {
-        if (!TextUtils.isEmpty(mUser.depositstatus)) {
+        if (!TextUtils.isEmpty(mTextViewYajingStatus.getText().toString())) {
 
-            if ("0".equals(mUser.depositstatus)) {
+            if ("未交".equals(mTextViewYajingStatus.getText().toString())) {
 
                 DialogUtils.getDefaultDialog(mContext, "提示", "您暂未交押金！", "交押金", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface mDialogInterface, int mI) {
 
 
+                        Http.getDefault().getDepositMoney(UserManager.getInsatance().getUser().id)
+                                .as(RxHelper.<String>handleResult(mContext))
+                                .subscribe(new ResponceSubscriber<String>() {
+                                    @Override
+                                    protected void onSucess(String mS) {
+                                        ARouter.getInstance().build("/activity/PayActivity")
+                                                .withString("orderType", "1")
+                                                .withInt("price", Integer.parseInt(mS))
+                                                .navigation(mContext);
+                                    }
+
+                                    @Override
+                                    protected void onFail(String message) {
+
+                                    }
+                                });
+
                     }
                 }).show();
 
+            } else if ("已交".equals(mTextViewYajingStatus.getText().toString())) {
+                DialogUtils.getDefaultDialog(mContext, "提示", "确定申请退押金吗", "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface mDialogInterface, int mI) {
 
+                        requestTuiYajin();
+
+                    }
+                }).show();
             }
 
         }

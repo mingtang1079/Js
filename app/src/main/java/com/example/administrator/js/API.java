@@ -233,7 +233,10 @@ public interface API {
     Observable<BaseModel<WrapperModel<CourseModel>>> getCourse(@Field("tid") String jiaolianId, @Field("status") String status,
                                                                @Field("pageNo") int pageNo, @Field("starttime") String starttime);
 
-
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/list")
+    Observable<BaseModel<WrapperModel<CourseModel>>> getHasCourseList(@Field("uid") String jiaolianId, @Field("status") String status,
+                                                               @Field("pageNo") int pageNo, @Field("orderid") String orderid);
     /**
      * J会员端
      *
@@ -308,7 +311,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/cardlist")
-    Observable<BaseModel<WrapperModel<HistoryOrder>>> cardlist(@Field("uid") String uid);
+    Observable<BaseModel<WrapperModel<HistoryOrder>>> cardlist(@Field("uid") String uid, @Field("pageNo") String pageNo);
 
 
     @FormUrlEncoded
@@ -396,14 +399,23 @@ public interface API {
      */
     @FormUrlEncoded
     @POST(AUTHORIRY + "/pay/submit")
-    Observable<BaseModel<String>> pay(@Field("uid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
+    Observable<BaseModel<String>> pay(@Field("userid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/pay/submit")
-    Observable<BaseModel<WeixinResult>> payWeixin(@Field("uid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
+    Observable<BaseModel<WeixinResult>> payWeixin(@Field("userid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
 
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/getUserInfoByWxCode")
-    Observable<BaseModel<User>> getUserInfoByWxCode(@Field("user") String code);
+    Observable<BaseModel<User>> getUserInfoByWxCode(@Field("code") String code);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/pay/getDepositMoney")
+    Observable<BaseModel<String>> getDepositMoney(@Field("userid") String code);
+
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/pay/returnDepositMoney")
+    Observable<BaseModel<String>> returnDepositMoney(@Field("userid") String code);
 }

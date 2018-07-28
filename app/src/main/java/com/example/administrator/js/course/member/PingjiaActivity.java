@@ -1,6 +1,7 @@
 package com.example.administrator.js.course.member;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.ItemAdapter;
 import com.example.administrator.js.activity.ItemDividerItemDecoration;
+import com.example.administrator.js.activity.ItemGridDividerItemDecoration;
 import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -58,7 +60,7 @@ public class PingjiaActivity extends BaseActivity {
 
     List<String> mStrings = new ArrayList<>();
     PingjiaAdapter mItemAdapter;
-    FlexboxLayoutManager mFlexboxLayoutManager;
+    GridLayoutManager mFlexboxLayoutManager;
 
     @Override
     public Toolbar getToolbar() {
@@ -72,9 +74,9 @@ public class PingjiaActivity extends BaseActivity {
         mToolbar.setTitle("评价");
 
         mItemAdapter = new PingjiaAdapter(R.layout.item_pingjia, mStrings);
-        mFlexboxLayoutManager = new FlexboxLayoutManager(mContext, FlexDirection.ROW, FlexWrap.WRAP);
+        mFlexboxLayoutManager = new GridLayoutManager(mContext, 3);
         mRecyclerview.setLayoutManager(mFlexboxLayoutManager);
-        mRecyclerview.addItemDecoration(new ItemDividerItemDecoration());
+        mRecyclerview.addItemDecoration(new ItemGridDividerItemDecoration());
         mRecyclerview.setAdapter(mItemAdapter);
         mItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override

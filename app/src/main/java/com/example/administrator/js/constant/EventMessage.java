@@ -43,14 +43,25 @@ public class EventMessage {
 
     }
 
-    public  static class CourseListStatusChange extends EventMessage {
+    public static class CourseListStatusChange extends EventMessage {
     }
 
-    public static class weixinLogin extends EventMessage{
+    public static class weixinLogin extends EventMessage {
         public weixinLogin(String mCode) {
             code = mCode;
         }
 
-        public  String code;
+        public String code;
     }
+
+    public static class closePayActivity {
+    }
+
+    public static class shareSuceesState extends EventMessage {
+
+        public shareSuceesState(int mI, Object mO) {
+            super(mI,mO);
+        }
+    }
+
 }

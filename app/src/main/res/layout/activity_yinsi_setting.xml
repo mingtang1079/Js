@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="8dp"
-            android:text="允许被查看详细信息"
+            android:text="不允许被查看详细信息"
             android:textColor="#4A576A"
             android:textSize="14sp" />
 

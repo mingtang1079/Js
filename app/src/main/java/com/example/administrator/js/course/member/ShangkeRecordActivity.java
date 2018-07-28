@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.network.ResponceSubscriber;
@@ -18,8 +20,11 @@ import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.course.member.adapter.ShangkeRecordAdapter;
 
+@Route(path = "/member/ShangkeRecordActivity")
 public class ShangkeRecordActivity extends MyBaseRefreshActivity<CourseModel> {
 
+    @Autowired
+    String orderId;
 
     @Override
     public void initAdapter() {
@@ -39,12 +44,13 @@ public class ShangkeRecordActivity extends MyBaseRefreshActivity<CourseModel> {
         super.initView();
         mToolbar.setTitle("上课记录");
         toggleShowLoading(true);
+        setLoadMoreListener();
         requestData();
     }
 
     @Override
     public void requestData() {
-        Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, "2", pageNo, null)
+        Http.getDefault().getHasCourseList(UserManager.getInsatance().getUser().id, "2", pageNo, orderId)
                 .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<CourseModel>>() {
                     @Override

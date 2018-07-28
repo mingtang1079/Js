@@ -193,7 +193,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"

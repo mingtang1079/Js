@@ -40,6 +40,7 @@ public class CourseMemberFragment extends BaseRefreshFragment<CourseModel> {
         super.initView();
         toggleShowLoading(true, "加载中……");
         requestData();
+        setLoadMoreListener();
 
     }
 
