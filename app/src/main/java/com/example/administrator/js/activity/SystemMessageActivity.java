@@ -30,6 +30,10 @@ public class SystemMessageActivity extends MyBaseRefreshActivity<SystemMessage> 
                 ARouter.getInstance().build("/web/Html5Activity")
                         .withString("url", mSystemMessage.url)
                         .navigation(mContext);
+
+                Http.getDefault().readmsg(mSystemMessage.id);
+                mSystemMessage.status="1";
+                mAdapter.notifyItemChanged(position);
             }
         });
     }

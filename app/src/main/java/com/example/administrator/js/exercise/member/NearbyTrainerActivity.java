@@ -53,6 +53,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
 
     int distance;
+    String degree;
     String sex;
     String skillids;
     String beginprice;
@@ -154,6 +155,9 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         if (!TextUtils.isEmpty(endprice)) {
             mStringStringMap.put("endprice", endprice);
         }
+        if (!TextUtils.isEmpty(degree)) {
+            mStringStringMap.put("degree", degree);
+        }
         mStringStringMap.put("pageNo", pageNo);
         Http.getDefault().seacrchUser(mStringStringMap)
                 .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))
@@ -241,6 +245,21 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 }
             }
         });
+        RadioGroup mRadioGroup1 = mView.findViewById(R.id.rg_dengji);
+        mRadioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup mRadioGroup, int mI) {
+                if (mI == R.id.rb_one) {
+                    degree = "1";
+                } else if (mI == R.id.rb_two) {
+                    degree = "2";
+                } else {
+                    degree = "3";
+                }
+            }
+        });
+
+
         EditText mEditText = mView.findViewById(R.id.et_pricedi);
         mEditText.setText(beginprice);
         EditText mEditText2 = mView.findViewById(R.id.et_pricegao);
@@ -320,6 +339,8 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         mItems.add("好评降序");
         mItems.add("等级升序");
         mItems.add("等级降序");
+        mItems.add("距离升序");
+        mItems.add("距离降序");
 
         BottomDialogUtils.showBottomDialog(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -332,7 +353,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                     mXiangmu.setText("项目");
                     distance = 0;
                     skillids = "";
-
+                    degree = "";
                     sex = "";
                     beginprice = "";
                     endprice = "";
@@ -354,6 +375,10 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                     orderby = "a.degree";
                 } else if (position == 8) {
                     orderby = "a.degree desc";
+                } else if (position == 9) {
+                    orderby = "a.distance ";
+                } else if (position == 10) {
+                    orderby = "a.distance desc";
                 }
 
                 refreshData(true);

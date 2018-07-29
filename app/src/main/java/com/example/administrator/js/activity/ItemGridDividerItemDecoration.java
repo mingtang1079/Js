@@ -20,9 +20,9 @@ public class ItemGridDividerItemDecoration extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
 
 //        //如果不是第一个，则设置top的值。
-            //这里直接硬编码为1px
-            outRect.left = ScreenUtils.dp2px(App.mInstance, 16);
-            outRect.bottom= ScreenUtils.dp2px(App.mInstance, 16);
+        //这里直接硬编码为1px
+        outRect.left = ScreenUtils.dp2px(App.mInstance, 16);
+        outRect.bottom = ScreenUtils.dp2px(App.mInstance, 16);
     }
 
     @Override

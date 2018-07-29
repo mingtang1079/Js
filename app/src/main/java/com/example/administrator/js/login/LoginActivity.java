@@ -127,9 +127,9 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
                         if (mUser != null) {
                             if (!TextUtils.isEmpty(mUser.id)) {
                                 onUserGet(mUser);
-                            }
-                            else {
+                            } else {
                                 //走注册界面 绑定手机号
+                                mRegisterFragment.openId = mUser.openid;
                                 mNavigator.showFragment(mRegisterFragment);
 
                             }

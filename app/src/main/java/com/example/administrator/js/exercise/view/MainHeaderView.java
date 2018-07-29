@@ -17,6 +17,7 @@ import com.appbaselib.base.BaseModel;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.LogUtils;
+import com.appbaselib.utils.ToastUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
@@ -141,11 +142,13 @@ public class MainHeaderView extends BaseLifeCycleView {
 
                 break;
             case R.id.tv_shop:
-                ARouter.getInstance().build("/web/Html5Activity")
-                        .withString("url", "http://www.qq.com")
-                        .navigation(getContext());
+//                ARouter.getInstance().build("/web/Html5Activity")
+//                        .withString("url", "http://www.qq.com")
+//                        .navigation(getContext());
+                ToastUtils.showShort(getContext(),"开发中,敬请期待");
                 break;
             case R.id.tv_work:
+                ToastUtils.showShort(getContext(),"开发中,敬请期待");
 
                 break;
         }

@@ -6,9 +6,19 @@
               android:orientation="vertical">
 
     <LinearLayout
+        android:background="@color/white_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <View
+            android:id="@+id/view_tag"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/circle_calender"/>
+
 
         <TextView
             android:id="@+id/tv_name"
@@ -29,7 +39,7 @@
             android:drawableRight="@drawable/icon_right"
             android:gravity="right"
             android:padding="16dp"
-            android:textSize="14sp"
+            android:textSize="12sp"
             tools:text="2012"/>
     </LinearLayout>
 

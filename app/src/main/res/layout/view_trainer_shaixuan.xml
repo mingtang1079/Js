@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="16dp">
 
     <LinearLayout
 
@@ -17,7 +17,7 @@
             android:text="综合"
             android:textColor="#ff4a576a"
             android:textSize="16sp"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_wancheng"
@@ -26,23 +26,24 @@
             android:gravity="right"
             android:text="完成"
             android:textColor="@color/color_ffcd00"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="性别"
+        android:textColor="#4A576A"
+        android:textSize="16sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="性别："
-            android:textColor="#ff4a576a"
-            android:textSize="16sp" />
 
         <RadioGroup
             android:id="@+id/rg"
@@ -56,19 +57,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rb_nobtn_selector"
-                android:paddingLeft="26dp"
-                android:paddingRight="26dp"
-                android:text="男" />
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="男"/>
 
             <RadioButton
                 android:id="@+id/rb_nv"
                 style="@style/CustomRadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:paddingLeft="26dp"
-                android:paddingRight="26dp"
-                android:text="女" />
+                android:layout_marginLeft="24dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:text="女"/>
 
 
         </RadioGroup>
@@ -76,45 +77,118 @@
         <android.support.v4.widget.Space
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"/>
 
 
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="价格区间"
+        android:textColor="#4A576A"
+        android:textSize="16sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="价格范围："
-            android:textColor="#ff4a576a"
-            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/et_pricedi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="number" />
+            android:background="@drawable/editext_bg"
+            android:gravity="center"
+            android:hint="最低价"
+            android:inputType="number"
+            android:padding="8dp"
+            android:textSize="14sp"/>
 
         <View
             android:layout_width="20dp"
             android:layout_height="1dp"
-            android:background="@color/line_DDDDDD" />
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/line_DDDDDD"/>
 
         <EditText
             android:id="@+id/et_pricegao"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:inputType="number" />
+            android:background="@drawable/editext_bg"
+            android:gravity="center"
+            android:hint="最高价"
+            android:inputType="number"
+            android:padding="8dp"
+            android:textSize="14sp"/>
     </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="等级"
+        android:textColor="#4A576A"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <RadioGroup
+            android:id="@+id/rg_dengji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_one"
+                style="@style/CustomRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rb_nobtn_selector"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="PT1-PT3"/>
+
+            <RadioButton
+                android:id="@+id/rb_two"
+                style="@style/CustomRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="PT4-PT6"/>
+
+            <RadioButton
+                android:id="@+id/rb_three"
+                style="@style/CustomRadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="PT7-PT10"/>
+
+        </RadioGroup>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
 
 </LinearLayout>

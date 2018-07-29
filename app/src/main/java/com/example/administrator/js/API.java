@@ -74,6 +74,7 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/reg")
     Observable<BaseModel<User>> register(@Field("regtype") String type,
+                                         @Field("openid") String openid,
                                          @Field("mobile") String phone,
                                          @Field("code") String code,
                                          @Field("role") String role,
@@ -426,4 +427,7 @@ public interface API {
     Observable<BaseModel<WrapperModel<SystemMessage>>> msgList(@Field("userid") String code, @Field("pageNo") int pageNo);
 
 
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/readmsg")
+    Observable<BaseModel<String>> readmsg(@Field("id") String id);
 }

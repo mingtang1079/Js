@@ -5,6 +5,7 @@ import com.appbaselib.base.BaseFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -48,6 +49,10 @@ public class PaySuccessFragment extends BaseFragment {
     protected void initView() {
         orderId = PreferenceUtils.getPrefString(mContext, Constans.ORDERID, "");
 
+        if (TextUtils.isEmpty(orderId))
+        {
+            mTvBackTop.setVisibility(View.GONE);
+        }
     }
 
     @OnClick({R.id.tv_back_home, R.id.tv_back_top})

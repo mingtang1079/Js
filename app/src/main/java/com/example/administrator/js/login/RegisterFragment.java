@@ -56,6 +56,7 @@ public class RegisterFragment extends BaseFragment {
     Button mBtRegister;
 
     private String role;
+  public   String  openId;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -126,7 +127,8 @@ public class RegisterFragment extends BaseFragment {
 
     private void register() {
 
-        Http.getDefault().register("0", mTvPhone.getText().toString(), mEdYzm.getText().toString(), role, mPassword.getText().toString())
+        Http.getDefault().register(TextUtils.isEmpty(openId)?"0":"1",openId,
+                mTvPhone.getText().toString(), mEdYzm.getText().toString(), role, mPassword.getText().toString())
                 .as(RxHelper.<User>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override
