@@ -1,6 +1,7 @@
 package com.example.administrator.js;
 
 import com.appbaselib.base.BaseModel;
+import com.example.administrator.js.activity.SystemMessage;
 import com.example.administrator.js.activity.WeixinResult;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.course.CourseModel;
@@ -236,7 +237,8 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")
     Observable<BaseModel<WrapperModel<CourseModel>>> getHasCourseList(@Field("uid") String jiaolianId, @Field("status") String status,
-                                                               @Field("pageNo") int pageNo, @Field("orderid") String orderid);
+                                                                      @Field("pageNo") int pageNo, @Field("orderid") String orderid);
+
     /**
      * J会员端
      *
@@ -390,7 +392,8 @@ public interface API {
 
     /**
      * ordertype	是	string	支付用途 0买课,1押金
-     paytype	是	string	支付方式0支付宝,1微信
+     * paytype	是	string	支付方式0支付宝,1微信
+     *
      * @param uid
      * @param orderid
      * @param paytype
@@ -414,8 +417,13 @@ public interface API {
     @POST(AUTHORIRY + "/pay/getDepositMoney")
     Observable<BaseModel<String>> getDepositMoney(@Field("userid") String code);
 
-
     @FormUrlEncoded
     @POST(AUTHORIRY + "/pay/returnDepositMoney")
     Observable<BaseModel<String>> returnDepositMoney(@Field("userid") String code);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/msgList")
+    Observable<BaseModel<WrapperModel<SystemMessage>>> msgList(@Field("userid") String code, @Field("pageNo") int pageNo);
+
+
 }

@@ -56,7 +56,10 @@ public class MessageActivity extends BaseActivity {
 
         List<Fragment> m = new ArrayList<>();
         Uri mUri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
-                .appendPath("conversationlist").appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false").build();
+                .appendPath("conversationlist")
+                .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false")
+                .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "false")
+                .build();
         ConversationListFragment mMessageFragment = new ConversationListFragment();
         mMessageFragment.setUri(mUri);
         m.add(mMessageFragment);

@@ -18,6 +18,14 @@ public abstract class MyBaseRefreshActivity<T> extends BaseRefreshActivity {
     }
 
     @Override
+    protected void initView() {
+        super.initView();
+        toggleShowLoading(true);
+        setLoadMoreListener();
+        requestData();
+    }
+
+    @Override
     public Toolbar getToolbar() {
         return mToolbar;
     }

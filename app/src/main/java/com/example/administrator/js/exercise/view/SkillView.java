@@ -98,12 +98,6 @@ public class SkillView extends BaseLifeCycleView {
         return visibility;
     }
 
-    @Override
-    protected void onWindowVisibilityChanged(int visibility) {
-        super.onWindowVisibilityChanged(visibility);
-        requestData();
-    }
-
     @OnClick(R.id.iv_skill)
     public void onViewClicked() {
 

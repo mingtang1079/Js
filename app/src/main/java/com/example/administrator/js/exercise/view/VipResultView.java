@@ -102,9 +102,4 @@ public class VipResultView extends BaseLifeCycleView {
 
     }
 
-    @Override
-    protected void onWindowVisibilityChanged(int visibility) {
-        super.onWindowVisibilityChanged(visibility);
-        LogUtils.d("visi--" + visibility);
-    }
 }

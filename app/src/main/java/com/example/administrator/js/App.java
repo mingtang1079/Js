@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
+import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.app.BaseApplication;
@@ -38,7 +39,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.model.UIConversation;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
 import io.rong.imlib.model.UserInfo;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -74,6 +77,37 @@ public class App extends BaseApplication {
     private void initIM() {
         if (getApplicationInfo().packageName.equals(CommonUtils.getCurProcessName(getApplicationContext()))) {
             RongIM.init(this);
+            //自定义点击事件
+            RongIM.setConversationListBehaviorListener(new RongIM.ConversationListBehaviorListener() {
+                @Override
+                public boolean onConversationPortraitClick(Context mContext, Conversation.ConversationType mConversationType, String mS) {
+                    return false;
+                }
+
+                @Override
+                public boolean onConversationPortraitLongClick(Context mContext, Conversation.ConversationType mConversationType, String mS) {
+                    return false;
+                }
+
+                @Override
+                public boolean onConversationLongClick(Context mContext, View mView, UIConversation mUIConversation) {
+                    return false;
+                }
+
+                @Override
+                public boolean onConversationClick(Context mContext, View mView, UIConversation uiConversation) {
+                    uiConversation.setUnReadMessageCount(0);
+                    if (uiConversation.getConversationType().toString().equals(Conversation.ConversationType.SYSTEM.toString())) {
+                        ARouter.getInstance().build("/activity/SystemMessageActivity")
+                                .navigation(mContext);
+                    }
+                    else {
+                        RongIM.getInstance().startConversation(mContext, Conversation.ConversationType.PRIVATE, uiConversation.getConversationTargetId(), uiConversation.getUIConversationTitle());
+                    }
+
+                    return true;
+                }
+            });
             connectRongYun();
         }
     }
@@ -96,6 +130,7 @@ public class App extends BaseApplication {
          * 建议在测试阶段建议设置成true，发布时设置为false */
         Bugly.init(getApplicationContext(), "b10f100f0d", false);
     }
+
     private void initRouter() {
 
         if (BuildConfig.DEBUG) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效

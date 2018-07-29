@@ -159,16 +159,4 @@ public class MainHeaderView extends BaseLifeCycleView {
         }
     }
 
-    @Override
-    protected void onWindowVisibilityChanged(int visibility) {
-        super.onWindowVisibilityChanged(visibility);
-        LogUtils.d("visi--" + visibility);
-    }
-
-    @Override
-    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
-        super.onVisibilityChanged(changedView, visibility);
-        LogUtils.d("visi--" + visibility);
-
-    }
 }
