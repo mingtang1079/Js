@@ -27,6 +27,7 @@ import com.mic.adressselectorlib.OnItemClickListener;
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.rong.imkit.RongIM;
 
 @Route(path = "/me/UserInfoActivity")
 public class UserInfoActivity extends BaseActivity implements UserPresenter.UserResponse {
@@ -187,6 +188,8 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                 DialogUtils.getDefaultDialog(mContext, "提示", "确定退出吗？", "确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                        RongIM.getInstance().logout();
                         PreferenceUtils.clearDefaultPreference(mContext);
                         UserManager.getInsatance().setUser(null);
                         Intent intent = new Intent(mContext, LoginActivity.class);
