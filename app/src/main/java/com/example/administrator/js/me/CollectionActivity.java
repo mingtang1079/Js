@@ -10,6 +10,7 @@ import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.ItemTopDividerItemDecoration;
 import com.example.administrator.js.base.MyBaseRefreshActivity;
 import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.exercise.model.Main;
@@ -23,6 +24,7 @@ public class CollectionActivity extends MyBaseRefreshActivity<Main> {
     protected void initView() {
         super.initView();
         mToolbar.setTitle("我的收藏");
+        mRecyclerview.addItemDecoration(new ItemTopDividerItemDecoration());
         toggleShowLoading(true);
         requestData();
     }

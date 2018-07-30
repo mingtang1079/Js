@@ -156,7 +156,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_jxzz"
+                    android:drawableLeft="@drawable/icon_dingdan2"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="我的订单"
@@ -176,7 +176,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_huiyaun"
+                    android:drawableLeft="@drawable/icon_shengtidata"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="身体数据"
@@ -196,7 +196,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/icon_richeng"
+                    android:drawableLeft="@drawable/icon_dingdan"
                     android:drawablePadding="8dp"
                     android:drawableRight="@drawable/icon_right"
                     android:text="健身需求"
@@ -226,10 +226,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="0.5dp"
                 android:id="@+id/ll_share"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0.5dp"
                 android:background="@color/white"
                 android:padding="16dp">
 
@@ -249,7 +249,6 @@
                 android:id="@+id/ll_fankui"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:background="@color/white"
                 android:padding="16dp">
 
@@ -266,11 +265,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:id="@+id/ll_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:layout_marginTop="0.5dp"
                 android:background="@color/white"
                 android:padding="16dp">
 

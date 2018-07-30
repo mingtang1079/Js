@@ -17,6 +17,9 @@ import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.vipandtrainer.adapter.CourseUserAdapter;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -52,7 +55,7 @@ public class CourseTrainerFragment extends BaseRefreshFragment<CourseModel> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ARouter.getInstance().build("/course/CourDetailActivity")
-                        .withString("id",mList.get(position).id)
+                        .withString("id", mList.get(position).id)
                         .navigation(mContext);
             }
         });
@@ -61,7 +64,15 @@ public class CourseTrainerFragment extends BaseRefreshFragment<CourseModel> {
     @Override
     public void requestData() {
 
-        Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, status, pageNo, null)
+        Map<String, String> mMap = new HashMap<>();
+
+        mMap.put("tid", UserManager.getInsatance().getUser().id);
+        mMap.put("status", "1");
+        mMap.put("pageNo", "1");
+        mMap.put("starttime", "1");
+
+
+        Http.getDefault().getCourse(mMap)
                 .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<CourseModel>>() {
                     @Override
@@ -88,7 +99,6 @@ public class CourseTrainerFragment extends BaseRefreshFragment<CourseModel> {
 
     @OnClick(R.id.et_search)
     public void onViewClicked() {
-
 
 
     }

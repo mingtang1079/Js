@@ -35,10 +35,12 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         helper.setText(R.id.tv_name, item.nickname);
         helper.setText(R.id.tv_id, "ID:" + item.no);
         //年龄
-        if (item.age != null && item.sex != null) {
+        if (item.sex != null) {
             TextView mTextView = helper.getView(R.id.tv_age);
             helper.setVisible(R.id.tv_age, true);
-            helper.setText(R.id.tv_age, item.age + "");
+            if (item.age!=null) {
+                helper.setText(R.id.tv_age, item.age + "");
+            }
             if (item.sex.equals("1")) {
                 //男性
                 mTextView.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
@@ -63,6 +65,7 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         helper.setText(R.id.tv_number,"订单号："+item.payno);
         helper.setText(R.id.tv_danjia, "￥ " + item.cprice / 100 + "");
         helper.setText(R.id.tv_course_count, "共" + item.csum + "节课  合计");
+        helper.setText(R.id.tv_count,"x"+item.csum);
         helper.setText(R.id.tv_course_type, item.ctypename + "(" + item.coursetypenames + ")");
         helper.setText(R.id.tv_count, "x" + item.csum);
         BigDecimal a;

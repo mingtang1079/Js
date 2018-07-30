@@ -99,6 +99,7 @@ public class MyOrderActivity extends BaseActivity {
         mViewpager.setAdapter(mFragmentAdapter);
         mTab.setTabMode(TabLayout.MODE_SCROLLABLE);
         mTab.setupWithViewPager(mViewpager);
-  //      TablayoutUtils.setTabLine(mTab, 10, 10, mContext);
+        TablayoutUtils.setTabLine(mTab, 10, 10, mContext);
+
     }
 }

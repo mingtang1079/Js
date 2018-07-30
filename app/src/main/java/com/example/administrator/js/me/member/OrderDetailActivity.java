@@ -183,7 +183,7 @@ public class OrderDetailActivity extends BaseActivity {
         if (mOrder.crealprice != null)
             mTvShijiPrice.setText(BigBigDecimalUtils.divide(new BigDecimal(mOrder.crealprice), new BigDecimal(100)) + "元");
         if (mOrder.ctotalprice != null && mOrder.crealprice != null) {
-            mTvYouhuiPrice.setText(BigBigDecimalUtils.divide(new BigDecimal(mOrder.ctotalprice - mOrder.crealprice), new BigDecimal(100)) + "元");
+            mTvYouhuiPrice.setText("-"+BigBigDecimalUtils.divide(new BigDecimal(mOrder.ctotalprice - mOrder.crealprice), new BigDecimal(100)) + "元");
         }
         mTvOrderNumber.setText(mOrder.payno + "");
         if ("1".equals(mOrder.paytype))

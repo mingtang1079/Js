@@ -106,6 +106,34 @@
                 android:textSize="14sp"
                 tools:text="男" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/white"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
+                android:text="生日"
+                android:textColor="#4A576A"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_birthday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="16dp"
+                android:drawableRight="@drawable/icon_right"
+                android:gravity="right"
+                android:textColor="#4A576A"
+                android:textSize="14sp"
+                tools:text="1992-02-02" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_area"
@@ -295,7 +323,7 @@
         android:id="@+id/tv_exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/colorAccent"
         android:gravity="center"
         android:padding="16dp"
         android:text="退出登录"

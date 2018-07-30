@@ -202,8 +202,11 @@ public class MeFragment extends BaseFragment {
 
             //年龄
             //年龄
-            if (mUser.age != null && mUser.sex != null) {
-                mTextViewAge.setText(mUser.age + "");
+            if ( mUser.sex != null) {
+                mTextViewAge.setVisibility(View.VISIBLE);
+                if (mUser.age != null) {
+                    mTextViewAge.setText(mUser.age + "");
+                }
                 if (mUser.sex.equals("1")) {
                     //男性
                     mTextViewAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));

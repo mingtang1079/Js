@@ -14,13 +14,18 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.utils.AdressHelper;
+import com.appbaselib.utils.DatePickerDialogUtils;
+import com.appbaselib.utils.DateUtils;
 import com.appbaselib.utils.DialogUtils;
 import com.appbaselib.utils.PreferenceUtils;
+import com.appbaselib.view.datepicker.view.GregorianLunarCalendarView;
+import com.appbaselib.view.datepicker.view.OnDateSelectedListener;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.login.LoginActivity;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.presenter.UserPresenter;
+import com.example.administrator.js.utils.TimeUtils;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.OnItemClickListener;
 
@@ -71,6 +76,8 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
     LinearLayout mLinearLayoutZhifubao;
     @BindView(R.id.tv_zhifubao)
     TextView mTextViewZhifubao;
+    @BindView(R.id.tv_birthday)
+    TextView mTextViewBirthday;
 
     UserPresenter mUserPresenter;
 
@@ -116,7 +123,8 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
             mTvAddress.setText(mUser.address);
             mTvPhone.setText(mUser.mobile);
             mTextViewZhifubao.setText(mUser.alipay + "");
-
+            if (!TextUtils.isEmpty(mUser.birthdate))
+                mTextViewBirthday.setText(TimeUtils.getTime(mUser.birthdate));
             if (!TextUtils.isEmpty(mUser.openid)) {
                 mTvWeixin.setText("已绑定");
             } else {
@@ -126,7 +134,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
         }
     }
 
-    @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit, R.id.ll_zhifubao})
+    @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit, R.id.ll_zhifubao, R.id.ll_birthday})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_head:
@@ -198,7 +206,18 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                     }
                 }).show();
 
+                break;
+            case R.id.ll_birthday:
 
+                DatePickerDialogUtils.getDefaultDatePickerDialog(mContext, new OnDateSelectedListener() {
+                    @Override
+                    public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
+                        //       time = DateUtils.getTimeLongYmd(mCalendarData.getTime());
+                        mTextViewBirthday.setText(mCalendarData.getTime());
+                        mUserPresenter.updateUser("birthdate", mCalendarData.getTime());
+
+                    }
+                }).show();
                 break;
         }
     }

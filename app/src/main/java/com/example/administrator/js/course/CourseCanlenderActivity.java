@@ -36,6 +36,7 @@ import com.ldf.calendar.view.MonthPager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -137,7 +138,25 @@ public class CourseCanlenderActivity extends BaseActivity {
     @Override
     public void requestData() {
 
-        Http.getDefault().getCourse(UserManager.getInsatance().getUser().id, "1", 1,currenttime)
+
+
+        Map<String, String> mMap = new HashMap<>();
+        if ("0".equals(UserManager.getInsatance().getUser().role)) {
+
+            mMap.put("tid", UserManager.getInsatance().getUser().id);
+
+
+        } else {
+            mMap.put("uid", UserManager.getInsatance().getUser().id);
+
+        }
+        mMap.put("status", "1");
+        mMap.put("pageNo", "1");
+        mMap.put("starttime", "1");
+
+
+
+        Http.getDefault().getCourse(mMap)
                 .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<WrapperModel<CourseModel>>(mContext) {
                     @Override
