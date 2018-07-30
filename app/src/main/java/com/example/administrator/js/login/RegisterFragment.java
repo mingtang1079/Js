@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
@@ -53,7 +54,7 @@ public class RegisterFragment extends BaseFragment {
     @BindView(R.id.password)
     PasswordToggleEditText mPassword;
     @BindView(R.id.bt_register)
-    Button mBtRegister;
+    TextView mBtRegister;
 
     private String role;
   public   String  openId;

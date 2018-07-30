@@ -65,6 +65,7 @@ public class CourseDetail implements Serializable {
 
     public String img;
 
+    public Integer age; // 年龄
 
     public String mobile;
 }

@@ -90,7 +90,7 @@ public class TuikeActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        mToolbar.setTitle("申请退课");
+        mToolbar.setTitle("申请退款");
         setData(mMyOrder);
         requestData();
         mLlReason.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +159,7 @@ public class TuikeActivity extends BaseActivity {
         }
         int price = new BigDecimal(mOrder.crealprice / 100).divide(new BigDecimal(mOrder.csum), 0, BigDecimal.ROUND_UP).intValue();
         mTvPrice.setText("￥ " + price);
-        mOrder.tuikePrice= String.valueOf(price);
+        mOrder.tuikePrice = String.valueOf(price);
 
     }
 
@@ -186,12 +186,12 @@ public class TuikeActivity extends BaseActivity {
                     @Override
                     protected void onSucess(String mS) {
 
-                        mMyOrder.tuikeTime= DateUtils.getCurrentTimeInString();
-                        mMyOrder.refundtype=refundtype;
-                        mMyOrder.refunddetail=mEtReason.getText().toString();
+                        mMyOrder.tuikeTime = DateUtils.getCurrentTimeInString();
+                        mMyOrder.refundtype = refundtype;
+                        mMyOrder.refunddetail = mEtReason.getText().toString();
 
                         ARouter.getInstance().build("/member/TuikeDetailActivity")
-                                .withBoolean("isFirst",true)
+                                .withBoolean("isFirst", true)
                                 .withObject("mMyOrder", mMyOrder)
                                 .navigation(mContext);
                         finish();

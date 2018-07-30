@@ -46,9 +46,9 @@ public class LoginFragment extends BaseFragment {
     @BindView(R.id.tv_wjmm)
     TextView mTvWjmm;
     @BindView(R.id.bt_login)
-    Button mBtLogin;
+    TextView mBtLogin;
     @BindView(R.id.bt_register)
-    Button mBtRegister;
+    TextView mBtRegister;
     @BindView(R.id.iv_weixin)
     ImageView mIvWeixin;
 

@@ -70,29 +70,29 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler 
                 case BaseResp.ErrCode.ERR_AUTH_DENIED:
                     //用户拒绝授权
                     showToast("拒绝授权微信登录");
+                    finish();
+
                 case BaseResp.ErrCode.ERR_USER_CANCEL:
                     //用户取消
                     showToast("取消了微信登录");
-
+                    finish();
                     break;
                 case BaseResp.ErrCode.ERR_OK:
                     //用户同意
                     EventBus.getDefault().post(new EventMessage.weixinLogin(((SendAuth.Resp) resp).code));
-                    finish();
                     break;
             }
         } else if (resp.getType() == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX)//分享
         {
 
-            switch (code)
-            {
+            switch (code) {
                 case BaseResp.ErrCode.ERR_OK:
-                    EventBus.getDefault().post(new EventMessage.shareSuceesState(0,null));
+                    EventBus.getDefault().post(new EventMessage.shareSuceesState(0, null));
                     finish();
 
                     break;
                 case BaseResp.ErrCode.ERR_USER_CANCEL:
-                    EventBus.getDefault().post(new EventMessage.shareSuceesState(-1,null));
+                    EventBus.getDefault().post(new EventMessage.shareSuceesState(-1, null));
                     finish();
 
                     break;

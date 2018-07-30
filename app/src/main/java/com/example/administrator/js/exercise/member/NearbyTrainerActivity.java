@@ -362,7 +362,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 } else if (position == 1) {
                     orderby = "a.courseprice";
                 } else if (position == 2) {
-                    orderby = "a.a.courseprice desc";
+                    orderby = "a.courseprice desc";
                 } else if (position == 3) {
                     orderby = "a.reorder";
                 } else if (position == 4) {
@@ -376,7 +376,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 } else if (position == 8) {
                     orderby = "a.degree desc";
                 } else if (position == 9) {
-                    orderby = "a.distance ";
+                    orderby = "a.distance";
                 } else if (position == 10) {
                     orderby = "a.distance desc";
                 }

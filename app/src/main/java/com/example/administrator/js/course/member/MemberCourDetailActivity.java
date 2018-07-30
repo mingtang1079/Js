@@ -3,6 +3,7 @@ package com.example.administrator.js.course.member;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.Toolbar;
@@ -65,6 +66,10 @@ public class MemberCourDetailActivity extends BaseActivity {
     Toolbar mToolbar;
     @BindView(R.id.tv_name)
     TextView mTvName;
+    @BindView(R.id.tv_age)
+    TextView mTvAge;
+    @BindView(R.id.tv_id)
+    TextView mTvId;
     @BindView(R.id.tv_course_type)
     TextView mTvCourseType;
     @BindView(R.id.tv_course_time)
@@ -206,6 +211,29 @@ public class MemberCourDetailActivity extends BaseActivity {
         // TODO: 2018/5/23
         mTvName.setText(mCourseDetail.nickname);
         ImageLoader.load(mContext, mCourseDetail.img, mIvHead);
+        mTvId.setText("ID：" + mCourseDetail.no + "");
+
+        //年龄
+        if (mCourseDetail.sex != null) {
+            if (mCourseDetail.age != null) {
+                mTvAge.setText(mCourseDetail.age + "");
+            }
+            if (mCourseDetail.sex.equals("1")) {
+                //男性
+                mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
+                Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_men);
+                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                mTvAge.setCompoundDrawables(drawable, null, null, null);
+            } else {
+                Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_women);
+                drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                mTvAge.setCompoundDrawables(drawable, null, null, null);
+                mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_women));
+
+            }
+        } else {
+            mTvAge.setVisibility(View.GONE);
+        }
 
         mTvCourseType.setText(mCourseDetail.coursetypenames);
         //  "status": "0", // 课程状态10已预约11进行中2已结束3已取消

@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#ff8996aa"
                     android:textSize="13sp"
-                    tools:text="退课原因：地点变更/太远了"/>
+                    tools:text="退款原因：地点变更/太远了"/>
 
 
             </LinearLayout>
@@ -285,7 +285,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="您的退课申请已提交，请耐心等待工作人员的审核"
+                            android:text="您的退款申请已提交，请耐心等待工作人员的审核"
                             android:textColor="#ff8996aa"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -339,7 +339,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:lineSpacingExtra="4dp"
-                            android:text="您的退课申请正在等待教练通过，如果3天之后教练未处理我们将自动把钱退给您"
+                            android:text="您的退款申请正在等待教练通过，如果3天之后教练未处理我们将自动把钱退给您"
                             android:textColor="#ff8996aa"
                             android:textSize="12sp"/>
                     </LinearLayout>
@@ -391,7 +391,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="您的退课由已转入到您的银行账户，请耐心等待。"
+                            android:text="您的退款由已转入到您的银行账户，请耐心等待。"
                             android:textColor="#ff8996aa"
                             android:textSize="12sp"/>
                     </LinearLayout>

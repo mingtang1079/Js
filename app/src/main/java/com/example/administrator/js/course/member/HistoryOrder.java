@@ -33,7 +33,8 @@ public class HistoryOrder implements Serializable {
 
     public String img;
 
-    public String sex;
+    public Integer age; // 年龄
+    public String sex; // 值为1时是男性，值为2时是女性，值为0时是未知
 
     public String nickname;
 
@@ -111,6 +112,8 @@ public class HistoryOrder implements Serializable {
         public int crealprice;
         public int ctotalprice;
         public String status;
+
+
     }
 
 

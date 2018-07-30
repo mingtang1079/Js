@@ -10,6 +10,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
 import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.utils.TimeUtils;
 
 import java.util.List;
 
@@ -27,14 +28,14 @@ public class CourseUserAdapter extends BaseRecyclerViewAdapter<CourseModel> {
             ImageLoader.load(mContext, item.img, (CircleImageView) helper.getView(R.id.iv_head));
         }
         helper.setText(R.id.tv_name, item.nickname);
-        helper.setText(R.id.tv_skill, item.coursetypenames);
-        helper.setText(R.id.tv_time_juli, item.starttime);
-
+        helper.setText(R.id.tv_skill, item.ctypename + "(" + item.coursetypenames + ")");
+        helper.setText(R.id.tv_time_juli, TimeUtils.getTime(item.starttime));
+        //   helper.setText(R.id.tv_time_juli, item.starttime);
         //年龄
-        if ( item.sex!= null) {
+        if (item.sex != null) {
             TextView mTextView = helper.getView(R.id.tv_age);
             helper.setVisible(R.id.tv_age, true);
-            if (item.age!=null) {
+            if (item.age != null) {
                 helper.setText(R.id.tv_age, item.age + "");
             }
             if (item.sex.equals("1")) {

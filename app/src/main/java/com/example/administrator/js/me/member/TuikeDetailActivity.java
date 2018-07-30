@@ -76,7 +76,7 @@ public class TuikeDetailActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        mToolbar.setTitle("退课详情");
+        mToolbar.setTitle("退款详情");
 
         setData(mMyOrder);
         if (isFirst)
@@ -107,9 +107,9 @@ public class TuikeDetailActivity extends BaseActivity {
         } else {
             mTvAge.setVisibility(View.GONE);
         }
-        mTvReason.setText("退课原因：" + mOrder.refundtype);
+        mTvReason.setText("退款原因：" + mOrder.refundtype);
         mTvTime.setText("申请时间：" + mOrder.tuikeTime);
-        mTvNumber.setText(mOrder.payno + "");
+        mTvNumber.setText("订单号：" + mOrder.payno + "");
 
         int price = new BigDecimal(mOrder.crealprice / 100).divide(new BigDecimal(mOrder.csum), 0, BigDecimal.ROUND_UP).intValue();
         mTvTuikuanPrice.setText("￥ " + price);

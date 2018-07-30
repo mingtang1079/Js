@@ -30,6 +30,7 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.ChooseLocationActivity;
+import com.example.administrator.js.me.model.Collection;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.utils.StringUtils;
 import com.example.administrator.js.vipandtrainer.adapter.BigCourse;
@@ -40,6 +41,7 @@ import com.example.administrator.js.vipandtrainer.trainer.ApplySuccessActivity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -87,7 +89,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
     @BindView(R.id.tv_jian)
     TextView mTvJian;
     @BindView(R.id.et_count)
-    EditText mEtCount;
+    TextView mEtCount;
     @BindView(R.id.tv_add)
     TextView mTvAdd;
     @BindView(R.id.tv_youhui_price)
@@ -211,7 +213,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
 //                    }
 //                });
 
-        Http.getDefault().getcourseinfo(id,cardid)
+        Http.getDefault().getcourseinfo(id, cardid)
                 .as(RxHelper.<CourseInfo>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<CourseInfo>() {
                     @Override
@@ -221,8 +223,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                             mBigCourses = mCourseTypes.ctypes;
                             mCourseTypeAdapterBig.setNewData2(mCourseTypes.ctypes);
                             //默认选中第一个
-                            if (mCourseTypes.ctypes.size()>0)
-                            {
+                            if (mCourseTypes.ctypes.size() > 0) {
                                 mCourseTypeAdapterBig.setSingleChoosed(0);
                                 initSmallCourse(0);
 
@@ -230,7 +231,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                             setUserData(mCourseTypes.teacher);
                         }
                         toggleShowLoading(false);
-
+                        Collections.reverse(mBigCourses);
                     }
 
                     @Override
@@ -246,10 +247,12 @@ public class BuySiJiaoKeActivity extends BaseActivity {
         if (mUser != null) {
             ImageLoader.load(mContext, mUser.img, mIvHead);
             mTvName.setText(mUser.nickname);
-            mTvId.setText(mUser.no + "");
+            mTvId.setText("ID：" + mUser.no + "");
             //年龄
-            if (mUser.age != null && mUser.sex != null) {
-                mTvAge.setText(mUser.age + "");
+            if (mUser.sex != null) {
+                if (mUser.age != null) {
+                    mTvAge.setText(mUser.age + "");
+                }
                 if (mUser.sex.equals("1")) {
                     //男性
                     mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
@@ -265,7 +268,6 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                 }
             } else {
                 mTvAge.setVisibility(View.GONE);
-
             }
         }
     }
@@ -320,7 +322,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
         }
         String mS = StringUtils.listToString(mStrings);
 
-        Http.getDefault().studentsave(id,cardid, UserManager.getInsatance().getUser().id, mBigCourse.id, mS, mEtCount.getText().toString(), address, lon, lat)
+        Http.getDefault().studentsave(id, cardid, UserManager.getInsatance().getUser().id, mBigCourse.id, mS, mEtCount.getText().toString(), address, lon, lat)
                 .as(RxHelper.<String>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override
@@ -342,43 +344,29 @@ public class BuySiJiaoKeActivity extends BaseActivity {
     private void caculatePrice(int mI) {
 
         BigDecimal totalPrice = new BigDecimal(Integer.valueOf(mBigCourse.price) * mI);
+        BigDecimal totalPriceCopy = new BigDecimal(Integer.valueOf(mBigCourse.price) * mI);
 
         if ("1".equals(mBigCourse.onsaletype)) {
-            BigDecimal mBigDecimal=new BigDecimal(mBigCourse.onsaledata);
+            BigDecimal mBigDecimal = new BigDecimal(mBigCourse.onsaledata);
             totalPrice = totalPrice.multiply(mBigDecimal);
             //打折
-
         } else if ("2".equals(mBigCourse.onsaletype)) {
             //满减
+            int priceYouhui = 0;
             if (mBigCourse.onsaledataforapp != null) {
                 for (int i = 0; i < mBigCourse.onsaledataforapp.size(); i++) {
-                    if (i < mBigCourse.onsaledataforapp.size() - 1) {
-                        //对比两个
-                        BigCourse.OnsaledataforappBean m = mBigCourse.onsaledataforapp.get(i);
-                        BigCourse.OnsaledataforappBean m2 = mBigCourse.onsaledataforapp.get(i + 1);
-                        int money = m.total;
-                        int money2 = m2.total;
-                        if ((money > totalPrice.doubleValue() && totalPrice.doubleValue() > money2) || totalPrice.doubleValue() > money) {
-                            totalPrice = totalPrice.subtract(new BigDecimal(m.money));
-                            break;
-                        }
-                    } else {
-                        //只跟最后一个对比
-                        BigCourse.OnsaledataforappBean m = mBigCourse.onsaledataforapp.get(i);
-                        int money = m.total;
-                        if (totalPrice.doubleValue() > money) {
-                            totalPrice = totalPrice.subtract(new BigDecimal(m.money));
-
-                        }
+                    if (totalPrice.doubleValue()>mBigCourse.onsaledataforapp.get(i).total){
+                        priceYouhui=mBigCourse.onsaledataforapp.get(i).money;
                     }
                 }
             }
+            totalPrice = totalPrice.subtract(new BigDecimal(priceYouhui));
 
         } else {
             //无优惠
         }
         mTvAllPrice.setText("￥ " + totalPrice);
-
+        mTvYouhuiPrice.setText("-"+totalPriceCopy.subtract(totalPrice).doubleValue());
     }
 
     @Override

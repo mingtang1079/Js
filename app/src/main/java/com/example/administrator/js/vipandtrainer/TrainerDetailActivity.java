@@ -141,11 +141,12 @@ public class TrainerDetailActivity extends BaseActivity {
         mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerview.setLayoutManager(mLinearLayoutManager);
         mRecyclerview.setAdapter(mWorkDateAdapter);
-       // mLlDateTwo.removeAllViews();
+        // mLlDateTwo.removeAllViews();
         mLlDateTwo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup mRadioGroup, int mI) {
 
+                mTvTime.setText(mTrainerDetail.workdatelist.get(mI).month+"月"+" "+mTrainerDetail.workdatelist.get(mI).year);
                 mWorkDateAdapter.setNewData(mTrainerDetail.workdatelist.get(mI).timelist);
             }
         });
@@ -181,10 +182,11 @@ public class TrainerDetailActivity extends BaseActivity {
             ImageLoader.load(mContext, mTrainerDetail.userinfo.img, mIvHead);
             mTvName.setText(mTrainerDetail.userinfo.nickname);
             mTvShanchang.setText(mTrainerDetail.userinfo.skillname);
-            mTvId.setText("ID" + mTrainerDetail.userinfo.no + "");
+            mTvId.setText("ID：" + mTrainerDetail.userinfo.no + "");
             //年龄
-            if (mTrainerDetail.userinfo.age != null && mTrainerDetail.userinfo.sex != null) {
-                mTvAge.setText(mTrainerDetail.userinfo.age + "");
+            if (mTrainerDetail.userinfo.sex != null) {
+                if (mTrainerDetail.userinfo.age != null)
+                    mTvAge.setText(mTrainerDetail.userinfo.age + "");
                 if (mTrainerDetail.userinfo.sex.equals("1")) {
                     //男性
                     mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
@@ -200,10 +202,9 @@ public class TrainerDetailActivity extends BaseActivity {
                 }
             } else {
                 mTvAge.setVisibility(View.GONE);
-
             }
             mTvArea.setText(mTrainerDetail.userinfo.address);
-            mTvArea.setText(mTrainerDetail.userinfo.address);
+            mTvDegree.setText(mTrainerDetail.userinfo.degree);
         }
 
         // 与我的关系          //是否接单tradestatus:0否1是, status:0没有关系,1已关注,2已拉黑
@@ -285,7 +286,7 @@ public class TrainerDetailActivity extends BaseActivity {
                 break;
             case R.id.tv_yuyue:
 
-                DialogUtils.getDefaultDialog(mContext, "提示", "是否要预约体验课?", "确定", new DialogInterface.OnClickListener() {
+                DialogUtils.getDefaultDialog(mContext, "", "是否要预约体验课?", "确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface mDialogInterface, int mI) {
 

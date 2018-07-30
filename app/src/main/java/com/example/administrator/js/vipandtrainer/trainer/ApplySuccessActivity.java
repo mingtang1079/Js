@@ -51,6 +51,7 @@ public class ApplySuccessActivity extends BaseActivity {
                 break;
             case R.id.tv_back_top:
                 start(MyOrderActivity.class);
+                finish();
                 break;
         }
     }

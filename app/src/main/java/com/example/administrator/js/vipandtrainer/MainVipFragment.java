@@ -15,6 +15,7 @@ import com.appbaselib.base.BaseFragment;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.TablayoutUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.NearByVipFragment;
 import com.example.administrator.js.R;
@@ -71,7 +72,7 @@ public class MainVipFragment extends BaseFragment {
 
                 if (item.getItemId() == R.id.scan) {
 
-                  saoyisao();
+                    saoyisao();
                 } else {
                     start(MessageActivity.class);
                 }
@@ -85,7 +86,7 @@ public class MainVipFragment extends BaseFragment {
         mTab.setTabMode(TabLayout.MODE_FIXED);
         mTab.setupWithViewPager(mViewpager);
         mViewpager.setOffscreenPageLimit(4);
-        //   TablayoutUtils.setTabLine(mTab,50,50,mContext);
+        TablayoutUtils.setTabLine(mTab, 20, 20, mContext);
         requestData();
     }
 
@@ -118,7 +119,7 @@ public class MainVipFragment extends BaseFragment {
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {
                     @Override
                     protected void onSucess(final WrapperModel<Main> mMainWrapperModel) {
-                        if (mMainWrapperModel != null && mMainWrapperModel.list != null&&mMainWrapperModel.list.size()!=0) {
+                        if (mMainWrapperModel != null && mMainWrapperModel.list != null && mMainWrapperModel.list.size() != 0) {
                             ImageLoader.load(mContext, mMainWrapperModel.list.get(0).image, mIvAdd);
                         }
                         mIvAdd.setOnClickListener(new View.OnClickListener() {

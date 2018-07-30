@@ -57,6 +57,8 @@ public class YuyueCourseActivity extends BaseActivity {
 //    TextView mTvAge;
     @BindView(R.id.tv_id)
     TextView mTvId;
+    @BindView(R.id.tv_age)
+    TextView mTvAge;
     @BindView(R.id.tv_course_type)
     TextView mTvCourseType;
     @BindView(R.id.tv_time)
@@ -173,26 +175,28 @@ public class YuyueCourseActivity extends BaseActivity {
         if (mUser != null) {
             ImageLoader.load(mContext, mUser.img, mIvHead);
             mTvName.setText(mUser.nickname);
-            mTvId.setText("ID" + mUser.no + "");
-//            //年龄
-//            if (mUser.age != null && mUser.sex != null) {
-//                mTvAge.setText(mUser.age + "");
-//                if (mUser.sex.equals("1")) {
-//                    //男性
-//                    mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
-//                    Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_men);
-//                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-//                    mTvAge.setCompoundDrawables(drawable, null, null, null);
-//                } else {
-//                    Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_women);
-//                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-//                    mTvAge.setCompoundDrawables(drawable, null, null, null);
-//                    mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_women));
-//
-//                }
-//            } else {
-//                mTvAge.setVisibility(View.GONE);
-//            }
+            mTvId.setText("ID：" + mUser.no + "");
+            //年龄
+            if (mUser.sex != null) {
+                if (mUser.age != null) {
+                    mTvAge.setText(mUser.age + "");
+                }
+                if (mUser.sex.equals("1")) {
+                    //男性
+                    mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
+                    Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_men);
+                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                    mTvAge.setCompoundDrawables(drawable, null, null, null);
+                } else {
+                    Drawable drawable = mContext.getResources().getDrawable(R.drawable.icon_women);
+                    drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+                    mTvAge.setCompoundDrawables(drawable, null, null, null);
+                    mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_women));
+
+                }
+            } else {
+                mTvAge.setVisibility(View.GONE);
+            }
         }
 
         mTvCourseType.setText(mUser.ctypename + "(" + mUser.coursetypenames + ")");
