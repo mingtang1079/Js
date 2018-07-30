@@ -409,5 +409,9 @@ public class MeFragment extends BaseFragment {
 
         }
     }
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.closePayActivity mListStatusChange) {
+        mUser.depositstatus = "1";//已交
+        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
+    }
 }

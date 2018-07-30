@@ -186,11 +186,12 @@ public class BuySiJiaoKeActivity extends BaseActivity {
         mTextViewYouhiuInfo.setText("(" + mBigCourses.get(position).onsalelabel + ")");
         mBigCourse = mBigCourses.get(position);
         mTvPrice.setText("￥ " + mBigCourses.get(position).price);
-        caculatePrice(1);
         BigCourse mCourseType = (BigCourse) mCourseTypeAdapterBig.getData().get(position);
         if (mCourseType.list != null) {
             mCourseTypeAdapterSmall.setNewData2(mCourseType.list);
         }
+
+        caculatePrice();
     }
 
     List<BigCourse> mBigCourses;
@@ -221,6 +222,13 @@ public class BuySiJiaoKeActivity extends BaseActivity {
 
                         if (mCourseTypes != null) {
                             mBigCourses = mCourseTypes.ctypes;
+//                            if (mBigCourses!=null&&mBigCourses.size()!=0)
+//                            {
+//                                for (BigCourse m :
+//                                        mBigCourses) {
+//                                    Collections.reverse(m.onsaledataforapp);
+//                                }
+//                            }
                             mCourseTypeAdapterBig.setNewData2(mCourseTypes.ctypes);
                             //默认选中第一个
                             if (mCourseTypes.ctypes.size() > 0) {
@@ -231,7 +239,6 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                             setUserData(mCourseTypes.teacher);
                         }
                         toggleShowLoading(false);
-                        Collections.reverse(mBigCourses);
                     }
 
                     @Override
@@ -289,11 +296,11 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                 int m = Integer.parseInt(mEtCount.getText().toString());
                 if (m > 1) {
                     mEtCount.setText(m - 1 + "");
-                    caculatePrice(m - 1);
+                    caculatePrice();
 
                 } else {
                     mEtCount.setText("1");
-                    caculatePrice(1);
+                    caculatePrice();
 
                 }
 
@@ -304,7 +311,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                 mEtCount.setText(m2 + 1 + "");
                 //计算价格
 
-                caculatePrice(m2 + 1);
+                caculatePrice();
 
                 break;
             case R.id.btn_sure:
@@ -341,8 +348,8 @@ public class BuySiJiaoKeActivity extends BaseActivity {
 
     }
 
-    private void caculatePrice(int mI) {
-
+    private void caculatePrice() {
+        int mI = Integer.parseInt(mEtCount.getText().toString());
         BigDecimal totalPrice = new BigDecimal(Integer.valueOf(mBigCourse.price) * mI);
         BigDecimal totalPriceCopy = new BigDecimal(Integer.valueOf(mBigCourse.price) * mI);
 
@@ -355,8 +362,12 @@ public class BuySiJiaoKeActivity extends BaseActivity {
             int priceYouhui = 0;
             if (mBigCourse.onsaledataforapp != null) {
                 for (int i = 0; i < mBigCourse.onsaledataforapp.size(); i++) {
-                    if (totalPrice.doubleValue()>mBigCourse.onsaledataforapp.get(i).total){
-                        priceYouhui=mBigCourse.onsaledataforapp.get(i).money;
+
+                    if (totalPrice.doubleValue() < mBigCourse.onsaledataforapp.get(i).total) {
+                        continue;
+                    } else {
+                        priceYouhui = mBigCourse.onsaledataforapp.get(i).money;
+                        break;
                     }
                 }
             }
@@ -366,7 +377,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
             //无优惠
         }
         mTvAllPrice.setText("￥ " + totalPrice);
-        mTvYouhuiPrice.setText("-"+totalPriceCopy.subtract(totalPrice).doubleValue());
+        mTvYouhuiPrice.setText("-" + totalPriceCopy.subtract(totalPrice).doubleValue());
     }
 
     @Override
