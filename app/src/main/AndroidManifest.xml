@@ -310,7 +310,6 @@
             android:name=".activity.ShareActivity"
             android:theme="@style/NoTitleTranslucentTheme">
         </activity>
-        <activity android:name=".activity.WBShareActivity"/>
         <activity android:name=".activity.SystemMessageActivity">
         </activity>
     </application>

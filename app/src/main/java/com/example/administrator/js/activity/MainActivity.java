@@ -83,6 +83,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+        upadateLocation();
 
         if (UserManager.getInsatance().getUser() != null) {
             if ("0".equals(UserManager.getInsatance().getUser().role)) {

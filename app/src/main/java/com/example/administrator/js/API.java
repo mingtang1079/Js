@@ -73,7 +73,7 @@ public interface API {
      */
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/reg")
-    Observable<BaseModel<User>> register(@Field("regtype") String type,
+    Observable<BaseModel<User>> register(@Field("zhucetype") String type,
                                          @Field("openid") String openid,
                                          @Field("mobile") String phone,
                                          @Field("code") String code,

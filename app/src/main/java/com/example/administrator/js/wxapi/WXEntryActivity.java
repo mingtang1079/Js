@@ -80,6 +80,8 @@ public class WXEntryActivity extends BaseActivity implements IWXAPIEventHandler 
                 case BaseResp.ErrCode.ERR_OK:
                     //用户同意
                     EventBus.getDefault().post(new EventMessage.weixinLogin(((SendAuth.Resp) resp).code));
+                    finish();
+
                     break;
             }
         } else if (resp.getType() == ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX)//分享
