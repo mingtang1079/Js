@@ -140,7 +140,7 @@ public class MeFragment extends BaseFragment {
 
         Http.getDefault().returnDepositMoney(UserManager.getInsatance().getUser().id)
                 .as(RxHelper.<String>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<String>() {
+                .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override
                     protected void onSucess(String mS) {
 
@@ -161,7 +161,7 @@ public class MeFragment extends BaseFragment {
 
                     @Override
                     protected void onFail(String message) {
-
+                        showToast(message);
                     }
                 });
     }
@@ -202,7 +202,7 @@ public class MeFragment extends BaseFragment {
 
             //年龄
             //年龄
-            if ( mUser.sex != null) {
+            if (mUser.sex != null) {
                 mTextViewAge.setVisibility(View.VISIBLE);
                 if (mUser.age != null) {
                     mTextViewAge.setText(mUser.age + "");
@@ -412,6 +412,7 @@ public class MeFragment extends BaseFragment {
 
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStatusChange(EventMessage.closePayActivity mListStatusChange) {
         mUser.depositstatus = "1";//已交

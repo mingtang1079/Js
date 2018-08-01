@@ -29,6 +29,8 @@ import com.example.administrator.js.utils.TimeUtils;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.OnItemClickListener;
 
+import org.w3c.dom.Text;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -122,7 +124,9 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                 mTvSex.setText("女");
             mTvAddress.setText(mUser.address);
             mTvPhone.setText(mUser.mobile);
-            mTextViewZhifubao.setText(mUser.alipay + "");
+            if (!TextUtils.isEmpty(mUser.alipay)) {
+                mTextViewZhifubao.setText(mUser.alipay + "");
+            }
             if (!TextUtils.isEmpty(mUser.birthdate))
                 mTextViewBirthday.setText(TimeUtils.getTime(mUser.birthdate));
             if (!TextUtils.isEmpty(mUser.openid)) {

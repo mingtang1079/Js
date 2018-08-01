@@ -130,6 +130,9 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
                             } else {
                                 //走注册界面 绑定手机号
                                 mRegisterFragment.openId = mUser.openid;
+                                mRegisterFragment.nickname = mUser.nickname;
+                                mRegisterFragment.img = mUser.img;
+                                mRegisterFragment.sex = mUser.sex;
                                 mNavigator.showFragment(mRegisterFragment);
 
                             }

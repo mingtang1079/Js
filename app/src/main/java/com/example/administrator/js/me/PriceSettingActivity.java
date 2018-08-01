@@ -3,6 +3,7 @@ package com.example.administrator.js.me;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -112,7 +113,7 @@ public class PriceSettingActivity extends BaseActivity {
         if ("pricea".equals(type)) {
             mToolbar.setTitle("常规课");
             canshuName = "pricea";
-            if (mPrice != null && mPrice.userprice != null) {
+            if (mPrice != null && mPrice.userprice != null&&!TextUtils.isEmpty(mPrice.userprice.pricea)) {
                 mTvPrice.setText(mPrice.userprice.pricea);
                 mSeekbar.setProgress(Integer.parseInt(mPrice.userprice.pricea));
             }
@@ -129,7 +130,7 @@ public class PriceSettingActivity extends BaseActivity {
             mToolbar.setTitle("特色课");
             canshuName = "priceb";
 
-            if (mPrice != null && mPrice.userprice != null) {
+            if (mPrice != null && mPrice.userprice != null&&!TextUtils.isEmpty(mPrice.userprice.priceb)) {
                 mTvPrice.setText(mPrice.userprice.priceb);
                 mSeekbar.setProgress(Integer.parseInt(mPrice.userprice.priceb));
 
@@ -147,7 +148,7 @@ public class PriceSettingActivity extends BaseActivity {
             mToolbar.setTitle("专业课");
             canshuName = "pricec";
 
-            if (mPrice != null && mPrice.userprice != null) {
+            if (mPrice != null && mPrice.userprice != null&&!TextUtils.isEmpty(mPrice.userprice.pricec)) {
                 mTvPrice.setText(mPrice.userprice.pricec);
                 mSeekbar.setProgress(Integer.parseInt(mPrice.userprice.pricec));
 

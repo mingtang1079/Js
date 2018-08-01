@@ -78,7 +78,12 @@ public interface API {
                                          @Field("mobile") String phone,
                                          @Field("code") String code,
                                          @Field("role") String role,
-                                         @Field("password") String password);
+                                         @Field("password") String password,
+                                         @Field("nickname") String nickname,
+                                         @Field("img") String img,
+                                         @Field("sex") String sex
+
+    );
 
     /**
      * 忘记密码

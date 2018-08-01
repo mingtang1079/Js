@@ -57,7 +57,12 @@ public class RegisterFragment extends BaseFragment {
     TextView mBtRegister;
 
     private String role;
-  public   String  openId;
+    public String openId;
+    public String nickname;
+    public String img;
+    public String sex;
+
+
 
     @Override
     protected int getContentViewLayoutID() {
@@ -128,8 +133,8 @@ public class RegisterFragment extends BaseFragment {
 
     private void register() {
 
-        Http.getDefault().register(TextUtils.isEmpty(openId)?"0":"1",openId,
-                mTvPhone.getText().toString(), mEdYzm.getText().toString(), role, mPassword.getText().toString())
+        Http.getDefault().register(TextUtils.isEmpty(openId) ? "0" : "1", openId,
+                mTvPhone.getText().toString(), mEdYzm.getText().toString(), role, mPassword.getText().toString(),nickname,img,sex)
                 .as(RxHelper.<User>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override
