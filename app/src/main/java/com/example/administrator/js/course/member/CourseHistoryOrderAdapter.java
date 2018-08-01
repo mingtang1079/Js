@@ -36,6 +36,10 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
         {
             helper.setVisible(R.id.tv_xuke,false);
         }
+        else {
+            helper.setVisible(R.id.tv_xuke,true);
+
+        }
         if (!TextUtils.isEmpty(item.img)) {
             ImageLoader.load(mContext, item.img, (CircleImageView) helper.getView(R.id.iv_head));
         }
