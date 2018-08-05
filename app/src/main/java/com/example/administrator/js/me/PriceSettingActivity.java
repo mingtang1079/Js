@@ -145,7 +145,7 @@ public class PriceSettingActivity extends BaseActivity {
             }
 
         } else {
-            mToolbar.setTitle("专业课");
+            mToolbar.setTitle("康复课");
             canshuName = "pricec";
 
             if (mPrice != null && mPrice.userprice != null&&!TextUtils.isEmpty(mPrice.userprice.pricec)) {

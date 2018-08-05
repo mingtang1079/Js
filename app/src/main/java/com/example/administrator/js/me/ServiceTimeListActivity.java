@@ -50,8 +50,8 @@ public class ServiceTimeListActivity extends MyBaseRefreshActivity<ServiceTime> 
                 return true;
             }
         });
-        toggleShowLoading(true);
-        requestData();
+        setLoadMoreListener();
+
     }
 
     @Override

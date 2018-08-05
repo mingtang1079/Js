@@ -43,9 +43,7 @@ public class ShangkeRecordActivity extends MyBaseRefreshActivity<CourseModel> {
     protected void initView() {
         super.initView();
         mToolbar.setTitle("上课记录");
-        toggleShowLoading(true);
         setLoadMoreListener();
-        requestData();
     }
 
     @Override

@@ -22,8 +22,10 @@ import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.base.BaseModel;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.network.ResponceSubscriber2;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.DialogUtils;
 import com.appbaselib.utils.PreferenceUtils;
@@ -85,8 +87,6 @@ public class TrainerDetailActivity extends BaseActivity {
     RadioGroup mLlDateTwo;
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
-    @BindView(R.id.ll_detail)
-    LinearLayout mLlDetail;
     @BindView(R.id.tv_yuyue)
     TextView mTvYuyue;
     @BindView(R.id.view_line)
@@ -97,6 +97,16 @@ public class TrainerDetailActivity extends BaseActivity {
     LinearLayout mContent;
     @BindView(R.id.tv_degree)
     TextView mTvDegree;
+
+    @BindView(R.id.ll_detail)
+    LinearLayout mLinearLayoutDetail;
+    @BindView(R.id.ll_button0)
+    LinearLayout mLinearLayoutButton0;
+    @BindView(R.id.ll_button)
+    LinearLayout mLinearLayoutButton;
+
+    @BindView(R.id.tv_message)
+    TextView mTextViewMeassage;
 
     TrainerDetail mTrainerDetail;
 
@@ -146,7 +156,7 @@ public class TrainerDetailActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(RadioGroup mRadioGroup, int mI) {
 
-                mTvTime.setText(mTrainerDetail.workdatelist.get(mI).month+"月"+" "+mTrainerDetail.workdatelist.get(mI).year);
+                mTvTime.setText(mTrainerDetail.workdatelist.get(mI).month + "月" + " " + mTrainerDetail.workdatelist.get(mI).year);
                 mWorkDateAdapter.setNewData(mTrainerDetail.workdatelist.get(mI).timelist);
             }
         });
@@ -160,11 +170,13 @@ public class TrainerDetailActivity extends BaseActivity {
 
         Http.getDefault().teacherDetail(id, UserManager.getInsatance().getUser().id)
                 .as(RxHelper.<TrainerDetail>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<TrainerDetail>() {
+                .subscribe(new ResponceSubscriber2<TrainerDetail>() {
                     @Override
-                    protected void onSucess(TrainerDetail m) {
-                        if (m != null) {
-                            mTrainerDetail = m;
+                    protected void onSucess(BaseModel<TrainerDetail> t) {
+                        if (t != null && t.data != null) {
+                            mTrainerDetail = t.data;
+                            mTextViewMeassage.setText(t.msg);
+
                             setData(mTrainerDetail);
                         }
                         toggleShowLoading(false);
@@ -178,6 +190,24 @@ public class TrainerDetailActivity extends BaseActivity {
     }
 
     private void setData(final TrainerDetail mTrainerDetail) {
+
+        //黑名单或者其他原因不能展示
+        if (mTrainerDetail.code != 0) {
+            mLinearLayoutDetail.setVisibility(View.GONE);
+            mLinearLayoutButton.setVisibility(View.GONE);
+            mLinearLayoutButton0.setVisibility(View.GONE);
+
+            mTextViewMeassage.setVisibility(View.VISIBLE);
+        } else {
+            mLinearLayoutDetail.setVisibility(View.VISIBLE);
+            mLinearLayoutButton.setVisibility(View.VISIBLE);
+            mLinearLayoutButton0.setVisibility(View.VISIBLE);
+
+            mTextViewMeassage.setVisibility(View.GONE);
+
+        }
+
+
         if (mTrainerDetail.userinfo != null) {
             ImageLoader.load(mContext, mTrainerDetail.userinfo.img, mIvHead);
             mTvName.setText(mTrainerDetail.userinfo.nickname);

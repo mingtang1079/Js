@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -60,7 +61,11 @@ public class MeFragment extends BaseFragment {
 
     @BindView(R.id.tv_degree)
     TextView mTextViewDegree;
+    @BindView(R.id.tv_verify2)
+    TextView mTextViewVirify2;
 
+    @BindView(R.id.p_progressbar)
+    ProgressBar mProgressBar;
 
     User mUser;
     RealUserInfo mRealUserInfo;
@@ -74,12 +79,7 @@ public class MeFragment extends BaseFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onVerifyChanged(EventMessage.VerifyChangedMessage message) {
 
-        if (mRealUserInfo != null) {
-            mRealUserInfo = new RealUserInfo();
-            mRealUserInfo.status = "0";
-            mTextViewVerify.setText("审核中");
-
-        }
+        requestData();
     }
 
     @Override
@@ -101,23 +101,40 @@ public class MeFragment extends BaseFragment {
                 .as(RxHelper.<RealUserInfo>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<RealUserInfo>() {
                     @Override
-                    protected void onSucess(RealUserInfo mUser) {
+                    protected void onSucess(RealUserInfo mRealUserInfo) {
 
-                        if (mUser != null) {
-                            mRealUserInfo = mUser;
-                            if (!TextUtils.isEmpty(mUser.status)) {
-                                if ("1".equals(mUser.status)) {
+                        if (mRealUserInfo != null) {
+                            MeFragment.this.mRealUserInfo = mRealUserInfo;
+                            if (!TextUtils.isEmpty(mRealUserInfo.status)) {
+                                if ("1".equals(mRealUserInfo.status)) {
                                     mTextViewVerify.setText("已认证");
-                                } else if ("2".equals(mUser.status)) {
+                                } else if ("2".equals(mRealUserInfo.status)) {
                                     mTextViewVerify.setText("认证不通过");
 
-                                } else {
+                                } else if ("3".equals(mRealUserInfo.status)) {
                                     mTextViewVerify.setText("审核中");
-
+                                } else {
+                                    //未审核
                                 }
                             }
+                            //教学资质
+                            if (!TextUtils.isEmpty(mRealUserInfo.teachstatus)) {
+                                if ("1".equals(mRealUserInfo.teachstatus)) {
+                                    mTextViewVirify2.setText("已认证");
+                                } else if ("2".equals(mRealUserInfo.teachstatus)) {
+                                    mTextViewVirify2.setText("认证不通过");
+
+                                } else if ("3".equals(mRealUserInfo.teachstatus)) {
+                                    mTextViewVirify2.setText("审核中");
+                                } else {
+                                    //未审核
+                                }
+                            }
+
+
                         } else {
                             mTextViewVerify.setText("未认证");
+                            mTextViewVirify2.setText("未认证");
 
                         }
                     }
@@ -133,6 +150,7 @@ public class MeFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         setUser();
+        requestData();
     }
 
     private void requestTuiYajin() {
@@ -145,6 +163,7 @@ public class MeFragment extends BaseFragment {
                     protected void onSucess(String mS) {
 
                         mUser.depositstatus = mS;
+                        setUser();
                         PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
 
 
@@ -228,9 +247,9 @@ public class MeFragment extends BaseFragment {
 
         if (!TextUtils.isEmpty(mUser.degree)) {
             mTextViewDegree.setText(mUser.degree);
-            mTextViewDegree.setVisibility(View.VISIBLE);
+            int degre = Integer.valueOf(mUser.degree.replace("PT", ""));
+            mProgressBar.setProgress(degre);
         } else {
-            mTextViewDegree.setVisibility(View.GONE);
 
         }
     }
@@ -242,9 +261,16 @@ public class MeFragment extends BaseFragment {
 
 
     @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.rl, R.id.tv_id, R.id.ll_zizhi, R.id.ll_share, R.id.ll_my_collection,
-            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_dingjia, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about, R.id.ll_fankui, R.id.ll_wufu_time, R.id.ll_tuijian, R.id.tv_verify})
+            R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_dingjia, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about,
+            R.id.ll_fankui, R.id.ll_wufu_time, R.id.ll_tuijian, R.id.ll_personal, R.id.ll_shiming})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+
+            case R.id.ll_personal:
+                ARouter.getInstance().build("/me/UserInfoActivity")
+                        .navigation();
+                break;
+
             case R.id.ll_barcode:
                 start(BarcodeActivity.class);
 
@@ -276,10 +302,15 @@ public class MeFragment extends BaseFragment {
             case R.id.ll_zizhi:
 
                 if (mRealUserInfo != null) {
-                    if (mRealUserInfo.status.equals("1")) {
+                    if (mRealUserInfo.teachstatus.equals("1") || mRealUserInfo.teachstatus.equals("2")) {
                         start(ZizhiActivity.class);
                     } else {
-                        showToast("未通过认证不能进行教学资质编辑");
+                        if (mRealUserInfo.status.equals("0")) {
+                            showToast("请先完成实名认证");
+                        } else if (mRealUserInfo.status.equals("3")) {
+                            showToast("实名审核中，请耐心等待");
+
+                        }
                     }
                 }
                 break;
@@ -331,33 +362,16 @@ public class MeFragment extends BaseFragment {
                 start(TuijianActivity.class);
                 break;
 
-            case R.id.tv_verify:
+            case R.id.ll_shiming:
 
                 if (mRealUserInfo != null) {
                     if (!TextUtils.isEmpty(mRealUserInfo.status)) {
-                        if ("1".equals(mRealUserInfo.status)) {
-
-                            if (BuildConfig.DEBUG) {
-                                ARouter.getInstance().build("/me/RealNameVerifyActivity")
-                                        .navigation();
-                            }
-
-                        } else if ("2".equals(mRealUserInfo.status)) {
+                        if (!"3".equals(mRealUserInfo.status)) {
                             ARouter.getInstance().build("/me/RealNameVerifyActivity")
                                     .navigation();
-
-                        } else {
-                            if (BuildConfig.DEBUG) {
-                                ARouter.getInstance().build("/me/RealNameVerifyActivity")
-                                        .navigation();
-                            }
-
                         }
                     }
 
-                } else {
-                    ARouter.getInstance().build("/me/RealNameVerifyActivity")
-                            .navigation();
                 }
 
                 break;
@@ -387,6 +401,7 @@ public class MeFragment extends BaseFragment {
                                         ARouter.getInstance().build("/activity/PayActivity")
                                                 .withString("orderType", "1")
                                                 .withInt("price", Integer.parseInt(mS))
+                                                .withString("title", "押金")
                                                 .navigation(mContext);
                                     }
 
@@ -416,6 +431,7 @@ public class MeFragment extends BaseFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStatusChange(EventMessage.closePayActivity mListStatusChange) {
         mUser.depositstatus = "1";//已交
+        mTextViewYajingStatus.setText("已交");
         PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
     }
 }

@@ -60,10 +60,16 @@ public class AddBodyDataActivity extends BaseActivity {
     EditText mEtTizhi;
     @BindView(R.id.et_daixie)
     EditText mEtDaixie;
-    @BindView(R.id.et_shuifeng)
-    EditText mEtShuifeng;
+    @BindView(R.id.et_Jirou)
+    EditText mEtJirou;
     @BindView(R.id.tv_weidu)
     TextView mTvWeidu;
+
+    @BindView(R.id.et_zhifang)
+    EditText mEtZhifang;
+    @BindView(R.id.et_bodyzhishu)
+    TextView mEtZhishu;
+
     @BindView(R.id.btn_sure)
     Button mBtnSure;
 
@@ -94,7 +100,7 @@ public class AddBodyDataActivity extends BaseActivity {
             mEtShengao.setText(mBodyData.height);
             mEtTizhi.setText(mBodyData.fat);
             mEtDaixie.setText(mBodyData.bmr);
-            mEtShuifeng.setText(mBodyData.bodywater);
+            mEtJirou.setText(mBodyData.muscle);
             date = mBodyData.writedate;
             mTvTime.setText(date);
         } else {
@@ -106,7 +112,7 @@ public class AddBodyDataActivity extends BaseActivity {
         Observable<CharSequence> mObservable2 = RxTextView.textChanges(mEtShengao);
         Observable<CharSequence> mObservable3 = RxTextView.textChanges(mEtTizhi);
         Observable<CharSequence> mObservable4 = RxTextView.textChanges(mEtDaixie);
-        Observable<CharSequence> mObservable5 = RxTextView.textChanges(mEtShuifeng);
+        Observable<CharSequence> mObservable5 = RxTextView.textChanges(mEtJirou);
 
         Observable.combineLatest(mObservable1, mObservable2, mObservable3, mObservable4, mObservable5,
                 new Function5<CharSequence, CharSequence, CharSequence, CharSequence, CharSequence, Boolean>() {
@@ -180,8 +186,17 @@ public class AddBodyDataActivity extends BaseActivity {
             mStringStringMap.put("bmr", mEtDaixie.getText().toString());
 
         }
-        if (!TextUtils.isEmpty(mEtShuifeng.getText().toString())) {
-            mStringStringMap.put("bodywater", mEtShuifeng.getText().toString());
+        if (!TextUtils.isEmpty(mEtJirou.getText().toString())) {
+            mStringStringMap.put("muscle", mEtJirou.getText().toString());
+
+        }
+
+        if (!TextUtils.isEmpty(mEtZhifang.getText().toString())) {
+            mStringStringMap.put("visceralfat", mEtZhifang.getText().toString());
+
+        }
+        if (!TextUtils.isEmpty(mEtZhishu.getText().toString())) {
+            mStringStringMap.put("bmi", mEtZhishu.getText().toString());
 
         }
 

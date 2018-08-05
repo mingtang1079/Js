@@ -23,9 +23,10 @@ public class SystemMessageAdapter extends BaseRecyclerViewAdapter<SystemMessage>
 
         if ("0".equals(item.status)) {
             mView.setBackground(ContextCompat.getDrawable(mContext,R.drawable.circle_calender));
+            mView.setVisibility(View.VISIBLE);
         } else {
             mView.setBackground(ContextCompat.getDrawable(mContext,R.drawable.circle_gray));
-
+            mView.setVisibility(View.INVISIBLE);
         }
     }
 }

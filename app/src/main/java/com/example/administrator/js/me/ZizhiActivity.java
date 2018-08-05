@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -25,10 +26,15 @@ import com.appbaselib.view.datepicker.view.OnDateSelectedListener;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
+import com.example.administrator.js.me.model.ShenheInfo;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.presenter.ZizhiPresenter;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,8 +71,31 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
     @BindView(R.id.ll_yaoqingma)
     LinearLayout mLinearLayoutYao;
 
+    @BindView(R.id.tv_jinshen)
+    TextView mTextViewJinshen;
+
     VerifyUser mVerifyUser;
     ZizhiPresenter mZizhiPresenter;
+
+    MenuItem mMenuItem;
+    private boolean isFinish = false;
+
+    protected void initMenu() {
+        mToolbar.inflateMenu(R.menu.toolbar_menu_common);
+        mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
+        mMenuItem.setEnabled(false);
+        mMenuItem.setTitle("保存");
+        mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem mMenuItem) {
+
+                isFinish = true;
+                mZizhiPresenter.updateZizhi("teachstatus", "3");
+
+                return true;
+            }
+        });
+    }
 
     @Override
     protected int getContentViewLayoutID() {
@@ -85,7 +114,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
     @Override
     protected void initView() {
-
+        initMenu();
         mToolbar.setTitle("教学资质");
         mZizhiPresenter = new ZizhiPresenter(mContext);
 
@@ -115,12 +144,46 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                         loadError();
                     }
                 });
+
+        //晋升状态
+        Http.getDefault().getPromotion(UserManager.getInsatance().getUser().id)
+                .as(RxHelper.<ShenheInfo>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<ShenheInfo>() {
+                    @Override
+                    protected void onSucess(ShenheInfo mShenheInfo) {
+
+                        if (mShenheInfo != null) {
+
+                            if (!TextUtils.isEmpty(mShenheInfo.promotionstatus)) {
+                                if ("3".equals(mShenheInfo.promotionstatus)) {
+                                    mTextViewJinshen.setText("审核中");
+                                } else  if ("2".equals(mShenheInfo.promotionstatus)) {
+                                    //未审核
+                                     mTextViewJinshen.setText("审核不通过");
+
+                                }else  if ("1".equals(mShenheInfo.promotionstatus)) {
+                                    //未审核
+                                    mTextViewJinshen.setText("审核通过");
+
+                                }
+                            }
+
+                        }
+
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+
+                    }
+                });
+
     }
 
     private void setData() {
 
         if (mVerifyUser != null && mVerifyUser.workdate != null)
-            mTvTime.setText(mVerifyUser.workdate);
+            mTvTime.setText(mVerifyUser.workdate.substring(0,mVerifyUser.workdate.lastIndexOf("-")));
 
 
     }
@@ -130,12 +193,13 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
         switch (view.getId()) {
             case R.id.ll_time:
 
-                DatePickerDialogUtils.getDefaultDatePickerDialog(mContext, new OnDateSelectedListener() {
+                DatePickerDialogUtils.getDefaultDatePickerDialog3(mContext, new OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
                         time = DateUtils.getTimeLongYmd(mCalendarData.getTime());
-                        mTvTime.setText(mCalendarData.getTime());
-                        mZizhiPresenter.updateZizhi("workdate", mCalendarData.getTime());
+                        mTvTime.setText(mCalendarData.pickedYear+"-"+mCalendarData.pickedMonthSway);
+                        isFinish = false;
+                        mZizhiPresenter.updateZizhi("workdate",mCalendarData.pickedYear+"-"+mCalendarData.pickedMonthSway);
 
                     }
                 }).show();
@@ -200,7 +264,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
     private void tianxie() {
 
-
+//0
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
         View mView = LayoutInflater.from(mContext).inflate(R.layout.view_input, null, false);
         final TextInputEditText mTextInputEditText = mView.findViewById(R.id.et);
@@ -218,6 +282,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
             @Override
             public void onClick(DialogInterface mDialogInterface, int mI) {
 
+                isFinish = false;
                 mZizhiPresenter.updateZizhi("invitecode", mTextInputEditText.getText().toString());
 
             }
@@ -244,16 +309,50 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
     private void shenqing() {
 
+        if ("审核中".equals(mTextViewJinshen.getText().toString())) {
+            return;
+        } else {
+
+
+            Http.getDefault().promotionSave(UserManager.getInsatance().getUser().id)
+                    .as(RxHelper.<ShenheInfo>handleResult(mContext))
+                    .subscribe(new ResponceSubscriber<ShenheInfo>(mContext) {
+                        @Override
+                        protected void onSucess(ShenheInfo mShenheInfo) {
+
+                            mTextViewJinshen.setText("审核中");
+
+                        }
+
+                        @Override
+                        protected void onFail(String message) {
+                            showToast(message);
+                        }
+                    });
+        }
 
     }
 
     @Override
     public void onSuccess() {
-        //  finish();
+        if (isFinish) {
+            finish();
+        }
     }
 
     @Override
     public void onFail(String mes) {
 
+    }
+
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.ZizhiStatus mZizhiStatus)
+    {
+        mMenuItem.setEnabled(true);
     }
 }

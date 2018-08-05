@@ -117,9 +117,15 @@ public class MeMemberFragment extends BaseFragment {
 
     @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.rl, R.id.tv_id,
             R.id.my_order, R.id.ll_share, R.id.ll_my_collection,
-            R.id.shenti_shuju, R.id.ll_xuqiu, R.id.ll_about, R.id.ll_fankui})
+            R.id.shenti_shuju, R.id.ll_xuqiu, R.id.ll_about, R.id.ll_fankui ,R.id.ll_personal,})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+
+            case R.id.ll_personal:
+                ARouter.getInstance().build("/me/UserInfoActivity")
+                        .navigation();
+                break;
+
             case R.id.ll_barcode:
                 start(BarcodeActivity.class);
 

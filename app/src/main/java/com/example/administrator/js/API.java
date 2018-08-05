@@ -18,6 +18,7 @@ import com.example.administrator.js.me.model.NewNeed;
 import com.example.administrator.js.me.model.Price;
 import com.example.administrator.js.me.model.RealUserInfo;
 import com.example.administrator.js.me.model.ServiceTime;
+import com.example.administrator.js.me.model.ShenheInfo;
 import com.example.administrator.js.me.model.Tongji;
 import com.example.administrator.js.me.model.Tuijian;
 import com.example.administrator.js.me.model.User;
@@ -219,7 +220,6 @@ public interface API {
      * 会员端 课程详细
      *
      * @param userId
-     * @param useId
      * @return
      */
     @POST(AUTHORIRY + "/course/get")
@@ -229,11 +229,6 @@ public interface API {
     /**
      * J教练端
      *
-     * @param jiaolianId
-     * @param status     状态 1进行中,2已结束
-     * @param pageNo     页码,默认1,用于已结束的下拉刷新
-     * @param starttime  某一天,用于我的日程 格式 2018-02-03
-     * @return
      */
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")
@@ -291,7 +286,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/count")
-    Observable<BaseModel<Tongji>> tongji(@Field("tid") String tid);
+    Observable<BaseModel<List<Tongji>>> tongji(@Field("tid") String tid);
 
 
     @FormUrlEncoded
@@ -434,4 +429,12 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/readmsg")
     Observable<BaseModel<String>> readmsg(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/promotionSave")
+    Observable<BaseModel<ShenheInfo>> promotionSave(@Field("userid") String id);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/getPromotion")
+    Observable<BaseModel<ShenheInfo>> getPromotion(@Field("userid") String id);
 }

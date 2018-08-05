@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/default_bg"
-    android:orientation="vertical"
-    tools:context=".exercise.member.NearbyTrainerActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical"
+              tools:context=".exercise.member.NearbyTrainerActivity">
 
 
     <android.support.design.widget.AppBarLayout
@@ -42,12 +42,12 @@
                     android:padding="8dp"
                     android:textColorHint="@color/color_bcc8da"
                     android:textSize="14sp"
-                    android:visibility="visible" />
+                    android:visibility="visible"/>
 
                 <android.support.v4.widget.Space
                     android:layout_width="24dp"
 
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>
@@ -66,11 +66,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableRight="@drawable/icon_xiabiao"
+                android:ellipsize="end"
                 android:gravity="center"
+                android:maxLines="1"
                 android:padding="16dp"
                 android:text="综合"
                 android:textColor="#FF4A576A"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/juli"
@@ -83,20 +85,7 @@
                 android:padding="16dp"
                 android:text="距离"
                 android:textColor="#FF4A576A"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/xiangmu"
-
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawableRight="@drawable/icon_xiabiao"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="项目"
-                android:textColor="#FF4A576A"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
 
 
             <TextView
@@ -110,7 +99,7 @@
                 android:padding="16dp"
                 android:text="筛选"
                 android:textColor="#FF4A576A"
-                android:textSize="16sp" />
+                android:textSize="16sp"/>
         </LinearLayout>
         >
 

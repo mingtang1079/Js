@@ -86,6 +86,8 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
                             .withString("orderId", mList.get(position).id)
                             .withString("orderType", "0")
                             .withInt("price", mList.get(position).crealprice)
+                            .withInt("totalPrice", mList.get(position).ctotalprice)
+                            .withString("title",mList.get(position).ctypename)
                             .navigation(mContext);
 
 

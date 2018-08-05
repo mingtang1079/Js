@@ -21,7 +21,6 @@ public abstract class MyBaseRefreshActivity<T> extends BaseRefreshActivity {
     protected void initView() {
         super.initView();
         toggleShowLoading(true);
-        setLoadMoreListener();
         requestData();
     }
 

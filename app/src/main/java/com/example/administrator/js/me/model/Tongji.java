@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Tongji implements Serializable {
 
-    public String money;
-    public String member;
-    public String course;
+    public String title;
+    public String value;
+    public String remark;
 }

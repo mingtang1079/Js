@@ -15,6 +15,6 @@ public class TrainerDetail implements Serializable {
     public User userinfo;
     public UserDetail.Relation relation;
     public List<Workdate> workdatelist;
-
+    public int code;
 
 }

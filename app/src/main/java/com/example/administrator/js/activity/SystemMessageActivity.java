@@ -36,6 +36,7 @@ public class SystemMessageActivity extends MyBaseRefreshActivity<SystemMessage> 
                 mAdapter.notifyItemChanged(position);
             }
         });
+        setLoadMoreListener();
     }
 
     @Override

@@ -60,8 +60,18 @@ public class EventMessage {
     public static class shareSuceesState extends EventMessage {
 
         public shareSuceesState(int mI, Object mO) {
-            super(mI,mO);
+            super(mI, mO);
         }
     }
 
+    // message  0新消息 1 被读取
+    public static class NewMessageReceived extends EventMessage {
+      public   NewMessageReceived(int mI) {
+            message = mI;
+        }
+    }
+
+    public static class ZizhiStatus extends EventMessage{
+
+    }
 }

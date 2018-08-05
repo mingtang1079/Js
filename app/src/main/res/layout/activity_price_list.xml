@@ -54,7 +54,7 @@
             android:text="专业课"
             android:textColor="#4A576A"
             android:textSize="14sp" />
-
+z
         <TextView
             android:id="@+id/tv_zhuanye"
             android:layout_width="0dp"

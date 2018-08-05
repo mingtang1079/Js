@@ -50,6 +50,7 @@ public class CourseHistoryOrderFragment extends BaseRefreshFragment<HistoryOrder
                 }
             }
         });
+
     }
 
     @Override

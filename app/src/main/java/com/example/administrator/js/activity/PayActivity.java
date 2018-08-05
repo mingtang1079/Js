@@ -55,12 +55,22 @@ public class PayActivity extends BaseActivity {
     @Autowired
     String orderType;
     @Autowired
-    int price;
+    int price;//实际价格
+    @Autowired
+    int totalPrice;
+    @Autowired
+    String title;
+
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.tv_all_price)
-    TextView mTvAllPrice;
+    TextView mTvShijiPrice;//实际价格
+    @BindView(R.id.tv_total_price)
+    TextView mTextViewTotolPrice;//原始价格
+    @BindView(R.id.tv_youhui_price)
+    TextView mTextViewYouhuijiage;
+
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
     @BindView(R.id.btn_sure)
@@ -89,7 +99,7 @@ public class PayActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        mToolbar.setTitle("支付订单");
+        mToolbar.setTitle(title);
         mStrings.add("支付宝支付");
         mStrings.add("微信支付");
         mPayAdapter = new PayAdapter(R.layout.item_pay, mStrings);
@@ -108,12 +118,34 @@ public class PayActivity extends BaseActivity {
         });
         //默认支付宝支付
         mPayAdapter.setSingleChoosed(0);
+        //实际价格
         BigDecimal a;
         BigDecimal b;
         a = new BigDecimal(price);
         b = new BigDecimal(100);
-        mTvAllPrice.setText(a.divide(b, 2, RoundingMode.HALF_UP).toString() + "元");
+        mTvShijiPrice.setText(a.divide(b, 2, RoundingMode.HALF_UP).toString() + "元");
 
+        //订单情况
+        if (!"押金".equals(title)) {
+            if (totalPrice == price) {
+                mTextViewYouhuijiage.setText("无优惠");
+            } else {
+                BigDecimal a1;
+                BigDecimal b1;
+                a1 = new BigDecimal(totalPrice - price);
+                b1 = new BigDecimal(100);
+                mTextViewYouhuijiage.setText(a1.divide(b1, 2, RoundingMode.HALF_UP).toString() + "元");
+            }
+            BigDecimal aa=new BigDecimal(totalPrice);
+            mTextViewTotolPrice.setText("￥"+aa.divide(new BigDecimal(100)).doubleValue() + "元");
+        }
+        else {
+
+            BigDecimal aa=new BigDecimal(price);//押金的实际价格 就是总价
+            mTextViewTotolPrice.setText("￥"+aa.divide(new BigDecimal(100)).doubleValue() + "元");
+            mTextViewYouhuijiage.setText("无优惠");
+
+        }
         //临时存放 orderId
         PreferenceUtils.setPrefString(mContext, Constans.ORDERID, orderId);
     }

@@ -277,6 +277,8 @@ public class OrderDetailActivity extends BaseActivity {
                         .withString("orderId", mOrder.id)
                         .withString("orderType", "0")
                         .withInt("price", mOrder.crealprice)
+                        .withInt("totalPrice", mOrder.ctotalprice)
+                        .withString("title",mOrder.ctypename)
                         .navigation(mContext);
 
                 break;

@@ -42,6 +42,7 @@ import io.rong.imkit.RongIM;
 import io.rong.imkit.model.UIConversation;
 import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
 import io.rong.imlib.model.UserInfo;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -79,6 +80,7 @@ public class App extends BaseApplication {
             RongIM.init(this);
             //自定义点击事件
             RongIM.setConversationListBehaviorListener(new RongIM.ConversationListBehaviorListener() {
+
                 @Override
                 public boolean onConversationPortraitClick(Context mContext, Conversation.ConversationType mConversationType, String mS) {
                     return false;
@@ -97,6 +99,8 @@ public class App extends BaseApplication {
                 @Override
                 public boolean onConversationClick(Context mContext, View mView, UIConversation uiConversation) {
                     uiConversation.setUnReadMessageCount(0);
+                    RongIM.getInstance().clearMessagesUnreadStatus(uiConversation.getConversationType(),uiConversation.getConversationTargetId(),null);
+
                     if (uiConversation.getConversationType().toString().equals(Conversation.ConversationType.SYSTEM.toString())) {
                         ARouter.getInstance().build("/activity/SystemMessageActivity")
                                 .navigation(mContext);
@@ -106,6 +110,36 @@ public class App extends BaseApplication {
                     }
 
                     return true;
+                }
+            });
+            RongIM.setConversationClickListener(new RongIM.ConversationClickListener() {
+                @Override
+                public boolean onUserPortraitClick(Context mContext, Conversation.ConversationType mConversationType, UserInfo mUserInfo, String mS) {
+
+                    ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                            .withString("id", mUserInfo.getUserId())
+                            .navigation(mContext);
+                    return true;
+                }
+
+                @Override
+                public boolean onUserPortraitLongClick(Context mContext, Conversation.ConversationType mConversationType, UserInfo mUserInfo, String mS) {
+                    return false;
+                }
+
+                @Override
+                public boolean onMessageClick(Context mContext, View mView, Message mMessage) {
+                    return false;
+                }
+
+                @Override
+                public boolean onMessageLinkClick(Context mContext, String mS, Message mMessage) {
+                    return false;
+                }
+
+                @Override
+                public boolean onMessageLongClick(Context mContext, View mView, Message mMessage) {
+                    return false;
                 }
             });
             connectRongYun();

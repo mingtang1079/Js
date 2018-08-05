@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
@@ -31,6 +32,14 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
         if (!TextUtils.isEmpty(item.img)) {
             ImageLoader.load(mContext, item.img, (CircleImageView) helper.getView(R.id.iv_head));
         }
+        helper.getView(R.id.iv_head).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                        .withString("id", item.uid)
+                        .navigation(mContext);
+            }
+        });
         helper.setText(R.id.tv_name, item.nickname);
 
         //年龄
@@ -58,7 +67,7 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
 
         }
 
-        helper.setText(R.id.tv_course, item.ctypename + item.csum);
+        helper.setText(R.id.tv_course, item.ctypename + item.csum+"节");
         helper.setText(R.id.time, item.distance + " " + item.updateDate);
 //a1已提交b2通过b3完成付款,b4不通过
         TextView mTextViewPass = helper.getView(R.id.pass);

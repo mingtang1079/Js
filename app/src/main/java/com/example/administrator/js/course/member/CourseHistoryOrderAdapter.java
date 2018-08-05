@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -28,7 +29,7 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, HistoryOrder item) {
+    protected void convert(BaseViewHolder helper, final HistoryOrder item) {
 
         helper.setText(R.id.tv_type, item.ctypename);
 
@@ -77,7 +78,7 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
         if (item.orderlist != null) {
             mLinearLayout.removeAllViews();
             for (int i = 0; i < item.orderlist.size(); i++) {
-                HistoryOrder.OrderList mOrderList = item.orderlist.get(i);
+                final HistoryOrder.OrderList mOrderList = item.orderlist.get(i);
                 View mView = LayoutInflater.from(mContext).inflate(R.layout.item_course_history_order_content, mLinearLayout, false);
                 TextView mTextViewTime = mView.findViewById(R.id.tv_time);
                 TextView mTextViewKeshi = mView.findViewById(R.id.tv_shengyukeshi);
@@ -86,6 +87,14 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
                 mTextViewKeshi.setText("(" + mOrderList.cuse + "/" + mOrderList.csum + ")");
                 mTextViewPrice.setText(mOrderList.cprice + "元");
                 mLinearLayout.addView(mView);
+                mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View mView) {
+                        ARouter.getInstance().build("/me/member/OrderDetailActivity")
+                                .withString("id",mOrderList.id)
+                                .navigation(mContext);
+                    }
+                });
             }
         }
 

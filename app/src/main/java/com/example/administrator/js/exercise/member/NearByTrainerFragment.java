@@ -3,6 +3,7 @@ package com.example.administrator.js.exercise.member;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -34,7 +35,7 @@ import io.reactivex.functions.Consumer;
 public class NearByTrainerFragment extends BaseRefreshFragment<User> {
 
     @BindView(R.id.et_search)
-    EditText mEditTextSearch;
+    TextView mEditTextSearch;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -53,6 +54,15 @@ public class NearByTrainerFragment extends BaseRefreshFragment<User> {
                         refreshData(true);
                     }
                 });
+
+        mEditTextSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                ARouter.getInstance().build("/exercise/NearbyTrainerActivity")
+                        .navigation(getContext());
+            }
+        });
+
         toggleShowLoading(true, "加载中……");
         requestData();
 

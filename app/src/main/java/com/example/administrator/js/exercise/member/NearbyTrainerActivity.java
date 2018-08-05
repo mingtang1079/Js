@@ -1,6 +1,8 @@
 package com.example.administrator.js.exercise.member;
 
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -20,7 +22,11 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.ItemAdapter;
+import com.example.administrator.js.activity.ItemGridDividerItemDecoration;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.exercise.adapter.DuoxuanTypeAdapter;
+import com.example.administrator.js.exercise.adapter.TypeAdapter;
 import com.example.administrator.js.exercise.model.Skill;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
@@ -46,8 +52,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     TextView mZonghe;
     @BindView(R.id.juli)
     TextView mJuli;
-    @BindView(R.id.xiangmu)
-    TextView mXiangmu;
+
     @BindView(R.id.shaixuan)
     TextView mShaixuan;
 
@@ -176,7 +181,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     }
 
-    @OnClick({R.id.zonghe, R.id.juli, R.id.xiangmu, R.id.shaixuan, R.id.tv_search})
+    @OnClick({R.id.zonghe, R.id.juli, R.id.shaixuan, R.id.tv_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.zonghe:
@@ -190,11 +195,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 showJuli();
 
                 break;
-            case R.id.xiangmu:
-                showType();
 
-                //       showXiangmu();
-                break;
             case R.id.shaixuan:
                 showXiangShaixuan();
                 break;
@@ -205,64 +206,18 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         }
     }
 
-
-    private void showType() {
-
-        final List<ObjectAdapter.Item> mItems = new ArrayList<>();
-        mItems.add(new Skill(null, "不限"));
-        mItems.addAll(mSkills);
-
-        BottomDialogUtils.showBottomDialog2(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-                if (position == 0) {
-                    skillids = "";
-                    mXiangmu.setText("项目");
-                } else {
-                    skillids = ((Skill) mItems.get(position)).id;
-                    mXiangmu.setText(mItems.get(position).getValue());
-
-                }
-                refreshData(true);
-            }
-        }).show();
-
-    }
-
+    int p1=-1;
+    int p2=-1;
+    int p3=-3;
+    List<Integer> mIntegers=new ArrayList<>();
 
     private void showXiangShaixuan() {
         View mView = getLayoutInflater().inflate(R.layout.view_trainer_shaixuan, null, false);
         final BottomSheetDialog mBottomSheetDialog = BottomDialogUtils.showBottomDialog(mContext, mView);
-        RadioGroup mRadioGroup = mView.findViewById(R.id.rg);
-        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup mRadioGroup, int mI) {
-                if (mI == R.id.rb_nan) {
-                    sex = "1";
-                } else {
-                    sex = "2";
-                }
-            }
-        });
-        RadioGroup mRadioGroup1 = mView.findViewById(R.id.rg_dengji);
-        mRadioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup mRadioGroup, int mI) {
-                if (mI == R.id.rb_one) {
-                    degree = "1";
-                } else if (mI == R.id.rb_two) {
-                    degree = "2";
-                } else {
-                    degree = "3";
-                }
-            }
-        });
 
-
-        EditText mEditText = mView.findViewById(R.id.et_pricedi);
+        final EditText mEditText = mView.findViewById(R.id.et_pricedi);
         mEditText.setText(beginprice);
-        EditText mEditText2 = mView.findViewById(R.id.et_pricegao);
+        final EditText mEditText2 = mView.findViewById(R.id.et_pricegao);
         mEditText2.setText(endprice);
         RxTextView.textChanges(mEditText)
                 .subscribe(new Consumer<CharSequence>() {
@@ -279,14 +234,160 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                     }
                 });
 
-        TextView mTextView = mView.findViewById(R.id.tv_wancheng);
+        //button
+        TextView mTextView = mView.findViewById(R.id.chongzhi);
+        TextView mTextView1 = mView.findViewById(R.id.sure);
+
+
+        final List<String> mItems = new ArrayList<>();
+        mItems.add("男");
+        mItems.add("女");
+        RecyclerView mRecyclerView = mView.findViewById(R.id.recyclerview_sex);
+        final TypeAdapter mItemAdapter;
+        mItemAdapter = new TypeAdapter(R.layout.item_xiangmu, mItems);
+        GridLayoutManager mFlexboxLayoutManager = new GridLayoutManager(mContext, 3);
+        mRecyclerView.setLayoutManager(mFlexboxLayoutManager);
+        mRecyclerView.addItemDecoration(new ItemGridDividerItemDecoration());
+        mRecyclerView.setAdapter(mItemAdapter);
+        mItemAdapter.setSingleChoosed(p1);
+        mItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mItemAdapter.setSingleChoosed(position);
+                p1=position;
+            }
+        });
+//-----------------------------------------------------------------我是分割线-----------------------------------------------
+        final List<String> mItems1 = new ArrayList<>();
+        mItems1.add("1km");
+        mItems1.add("2km");
+        mItems1.add("3km");
+        mItems1.add("5km");
+        mItems1.add("10km");
+        RecyclerView mRecyclerView1 = mView.findViewById(R.id.recyclerview_xiangmu);
+        final TypeAdapter mItemAdapter1;
+        mItemAdapter1 = new TypeAdapter(R.layout.item_xiangmu, mItems1);
+        GridLayoutManager mFlexboxLayoutManager1 = new GridLayoutManager(mContext, 3);
+        mRecyclerView1.setLayoutManager(mFlexboxLayoutManager1);
+        mRecyclerView1.addItemDecoration(new ItemGridDividerItemDecoration());
+        mRecyclerView1.setAdapter(mItemAdapter1);
+        mItemAdapter1.setSingleChoosed(p2);
+        mItemAdapter1.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mItemAdapter1.setSingleChoosed(position);
+                p2=position;
+            }
+        });
+//-----------------------------------------------------------------我是分割线-----------------------------------------------
+        final List<String> mItems2 = new ArrayList<>();
+        mItems2.add("PT1-PT3");
+        mItems2.add("PT4-PT6");
+        mItems2.add("PT7-PT10");
+        RecyclerView mRecyclerView2 = mView.findViewById(R.id.recyclerview_dengji);
+        final TypeAdapter mItemAdapter2;
+        mItemAdapter2 = new TypeAdapter(R.layout.item_xiangmu, mItems2);
+        GridLayoutManager mFlexboxLayoutManager2 = new GridLayoutManager(mContext, 3);
+        mRecyclerView2.setLayoutManager(mFlexboxLayoutManager2);
+        mRecyclerView2.addItemDecoration(new ItemGridDividerItemDecoration());
+        mRecyclerView2.setAdapter(mItemAdapter2);
+        mItemAdapter2.setSingleChoosed(p3);
+        mItemAdapter2.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mItemAdapter2.setSingleChoosed(position);
+                p3=position;
+            }
+        });
+        //-----------------------------------------------------------------我是分割线-----------------------------------------------
+        final List<String> mItems3 = new ArrayList<>();
+
+        for (Skill mSkill : mSkills) {
+            mItems3.add(mSkill.name);
+        }
+
+        RecyclerView mRecyclerView3 = mView.findViewById(R.id.recyclerview_shanchang);
+        final DuoxuanTypeAdapter mItemAdapter3;
+        mItemAdapter3 = new DuoxuanTypeAdapter(R.layout.item_xiangmu, mItems3);
+        GridLayoutManager mFlexboxLayoutManager3 = new GridLayoutManager(mContext, 3);
+        mRecyclerView3.setLayoutManager(mFlexboxLayoutManager3);
+        mRecyclerView3.addItemDecoration(new ItemGridDividerItemDecoration());
+        mRecyclerView3.setAdapter(mItemAdapter3);
+        for (Integer mInteger:mIntegers)
+        {
+            mItemAdapter3.switchSelectedState(mInteger);
+
+        }
+        mItemAdapter3.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                mItemAdapter3.switchSelectedState(position);
+                mIntegers.add(position);
+            }
+        });
+
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                mBottomSheetDialog.dismiss();
-                refreshData(true);
+
+                //重置
+                mEditText.setText("");
+                mEditText2.setText("");
+                beginprice = "";
+                endprice = "";
+                mItemAdapter.setSingleChoosed(-1);
+                mItemAdapter1.setSingleChoosed(-1);
+                mItemAdapter2.setSingleChoosed(-1);
+                mItemAdapter3.clearSelectedState();
+
             }
         });
+        mTextView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                if (mItemAdapter.mSinglePosition == 0) {
+                    sex = "1";
+                } else {
+                    sex = "2";
+                }
+
+                //------分割线-------
+
+                if (mItemAdapter1.mSinglePosition == 0) {
+                    distance = 1 * 1000;
+                } else if (mItemAdapter1.mSinglePosition == 1) {
+                    distance = 2 * 1000;
+                } else if (mItemAdapter1.mSinglePosition == 1) {
+                    distance = 3 * 1000;
+                } else if (mItemAdapter1.mSinglePosition == 1) {
+                    distance = 5 * 1000;
+                } else if (mItemAdapter1.mSinglePosition == 1) {
+                    distance = 10 * 1000;
+                }
+
+                //------分割线-------
+                if (mItemAdapter2.mSinglePosition == 0) {
+                    degree = "1";
+                } else if (mItemAdapter2.mSinglePosition == 1) {
+                    degree = "2";
+                } else {
+                    degree = "3";
+                }
+
+                if (mItemAdapter3.getSelectedItemsKey() != null&&mItemAdapter3.getSelectedItemsKey().size()!=0) {
+                    StringBuilder mStringBuilder = new StringBuilder();
+                    for (Integer m : mItemAdapter3.getSelectedItemsKey()) {
+                        mStringBuilder.append(mSkills.get(m).id + ",");
+                    }
+                    skillids = mStringBuilder.toString().substring(0, mStringBuilder.toString().length() - 1);
+                }
+
+                mBottomSheetDialog.dismiss();
+                refreshData(true);
+
+            }
+        });
+
     }
 
     @Deprecated
@@ -299,15 +400,35 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
     private void showJuli() {
 
+//        final List<String> mItems = new ArrayList<>();
+//        mItems.add("不限");
+//        mItems.add("1km");
+//        mItems.add("2km");
+//        mItems.add("3km");
+//        mItems.add("4km");
+//        mItems.add("5km");
+//        mItems.add("6km");
+//
+//        BottomDialogUtils.showBottomDialog(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//
+//                if (position == 0) {
+//                    distance = 0;
+//                    mJuli.setText("距离");
+//                } else {
+//                    distance = position * 1000;
+//                    mJuli.setText(mItems.get(position));
+//
+//                }
+//
+//                refreshData(true);
+//            }
+//        }).show();
         final List<String> mItems = new ArrayList<>();
         mItems.add("不限");
-        mItems.add("1km");
-        mItems.add("2km");
-        mItems.add("3km");
-        mItems.add("4km");
-        mItems.add("5km");
-        mItems.add("6km");
-
+        mItems.add("距离升序");
+        mItems.add("距离降序");
         BottomDialogUtils.showBottomDialog(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -315,16 +436,18 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 if (position == 0) {
                     distance = 0;
                     mJuli.setText("距离");
-                } else {
-                    distance = position * 1000;
+                } else if (position == 1) {
+                    orderby = "a.distance";
                     mJuli.setText(mItems.get(position));
 
+                } else if (position == 2) {
+                    orderby = "a.distance desc";
+                    mJuli.setText(mItems.get(position));
                 }
 
                 refreshData(true);
             }
         }).show();
-
     }
 
     private void showZonghe() {
@@ -333,14 +456,11 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         mItems.add("综合");
         mItems.add("价格升序");
         mItems.add("价格降序");
-        mItems.add("续课率升序");
-        mItems.add("续课率降序");
         mItems.add("好评升序");
         mItems.add("好评降序");
         mItems.add("等级升序");
         mItems.add("等级降序");
-        mItems.add("距离升序");
-        mItems.add("距离降序");
+
 
         BottomDialogUtils.showBottomDialog(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -350,7 +470,6 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 if (position == 0) {
                     //清空所有的条件
                     mJuli.setText("距离");
-                    mXiangmu.setText("项目");
                     distance = 0;
                     skillids = "";
                     degree = "";
@@ -364,21 +483,13 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 } else if (position == 2) {
                     orderby = "a.courseprice desc";
                 } else if (position == 3) {
-                    orderby = "a.reorder";
-                } else if (position == 4) {
-                    orderby = "a.reorder desc";
-                } else if (position == 5) {
                     orderby = "a.score";
-                } else if (position == 6) {
+                } else if (position == 4) {
                     orderby = "a.score desc";
-                } else if (position == 7) {
+                } else if (position == 5) {
                     orderby = "a.degree";
-                } else if (position == 8) {
+                } else if (position == 6) {
                     orderby = "a.degree desc";
-                } else if (position == 9) {
-                    orderby = "a.distance";
-                } else if (position == 10) {
-                    orderby = "a.distance desc";
                 }
 
                 refreshData(true);

@@ -49,11 +49,11 @@ public class VipSupplyFragment extends BaseRefreshFragment<VipSupply> {
             mMap.put("status", "1");
             mMap.put("tryflag", "1");
         } else if ("2".equals(status)) {
+            mMap.put("tryflag", "0");
             mMap.put("status", "1");
-            mMap.put("tryflag", "0");
         } else if ("3".equals(status)) {
-            mMap.put("status", "b55");
             mMap.put("tryflag", "0");
+            mMap.put("status", "b55");
         } else {
             mMap.put("status", "b");
         }

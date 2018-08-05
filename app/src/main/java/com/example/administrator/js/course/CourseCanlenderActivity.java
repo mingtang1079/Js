@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -93,20 +94,21 @@ public class CourseCanlenderActivity extends BaseActivity {
         //这里用线性显示 类似于listview
         mList.setLayoutManager(new LinearLayoutManager(this));
         mCourseUserAdapter = new CourseUserAdapter(R.layout.item_course_user, null);
+        View mView = getLayoutInflater().inflate(R.layout.view_empty, mList, false);
+        mCourseUserAdapter.setEmptyView(mView);
         mCourseUserAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
 
-
                 if ("0".equals(UserManager.getInsatance().getUser().role)) {
 
                     ARouter.getInstance().build("/course/CourDetailActivity")
-                            .withString("id",mCourseUserAdapter.getData().get(position).id)
+                            .withString("id", mCourseUserAdapter.getData().get(position).id)
                             .navigation(mContext);
                 } else {
                     ARouter.getInstance().build("/course/MemberCourDetailActivity")
-                            .withObject("mCourseModel",mCourseUserAdapter.getData().get(position))
+                            .withObject("mCourseModel", mCourseUserAdapter.getData().get(position))
                             .navigation(mContext);
                 }
             }
@@ -116,8 +118,8 @@ public class CourseCanlenderActivity extends BaseActivity {
         initCurrentDate();
         initCalendarView();
 
-        View mView = LayoutInflater.from(mContext).inflate(R.layout.view_header_course, mList, false);
-        mCourseUserAdapter.addHeaderView(mView);
+        View mView1 = LayoutInflater.from(mContext).inflate(R.layout.view_header_course, mList, false);
+        mCourseUserAdapter.addHeaderView(mView1);
 
         mIvRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,13 +133,12 @@ public class CourseCanlenderActivity extends BaseActivity {
                 mCalendarView.setCurrentItem(mCalendarView.getCurrentPosition() - 1);
             }
         });
-        currenttime= DateUtils.getCurrentTimeYmd();
+        currenttime = DateUtils.getCurrentTimeYmd();
         requestData();
     }
 
     @Override
     public void requestData() {
-
 
 
         Map<String, String> mMap = new HashMap<>();
@@ -153,7 +154,6 @@ public class CourseCanlenderActivity extends BaseActivity {
         mMap.put("status", "1");
         mMap.put("pageNo", "1");
         mMap.put("starttime", "1");
-
 
 
         Http.getDefault().getCourse(mMap)
@@ -224,7 +224,7 @@ public class CourseCanlenderActivity extends BaseActivity {
             @Override
             public void onSelectDate(CalendarDate date) {
                 refreshClickDate(date);
-                currenttime=date.year+"-"+date.month+"-"+date.day;
+                currenttime = date.year + "-" + date.month + "-" + date.day;
                 requestData();
             }
 

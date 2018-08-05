@@ -114,10 +114,10 @@ public class ShanChangActivity extends BaseActivity implements ZizhiPresenter.Zi
                     mIvSeven.setVisibility(View.VISIBLE);
                 }else if (mS.equals("功能性训练")) {
                     mStringSparseArray.put(7, "功能性训练");
-                    mIvSix.setVisibility(View.VISIBLE);
+                    mIvEight.setVisibility(View.VISIBLE);
                 } else if (mS.equals("竞技健美")) {
                     mStringSparseArray.put(8, "竞技健美");
-                    mIvSeven.setVisibility(View.VISIBLE);
+                    mIvNine.setVisibility(View.VISIBLE);
                 }
             }
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/default_bg"
-    android:orientation="vertical"
-    tools:context=".vipandtrainer.VipUserDetailActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical"
+              tools:context=".vipandtrainer.VipUserDetailActivity">
 
-    <include layout="@layout/include_toolbar" />
+    <include layout="@layout/include_toolbar"/>
 
     <LinearLayout
         android:id="@+id/content"
@@ -58,7 +58,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#FF4A576A"
                                     android:textSize="16sp"
-                                    tools:text="Mo" />
+                                    tools:text="Mo"/>
 
                                 <TextView
                                     android:id="@+id/tv_age"
@@ -72,7 +72,7 @@
                                     android:paddingRight="4dp"
                                     android:textColor="@color/white_color"
                                     android:textSize="11sp"
-                                    tools:text="22" />
+                                    tools:text="22"/>
 
                                 <TextView
                                     android:id="@+id/tv_id"
@@ -80,7 +80,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="16dp"
                                     android:textColor="@color/normal_day"
-                                    tools:text="ID:2323422" />
+                                    tools:text="ID:2323422"/>
 
                             </LinearLayout>
 
@@ -95,7 +95,7 @@
                                     android:layout_marginTop="8dp"
                                     android:text="需求类型："
                                     android:textColor="#FF8996AA"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"/>
 
                                 <TextView
                                     android:id="@+id/tv_skill"
@@ -104,7 +104,7 @@
                                     android:layout_marginTop="8dp"
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="增肌  减脂  塑形" />
+                                    tools:text="增肌  减脂  塑形"/>
 
                             </LinearLayout>
 
@@ -119,7 +119,7 @@
                                     android:layout_marginTop="8dp"
                                     android:text="意向购买课时："
                                     android:textColor="#FF8996AA"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"/>
 
                                 <TextView
                                     android:id="@+id/tv_keshi"
@@ -128,7 +128,7 @@
                                     android:layout_marginTop="8dp"
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="10课时" />
+                                    tools:text="10课时"/>
 
                             </LinearLayout>
 
@@ -144,7 +144,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="地区："
                                     android:textColor="#FF8996AA"
-                                    android:textSize="13sp" />
+                                    android:textSize="13sp"/>
 
                                 <TextView
                                     android:id="@+id/tv_area"
@@ -152,7 +152,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="四川-成都-武侯区" />
+                                    tools:text="四川-成都-武侯区"/>
 
                             </LinearLayout>
                         </LinearLayout>
@@ -162,11 +162,12 @@
                             android:layout_width="48dp"
                             android:layout_height="48dp"
                             android:layout_margin="16dp"
-                            android:src="@drawable/icon_user_default" />
+                            android:src="@drawable/icon_user_default"/>
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_yuyue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|right"
@@ -177,281 +178,310 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="是否预约：" />
+                            android:text="是否预约："/>
 
                         <ImageView
                             android:id="@+id/iv_yuyue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/icon_xingxing_selsected" />
+                            android:src="@drawable/icon_xingxing_selsected"/>
 
 
                     </LinearLayout>
 
                 </FrameLayout>
 
-                <LinearLayout
-                    android:id="@+id/ll_detail"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
+                    android:layout_height="wrap_content">
+
+
+                    <LinearLayout
+                        android:visibility="visible"
+                        android:id="@+id/ll_body_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/ll_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/white"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="14dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="14dp"
+                                android:text="详细描述"
+                                android:textColor="#4A576A"
+                                android:textSize="14sp"/>
+
+
+                            <TextView
+                                android:id="@+id/tv_detail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:textColor="#002700"
+                                android:textSize="14sp"
+                                tools:text="发送到老年福利思念泛滥的康师傅的数量反倒是了"/>
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/recyclerview"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp">
+
+                            </android.support.v7.widget.RecyclerView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_body"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:background="@color/white"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="16dp"
+                                android:text="最新身体数据"
+                                android:textColor="#4A576A"
+                                android:textSize="14sp"/>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="体重（kg）："
+                                        android:textColor="#FF8996AA"
+                                        android:textSize="13sp"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_tizhong"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#002700"
+                                        android:textSize="13sp"
+                                        tools:text="160"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="基础代谢（kcal）："
+                                        android:textColor="#FF8996AA"
+                                        android:textSize="13sp"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_daixie"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#002700"
+                                        android:textSize="13sp"
+                                        tools:text="50"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginTop="16dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="身高（cm）："
+                                        android:textColor="#FF8996AA"
+                                        android:textSize="13sp"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_shengao"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#002700"
+                                        android:textSize="13sp"
+                                        tools:text="160"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="身体质量指标（%）："
+                                        android:textColor="#FF8996AA"
+                                        android:textSize="13sp"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_zhibiao"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#002700"
+                                        android:textSize="13sp"
+                                        tools:text="5"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginTop="16dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="体脂（%）："
+                                        android:textColor="#FF8996AA"
+                                        android:textSize="13sp"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_tizhi"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#002700"
+                                        android:textSize="13sp"
+                                        tools:text="8"/>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="内脏脂肪（%）："
+                                        android:textColor="#FF8996AA"
+                                        android:textSize="13sp"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_neizang"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#002700"
+                                        android:textSize="13sp"
+                                        tools:text="12"/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginTop="16dp"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="维度（cm）："
+                                        android:textColor="#FF8996AA"
+                                        android:textSize="13sp"/>
+
+                                    <TextView
+                                        android:id="@+id/tv_weidu"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textColor="#002700"
+                                        android:textSize="13sp"
+                                        tools:text="胸80 腰78 "/>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="14dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="14dp"
-                        android:text="详细描述"
-                        android:textColor="#4A576A"
-                        android:textSize="14sp" />
-
-
-                    <TextView
-                        android:id="@+id/tv_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:textColor="#002700"
-                        android:textSize="14sp"
-                        tools:text="发送到老年福利思念泛滥的康师傅的数量反倒是了" />
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview"
+                        android:background="@color/white"
+                        android:layout_marginTop="8dp"
+                        android:padding="16dp"
+                        android:id="@+id/tv_message"
+                        android:text="dsfgdsgfdsgfds"
+                        android:layout_gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp">
+                        android:layout_height="100dp"
+                        android:visibility="gone"/>
+                </FrameLayout>
 
-                    </android.support.v7.widget.RecyclerView>
 
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_body"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:text="最新身体数据"
-                        android:textColor="#4A576A"
-                        android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="体重（kg）："
-                                android:textColor="#FF8996AA"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_tizhong"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#002700"
-                                android:textSize="13sp"
-                                tools:text="160" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="基础代谢（kg）："
-                                android:textColor="#FF8996AA"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_daixie"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#002700"
-                                android:textSize="13sp"
-                                tools:text="50" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="身高（cm）："
-                                android:textColor="#FF8996AA"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_shengao"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#002700"
-                                android:textSize="13sp"
-                                tools:text="160" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="身体质量指标（%）："
-                                android:textColor="#FF8996AA"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_zhibiao"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#002700"
-                                android:textSize="13sp"
-                                tools:text="5" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="体脂（%）："
-                                android:textColor="#FF8996AA"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_tizhi"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#002700"
-                                android:textSize="13sp"
-                                tools:text="8" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="内脏脂肪（%）："
-                                android:textColor="#FF8996AA"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_neizang"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#002700"
-                                android:textSize="13sp"
-                                tools:text="12" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="维度（cm）："
-                                android:textColor="#FF8996AA"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:id="@+id/tv_weidu"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="#002700"
-                                android:textSize="13sp"
-                                tools:text="胸80 腰78 " />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>
 
         <LinearLayout
+            android:id="@+id/ll_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
@@ -468,7 +498,7 @@
                 android:text="打招呼"
                 android:textColor="@color/white"
 
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <View
                 android:id="@+id/view_line"
@@ -476,7 +506,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="14dp"
                 android:layout_marginTop="14dp"
-                android:background="#77808f" />
+                android:background="#77808f"/>
 
             <TextView
                 android:id="@+id/tv_guanzhu"
@@ -489,7 +519,7 @@
                 android:text="关注"
                 android:textColor="@color/white"
 
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
         </LinearLayout>
     </LinearLayout>

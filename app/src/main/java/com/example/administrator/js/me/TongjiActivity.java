@@ -11,59 +11,40 @@ import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.base.MyBaseRefreshActivity;
+import com.example.administrator.js.me.adapter.TongjiAdapter;
 import com.example.administrator.js.me.model.Tongji;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class TongjiActivity extends BaseActivity {
+public class TongjiActivity extends MyBaseRefreshActivity<Tongji> {
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
-    @BindView(R.id.tv_shouru)
-    TextView mTvShouru;
-    @BindView(R.id.tv_huiyuan)
-    TextView mTvHuiyuan;
-    @BindView(R.id.tv_keshi)
-    TextView mTvKeshi;
-
-
-    @Override
-    protected int getContentViewLayoutID() {
-        return R.layout.activity_tongji;
-    }
-
-    @Override
-    protected View getLoadingTargetView() {
-        return null;
-    }
-
-    @Override
-    public Toolbar getToolbar() {
-        return mToolbar;
-    }
 
     @Override
     protected void initView() {
-
+        super.initView();
         mToolbar.setTitle("统计");
-        requestData();
+        toggleShowLoading(true);
     }
 
     @Override
-    protected void requestData() {
-        super.requestData();
+    public void initAdapter() {
+        mAdapter = new TongjiAdapter(R.layout.item_tongji, mList);
+    }
+
+    @Override
+    public void requestData() {
 
         Http.getDefault().tongji(UserManager.getInsatance().getUser().id)
-                .as(RxHelper.<Tongji>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<Tongji>() {
+                .as(RxHelper.<List<Tongji>>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<List<Tongji>>() {
                     @Override
-                    protected void onSucess(Tongji mTongji) {
-                        if (mTongji!=null)
-                        {
-                            setData(mTongji);
-                        }
+                    protected void onSucess(List<Tongji> mTongjis) {
+                        loadComplete(mTongjis);
                     }
 
                     @Override
@@ -71,12 +52,6 @@ public class TongjiActivity extends BaseActivity {
 
                     }
                 });
-    }
-
-    private void setData(Tongji mData) {
-        mTvShouru.setText("￥ "+mData.money);
-        mTvKeshi.setText(mData.course+"课时");
-        mTvHuiyuan.setText(mData.member+"个");
 
     }
 }

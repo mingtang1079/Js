@@ -1,7 +1,9 @@
 package com.example.administrator.js.vipandtrainer;
 
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -11,6 +13,7 @@ import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.SearchUserActivity;
 import com.example.administrator.js.exercise.adapter.NearbyVipAdapter;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
@@ -32,7 +35,7 @@ public class VipUserFragment extends BaseRefreshFragment<User> {
     String status;
 
     @BindView(R.id.et_search)
-    EditText mEditTextSearch;
+    TextView mEditTextSearch;
 
     @Override
     protected void initView() {
@@ -46,6 +49,15 @@ public class VipUserFragment extends BaseRefreshFragment<User> {
                         refreshData(true);
                     }
                 });
+        mEditTextSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                start(SearchUserActivity.class);
+
+            }
+        });
+
+
         toggleShowLoading(true, "加载中……");
         requestData();
     }

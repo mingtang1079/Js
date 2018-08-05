@@ -1,194 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:padding="16dp">
+
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
 
     <LinearLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingTop="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="综合"
-            android:textColor="#ff4a576a"
-            android:textSize="16sp"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/tv_wancheng"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="完成"
-            android:textColor="@color/color_ffcd00"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="价格区间"
+            android:textColor="#4A576A"
             android:textSize="16sp"/>
 
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="性别"
-        android:textColor="#4A576A"
-        android:textSize="16sp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-
-        <RadioGroup
-            android:id="@+id/rg"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rb_nan"
-                style="@style/CustomRadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rb_nobtn_selector"
-                android:paddingLeft="40dp"
-                android:paddingRight="40dp"
-                android:text="男"/>
-
-            <RadioButton
-                android:id="@+id/rb_nv"
-                style="@style/CustomRadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:paddingLeft="40dp"
-                android:paddingRight="40dp"
-                android:text="女"/>
-
-
-        </RadioGroup>
-
-        <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="价格区间"
-        android:textColor="#4A576A"
-        android:textSize="16sp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/et_pricedi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/editext_bg"
-            android:gravity="center"
-            android:hint="最低价"
-            android:inputType="number"
-            android:padding="8dp"
-            android:textSize="14sp"/>
-
-        <View
-            android:layout_width="20dp"
-            android:layout_height="1dp"
+            android:layout_marginBottom="24dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:background="@color/line_DDDDDD"/>
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/et_pricegao"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/editext_bg"
-            android:gravity="center"
-            android:hint="最高价"
-            android:inputType="number"
-            android:padding="8dp"
-            android:textSize="14sp"/>
-    </LinearLayout>
+            <EditText
+                android:id="@+id/et_pricedi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/editext_bg"
+                android:gravity="center"
+                android:hint="最低价"
+                android:inputType="number"
+                android:padding="8dp"
+                android:textSize="14sp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="等级"
-        android:textColor="#4A576A"
-        android:textSize="16sp"/>
+            <View
+                android:layout_width="20dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/line_DDDDDD"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/et_pricegao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/editext_bg"
+                android:gravity="center"
+                android:hint="最高价"
+                android:inputType="number"
+                android:padding="8dp"
+                android:textSize="14sp"/>
+        </LinearLayout>
 
-
-        <RadioGroup
-            android:id="@+id/rg_dengji"
+        <TextView
             android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="性别"
+            android:textColor="#4A576A"
+            android:textSize="16sp"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/recyclerview_sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:text="距离"
+            android:textColor="#4A576A"
+            android:textSize="16sp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+
+            android:id="@+id/recyclerview_xiangmu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="等级"
+            android:textColor="#4A576A"
+            android:textSize="16sp"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+
+            android:id="@+id/recyclerview_dengji"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="擅长"
+            android:textColor="#4A576A"
+            android:textSize="16sp"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+
+            android:id="@+id/recyclerview_shanchang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rb_one"
-                style="@style/CustomRadioBtn"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/chongzhi"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rb_nobtn_selector"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="PT1-PT3"/>
+                android:layout_weight="1"
+                android:background="#e4e3e3"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="重置"/>
 
-            <RadioButton
-                android:id="@+id/rb_two"
-                style="@style/CustomRadioBtn"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/sure"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="PT4-PT6"/>
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="确定"
+                android:textColor="@color/white"/>
 
-            <RadioButton
-                android:id="@+id/rb_three"
-                style="@style/CustomRadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:text="PT7-PT10"/>
-
-        </RadioGroup>
-
-        <android.support.v4.widget.Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

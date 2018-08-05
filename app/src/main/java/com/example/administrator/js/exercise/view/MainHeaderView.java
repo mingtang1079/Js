@@ -85,7 +85,7 @@ public class MainHeaderView extends BaseLifeCycleView {
 
     public void requestData() {
 
-        mBaseModelObservable = Http.getDefault().getMain(UserManager.getInsatance().getUser().id, 1, 1, 3);
+        mBaseModelObservable = Http.getDefault().getMain(UserManager.getInsatance().getUser().id, 1, 1, 5);
 
         mBaseModelObservable.as(RxHelper.<WrapperModel<Main>>handleResult(getContext()))
                 .subscribe(new ResponceSubscriber<WrapperModel<Main>>() {

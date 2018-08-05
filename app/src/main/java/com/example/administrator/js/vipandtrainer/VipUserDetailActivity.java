@@ -14,8 +14,10 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.base.BaseModel;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.network.ResponceSubscriber2;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
@@ -83,10 +85,17 @@ public class VipUserDetailActivity extends BaseActivity {
     RecyclerView mRecyclerView;
     @BindView(R.id.view_line)
     View mViewLine;
-    @BindView(R.id.ll_detail)
-    LinearLayout mLinearLayoutDetail;
-    @BindView(R.id.ll_body)
-    LinearLayout mLinearLayoutBody;
+
+    @BindView(R.id.ll_body_detail)
+    LinearLayout mLinearLayoutDetailAndBody;
+    @BindView(R.id.ll_button)
+    LinearLayout mLinearLayoutButton;
+    @BindView(R.id.ll_yuyue)
+    LinearLayout mLinearLayoutYuyue;
+
+    @BindView(R.id.tv_message)
+    TextView mTextViewMeassage;
+
 
     MenuItem mMenuItem;
 
@@ -136,17 +145,15 @@ public class VipUserDetailActivity extends BaseActivity {
 
         Http.getDefault().userDetail(UserManager.getInsatance().getUser().id, id)
                 .as(RxHelper.<UserDetail>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<UserDetail>() {
+                .subscribe(new ResponceSubscriber2<UserDetail>() {
                     @Override
-                    protected void onSucess(UserDetail mObserver) {
-
-
-                        if (mObserver != null) {
-                            mUserDetail = mObserver;
-                            setData(mObserver);
+                    protected void onSucess(BaseModel<UserDetail> t) {
+                        if (t != null&&t.data!=null) {
+                            mUserDetail = t.data;
+                            mTextViewMeassage.setText(t.msg);
+                            setData(t.data);
                         }
                         toggleShowLoading(false);
-
                     }
 
                     @Override
@@ -158,6 +165,21 @@ public class VipUserDetailActivity extends BaseActivity {
     }
 
     private void setData(UserDetail mUserDetail) {
+
+        //黑名单或者其他原因不能展示
+        if (mUserDetail.code != 0) {
+            mLinearLayoutDetailAndBody.setVisibility(View.GONE);
+            mLinearLayoutButton.setVisibility(View.GONE);
+            mLinearLayoutYuyue.setVisibility(View.GONE);
+            mTextViewMeassage.setVisibility(View.VISIBLE);
+        } else {
+            mLinearLayoutDetailAndBody.setVisibility(View.VISIBLE);
+            mLinearLayoutButton.setVisibility(View.VISIBLE);
+            mLinearLayoutYuyue.setVisibility(View.VISIBLE);
+            mTextViewMeassage.setVisibility(View.GONE);
+
+        }
+
 
         User mUser = mUserDetail.userinfo;
         mTvName.setText(mUser.nickname);
@@ -216,8 +238,6 @@ public class VipUserDetailActivity extends BaseActivity {
 //黑名单不显示
                 mTvDazhaohu.setVisibility(View.GONE);
                 mViewLine.setVisibility(View.GONE);
-                mLinearLayoutDetail.setVisibility(View.GONE);
-                mLinearLayoutBody.setVisibility(View.GONE);
             } else {
                 mTvGuanzhu.setVisibility(View.VISIBLE);
                 mMenuItem.setTitle("加入黑名单");
@@ -235,16 +255,6 @@ public class VipUserDetailActivity extends BaseActivity {
                 }
 
             }
-
-                if (mUserDetail.relation.status.equals("1")) {
-                    mTvGuanzhu.setText("取消关注");
-                    mLinearLayoutDetail.setVisibility(View.VISIBLE);
-                    mLinearLayoutBody.setVisibility(View.VISIBLE);
-                }  else {
-                    mTvGuanzhu.setText("关注");
-                    mLinearLayoutDetail.setVisibility(View.VISIBLE);
-                    mLinearLayoutBody.setVisibility(View.VISIBLE);
-                }
 
         }
         //身体数据

@@ -25,8 +25,6 @@ public class CollectionActivity extends MyBaseRefreshActivity<Main> {
         super.initView();
         mToolbar.setTitle("我的收藏");
         mRecyclerview.addItemDecoration(new ItemTopDividerItemDecoration());
-        toggleShowLoading(true);
-        requestData();
     }
 
     @Override

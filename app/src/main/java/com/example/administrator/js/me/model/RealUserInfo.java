@@ -15,6 +15,8 @@ public class RealUserInfo implements Serializable {
     public String idimgpath;        // 身份证图片
     public String areaid;        // 地区id
     public String areaname;        // 地区名称
-    public String status;        // 审核状态0未审核1审核通过2不通过
+    public String status;        // 审核状态0未审核1审核通过2不通过3审核中
     public String reason;        // 状态描述，不通过原因
+    public String teachstatus;  // 审核状态0未审核1审核通过2不通过3审核中
+
 }

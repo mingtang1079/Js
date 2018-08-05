@@ -203,7 +203,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="基础代谢"
+                        android:text="基础代谢（BMR）"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp" />
 
@@ -250,12 +250,58 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="身体水分"
+                        android:text="肌肉量"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp" />
 
                     <EditText
-                        android:id="@+id/et_shuifeng"
+                        android:id="@+id/et_Jirou"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="numberDecimal"
+
+                        android:background="@color/white_color"
+                        android:gravity="right"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#f5f5f5" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="right"
+                    android:text="单位：kg"
+                    android:textColor="#ffdbdbdb"
+                    android:textSize="10sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="内脏脂肪"
+                        android:textColor="#ff4a576a"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_zhifang"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -279,6 +325,45 @@
                     android:text="单位：%"
                     android:textColor="#ffdbdbdb"
                     android:textSize="10sp" />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="身体质量指数（BMI ）"
+                        android:textColor="#ff4a576a"
+                        android:textSize="14sp" />
+
+                    <EditText
+                        android:id="@+id/et_bodyzhishu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:inputType="numberDecimal"
+
+                        android:background="@color/white_color"
+                        android:gravity="right"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#f5f5f5" />
+
 
 
             </LinearLayout>

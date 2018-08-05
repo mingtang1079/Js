@@ -21,6 +21,7 @@ import com.example.administrator.js.LocationManager;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.ChooseLocationActivity;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.course.MainCourseFragment;
 import com.example.administrator.js.exercise.ExerciseFragment;
 import com.example.administrator.js.me.MeFragment;
@@ -30,10 +31,15 @@ import com.example.administrator.js.vipandtrainer.MainVipFragment;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Message;
 
 @Route(path = "/activity/MainActivity")
 public class MainActivity extends BaseActivity {
@@ -84,6 +90,7 @@ public class MainActivity extends BaseActivity {
     protected void initView() {
 
         upadateLocation();
+        initIm();
 
         if (UserManager.getInsatance().getUser() != null) {
             if ("0".equals(UserManager.getInsatance().getUser().role)) {
@@ -138,6 +145,19 @@ public class MainActivity extends BaseActivity {
                 return true;
             }
         });
+    }
+
+    private void initIm() {
+
+        RongIM.setOnReceiveMessageListener(new RongIMClient.OnReceiveMessageListener() {
+            @Override
+            public boolean onReceived(Message mMessage, int mI) {
+
+                EventBus.getDefault().post(new EventMessage.NewMessageReceived(0));
+                return false;
+            }
+        });
+
     }
 
     private void upadateLocation() {

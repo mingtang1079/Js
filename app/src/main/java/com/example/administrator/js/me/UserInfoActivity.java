@@ -126,6 +126,9 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
             mTvPhone.setText(mUser.mobile);
             if (!TextUtils.isEmpty(mUser.alipay)) {
                 mTextViewZhifubao.setText(mUser.alipay + "");
+            } else {
+                mTextViewZhifubao.setText("未绑定");
+
             }
             if (!TextUtils.isEmpty(mUser.birthdate))
                 mTextViewBirthday.setText(TimeUtils.getTime(mUser.birthdate));

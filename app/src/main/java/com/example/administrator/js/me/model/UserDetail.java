@@ -15,6 +15,7 @@ public class UserDetail implements Serializable {
     public User userinfo;
     public UserBody bodydata;
     public Relation relation;
+    public int code;//0=成功
 
     public static class Need implements Serializable {
         public String id;

@@ -22,10 +22,15 @@ import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.MessageActivity;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.member.NearByTrainerFragment;
 import com.example.administrator.js.qrcode.CaptureActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +54,13 @@ public class MainVipFragment extends BaseFragment {
     @BindView(R.id.pager)
     ViewPager mViewpager;
 
+    @BindView(R.id.iv_saoyisao)
+    ImageView mImageViewSaoyisao;
+    @BindView(R.id.iv_message)
+    ImageView mImageViewMes;
+    @BindView(R.id.view_tag)
+    View mViewTag;
+
     FragmentAdapter mFragmentAdapter;
 
     @Override
@@ -59,28 +71,29 @@ public class MainVipFragment extends BaseFragment {
     @Override
     protected void initView() {
 
-        mToolbar.inflateMenu(R.menu.main_vip);
         if (UserManager.getInsatance().getRole().equals("0")) {
             mToolbar.setTitle("会员");
 
         } else {
             mToolbar.setTitle("教练");
         }
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+
+        mImageViewMes.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
+            public void onClick(View mView) {
+                EventBus.getDefault().post(new EventMessage.NewMessageReceived(1));
 
-                if (item.getItemId() == R.id.scan) {
-
-                    saoyisao();
-                } else {
-                    start(MessageActivity.class);
-                }
-
-                return false;
+                start(MessageActivity.class);
+                mViewTag.setVisibility(View.GONE);
             }
         });
+        mImageViewSaoyisao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                saoyisao();
 
+            }
+        });
         mFragmentAdapter = new FragmentAdapter(getChildFragmentManager(), getFragments(), getTabTitle());
         mViewpager.setAdapter(mFragmentAdapter);
         mTab.setTabMode(TabLayout.MODE_FIXED);
@@ -208,5 +221,22 @@ public class MainVipFragment extends BaseFragment {
 
     @OnClick(R.id.iv_add)
     public void onViewClicked() {
+    }
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void showMessage(EventMessage.NewMessageReceived mm) {
+
+        if (mViewTag != null) {
+            if (mm.message == 0) {
+                mViewTag.setVisibility(View.VISIBLE);
+            } else if (mm.message==1){
+                mViewTag.setVisibility(View.GONE);
+
+            }
+        }
+
     }
 }

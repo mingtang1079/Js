@@ -35,6 +35,17 @@
         android:theme="@style/AppTheme"
         tools:replace="android:label">
 
+
+        <receiver
+            android:exported="true"
+            android:name=".broadcastReceiver.MyPushMessageReceiver">
+            <intent-filter>
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+            </intent-filter>
+        </receiver>
         <!-- 搞得地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -192,18 +203,6 @@
                     android:scheme="rong"/>
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name=".broadcast.SealNotificationReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED"/>
-                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED"/>
-                <action android:name="io.rong.push.intent.MESSAGE_CLICKED"/>
-                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED"/>
-                <action android:name="io.rong.push.intent.THIRD_PARTY_PUSH_STATE"/>
-            </intent-filter>
-        </receiver>
 
         <activity
             android:name=".exercise.DetailActivity"

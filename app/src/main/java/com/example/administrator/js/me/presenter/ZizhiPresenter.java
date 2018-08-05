@@ -7,7 +7,10 @@ import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.ToastUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.me.model.Zizhi;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +42,7 @@ public class ZizhiPresenter {
                     protected void onSucess(Zizhi mZizhi) {
 
                         ToastUtils.showShort(mContext, "保存成功！");
+                        EventBus.getDefault().post(new EventMessage.ZizhiStatus());
                         if (mZizhiResponse != null)
                             mZizhiResponse.onSuccess();
                     }

@@ -200,11 +200,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
-                android:text="申请晋升"
+                android:text="越级晋升申请"
                 android:textColor="#4A576A"
                 android:textSize="14sp" />
 
             <TextView
+                android:id="@+id/tv_jinshen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -213,7 +214,7 @@
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"
-                tools:text="17612870000" />
+                tools:text="审核中" />
         </LinearLayout>
 
         <LinearLayout
