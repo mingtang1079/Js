@@ -260,7 +260,7 @@ public class MeFragment extends BaseFragment {
     }
 
 
-    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.rl, R.id.tv_id, R.id.ll_zizhi, R.id.ll_share, R.id.ll_my_collection,
+    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.fl, R.id.tv_id, R.id.ll_zizhi, R.id.ll_share, R.id.ll_my_collection,
             R.id.ll_shenqing, R.id.ll_richeng, R.id.ll_dingjia, R.id.ll_tongji, R.id.ll_yajing, R.id.ll_bidu, R.id.ll_about,
             R.id.ll_fankui, R.id.ll_wufu_time, R.id.ll_tuijian, R.id.ll_personal, R.id.ll_shiming})
     public void onViewClicked(View view) {
@@ -290,10 +290,12 @@ public class MeFragment extends BaseFragment {
 
                 start(SettingActivity.class);
                 break;
-            case R.id.rl:
+            case R.id.fl:
 
-                ARouter.getInstance().build("/me/UserInfoActivity")
-                        .navigation();
+//                ARouter.getInstance().build("/me/UserInfoActivity")
+//                        .navigation();
+                start(JingYanActivity.class);
+
                 break;
             case R.id.tv_id:
 

@@ -83,7 +83,6 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
     protected void initMenu() {
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
         mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
-        mMenuItem.setEnabled(false);
         mMenuItem.setTitle("保存");
         mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

@@ -1,5 +1,6 @@
 package com.example.administrator.js.course;
 
+import com.example.administrator.js.course.model.Item;
 import com.example.administrator.js.me.model.User;
 
 import java.io.Serializable;
@@ -8,7 +9,7 @@ import java.io.Serializable;
  * Created by tangming on 2018/7/9.
  */
 
-public class CourseModel implements Serializable {
+public class CourseModel implements Serializable,Item {
 
     public String id;
 

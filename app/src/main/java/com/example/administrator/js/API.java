@@ -9,6 +9,7 @@ import com.example.administrator.js.course.member.HistoryOrder;
 import com.example.administrator.js.course.member.Pingjia;
 import com.example.administrator.js.course.member.YuyueInfo;
 import com.example.administrator.js.course.model.CourseDetail;
+import com.example.administrator.js.course.model.MyDate;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.example.administrator.js.exercise.model.VipUser;
@@ -228,7 +229,6 @@ public interface API {
 
     /**
      * J教练端
-     *
      */
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")
@@ -437,4 +437,8 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/getPromotion")
     Observable<BaseModel<ShenheInfo>> getPromotion(@Field("userid") String id);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/mydate")
+    Observable<BaseModel<MyDate>> getMydate(@FieldMap Map<String, String> mStringStringMap);
 }

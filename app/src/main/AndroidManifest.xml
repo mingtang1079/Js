@@ -34,16 +34,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">
-
-
         <receiver
-            android:exported="true"
-            android:name=".broadcastReceiver.MyPushMessageReceiver">
+            android:name=".broadcastReceiver.MyPushMessageReceiver"
+            android:exported="true">
             <intent-filter>
-                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED" />
-                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED" />
-                <action android:name="io.rong.push.intent.MESSAGE_CLICKED" />
-                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED" />
+                <action android:name="io.rong.push.intent.MESSAGE_ARRIVED"/>
+                <action android:name="io.rong.push.intent.MI_MESSAGE_ARRIVED"/>
+                <action android:name="io.rong.push.intent.MESSAGE_CLICKED"/>
+                <action android:name="io.rong.push.intent.MI_MESSAGE_CLICKED"/>
             </intent-filter>
         </receiver>
         <!-- 搞得地图 -->
@@ -203,7 +201,6 @@
                     android:scheme="rong"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".exercise.DetailActivity"
             android:screenOrientation="portrait"/>
@@ -310,6 +307,8 @@
             android:theme="@style/NoTitleTranslucentTheme">
         </activity>
         <activity android:name=".activity.SystemMessageActivity">
+        </activity>
+        <activity android:name=".me.JingYanActivity">
         </activity>
     </application>
 

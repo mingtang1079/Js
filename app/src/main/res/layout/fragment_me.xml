@@ -45,11 +45,15 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:gravity="center_vertical"
             android:id="@+id/rl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp">
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -146,14 +150,21 @@
                 </LinearLayout>
 
 
-                <ProgressBar
-                    android:id="@+id/p_progressbar"
-                    style="@style/mProgressBar1"
-                    android:layout_width="100dp"
-                    android:layout_height="4dp"
-                    android:layout_marginTop="6dp"
-                    android:max="10"
-                    android:secondaryProgress="2"/>
+                <FrameLayout
+                    android:id="@+id/fl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:id="@+id/p_progressbar"
+                        style="@style/mProgressBar1"
+                        android:layout_width="100dp"
+                        android:layout_height="4dp"
+                        android:layout_marginTop="8dp"
+                        android:max="10"
+                        android:layout_marginBottom="12dp"
+                        android:secondaryProgress="2"/>
+                </FrameLayout>
             </LinearLayout>
 
 

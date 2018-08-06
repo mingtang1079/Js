@@ -1,5 +1,6 @@
 package com.example.administrator.js.course;
 
+import android.mtp.MtpEvent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,10 +21,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
-import com.example.administrator.js.base.model.WrapperModel;
-import com.example.administrator.js.me.MeFragment;
-import com.example.administrator.js.me.member.MeMemberFragment;
-import com.example.administrator.js.me.model.User;
+import com.example.administrator.js.course.model.Item;
+import com.example.administrator.js.course.model.MyDate;
+import com.example.administrator.js.course.model.TimeItem;
+import com.example.administrator.js.course.model.ViewItem;
 import com.example.administrator.js.view.CustomDayView;
 import com.example.administrator.js.view.ThemeDayView;
 import com.example.administrator.js.vipandtrainer.adapter.CourseUserAdapter;
@@ -37,6 +37,7 @@ import com.ldf.calendar.view.MonthPager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -66,7 +67,7 @@ public class CourseCanlenderActivity extends BaseActivity {
     private boolean initiated = false;
 
 
-    CourseUserAdapter mCourseUserAdapter;
+    MyDateAdapter mMyDateAdapter;
 
     String currenttime;
 
@@ -93,33 +94,38 @@ public class CourseCanlenderActivity extends BaseActivity {
         mList.setHasFixedSize(true);
         //这里用线性显示 类似于listview
         mList.setLayoutManager(new LinearLayoutManager(this));
-        mCourseUserAdapter = new CourseUserAdapter(R.layout.item_course_user, null);
+        mMyDateAdapter = new MyDateAdapter();
         View mView = getLayoutInflater().inflate(R.layout.view_empty, mList, false);
-        mCourseUserAdapter.setEmptyView(mView);
-        mCourseUserAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+        mMyDateAdapter.setEmptyView(mView);
+        mMyDateAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+                Item mItem = mMyDateAdapter.getData().get(position);
+                if (mItem instanceof CourseModel) {
+                    CourseModel mCourseModel = (CourseModel) mMyDateAdapter.getData().get(position);
 
-                if ("0".equals(UserManager.getInsatance().getUser().role)) {
+                    if ("0".equals(UserManager.getInsatance().getUser().role)) {
 
-                    ARouter.getInstance().build("/course/CourDetailActivity")
-                            .withString("id", mCourseUserAdapter.getData().get(position).id)
-                            .navigation(mContext);
-                } else {
-                    ARouter.getInstance().build("/course/MemberCourDetailActivity")
-                            .withObject("mCourseModel", mCourseUserAdapter.getData().get(position))
-                            .navigation(mContext);
+
+                        ARouter.getInstance().build("/course/CourDetailActivity")
+                                .withString("id", mCourseModel.id)
+                                .navigation(mContext);
+                    } else {
+                        ARouter.getInstance().build("/course/MemberCourDetailActivity")
+                                .withObject("mCourseModel", mCourseModel)
+                                .navigation(mContext);
+                    }
                 }
             }
         });
-        mList.setAdapter(mCourseUserAdapter);
+        mList.setAdapter(mMyDateAdapter);
 
         initCurrentDate();
         initCalendarView();
 
-        View mView1 = LayoutInflater.from(mContext).inflate(R.layout.view_header_course, mList, false);
-        mCourseUserAdapter.addHeaderView(mView1);
+//        View mView1 = LayoutInflater.from(mContext).inflate(R.layout.item_course_one, mList, false);
+//        mMyDateAdapter.addHeaderView(mView1);
 
         mIvRight.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,16 +159,56 @@ public class CourseCanlenderActivity extends BaseActivity {
         }
         mMap.put("status", "1");
         mMap.put("pageNo", "1");
-        mMap.put("starttime", "1");
+        mMap.put("starttime", currenttime);
 
 
-        Http.getDefault().getCourse(mMap)
-                .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<WrapperModel<CourseModel>>(mContext) {
+        Http.getDefault().getMydate(mMap)
+                .as(RxHelper.<MyDate>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<MyDate>(mContext) {
                     @Override
-                    protected void onSucess(WrapperModel<CourseModel> mVipUserBaseModelWrapper) {
+                    protected void onSucess(MyDate mVipUserBaseModelWrapper) {
+
                         if (mVipUserBaseModelWrapper != null) {
-                            mCourseUserAdapter.setNewData(mVipUserBaseModelWrapper.list);
+
+                            if (mVipUserBaseModelWrapper.page.list==null||mVipUserBaseModelWrapper.page.list.size()==0)
+                            {
+                                mMyDateAdapter.setNewData(null);
+                                return;
+                            }
+
+                            if (UserManager.getInsatance().getUser() != null) {
+                                List<Item> mItems = new ArrayList<>();
+
+                                if ("0".equals(UserManager.getInsatance().getUser().role)) {
+//当前用户是教练
+                                    ViewItem mViewItem = new ViewItem();
+                                    mViewItem.name = "工作时间";
+                                    mItems.add(mViewItem);
+
+                                    for (String m : mVipUserBaseModelWrapper.worktimelist) {
+                                        mItems.add(new TimeItem(m));
+                                    }
+
+
+                                    ViewItem mViewItem1 = new ViewItem();
+                                    mViewItem1.name = "课程" + mVipUserBaseModelWrapper.count + "节";
+                                    mItems.add(mViewItem1);
+                                    for (CourseModel mCourseModel : mVipUserBaseModelWrapper.page.list) {
+                                        mItems.add(mCourseModel);
+                                    }
+
+                                } else {
+//当前用户是学员
+                                    ViewItem mViewItem = new ViewItem();
+                                    mViewItem.name = "课程" + mVipUserBaseModelWrapper.count + "节";
+                                    mItems.add(mViewItem);
+                                    for (CourseModel mCourseModel : mVipUserBaseModelWrapper.page.list) {
+                                        mItems.add(mCourseModel);
+                                    }
+                                }
+                                mMyDateAdapter.setNewData(mItems);
+                            }
+
                         }
 
                     }
