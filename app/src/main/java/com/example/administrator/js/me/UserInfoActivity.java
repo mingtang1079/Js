@@ -198,7 +198,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                 break;
             case R.id.ll_weixin:
 
-                if ("已绑定".equals(mTvWeixin)) {
+                if ("已绑定".equals(mTvWeixin.getText().toString())) {
                     return;
                 }
                 if (!App.mInstance.api.isWXAppInstalled()) {

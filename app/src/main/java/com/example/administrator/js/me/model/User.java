@@ -47,4 +47,5 @@ public class User {
     public String depositstatus; //押金状态 0 未交押金 1 已交押金 2 免押金,3退款中
 
     public String apitoken;
+    public int progress;
 }

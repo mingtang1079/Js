@@ -88,6 +88,7 @@ public class MeFragment extends BaseFragment {
     @Override
     protected void initView() {
         mUser = UserManager.getInsatance().getUser();
+        setUser();
         requestData();
     }
 
@@ -245,11 +246,10 @@ public class MeFragment extends BaseFragment {
 
         if (!TextUtils.isEmpty(mUser.degree)) {
             mTextViewDegree.setText(mUser.degree);
-            int degre = Integer.valueOf(mUser.degree.replace("PT", ""));
-            mProgressBar.setProgress(degre);
-        } else {
-
         }
+
+        mProgressBar.setProgress(mUser.progress);
+
     }
 
     @Override
@@ -369,6 +369,8 @@ public class MeFragment extends BaseFragment {
                         if (!"3".equals(mUser.provestatus)) {
                             ARouter.getInstance().build("/me/RealNameVerifyActivity")
                                     .navigation();
+                        } else {
+                            showToast("实名认证审核中，请耐心等待");
                         }
                     }
 
