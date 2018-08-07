@@ -27,6 +27,9 @@ import com.google.gson.JsonObject;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DefaultObserver;
 import io.reactivex.schedulers.Schedulers;
@@ -119,7 +122,10 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
     }
 
     private void requestUserInfo(final String mCode) {
-        Http.getDefault().getUserInfoByWxCode(mCode)
+        Map<String,String> mStringStringMap=new HashMap<>();
+        mStringStringMap.put("code",mCode);
+
+        Http.getDefault().getUserInfoByWxCode(mStringStringMap)
                 .as(RxHelper.<User>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<User>() {
                     @Override

@@ -68,7 +68,6 @@ public class MeFragment extends BaseFragment {
     ProgressBar mProgressBar;
 
     User mUser;
-    RealUserInfo mRealUserInfo;
     String yajingStatus;//压惊状态
 
     @Override
@@ -78,7 +77,6 @@ public class MeFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onVerifyChanged(EventMessage.VerifyChangedMessage message) {
-
         requestData();
     }
 
@@ -97,34 +95,34 @@ public class MeFragment extends BaseFragment {
     protected void requestData() {
         super.requestData();
 
-        Http.getDefault().getRealNameInfo(mUser.id)
-                .as(RxHelper.<RealUserInfo>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<RealUserInfo>() {
+        Http.getDefault().getUserInfo(mUser.id)
+                .as(RxHelper.<User>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<User>() {
                     @Override
-                    protected void onSucess(RealUserInfo mRealUserInfo) {
+                    protected void onSucess(User mUser) {
 
-                        if (mRealUserInfo != null) {
-                            MeFragment.this.mRealUserInfo = mRealUserInfo;
-                            if (!TextUtils.isEmpty(mRealUserInfo.status)) {
-                                if ("1".equals(mRealUserInfo.status)) {
+                        if (mUser != null) {
+                            MeFragment.this.mUser = mUser;
+                            if (!TextUtils.isEmpty(mUser.provestatus)) {
+                                if ("1".equals(mUser.provestatus)) {
                                     mTextViewVerify.setText("已认证");
-                                } else if ("2".equals(mRealUserInfo.status)) {
+                                } else if ("2".equals(mUser.provestatus)) {
                                     mTextViewVerify.setText("认证不通过");
 
-                                } else if ("3".equals(mRealUserInfo.status)) {
+                                } else if ("3".equals(mUser.provestatus)) {
                                     mTextViewVerify.setText("审核中");
                                 } else {
                                     //未审核
                                 }
                             }
                             //教学资质
-                            if (!TextUtils.isEmpty(mRealUserInfo.teachstatus)) {
-                                if ("1".equals(mRealUserInfo.teachstatus)) {
+                            if (!TextUtils.isEmpty(mUser.teachstatus)) {
+                                if ("1".equals(mUser.teachstatus)) {
                                     mTextViewVirify2.setText("已认证");
-                                } else if ("2".equals(mRealUserInfo.teachstatus)) {
+                                } else if ("2".equals(mUser.teachstatus)) {
                                     mTextViewVirify2.setText("认证不通过");
 
-                                } else if ("3".equals(mRealUserInfo.teachstatus)) {
+                                } else if ("3".equals(mUser.teachstatus)) {
                                     mTextViewVirify2.setText("审核中");
                                 } else {
                                     //未审核
@@ -303,13 +301,13 @@ public class MeFragment extends BaseFragment {
 
             case R.id.ll_zizhi:
 
-                if (mRealUserInfo != null) {
-                    if (mRealUserInfo.teachstatus.equals("1") || mRealUserInfo.teachstatus.equals("2")) {
+                if (mUser != null) {
+                    if (mUser.teachstatus.equals("1") || mUser.teachstatus.equals("2")) {
                         start(ZizhiActivity.class);
                     } else {
-                        if (mRealUserInfo.status.equals("0")) {
+                        if (mUser.provestatus.equals("0")) {
                             showToast("请先完成实名认证");
-                        } else if (mRealUserInfo.status.equals("3")) {
+                        } else if (mUser.provestatus.equals("3")) {
                             showToast("实名审核中，请耐心等待");
 
                         }
@@ -366,9 +364,9 @@ public class MeFragment extends BaseFragment {
 
             case R.id.ll_shiming:
 
-                if (mRealUserInfo != null) {
-                    if (!TextUtils.isEmpty(mRealUserInfo.status)) {
-                        if (!"3".equals(mRealUserInfo.status)) {
+                if (mUser != null) {
+                    if (!TextUtils.isEmpty(mUser.provestatus)) {
+                        if (!"3".equals(mUser.provestatus)) {
                             ARouter.getInstance().build("/me/RealNameVerifyActivity")
                                     .navigation();
                         }

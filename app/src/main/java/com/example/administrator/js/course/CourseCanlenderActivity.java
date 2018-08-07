@@ -191,7 +191,7 @@ public class CourseCanlenderActivity extends BaseActivity {
 
 
                                     ViewItem mViewItem1 = new ViewItem();
-                                    mViewItem1.name = "课程" + mVipUserBaseModelWrapper.count + "节";
+                                    mViewItem1.name = "今日课程" + mVipUserBaseModelWrapper.count + "节";
                                     mItems.add(mViewItem1);
                                     for (CourseModel mCourseModel : mVipUserBaseModelWrapper.page.list) {
                                         mItems.add(mCourseModel);
@@ -200,7 +200,7 @@ public class CourseCanlenderActivity extends BaseActivity {
                                 } else {
 //当前用户是学员
                                     ViewItem mViewItem = new ViewItem();
-                                    mViewItem.name = "课程" + mVipUserBaseModelWrapper.count + "节";
+                                    mViewItem.name = "今日课程" + mVipUserBaseModelWrapper.count + "节";
                                     mItems.add(mViewItem);
                                     for (CourseModel mCourseModel : mVipUserBaseModelWrapper.page.list) {
                                         mItems.add(mCourseModel);

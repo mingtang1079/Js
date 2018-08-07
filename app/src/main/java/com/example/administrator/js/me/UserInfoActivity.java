@@ -7,12 +7,15 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.AdressHelper;
 import com.appbaselib.utils.DatePickerDialogUtils;
 import com.appbaselib.utils.DateUtils;
@@ -20,16 +23,25 @@ import com.appbaselib.utils.DialogUtils;
 import com.appbaselib.utils.PreferenceUtils;
 import com.appbaselib.view.datepicker.view.GregorianLunarCalendarView;
 import com.appbaselib.view.datepicker.view.OnDateSelectedListener;
+import com.example.administrator.js.App;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.login.LoginActivity;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.presenter.UserPresenter;
 import com.example.administrator.js.utils.TimeUtils;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.OnItemClickListener;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -141,7 +153,8 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
         }
     }
 
-    @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area, R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit, R.id.ll_zhifubao, R.id.ll_birthday})
+    @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area,
+            R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit, R.id.ll_zhifubao, R.id.ll_birthday})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_head:
@@ -184,6 +197,18 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                 start(BarcodeActivity.class);
                 break;
             case R.id.ll_weixin:
+
+                if ("已绑定".equals(mTvWeixin)) {
+                    return;
+                }
+                if (!App.mInstance.api.isWXAppInstalled()) {
+                    showToast("请安装微信");
+                } else {
+                    final SendAuth.Req req = new SendAuth.Req();
+                    req.scope = "snsapi_userinfo";
+                    req.state = "wechat_sdk_demo_test";
+                    App.mInstance.api.sendReq(req);
+                }
 
 
                 break;
@@ -238,4 +263,38 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
     public void onFail(String mes) {
         showToast(mes);
     }
+
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.weixinLogin mListStatusChange) {
+        requestUserInfo(mListStatusChange.code);
+
+    }
+
+    private void requestUserInfo(final String mCode) {
+        Map<String, String> mStringStringMap = new HashMap<>();
+        mStringStringMap.put("code", mCode);
+        mStringStringMap.put("type", "2");
+        mStringStringMap.put("userid", UserManager.getInsatance().getUser().id);
+
+        Http.getDefault().getUserInfoByWxCode(mStringStringMap)
+                .as(RxHelper.<User>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<User>() {
+                    @Override
+                    protected void onSucess(User mUser) {
+                        mTvWeixin.setText("已绑定");
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+
+                    }
+                });
+
+    }
+
 }

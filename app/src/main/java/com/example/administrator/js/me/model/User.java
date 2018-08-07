@@ -31,7 +31,6 @@ public class User {
     public String latitude; // 纬度
     public Double distance;//经纬度刻度//用于查询
     public String token;//token
-    public String depositstatus; //押金状态 0 未交押金 1 已交押金 2 免押金,3退款中
     public String skillids;    // 专长ids
     public String skillname;    // 专长名称
     public String courseprice;    // 课程价格
@@ -43,4 +42,9 @@ public class User {
     public String privatemode;//隐私0关  1开
     public String remindme;//提醒 0 不提醒1 一小时提醒 2 两小时提薪
 
+    public String provestatus;        // 审核状态0未审核1审核通过2不通过3审核中
+    public String teachstatus;  // 审核状态0未审核1审核通过2不通过3审核中
+    public String depositstatus; //押金状态 0 未交押金 1 已交押金 2 免押金,3退款中
+
+    public String apitoken;
 }

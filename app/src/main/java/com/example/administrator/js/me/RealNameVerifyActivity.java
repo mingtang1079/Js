@@ -185,13 +185,18 @@ public class RealNameVerifyActivity extends BaseActivity {
 
     private void setData(VerifyUser mVerifyUser) {
 
+        mSelects.clear();
         if (mVerifyUser != null) {
             mEtName.setText(mVerifyUser.realname);
             mEtShenfenzheng.setText(mVerifyUser.idnumber);
-            if (!TextUtils.isEmpty(mVerifyUser.idimgpath))
+            if (!TextUtils.isEmpty(mVerifyUser.idimgpath)) {
                 ImageLoader.load(mContext, mVerifyUser.idimgpath, mIvShenfengzheng);
-            if (!TextUtils.isEmpty(mVerifyUser.idimgbackpath))
+                mSelects.add(mVerifyUser.idimgpath);
+            }
+            if (!TextUtils.isEmpty(mVerifyUser.idimgbackpath)) {
                 ImageLoader.load(mContext, mVerifyUser.idimgbackpath, mIvShengfenzhengback);
+                mSelects.add(mVerifyUser.idimgbackpath);
+            }
             if (!TextUtils.isEmpty(mVerifyUser.photopath))
                 ImageLoader.load(mContext, mVerifyUser.photopath, mIvGongpai);
 
@@ -201,15 +206,29 @@ public class RealNameVerifyActivity extends BaseActivity {
         }
     }
 
+    List<String> mSelects = new ArrayList<>(2);
+
     private void submit() {
 
-        List<String> mStrings = new ArrayList<>();
-        mStrings.add(FileUtlis.getRealFilePath(mContext, sfzz));
-        mStrings.add(FileUtlis.getRealFilePath(mContext, sfzf));
-        mStrings.add(FileUtlis.getRealFilePath(mContext, zm));
-        mStrings.add(FileUtlis.getRealFilePath(mContext, zs));
 
-        Observable.just(mStrings)
+//        mStrings.add(FileUtlis.getRealFilePath(mContext, zm));
+//        mStrings.add(FileUtlis.getRealFilePath(mContext, zs));
+
+        Observable.just(mSelects)
+                .map(new Function<List<String>, ArrayList<String>>() {
+                    @Override
+                    public ArrayList<String> apply(List<String> mStrings) throws Exception {
+                        //筛选已经上传过的数据（编辑状态会存在上传过的照片）
+                        ArrayList<String> m = new ArrayList<>();
+                        for (String mS :
+                                mStrings) {
+                            if (!mS.startsWith("http")) {
+                                m.add(mS);
+                            }
+                        }
+                        return m;
+                    }
+                })
                 .observeOn(Schedulers.io())
                 .map(new Function<List<String>, List<File>>() {
                     @Override
@@ -239,6 +258,26 @@ public class RealNameVerifyActivity extends BaseActivity {
                         return results;
                     }
                 })
+                .map(new Function<List<String>, List<String>>() {
+                    @Override
+                    public List<String> apply(List<String> mStrings) throws Exception {
+
+                        //mstrings 此时有可能比 mselected小
+                        if (mStrings.size() < mSelects.size()) {
+                            ArrayList<String> mOrigin = new ArrayList<>();
+                            for (String mS :
+                                    mSelects) {
+                                if (mS.startsWith("http")) {
+                                    mOrigin.add(mS);
+                                }
+                            }
+
+                            mStrings.addAll(0, mOrigin);
+                        }
+
+                        return mStrings;
+                    }
+                })
                 .flatMap(new Function<List<String>, ObservableSource<BaseModel<String>>>() {
                     @Override
                     public ObservableSource<BaseModel<String>> apply(List<String> mFiles) throws Exception {
@@ -252,6 +291,7 @@ public class RealNameVerifyActivity extends BaseActivity {
                         params.put("idnumber", mEtShenfenzheng.getText().toString());
                         params.put("idimgpath", mFiles.get(0));//正面身份证
                         params.put("idimgbackpath", mFiles.get(1));//反面身份证
+                        params.put("status", "3");
 //                        params.put("photopath", mFiles.get(2));//从业证明
 //                        params.put("certpath", mFiles.get(3));//证书地址
 
@@ -286,10 +326,12 @@ public class RealNameVerifyActivity extends BaseActivity {
             if (requestCode == 20) {
                 sfzz = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
                 ImageLoader.load(mContext, sfzz, mIvShenfengzheng);
+                mSelects.set(0,FileUtlis.getRealFilePath(mContext, sfzz));
 
             } else if (requestCode == 30) {
                 sfzf = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
                 ImageLoader.load(mContext, sfzf, mIvShengfenzhengback);
+                mSelects.set(1,FileUtlis.getRealFilePath(mContext, sfzf));
 
             } else if (requestCode == 40) {
                 zm = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));

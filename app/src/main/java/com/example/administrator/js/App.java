@@ -25,6 +25,8 @@ import com.mic.adressselectorlib.CityHelper;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
 import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.util.ArrayList;
@@ -54,10 +56,15 @@ import retrofit2.Retrofit;
  */
 
 public class App extends BaseApplication {
+    public static App mInstance = null;
+
+    public IWXAPI api;
+
 
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance=this;
         initIM();
         initBugly();
         initRouter();
@@ -65,6 +72,9 @@ public class App extends BaseApplication {
         //参数3:Push推送业务的secret，需要集成Push功能时必须传入Push的secret，否则传空。
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
         CityHelper.getInsatance().getCities(this);//初始化
+
+        api = WXAPIFactory.createWXAPI(this, Constans.weixin);
+        api.registerApp(Constans.weixin);
     }
 
     private void startService() {

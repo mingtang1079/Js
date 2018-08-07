@@ -1,5 +1,6 @@
 package com.example.administrator.js.me;
 
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.utils.DialogUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.me.presenter.UserPresenter;
 import com.jakewharton.rxbinding2.view.RxView;
@@ -69,7 +71,14 @@ public class AddAlipayActivity extends BaseActivity  implements UserPresenter.Us
 
     private void sure() {
 
-        mUserPresenter.updateUser("alipay", mEditTextName.getText().toString());
+        DialogUtils.getDefaultDialog(mContext, "", "该账号将作为您的支付宝收款账号,是否确认正确", "确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface mDialogInterface, int mI) {
+                mUserPresenter.updateUser("alipay", mEditTextName.getText().toString());
+
+            }
+        }).show();
+
 
     }
 

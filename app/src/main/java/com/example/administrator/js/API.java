@@ -172,7 +172,6 @@ public interface API {
     @POST(AUTHORIRY + "/user/get")
     Observable<BaseModel<User>> getUser(@Field("id") String id);
 
-
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/teachingQualificationSave")
     Observable<BaseModel<Zizhi>> editZizhi(@FieldMap Map<String, String> map);
@@ -411,7 +410,7 @@ public interface API {
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/getUserInfoByWxCode")
-    Observable<BaseModel<User>> getUserInfoByWxCode(@Field("code") String code);
+    Observable<BaseModel<User>> getUserInfoByWxCode(@FieldMap Map<String, String> mStringStringMap);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/pay/getDepositMoney")
@@ -441,4 +440,8 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/mydate")
     Observable<BaseModel<MyDate>> getMydate(@FieldMap Map<String, String> mStringStringMap);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/get")
+    Observable<BaseModel<User>> getUserInfo(@Field("id") String id);
 }
