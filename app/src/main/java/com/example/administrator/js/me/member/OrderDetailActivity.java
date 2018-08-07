@@ -1,5 +1,6 @@
 package com.example.administrator.js.me.member;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
@@ -15,6 +16,7 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.DialogUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
@@ -117,7 +119,7 @@ public class OrderDetailActivity extends BaseActivity {
             @Override
             public void onClick(View mView) {
                 ARouter.getInstance().build("/member/ShangkeRecordActivity")
-                        .withString("orderId",mOrder.id)
+                        .withString("orderId", mOrder.id)
                         .navigation(mContext);
             }
         });
@@ -183,7 +185,7 @@ public class OrderDetailActivity extends BaseActivity {
         if (mOrder.crealprice != null)
             mTvShijiPrice.setText(BigBigDecimalUtils.divide(new BigDecimal(mOrder.crealprice), new BigDecimal(100)) + "元");
         if (mOrder.ctotalprice != null && mOrder.crealprice != null) {
-            mTvYouhuiPrice.setText("-"+BigBigDecimalUtils.divide(new BigDecimal(mOrder.ctotalprice - mOrder.crealprice), new BigDecimal(100)) + "元");
+            mTvYouhuiPrice.setText("-" + BigBigDecimalUtils.divide(new BigDecimal(mOrder.ctotalprice - mOrder.crealprice), new BigDecimal(100)) + "元");
         }
         mTvOrderNumber.setText(mOrder.payno + "");
         if ("1".equals(mOrder.paytype))
@@ -264,10 +266,17 @@ public class OrderDetailActivity extends BaseActivity {
                 break;
             case R.id.tv_cancel:
 
+                DialogUtils.getDefaultDialog(mContext, "提示", "确定取消该订单吗？", "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface mDialogInterface, int mI) {
 
-                cancel("c70");
+                        cancel("c70");
+                    }
+                }).show();
+
                 break;
             case R.id.tv_quxiao_tuikuan:
+
                 cancel("b3");
 
                 break;
@@ -278,7 +287,7 @@ public class OrderDetailActivity extends BaseActivity {
                         .withString("orderType", "0")
                         .withInt("price", mOrder.crealprice)
                         .withInt("totalPrice", mOrder.ctotalprice)
-                        .withString("title",mOrder.ctypename)
+                        .withString("title", mOrder.ctypename)
                         .navigation(mContext);
 
                 break;

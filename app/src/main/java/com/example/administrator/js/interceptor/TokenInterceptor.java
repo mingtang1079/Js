@@ -1,9 +1,11 @@
 package com.example.administrator.js.interceptor;
 
 import com.appbaselib.utils.PackageUtil;
+import com.appbaselib.utils.PreferenceUtils;
 import com.appbaselib.utils.SystemUtils;
 import com.example.administrator.js.App;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.Constans;
 
 import java.io.IOException;
 
@@ -17,9 +19,8 @@ public class TokenInterceptor implements Interceptor {
 
         Request original = chain.request();
         if (UserManager.getInsatance().getUser() != null) {
-
             Request request = original.newBuilder()
-                    .header("apitoken", UserManager.getInsatance().getUser().apitoken)
+                    .header("apitoken", PreferenceUtils.getPrefString(App.mInstance, Constans.TOKEN,""))
                     .header("osname", "0")
                     .header("versionno", PackageUtil.getAppVersionName(App.mInstance))
                     .header("deviceid", SystemUtils.getDeviceBrand())
