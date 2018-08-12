@@ -302,10 +302,10 @@ public class MeFragment extends BaseFragment {
             case R.id.ll_zizhi:
 
                 if (mUser != null) {
-                    if (mUser.teachstatus.equals("1") || mUser.teachstatus.equals("2")) {
+                    if (mUser.provestatus.equals("1") &&! mUser.teachstatus.equals("3")) {
                         start(ZizhiActivity.class);
                     } else {
-                        if (mUser.provestatus.equals("0")) {
+                        if (!mUser.provestatus.equals("3")) {
                             showToast("请先完成实名认证");
                         } else if (mUser.provestatus.equals("3")) {
                             showToast("实名审核中，请耐心等待");

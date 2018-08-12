@@ -28,7 +28,6 @@ public class TongjiActivity extends MyBaseRefreshActivity<Tongji> {
     protected void initView() {
         super.initView();
         mToolbar.setTitle("统计");
-        toggleShowLoading(true);
     }
 
     @Override

@@ -34,8 +34,8 @@
 
     <style name="ThemeFullScreen" parent="AppTheme">
         <item name="android:windowBackground">@drawable/spalash</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:clipToPadding">false</item>
+        <!--<item name="android:fitsSystemWindows">true</item>-->
+        <!--<item name="android:clipToPadding">false</item>-->
     </style>
 
     <style name="AnimationActivity" parent="@android:style/Animation.Activity">

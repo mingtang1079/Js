@@ -19,13 +19,16 @@ import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.network.ResponceSubscriber2;
 import com.appbaselib.rx.RxHelper;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.UserDetail;
 import com.example.administrator.js.vipandtrainer.adapter.UserdetailImageAdapter;
+import com.foamtrace.photopicker.intent.PhotoPreviewIntent;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -148,7 +151,7 @@ public class VipUserDetailActivity extends BaseActivity {
                 .subscribe(new ResponceSubscriber2<UserDetail>() {
                     @Override
                     protected void onSucess(BaseModel<UserDetail> t) {
-                        if (t != null&&t.data!=null) {
+                        if (t != null && t.data != null) {
                             mUserDetail = t.data;
                             mTextViewMeassage.setText(t.msg);
                             setData(t.data);
@@ -189,11 +192,14 @@ public class VipUserDetailActivity extends BaseActivity {
             mIvYuyue.setImageResource(R.drawable.icon_xingxing);
 
         }
+        mTvId.setText("ID："+mUser.no + "");
         ImageLoader.load(mContext, mUser.img, mIvHead);
         //年龄
-        if (mUser.age != null || mUser.sex.equals("0")) {
+        if (mUser.sex.equals("0")) {
 
-            mTvAge.setText(mUser.age + "");
+            if (mUser.age != null) {
+                mTvAge.setText(mUser.age + "");
+            }
             if (mUser.sex.equals("1")) {
                 //男性
                 mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
@@ -220,11 +226,26 @@ public class VipUserDetailActivity extends BaseActivity {
 
             if (!TextUtils.isEmpty(mUserDetail.need.detailimg)) {
                 String[] mStrings = mUserDetail.need.detailimg.split(",");
-                List<String> mList = Arrays.asList(mStrings);
+                final ArrayList<String> mList = new ArrayList<>(mStrings.length);
+                for (String m:mStrings)
+                {
+                    mList.add(m);
+                }
                 LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(mContext);
                 mLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 mRecyclerView.setLayoutManager(mLinearLayoutManager);
-                mRecyclerView.setAdapter(new UserdetailImageAdapter(R.layout.item_user_detail_image, mList));
+                UserdetailImageAdapter mUserdetailImageAdapter=new UserdetailImageAdapter(R.layout.item_user_detail_image, mList);
+                mRecyclerView.setAdapter(mUserdetailImageAdapter);
+                mUserdetailImageAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        PhotoPreviewIntent intent = new PhotoPreviewIntent(mContext);
+                        intent.setCurrentItem(position);
+                        intent.setPhotoPaths(mList);
+                        intent.setIsShowDelete(false);
+                        startActivity(intent);
+                    }
+                });
             }
 
         }

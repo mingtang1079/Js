@@ -326,12 +326,23 @@ public class RealNameVerifyActivity extends BaseActivity {
             if (requestCode == 20) {
                 sfzz = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
                 ImageLoader.load(mContext, sfzz, mIvShenfengzheng);
-                mSelects.set(0,FileUtlis.getRealFilePath(mContext, sfzz));
+                if (mSelects.size() > 0) {
+                    mSelects.set(0, FileUtlis.getRealFilePath(mContext, sfzz));
+                }
+                else {
+                    mSelects.add(FileUtlis.getRealFilePath(mContext, sfzz));
+                }
 
             } else if (requestCode == 30) {
                 sfzf = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
                 ImageLoader.load(mContext, sfzf, mIvShengfenzhengback);
-                mSelects.set(1,FileUtlis.getRealFilePath(mContext, sfzf));
+                if (mSelects.size()>1) {
+                    mSelects.set(1, FileUtlis.getRealFilePath(mContext, sfzf));
+                }
+                else {
+                    mSelects.add(FileUtlis.getRealFilePath(mContext, sfzf));
+
+                }
 
             } else if (requestCode == 40) {
                 zm = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));

@@ -14,6 +14,8 @@ import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.PreferenceUtils;
+import com.appbaselib.utils.ToastUtils;
+import com.example.administrator.js.App;
 import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
@@ -145,7 +147,7 @@ public class LoginFragment extends BaseFragment {
 
                     @Override
                     protected void onFail(String message) {
-                        showToast(message);
+                        ToastUtils.showShort(App.mInstance,message);
                         mBtLogin.setEnabled(true);
                         mBtLogin.setText("登录");
                     }

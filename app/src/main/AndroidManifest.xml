@@ -118,7 +118,7 @@
         <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeFullScreen"/>
+       />
         <activity
             android:name=".me.RealNameVerifyActivity"
             android:screenOrientation="portrait"/>
@@ -309,6 +309,10 @@
         <activity android:name=".activity.SystemMessageActivity">
         </activity>
         <activity android:name=".me.JingYanActivity">
+        </activity>
+        <activity android:name=".exercise.YouhuiWorkActivity">
+        </activity>
+        <activity android:name=".me.YaoqingmaActivity">
         </activity>
     </application>
 

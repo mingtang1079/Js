@@ -63,4 +63,5 @@ public class VerifyUser implements Serializable {
     public String idimgbackpath;
     public String succaseimage;
     public String motto;
+    public String invitecode;
 }

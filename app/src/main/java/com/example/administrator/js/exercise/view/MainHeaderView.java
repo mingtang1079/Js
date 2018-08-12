@@ -3,6 +3,7 @@ package com.example.administrator.js.exercise.view;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.OnLifecycleEvent;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.adapter.BaseLifeCycleView;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.exercise.YouhuiWorkActivity;
 import com.example.administrator.js.exercise.model.Main;
 import com.example.administrator.js.me.model.Zizhi;
 import com.youth.banner.listener.OnBannerListener;
@@ -148,7 +150,9 @@ public class MainHeaderView extends BaseLifeCycleView {
                 ToastUtils.showShort(getContext(),"开发中,敬请期待");
                 break;
             case R.id.tv_work:
-                ToastUtils.showShort(getContext(),"开发中,敬请期待");
+
+
+              getContext().startActivity(new Intent(getContext(), YouhuiWorkActivity.class));
 
                 break;
         }

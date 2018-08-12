@@ -155,7 +155,7 @@ public class OrderDetailActivity extends BaseActivity {
 
         ImageLoader.load(mContext, mOrder.img, mIvHead);
         mTvName.setText(mOrder.nickname);
-        mTvId.setText("ID" + mOrder.no + "");
+        mTvId.setText("ID：" + mOrder.no + "");
         //年龄
         if (mOrder.age != null && mOrder.sex != null) {
             mTvAge.setText(mOrder.age + "");
@@ -179,7 +179,7 @@ public class OrderDetailActivity extends BaseActivity {
 
         mTvAddress.setText(mOrder.address);
         mTvCourseType.setText(mOrder.ctypename + "(" + mOrder.coursetypenames + ")");
-        mTextViewShengyekeshi.setText("剩余课时 (" + mOrder.cuse + "/" + mOrder.csum + ")");
+        mTextViewShengyekeshi.setText("已上课时 (" + mOrder.cuse + "/" + mOrder.csum + ")");
         if (mOrder.ctotalprice != null)
             mTvAllPrice.setText(BigBigDecimalUtils.divide(new BigDecimal(mOrder.ctotalprice), new BigDecimal(100)) + "元");
         if (mOrder.crealprice != null)

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.AlertDialogLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -156,11 +157,11 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                             if (!TextUtils.isEmpty(mShenheInfo.promotionstatus)) {
                                 if ("3".equals(mShenheInfo.promotionstatus)) {
                                     mTextViewJinshen.setText("审核中");
-                                } else  if ("2".equals(mShenheInfo.promotionstatus)) {
+                                } else if ("2".equals(mShenheInfo.promotionstatus)) {
                                     //未审核
-                                     mTextViewJinshen.setText("审核不通过");
+                                    mTextViewJinshen.setText("审核不通过");
 
-                                }else  if ("1".equals(mShenheInfo.promotionstatus)) {
+                                } else if ("1".equals(mShenheInfo.promotionstatus)) {
                                     //未审核
                                     mTextViewJinshen.setText("审核通过");
 
@@ -182,7 +183,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
     private void setData() {
 
         if (mVerifyUser != null && mVerifyUser.workdate != null)
-            mTvTime.setText(mVerifyUser.workdate.substring(0,mVerifyUser.workdate.lastIndexOf("-")));
+            mTvTime.setText(mVerifyUser.workdate.substring(0, mVerifyUser.workdate.lastIndexOf("-")));
 
 
     }
@@ -196,9 +197,9 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                     @Override
                     public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
                         time = DateUtils.getTimeLongYmd(mCalendarData.getTime());
-                        mTvTime.setText(mCalendarData.pickedYear+"-"+mCalendarData.pickedMonthSway);
+                        mTvTime.setText(mCalendarData.pickedYear + "-" + mCalendarData.pickedMonthSway);
                         isFinish = false;
-                        mZizhiPresenter.updateZizhi("workdate",mCalendarData.pickedYear+"-"+mCalendarData.pickedMonthSway);
+                        mZizhiPresenter.updateZizhi("workdate", mCalendarData.pickedYear + "-" + mCalendarData.pickedMonthSway);
 
                     }
                 }).show();
@@ -236,14 +237,32 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                         .navigation();
                 break;
             case R.id.ll_jinsheng:
-                DialogUtils.getDefaultDialog(mContext, "提示", "确定申请晋升？", "确定", new DialogInterface.OnClickListener() {
+                android.support.v7.app.AlertDialog.Builder m = new android.support.v7.app.AlertDialog.Builder(mContext);
+                m.setTitle("提示");
+                m.setMessage("确定申请晋升？");
+                m.setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface mDialogInterface, int mI) {
-
+                        mDialogInterface.dismiss();
+                    }
+                });
+                m.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface mDialogInterface, int mI) {
                         shenqing();
 
                     }
-                }).show();
+                });
+                m.setNeutralButton("申请原则", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                        ARouter.getInstance().build("/web/Html5Activity")
+                                .withString("url", "https://www.cdmuscle.com/h5/news/detail?id=yuanze&userid=" + UserManager.getInsatance().getUser().id)
+                                .navigation(mContext);
+                    }
+                });
+                m.create().show();
 
                 break;
             case R.id.ll_jianli:
@@ -255,7 +274,10 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
             case R.id.ll_yaoqingma:
 
-                tianxie();
+
+                ARouter.getInstance().build("/me/YaoqingmaActivity")
+                        .withObject("mVerifyUser", mVerifyUser)
+                        .navigation();
 
                 break;
         }
@@ -350,8 +372,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onStatusChange(EventMessage.ZizhiStatus mZizhiStatus)
-    {
+    public void onStatusChange(EventMessage.ZizhiStatus mZizhiStatus) {
         mMenuItem.setEnabled(true);
     }
 }
