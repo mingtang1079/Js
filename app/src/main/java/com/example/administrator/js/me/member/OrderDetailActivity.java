@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -91,6 +92,13 @@ public class OrderDetailActivity extends BaseActivity {
     NestedScrollView mNestedScrollView;
     @BindView(R.id.tv_record)
     TextView mTextViewRecord;
+
+    @BindView(R.id.ll_tuike_content)
+    LinearLayout mLinearLayoutTuike;
+    @BindView(R.id.tv_tuike_count)
+    TextView mTextViewTuikeCount;
+    @BindView(R.id.tv_tuikuan_price)
+    TextView mTextViewTuikePrice;
 
 
     @Override
@@ -204,14 +212,15 @@ public class OrderDetailActivity extends BaseActivity {
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
             //成交时间
             mTvOrderChengjiaoTime.setVisibility(View.GONE);
+            mLinearLayoutTuike.setVisibility(View.GONE);
         } else if ("b2".equals(mOrder.status)) {
             mTvOrderStatus.setText("待付款");
             mTvCancel.setVisibility(View.VISIBLE);
             mTvPay.setVisibility(View.VISIBLE);
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
-
             mTvOrderChengjiaoTime.setVisibility(View.GONE);
+            mLinearLayoutTuike.setVisibility(View.GONE);
 
         } else if ("b3".equals(mOrder.status)) {
             mTvOrderStatus.setText("已完成");
@@ -219,8 +228,8 @@ public class OrderDetailActivity extends BaseActivity {
             mTvPay.setVisibility(View.GONE);
             mTvTuikuan.setVisibility(View.VISIBLE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
-
             mTvOrderChengjiaoTime.setVisibility(View.VISIBLE);
+            mLinearLayoutTuike.setVisibility(View.GONE);
 
         } else if ("b55".equals(mOrder.status)) {
             mTvOrderStatus.setText("退款中");
@@ -231,6 +240,12 @@ public class OrderDetailActivity extends BaseActivity {
             mTvTuike.setVisibility(View.VISIBLE);
             mTvTuikuan.setVisibility(View.GONE);
             //   mTvTuikuan.setText("退课详情");
+            //退款显示的内容
+            mLinearLayoutTuike.setVisibility(View.VISIBLE);
+            mTextViewTuikeCount.setText(mOrder.csum - mOrder.cuse+"节");
+            BigDecimal mBigDecimal=new BigDecimal(mOrder.refundmoney);
+            mTextViewTuikePrice.setText(mBigDecimal.divide(new BigDecimal(100)).doubleValue()+"");
+
 
         } else if ("b56".equals(mOrder.status)) {
             mTvOrderStatus.setText("已退款");
@@ -238,13 +253,15 @@ public class OrderDetailActivity extends BaseActivity {
             mTvPay.setVisibility(View.GONE);
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
+            mLinearLayoutTuike.setVisibility(View.VISIBLE);
+
         } else {
             mTvCancel.setVisibility(View.GONE);
             mTvPay.setVisibility(View.GONE);
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
             mTvOrderChengjiaoTime.setVisibility(View.GONE);
-
+            mLinearLayoutTuike.setVisibility(View.GONE);
         }
 
     }

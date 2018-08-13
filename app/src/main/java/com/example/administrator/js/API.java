@@ -389,6 +389,10 @@ public interface API {
     @POST(AUTHORIRY + "/course/appraiseSave")
     Observable<BaseModel<Pingjia>> savePingjia(@FieldMap Map<String, Object> mMap);
 
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/appraise")
+    Observable<BaseModel<Pingjia>> getPingjia(@Field("courseid") String courseid, @Field("userid") String userid);
+
     /**
      * ordertype	是	string	支付用途 0买课,1押金
      * paytype	是	string	支付方式0支付宝,1微信

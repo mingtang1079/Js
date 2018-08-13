@@ -12,6 +12,7 @@ import android.widget.RatingBar;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.base.BaseModel;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -35,6 +36,8 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Function;
 
 /**
  * Created by tangming on 2018/6/25.
@@ -94,18 +97,69 @@ public class PingjiaActivity extends BaseActivity {
         super.requestData();
 
         Http.getDefault().getPinjiatags()
-                .as(RxHelper.<List<String>>handleResult(mContext))
-                .subscribe(new ResponceSubscriber<List<String>>() {
+                .flatMap(new Function<BaseModel<List<String>>, ObservableSource<BaseModel<Pingjia>>>() {
                     @Override
-                    protected void onSucess(List<String> mSmallCourseTypes) {
-                        mItemAdapter.setNewData(mSmallCourseTypes);
+                    public ObservableSource<BaseModel<Pingjia>> apply(BaseModel<List<String>> mListBaseModel) throws Exception {
+                        if (mListBaseModel != null && mListBaseModel.data != null) {
+                            mStrings.addAll(mListBaseModel.data);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mItemAdapter.notifyDataSetChanged();
+
+                                }
+                            });
+                        }
+                        return Http.getDefault().getPingjia(id, UserManager.getInsatance().getUser().id);
+                    }
+                })
+                .as(RxHelper.<Pingjia>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<Pingjia>() {
+                    @Override
+                    protected void onSucess(Pingjia mPingjia) {
+
+                        mRbPingfen.setRating(mPingjia.score);
+                        for (String mS : mItemAdapter.getData()) {
+                            if (mS.equals(mPingjia.keyword)) {
+                                mItemAdapter.setSingleChoosed(mStrings.indexOf(mS));
+                                break;
+                            }
+                        }
+                        mEtContent.setText(mPingjia.praisedesc);
+
                     }
 
                     @Override
                     protected void onFail(String message) {
-
+                    showToast(message);
                     }
                 });
+
+//
+//        Http.getDefault().getPingjia(id, UserManager.getInsatance().getUser().id)
+//                .as(RxHelper.<Pingjia>handleResult(mContext))
+//                .subscribe(new ResponceSubscriber<Pingjia>() {
+//                    @Override
+//                    protected void onSucess(Pingjia mPingjia) {
+//
+//                        mRbPingfen.setRating(mPingjia.score);
+//                        for (String mS : mItemAdapter.getData()) {
+//                            if (mS.equals(mPingjia.keyword)) {
+//                                mItemAdapter.setSingleChoosed(mStrings.indexOf(mS));
+//                                break;
+//                            }
+//                        }
+//                        mEtContent.setText(mPingjia.praisedesc);
+//
+//                    }
+//
+//                    @Override
+//                    protected void onFail(String message) {
+//
+//                    }
+//                });
+
+
     }
 
     @Override
@@ -126,7 +180,7 @@ public class PingjiaActivity extends BaseActivity {
         mMap.put("courseid", id);
         mMap.put("userid", UserManager.getInsatance().getUser().id);
         mMap.put("tid", tid);
-        mMap.put("score",Integer.valueOf((int) mRbPingfen.getRating()));
+        mMap.put("score", Integer.valueOf((int) mRbPingfen.getRating()));
         mMap.put("keyword", mItemAdapter.getSingleSelectedItems());
         mMap.put("praisedesc", mEtContent.getText().toString());
 

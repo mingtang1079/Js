@@ -13,6 +13,7 @@ import com.appbaselib.common.ImageLoader;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
+import com.example.administrator.js.utils.TimeUtils;
 
 import java.util.List;
 
@@ -83,7 +84,7 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
                 TextView mTextViewTime = mView.findViewById(R.id.tv_time);
                 TextView mTextViewKeshi = mView.findViewById(R.id.tv_shengyukeshi);
                 TextView mTextViewPrice = mView.findViewById(R.id.tv_price);
-                mTextViewTime.setText(mOrderList.createDate);
+                mTextViewTime.setText(TimeUtils.getTime(mOrderList.createDate));
                 mTextViewKeshi.setText("(" + mOrderList.cuse + "/" + mOrderList.csum + ")");
                 mTextViewPrice.setText(mOrderList.cprice + "元");
                 mLinearLayout.addView(mView);

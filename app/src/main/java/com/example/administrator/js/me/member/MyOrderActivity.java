@@ -94,7 +94,7 @@ public class MyOrderActivity extends BaseActivity {
         mToolbar.setTitle("我的订单");
         mTab = (TabLayout) findViewById(R.id.tab);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
-        mViewpager.setOffscreenPageLimit(6);
+        mViewpager.setOffscreenPageLimit(7);
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), getFragments(), getTabTitle());
         mViewpager.setAdapter(mFragmentAdapter);
         mTab.setTabMode(TabLayout.MODE_SCROLLABLE);

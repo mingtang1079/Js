@@ -77,4 +77,5 @@ public class MyOrder implements Serializable {
     public String refundtype;
     public String refunddetail;
     public String tuikeTime;
+    public Integer refundmoney;
 }

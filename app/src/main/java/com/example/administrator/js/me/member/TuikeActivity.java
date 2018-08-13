@@ -47,6 +47,7 @@ public class TuikeActivity extends BaseActivity {
 
     @Autowired
     MyOrder mMyOrder;
+
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.iv_head)
@@ -157,9 +158,9 @@ public class TuikeActivity extends BaseActivity {
             mTvAge.setVisibility(View.GONE);
 
         }
-        int price = new BigDecimal(mOrder.crealprice / 100).divide(new BigDecimal(mOrder.csum), 0, BigDecimal.ROUND_UP).intValue();
-        mTvPrice.setText("￥ " + price);
-        mOrder.tuikePrice = String.valueOf(price);
+
+        BigDecimal mBigDecimal=new BigDecimal(mOrder.refundmoney);
+        mTvPrice.setText(mBigDecimal.divide(new BigDecimal(100)).doubleValue()+"元");
 
     }
 

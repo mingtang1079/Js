@@ -161,9 +161,9 @@
                         android:layout_width="100dp"
                         android:layout_height="4dp"
                         android:layout_marginTop="8dp"
-                        android:max="10"
+                        android:max="100"
                         android:layout_marginBottom="12dp"
-                        android:secondaryProgress="2"/>
+                        android:secondaryProgress="23"/>
                 </FrameLayout>
             </LinearLayout>
 

@@ -111,8 +111,8 @@ public class TuikeDetailActivity extends BaseActivity {
         mTvTime.setText("申请时间：" + mOrder.tuikeTime);
         mTvNumber.setText("订单号：" + mOrder.payno + "");
 
-        int price = new BigDecimal(mOrder.crealprice / 100).divide(new BigDecimal(mOrder.csum), 0, BigDecimal.ROUND_UP).intValue();
-        mTvTuikuanPrice.setText("￥ " + price);
+        BigDecimal mBigDecimal=new BigDecimal(mOrder.refundmoney);
+        mTvTuikuanPrice.setText(mBigDecimal.divide(new BigDecimal(100)).doubleValue()+"元");
 
     }
 }
