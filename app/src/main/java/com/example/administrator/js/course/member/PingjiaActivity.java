@@ -23,6 +23,7 @@ import com.example.administrator.js.activity.ItemAdapter;
 import com.example.administrator.js.activity.ItemDividerItemDecoration;
 import com.example.administrator.js.activity.ItemGridDividerItemDecoration;
 import com.example.administrator.js.exercise.model.SmallCourseType;
+import com.example.administrator.js.utils.StringUtils;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -84,7 +85,7 @@ public class PingjiaActivity extends BaseActivity {
         mItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mItemAdapter.setSingleChoosed(position);
+                mItemAdapter.switchSelectedState(position);
             }
         });
 
@@ -118,20 +119,28 @@ public class PingjiaActivity extends BaseActivity {
                     @Override
                     protected void onSucess(Pingjia mPingjia) {
 
-                        mRbPingfen.setRating(mPingjia.score);
-                        for (String mS : mItemAdapter.getData()) {
-                            if (mS.equals(mPingjia.keyword)) {
-                                mItemAdapter.setSingleChoosed(mStrings.indexOf(mS));
-                                break;
+                        if (mPingjia != null) {
+
+                            mRbPingfen.setRating(mPingjia.score);
+                            List<String> mRe=StringUtils.stringToList(mPingjia.keyword.toString());
+                            for (String mS : mItemAdapter.getData()) {
+
+                                for (String mS1:mRe)
+                                {
+                                    if (mS.equals(mS1)) {
+                                        mItemAdapter.switchSelectedState(mStrings.indexOf(mS));
+                                    }
+                                }
+
                             }
+                            mEtContent.setText(mPingjia.praisedesc);
                         }
-                        mEtContent.setText(mPingjia.praisedesc);
 
                     }
 
                     @Override
                     protected void onFail(String message) {
-                    showToast(message);
+                        showToast(message);
                     }
                 });
 
@@ -181,7 +190,10 @@ public class PingjiaActivity extends BaseActivity {
         mMap.put("userid", UserManager.getInsatance().getUser().id);
         mMap.put("tid", tid);
         mMap.put("score", Integer.valueOf((int) mRbPingfen.getRating()));
-        mMap.put("keyword", mItemAdapter.getSingleSelectedItems());
+        if (mItemAdapter.getSelectedItemCount() != 0) {
+            StringUtils.listToString(mItemAdapter.getSelectedItems());
+            mMap.put("keyword", StringUtils.listToString(mItemAdapter.getSelectedItems()));
+        }
         mMap.put("praisedesc", mEtContent.getText().toString());
 
         Http.getDefault().savePingjia(mMap)

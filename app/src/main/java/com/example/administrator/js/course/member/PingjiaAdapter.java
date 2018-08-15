@@ -18,7 +18,7 @@ public class PingjiaAdapter extends BaseRecyclerViewAdapter<String>{
     protected void convert(BaseViewHolder helper, String item) {
         helper.setText(R.id.tv_name, item);
         TextView mTextView = helper.getView(R.id.tv_name);
-        if (mSinglePosition == (helper.getLayoutPosition())) {
+        if (isSelected((helper.getAdapterPosition())) ) {
             mTextView.setSelected(true);
         } else {
             mTextView.setSelected(false);

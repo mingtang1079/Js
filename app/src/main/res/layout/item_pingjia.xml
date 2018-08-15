@@ -4,8 +4,8 @@
           style="@style/CustomRadioBtn3"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:background="@drawable/rb_solid_btn_selector"
+          android:background="@drawable/draw_pingjia_bg"
           android:maxLines="1"
           android:ellipsize="end"
-          android:textColor="@color/course_text"
+          android:textColor="@color/pingjia_text"
           android:text="拉伸" />

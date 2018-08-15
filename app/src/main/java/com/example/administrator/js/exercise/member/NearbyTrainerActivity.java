@@ -357,11 +357,11 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                     distance = 1 * 1000;
                 } else if (mItemAdapter1.mSinglePosition == 1) {
                     distance = 2 * 1000;
-                } else if (mItemAdapter1.mSinglePosition == 1) {
+                } else if (mItemAdapter1.mSinglePosition == 2) {
                     distance = 3 * 1000;
-                } else if (mItemAdapter1.mSinglePosition == 1) {
+                } else if (mItemAdapter1.mSinglePosition == 3) {
                     distance = 5 * 1000;
-                } else if (mItemAdapter1.mSinglePosition == 1) {
+                } else if (mItemAdapter1.mSinglePosition == 4) {
                     distance = 10 * 1000;
                 }
 
@@ -434,7 +434,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 if (position == 0) {
-                    distance = 0;
+                    orderby="";
                     mJuli.setText("距离");
                 } else if (position == 1) {
                     orderby = "a.distance";

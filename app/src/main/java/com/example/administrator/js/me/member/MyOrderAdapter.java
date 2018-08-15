@@ -98,7 +98,7 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
             helper.setText(R.id.tv_status, "已完成");
             mTextViewCancel.setVisibility(View.GONE);
             mTextViewPay.setVisibility(View.GONE);
-            if (!"体验课".equals(item.ctypename)) {
+            if (!"体验课".equals(item.ctypename)&&(item.cuse!=item.csum)) {
                 mTextViewTuikuan.setVisibility(View.VISIBLE);
             } else {
                 mTextViewTuikuan.setVisibility(View.GONE);
