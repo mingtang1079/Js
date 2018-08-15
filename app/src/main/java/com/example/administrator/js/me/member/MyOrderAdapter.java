@@ -38,7 +38,7 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         if (item.sex != null) {
             TextView mTextView = helper.getView(R.id.tv_age);
             helper.setVisible(R.id.tv_age, true);
-            if (item.age!=null) {
+            if (item.age != null) {
                 helper.setText(R.id.tv_age, item.age + "");
             }
             if (item.sex.equals("1")) {
@@ -62,15 +62,15 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         }
 
         //单价
-        helper.setText(R.id.tv_number,"订单号："+item.payno);
+        helper.setText(R.id.tv_number, "订单号：" + item.payno);
         helper.setText(R.id.tv_danjia, "￥ " + item.cprice / 100 + "");
         helper.setText(R.id.tv_course_count, "共" + item.csum + "节课  合计");
-        helper.setText(R.id.tv_count,"x"+item.csum);
+        helper.setText(R.id.tv_count, "x" + item.csum);
         helper.setText(R.id.tv_course_type, item.ctypename + "(" + item.coursetypenames + ")");
         helper.setText(R.id.tv_count, "x" + item.csum);
         BigDecimal a;
         BigDecimal b;
-        a = new BigDecimal(item.crealprice );
+        a = new BigDecimal(item.crealprice);
         b = new BigDecimal(100);
         helper.setText(R.id.tv_all_price, "￥ " + a.divide(b, 2, RoundingMode.HALF_UP).toString());
 
@@ -98,7 +98,12 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
             helper.setText(R.id.tv_status, "已完成");
             mTextViewCancel.setVisibility(View.GONE);
             mTextViewPay.setVisibility(View.GONE);
-            mTextViewTuikuan.setVisibility(View.VISIBLE);
+            if (!"体验课".equals(item.ctypename)) {
+                mTextViewTuikuan.setVisibility(View.VISIBLE);
+            } else {
+                mTextViewTuikuan.setVisibility(View.GONE);
+
+            }
             mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
 
 
