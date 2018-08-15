@@ -12,6 +12,10 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.constant.EventMessage;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * Created by tangming on 2018/6/25.
@@ -74,4 +78,9 @@ public class CourseHistoryOrderFragment extends BaseRefreshFragment<HistoryOrder
 
 
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.CourseListStatusChange mListStatusChange) {
+        refreshData(false);
+    }
+
 }

@@ -132,7 +132,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="四川-成都-武侯区" />
+                                    tools:text="已预约" />
 
                             </LinearLayout>
                         </LinearLayout>

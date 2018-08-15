@@ -37,15 +37,16 @@
                     android:drawablePadding="8dp"
                     android:text="上课地点"
                     android:textColor="#ff8996aa"
-                    android:textSize="12sp"/>
+                    android:textSize="13sp"/>
 
                 <TextView
                     android:id="@+id/tv_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
                     android:text="天府三街"
                     android:textColor="#4A576A"
-                    android:textSize="14sp"/>
+                    android:textSize="13sp"/>
             </LinearLayout>
 
             <LinearLayout

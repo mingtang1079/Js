@@ -204,10 +204,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="14dp"
                         android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:layout_marginTop="14dp"
                         android:drawableLeft="@drawable/icon_address"
                         android:drawablePadding="16dp"
-                        android:text="训练地址：成都是高新区"
+                        tools:text="训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区"
                         android:textColor="#4A576A"
                         android:textSize="14sp"/>
 

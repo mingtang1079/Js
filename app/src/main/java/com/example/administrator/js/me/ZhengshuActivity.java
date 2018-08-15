@@ -21,6 +21,7 @@ import com.example.administrator.js.activity.MutichoosePhotoActivity;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.model.Zizhi;
 import com.example.administrator.js.me.presenter.ZizhiPresenter;
+import com.example.administrator.js.utils.StringUtils;
 import com.example.administrator.js.utils.Utils;
 
 import java.io.File;
@@ -51,8 +52,6 @@ public class ZhengshuActivity extends MutichoosePhotoActivity implements ZizhiPr
     @Autowired
     VerifyUser mVerifyUser;
 
-    Uri sfzz;
-
     ZizhiPresenter mZizhiPresenter;
     MenuItem mMenuItem;
 
@@ -80,9 +79,7 @@ public class ZhengshuActivity extends MutichoosePhotoActivity implements ZizhiPr
         if (mVerifyUser != null) {
             if (!TextUtils.isEmpty(mVerifyUser.certpath)) {
 
-                String[] mStrings = mVerifyUser.certpath.split(",");
-                List<String> mList = Arrays.asList(mStrings);
-                mChoosePhotoAdapter.addData(mList);
+                mChoosePhotoAdapter.addData(StringUtils.stringToList(mVerifyUser.certpath));
 
 
             }
@@ -185,7 +182,7 @@ public class ZhengshuActivity extends MutichoosePhotoActivity implements ZizhiPr
                         return Http.getDefault().editZizhi(params);
                     }
                 })
-                .compose(RxHelper.<Zizhi>handleResult())
+                .as(RxHelper.<Zizhi>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<Zizhi>(mContext) {
                     @Override
                     protected void onSucess(Zizhi mS) {

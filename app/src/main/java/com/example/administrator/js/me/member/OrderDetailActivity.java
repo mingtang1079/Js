@@ -28,6 +28,8 @@ import com.example.administrator.js.course.member.ShangkeRecordActivity;
 import com.example.administrator.js.utils.BigBigDecimalUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -213,6 +215,7 @@ public class OrderDetailActivity extends BaseActivity {
             //成交时间
             mTvOrderChengjiaoTime.setVisibility(View.GONE);
             mLinearLayoutTuike.setVisibility(View.GONE);
+            mTextViewRecord.setVisibility(View.GONE);
         } else if ("b2".equals(mOrder.status)) {
             mTvOrderStatus.setText("待付款");
             mTvCancel.setVisibility(View.VISIBLE);
@@ -221,6 +224,7 @@ public class OrderDetailActivity extends BaseActivity {
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
             mTvOrderChengjiaoTime.setVisibility(View.GONE);
             mLinearLayoutTuike.setVisibility(View.GONE);
+            mTextViewRecord.setVisibility(View.GONE);
 
         } else if ("b3".equals(mOrder.status)) {
             mTvOrderStatus.setText("已完成");
@@ -339,5 +343,11 @@ public class OrderDetailActivity extends BaseActivity {
                     }
                 });
 
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.ListStatusChange mListStatusChange) {
+      finish();
     }
 }

@@ -14,8 +14,12 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.vipandtrainer.adapter.CourseUserAdapter;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,9 +72,7 @@ public class CourseTrainerFragment extends BaseRefreshFragment<CourseModel> {
 
         mMap.put("tid", UserManager.getInsatance().getUser().id);
         mMap.put("status", "1");
-        mMap.put("pageNo", "1");
-        mMap.put("starttime", "1");
-
+        mMap.put("pageNo", status);
 
         Http.getDefault().getCourse(mMap)
                 .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))
@@ -102,4 +104,14 @@ public class CourseTrainerFragment extends BaseRefreshFragment<CourseModel> {
 
 
     }
+
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.CourseListStatusChange mListStatusChange) {
+        refreshData(false);
+    }
+
 }

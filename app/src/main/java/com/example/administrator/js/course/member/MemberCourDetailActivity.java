@@ -437,7 +437,7 @@ public class MemberCourDetailActivity extends BaseActivity {
             @Override
             public void onClick(DialogInterface mDialogInterface, int mI) {
 
-                Http.getDefault().cancelCourse(mCourseDetail.id, UserManager.getInsatance().getUser().id, mTextInputEditText.getText().toString())
+                Http.getDefault().cancelCourse2(mCourseDetail.id, UserManager.getInsatance().getUser().id, mTextInputEditText.getText().toString())
                         .as(RxHelper.<String>handleResult(mContext))
                         .subscribe(new ResponceSubscriber<String>() {
                             @Override

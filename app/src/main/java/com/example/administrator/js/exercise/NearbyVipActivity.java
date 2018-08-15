@@ -188,9 +188,8 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
         mItems.add("1km");
         mItems.add("2km");
         mItems.add("3km");
-        mItems.add("4km");
         mItems.add("5km");
-        mItems.add("6km");
+        mItems.add("10km");
 
         BottomDialogUtils.showBottomDialog(mContext, mItems, new BaseQuickAdapter.OnItemClickListener() {
             @Override
@@ -200,7 +199,7 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
                     distance = 0;
                     mJuli.setText("距离");
                 } else {
-                    distance = position * 1000;
+                    distance = Integer.valueOf(mItems.get(position).replace("km","")) * 1000;
                     mJuli.setText(mItems.get(position));
 
                 }

@@ -2,6 +2,7 @@ package com.example.administrator.js;
 
 import com.appbaselib.network.AbstractRetrofitHelper;
 import com.example.administrator.js.interceptor.RongInterceptor;
+import com.example.administrator.js.interceptor.TokenEnableInterceptor;
 import com.example.administrator.js.interceptor.TokenInterceptor;
 
 import java.util.ArrayList;
@@ -38,7 +39,9 @@ public class Http extends AbstractRetrofitHelper<API> {
 
     @Override
     protected List<Interceptor> getCustomNetworkInterceptors() {
-        return null;
+        List<Interceptor> mInterceptors = new ArrayList<>();
+        mInterceptors.add(new TokenEnableInterceptor());
+        return mInterceptors;
     }
 
     @Override

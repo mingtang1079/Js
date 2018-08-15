@@ -278,7 +278,10 @@ public interface API {
     @POST(AUTHORIRY + "/course/cancel")
     Observable<BaseModel<String>> cancelCourse(@Field("id") String id, @Field("tid") String tid, @Field("cancelreason") String cancelreason);
 
-
+    //会员端用
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/course/cancel")
+    Observable<BaseModel<String>> cancelCourse2(@Field("id") String id, @Field("uid") String tid, @Field("cancelreason") String cancelreason);
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/invitelist")
     Observable<BaseModel<Tuijian>> getTuijian(@Field("id") String userid);

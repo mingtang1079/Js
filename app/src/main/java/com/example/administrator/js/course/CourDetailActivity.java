@@ -35,11 +35,14 @@ import com.example.administrator.js.BuildConfig;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.utils.Utils;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -190,7 +193,7 @@ public class CourDetailActivity extends BaseActivity {
         ImageLoader.load(mContext, mCourseDetail.img, mIvHead);
 
         mTvCourseType.setText(mCourseDetail.coursetypenames);
-        //  "status": "0", // 课程状态10已预约11进行中2已结束3已取消
+        //  "status": "0", // 课程状态10已预约11进行中2已结束3已取消  14,课程进展应该是 已预约,且11进行中状态,不应该出现取消预约按钮,
         if ("10".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.starttime);
             mTvProgress.setText("已预约");
@@ -198,10 +201,16 @@ public class CourDetailActivity extends BaseActivity {
         } else if ("11".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.starttime);
             mTvProgress.setText("进行中");
+            mTvYuyue.setVisibility(View.GONE);
 
         } else if ("2".equals(mCourseDetail.status)) {
             mTvCourseTime.setText(mCourseDetail.starttime + "-" + mCourseDetail.endtime);
             mTvProgress.setText("已结束");
+            mTvYuyue.setVisibility(View.GONE);
+
+        } else if ("14".equals(mCourseDetail.status)) {
+            mTvCourseTime.setText(mCourseDetail.starttime);
+            mTvProgress.setText("已预约");
             mTvYuyue.setVisibility(View.GONE);
 
         } else {
@@ -336,6 +345,8 @@ public class CourDetailActivity extends BaseActivity {
                         .subscribe(new ResponceSubscriber<String>() {
                             @Override
                             protected void onSucess(String mS) {
+
+                                EventBus.getDefault().post(new EventMessage.CourseListStatusChange());
                                 showToast("取消成功");
                                 finish();
                             }

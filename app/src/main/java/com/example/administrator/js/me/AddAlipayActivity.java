@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.utils.DialogUtils;
 import com.example.administrator.js.R;
@@ -19,7 +21,11 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import butterknife.BindView;
 import io.reactivex.functions.Consumer;
 
+@Route( path = "/me/AddAlipayActivity")
 public class AddAlipayActivity extends BaseActivity  implements UserPresenter.UserResponse {
+
+    @Autowired
+    String name;
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -67,6 +73,7 @@ public class AddAlipayActivity extends BaseActivity  implements UserPresenter.Us
                 }
             }
         });
+        mEditTextName.setText(name);
     }
 
     private void sure() {

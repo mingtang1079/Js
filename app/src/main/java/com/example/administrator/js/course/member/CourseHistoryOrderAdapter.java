@@ -13,8 +13,10 @@ import com.appbaselib.common.ImageLoader;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.R;
+import com.example.administrator.js.utils.BigBigDecimalUtils;
 import com.example.administrator.js.utils.TimeUtils;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -86,7 +88,7 @@ class CourseHistoryOrderAdapter extends BaseRecyclerViewAdapter<HistoryOrder> {
                 TextView mTextViewPrice = mView.findViewById(R.id.tv_price);
                 mTextViewTime.setText(TimeUtils.getTime(mOrderList.createDate));
                 mTextViewKeshi.setText("(" + mOrderList.cuse + "/" + mOrderList.csum + ")");
-                mTextViewPrice.setText(mOrderList.cprice + "元");
+                mTextViewPrice.setText(BigBigDecimalUtils.divide(new BigDecimal(mOrderList.crealprice), new BigDecimal(100)) + "元");
                 mLinearLayout.addView(mView);
                 mView.setOnClickListener(new View.OnClickListener() {
                     @Override
