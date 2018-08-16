@@ -102,6 +102,11 @@ public class OrderDetailActivity extends BaseActivity {
     @BindView(R.id.tv_tuikuan_price)
     TextView mTextViewTuikePrice;
 
+    @BindView(R.id.ll_pay_way)
+    LinearLayout mLinearLayoutPayWay;
+    @BindView(R.id.ll_time)
+    LinearLayout mLinearLayoutTime;
+
 
     @Override
     protected int getContentViewLayoutID() {
@@ -213,7 +218,9 @@ public class OrderDetailActivity extends BaseActivity {
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
             //成交时间
-            mTvOrderChengjiaoTime.setVisibility(View.GONE);
+            mLinearLayoutTime.setVisibility(View.GONE);
+            mLinearLayoutPayWay.setVisibility(View.GONE);
+
             mLinearLayoutTuike.setVisibility(View.GONE);
             mTextViewRecord.setVisibility(View.GONE);
         } else if ("b2".equals(mOrder.status)) {
@@ -222,7 +229,10 @@ public class OrderDetailActivity extends BaseActivity {
             mTvPay.setVisibility(View.VISIBLE);
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
-            mTvOrderChengjiaoTime.setVisibility(View.GONE);
+
+            mLinearLayoutTime.setVisibility(View.GONE);
+            mLinearLayoutPayWay.setVisibility(View.GONE);
+
             mLinearLayoutTuike.setVisibility(View.GONE);
             mTextViewRecord.setVisibility(View.GONE);
 
@@ -232,7 +242,10 @@ public class OrderDetailActivity extends BaseActivity {
             mTvPay.setVisibility(View.GONE);
             mTvTuikuan.setVisibility(View.VISIBLE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
-            mTvOrderChengjiaoTime.setVisibility(View.VISIBLE);
+
+            mLinearLayoutTime.setVisibility(View.VISIBLE);
+            mLinearLayoutPayWay.setVisibility(View.VISIBLE);
+
             mLinearLayoutTuike.setVisibility(View.GONE);
 
         } else if ("b55".equals(mOrder.status)) {
@@ -250,6 +263,8 @@ public class OrderDetailActivity extends BaseActivity {
             BigDecimal mBigDecimal=new BigDecimal(mOrder.refundmoney);
             mTextViewTuikePrice.setText(mBigDecimal.divide(new BigDecimal(100)).doubleValue()+"");
 
+            mLinearLayoutTime.setVisibility(View.VISIBLE);
+            mLinearLayoutPayWay.setVisibility(View.VISIBLE);
 
         } else if ("b56".equals(mOrder.status)) {
             mTvOrderStatus.setText("已退款");
@@ -259,12 +274,16 @@ public class OrderDetailActivity extends BaseActivity {
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
             mLinearLayoutTuike.setVisibility(View.VISIBLE);
 
+            mLinearLayoutTime.setVisibility(View.VISIBLE);
+            mLinearLayoutPayWay.setVisibility(View.VISIBLE);
+
         } else {
             mTvCancel.setVisibility(View.GONE);
             mTvPay.setVisibility(View.GONE);
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
-            mTvOrderChengjiaoTime.setVisibility(View.GONE);
+            mLinearLayoutTime.setVisibility(View.GONE);
+            mLinearLayoutPayWay.setVisibility(View.GONE);
             mLinearLayoutTuike.setVisibility(View.GONE);
         }
 
