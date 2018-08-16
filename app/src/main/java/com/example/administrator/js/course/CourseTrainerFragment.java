@@ -68,11 +68,11 @@ public class CourseTrainerFragment extends BaseRefreshFragment<CourseModel> {
     @Override
     public void requestData() {
 
-        Map<String, String> mMap = new HashMap<>();
+        Map<String, Object> mMap = new HashMap<>();
 
         mMap.put("tid", UserManager.getInsatance().getUser().id);
-        mMap.put("status", "1");
-        mMap.put("pageNo", status);
+        mMap.put("status", status);
+        mMap.put("pageNo", pageNo);
 
         Http.getDefault().getCourse(mMap)
                 .as(RxHelper.<WrapperModel<CourseModel>>handleResult(mContext))

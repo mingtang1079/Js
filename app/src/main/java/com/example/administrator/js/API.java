@@ -231,7 +231,7 @@ public interface API {
      */
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")
-    Observable<BaseModel<WrapperModel<CourseModel>>> getCourse(@FieldMap Map<String, String> mMap);
+    Observable<BaseModel<WrapperModel<CourseModel>>> getCourse(@FieldMap Map<String, Object> mMap);
 
     @FormUrlEncoded
     @POST(AUTHORIRY + "/course/list")

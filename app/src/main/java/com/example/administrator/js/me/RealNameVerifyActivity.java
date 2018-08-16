@@ -116,7 +116,8 @@ public class RealNameVerifyActivity extends BaseActivity {
         Observable.combineLatest(mObservablePhone, mCharSequenceObservablePassword, new BiFunction<CharSequence, CharSequence, Boolean>() {
             @Override
             public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2) throws Exception {
-                return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2);
+
+                return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2)&& (mCharSequence2.length() == 15||mCharSequence2.length() == 18);
             }
         }).subscribe(new Consumer<Boolean>() {
             @Override
