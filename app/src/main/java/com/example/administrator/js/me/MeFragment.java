@@ -103,7 +103,8 @@ public class MeFragment extends BaseFragment {
                     protected void onSucess(User mUser) {
 
                         if (mUser != null) {
-                            MeFragment.this.mUser = mUser;
+                            PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
+
                             if (!TextUtils.isEmpty(mUser.provestatus)) {
                                 if ("1".equals(mUser.provestatus)) {
                                     mTextViewVerify.setText("已认证");
@@ -152,6 +153,7 @@ public class MeFragment extends BaseFragment {
         requestData();
     }
 
+    //申请退押金
     private void requestTuiYajin() {
 
 
@@ -161,9 +163,9 @@ public class MeFragment extends BaseFragment {
                     @Override
                     protected void onSucess(String mS) {
 
+                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
                         mUser.depositstatus = mS;
                         setUser();
-                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
 
 
                         if ("0".equals(mS)) {
@@ -305,10 +307,10 @@ public class MeFragment extends BaseFragment {
                     if (mUser.provestatus.equals("1") &&! mUser.teachstatus.equals("3")) {
                         start(ZizhiActivity.class);
                     } else {
-                        if (!mUser.provestatus.equals("3")) {
+                        if (!mUser.provestatus.equals("1")) {
                             showToast("请先完成实名认证");
-                        } else if (mUser.provestatus.equals("3")) {
-                            showToast("实名审核中，请耐心等待");
+                        } else if (mUser.teachstatus.equals("3")) {
+                            showToast("教学资质审核中，请耐心等待");
 
                         }
                     }

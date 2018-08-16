@@ -63,7 +63,6 @@ public class RegisterFragment extends BaseFragment {
     public String sex;
 
 
-
     @Override
     protected int getContentViewLayoutID() {
         return R.layout.fragment_register;
@@ -79,6 +78,14 @@ public class RegisterFragment extends BaseFragment {
         Observable.combineLatest(mObservablePhone, mCharSequenceObservablePassword, mObservableYzm, new Function3<CharSequence, CharSequence, CharSequence, Boolean>() {
             @Override
             public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2, CharSequence mCharSequence3) throws Exception {
+
+                if (!TextUtils.isEmpty(mCharSequence) && mCharSequence.length() == 11) {
+                    mBtYzm.setEnabled(true);
+                } else {
+                    mBtYzm.setEnabled(false);
+
+                }
+
                 return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2) && !TextUtils.isEmpty(mCharSequence3);
             }
         }).subscribe(new Consumer<Boolean>() {
@@ -134,7 +141,7 @@ public class RegisterFragment extends BaseFragment {
     private void register() {
 
         Http.getDefault().register(TextUtils.isEmpty(openId) ? "0" : "1", openId,
-                mTvPhone.getText().toString(), mEdYzm.getText().toString(), role, mPassword.getText().toString(),nickname,img,sex)
+                mTvPhone.getText().toString(), mEdYzm.getText().toString(), role, mPassword.getText().toString(), nickname, img, sex)
                 .as(RxHelper.<User>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<User>(mContext) {
                     @Override

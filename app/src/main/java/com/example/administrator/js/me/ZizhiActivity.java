@@ -89,12 +89,33 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
             @Override
             public boolean onMenuItemClick(MenuItem mMenuItem) {
 
+                //必须有四个值，时间，擅长哪个，资助证书，形象照
+
                 isFinish = true;
                 mZizhiPresenter.updateZizhi("teachstatus", "3");
 
                 return true;
             }
         });
+
+
+    }
+
+    private void panDuanButton() {
+
+        if (mVerifyUser==null)
+        {
+            mMenuItem.setEnabled(false);
+            return;
+        }
+
+        if (!TextUtils.isEmpty(mVerifyUser.workdate)&&!TextUtils.isEmpty(mVerifyUser.skillname)&&!TextUtils.isEmpty(mVerifyUser.certpath)&&!TextUtils.isEmpty(mVerifyUser.photopath))
+        {
+            mMenuItem.setEnabled(true);
+        }else {
+            mMenuItem.setEnabled(false);
+
+        }
     }
 
     @Override
@@ -137,6 +158,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
                         ZizhiActivity.this.mVerifyUser = mVerifyUser;
                         setData();
                         toggleShowLoading(false);
+                        panDuanButton();
                     }
 
                     @Override
