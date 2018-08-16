@@ -10,8 +10,8 @@ public class Constans {
     public static final String ORDERID = "order_id";
     public static final String TOKEN = "token";
     public static String rongyunUrl = "http://api.cn.ronghub.com/user/getToken.json";
-    public static String rongAppKey = "pgyu6atqpezeu";
-    public static String rongAppScrect = "Z7TvAx70vkQDu";
+    public static String rongAppKey = "0vnjpoad06u6z";
+    public static String rongAppScrect = "AYGUlxRNLPUr";
     public static String weixin = "wx4f356883cc9ad92a";
 
     //新浪微博

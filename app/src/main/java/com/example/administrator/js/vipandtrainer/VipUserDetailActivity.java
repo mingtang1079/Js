@@ -259,9 +259,17 @@ public class VipUserDetailActivity extends BaseActivity {
 //黑名单不显示
                 mTvDazhaohu.setVisibility(View.GONE);
                 mViewLine.setVisibility(View.GONE);
-            } else {
+            } else if (mUserDetail.relation.status.equals("1")){
                 mTvGuanzhu.setVisibility(View.VISIBLE);
                 mMenuItem.setTitle("加入黑名单");
+                mTvGuanzhu.setText("取消关注");
+                mTvDazhaohu.setVisibility(View.VISIBLE);
+            }
+            else {
+                //status==0
+                mTvGuanzhu.setVisibility(View.VISIBLE);
+                mMenuItem.setTitle("加入黑名单");
+                mTvGuanzhu.setText("关注");
                 mTvDazhaohu.setVisibility(View.VISIBLE);
             }
             //已接单不能拉黑
