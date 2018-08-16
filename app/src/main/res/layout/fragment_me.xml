@@ -163,7 +163,7 @@
                         android:layout_marginTop="8dp"
                         android:max="100"
                         android:layout_marginBottom="12dp"
-                        android:secondaryProgress="23"/>
+                        tools:secondaryProgress="23"/>
                 </FrameLayout>
             </LinearLayout>
 
