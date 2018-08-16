@@ -3,3 +3,8 @@ include ':baselibrary'
 project(':baselibrary').projectDir=new File('../CommonLibrary/baselibrary')
 include ':photopicker'
 project(':photopicker').projectDir=new File('../CommonLibrary/photopicker')
+include ':adressselectorlib'
+project(':adressselectorlib').projectDir=new File('../CommonLibrary/adressselectorlib')
+//include':IMKit'
+//include':IMLib'
+

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.administrator.test.com.example.administrator.js.activity.MainActivity">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -18,8 +16,7 @@
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            />
+            android:layout_weight="1" />
 
         <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
             android:id="@+id/bnve"
@@ -29,7 +26,7 @@
             android:background="@android:color/white"
             app:itemIconTint="@color/selector_item_primary_color"
             app:itemTextColor="@color/selector_item_primary_color"
-            app:menu="@menu/main_menu_navigation"/>
+            app:menu="@menu/main_menu_navigation" />
 
     </LinearLayout>
 
@@ -39,5 +36,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="4dp"
-        android:src="@drawable/icon_main_add"/>
+        android:src="@drawable/icon_main_add" />
 </FrameLayout>

@@ -7,7 +7,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.app.BaseApplication;
 import com.appbaselib.utils.SystemUtils;
 import com.example.core.model.User;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -31,28 +30,9 @@ public class App extends BaseApplication {
     public void onCreate() {
         super.onCreate();
         initOkHttp();
-        initBugly();
         initRouter();
     }
 
-    private void initBugly() {
-        Context context = getApplicationContext();
-        // 获取当前包名
-        String packageName = context.getPackageName();
-        String processName = SystemUtils.getProcessName(android.os.Process.myPid());
-        // 设置是否为上报进程
-        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
-        strategy.setUploadProcess(processName == null || processName.equals(packageName));
-        // 初始化Bugly
-        boolean isDebug = BuildConfig.DEBUG;
-        /**
-         * 配置Bugly,第三个参数为SDK调试模式开关，调试模式的行为特性如下：
-         * 输出详细的Bugly SDK的Log；
-         * 每一条Crash都会被立即上报；
-         * 自定义日志将会在Logcat中输出。
-         * 建议在测试阶段建议设置成true，发布时设置为false */
-        CrashReport.initCrashReport(context, buglyAppId(), isDebug, strategy);
-    }
 
     protected String buglyAppId() {
         return "";
