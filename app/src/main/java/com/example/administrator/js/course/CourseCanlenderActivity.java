@@ -95,8 +95,8 @@ public class CourseCanlenderActivity extends BaseActivity {
         //这里用线性显示 类似于listview
         mList.setLayoutManager(new LinearLayoutManager(this));
         mMyDateAdapter = new MyDateAdapter();
-        View mView = getLayoutInflater().inflate(R.layout.view_empty, mList, false);
-        mMyDateAdapter.setEmptyView(mView);
+      //  View mView = getLayoutInflater().inflate(R.layout.view_empty, mList, false);
+     //   mMyDateAdapter.setEmptyView(mView);
         mMyDateAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {

@@ -88,10 +88,10 @@ public class TuikeDetailActivity extends BaseActivity {
     private void setData(MyOrder mOrder) {
         ImageLoader.load(mContext, mOrder.img, mIvHead);
         mTvName.setText(mOrder.nickname);
-        mTvId.setText("ID" + mOrder.no + "");
+        mTvId.setText("ID：" + mOrder.no + "");
         //年龄
         if (mOrder.age != null && mOrder.sex != null) {
-            mTvAge.setText(mOrder.age + "");
+            mTvAge.setText(" "+mOrder.age);
             if (mOrder.sex.equals("1")) {
                 //男性
                 mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));

@@ -15,8 +15,7 @@ public class StringUtils {
         }
     }
 
-    public static  String listToString(List<String> mStrings)
-    {
+    public static String listToString(List<String> mStrings) {
         StringBuilder mStringBuilder = new StringBuilder();
         for (int i = 0, nsize = mStrings.size(); i < nsize; i++) {
             String value = mStrings.get(i);
@@ -26,6 +25,14 @@ public class StringUtils {
                 mStringBuilder.append("," + value);
             }
         }
-        return  mStringBuilder.toString();
+        return mStringBuilder.toString();
     }
+
+    public static String getString(String mS) {
+        if (!TextUtils.isEmpty(mS))
+            return mS;
+        else
+            return "";
+    }
+
 }

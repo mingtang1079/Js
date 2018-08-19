@@ -451,4 +451,8 @@ public interface API {
     @FormUrlEncoded
     @POST(AUTHORIRY + "/user/get")
     Observable<BaseModel<User>> getUserInfo(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST(AUTHORIRY + "/user/unbindwechat")
+    Observable<BaseModel<String>> unbindwechat(@Field("id") String id);
 }

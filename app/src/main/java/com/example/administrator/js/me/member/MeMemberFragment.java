@@ -86,7 +86,7 @@ public class MeMemberFragment extends BaseFragment {
                 mTextViewAge.setVisibility(View.VISIBLE);
 
                 if (mUser.age != null ) {
-                    mTextViewAge.setText(mUser.age + "");
+                    mTextViewAge.setText(" "+mUser.age);
                 }
                 if (mUser.sex.equals("1")) {
                     //男性
@@ -115,7 +115,7 @@ public class MeMemberFragment extends BaseFragment {
 
     BottomSheetDialog mBottomSheetDialog;
 
-    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.rl, R.id.tv_id,
+    @OnClick({R.id.ll_barcode, R.id.iv_add, R.id.iv_mes, R.id.iv_setting, R.id.iv_head, R.id.tv_id,
             R.id.my_order, R.id.ll_share, R.id.ll_my_collection,
             R.id.shenti_shuju, R.id.ll_xuqiu, R.id.ll_about, R.id.ll_fankui ,R.id.ll_personal,})
     public void onViewClicked(View view) {
@@ -145,10 +145,12 @@ public class MeMemberFragment extends BaseFragment {
 
                 start(SettingActivity.class);
                 break;
-            case R.id.rl:
+            case R.id.iv_head:
 
-                ARouter.getInstance().build("/me/UserInfoActivity")
+                ARouter.getInstance().build("/activity/LookBigImageActivity")
+                        .withString("url",mUser.img)
                         .navigation();
+
                 break;
             case R.id.tv_id:
 

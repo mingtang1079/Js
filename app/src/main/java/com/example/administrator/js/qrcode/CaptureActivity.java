@@ -253,11 +253,21 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
 
         BarcodeModel mBarcodeModel = JsonUtil.fromJson(result, BarcodeModel.class);
         if (mBarcodeModel != null) {
-            ARouter.getInstance().build("/vip/VipUserDetailActivity")
-                    .withString("id", mBarcodeModel.id)
-                    .navigation(mContext);
+
+            if ("1".equals(mBarcodeModel.type)) {
+                ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                        .withString("id", mBarcodeModel.id)
+                        .navigation(mContext);
+            }
+            else {
+                ARouter.getInstance().build("/vipandtrainer/TrainerDetailActivity")
+                        .withString("id",mBarcodeModel.id)
+                        .navigation(mContext);
+            }
             finish();
         }
+
+
     }
 
     public int numberOfStr(String str, String con) {

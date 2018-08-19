@@ -1,6 +1,7 @@
 package com.example.administrator.js.course.member;
 
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,9 +25,11 @@ import com.example.administrator.js.activity.ItemDividerItemDecoration;
 import com.example.administrator.js.activity.ItemGridDividerItemDecoration;
 import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.example.administrator.js.utils.StringUtils;
+import com.google.android.flexbox.AlignItems;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
 import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
@@ -58,13 +61,13 @@ public class PingjiaActivity extends BaseActivity {
     @BindView(R.id.recyclerview)
     RecyclerView mRecyclerview;
     @BindView(R.id.rb_pingfen)
-    RatingBar mRbPingfen;
+    AppCompatRatingBar mRbPingfen;
     @BindView(R.id.btn_sure)
     Button mBtnSure;
 
     List<String> mStrings = new ArrayList<>();
     PingjiaAdapter mItemAdapter;
-    GridLayoutManager mFlexboxLayoutManager;
+    FlexboxLayoutManager mFlexboxLayoutManager;
 
     @Override
     public Toolbar getToolbar() {
@@ -78,7 +81,11 @@ public class PingjiaActivity extends BaseActivity {
         mToolbar.setTitle("评价");
 
         mItemAdapter = new PingjiaAdapter(R.layout.item_pingjia, mStrings);
-        mFlexboxLayoutManager = new GridLayoutManager(mContext, 3);
+        mFlexboxLayoutManager = new FlexboxLayoutManager(mContext);
+        mFlexboxLayoutManager.setFlexWrap(FlexWrap.WRAP);
+        mFlexboxLayoutManager.setFlexDirection(FlexDirection.ROW);
+        mFlexboxLayoutManager.setAlignItems(AlignItems.STRETCH);
+        mFlexboxLayoutManager.setJustifyContent(JustifyContent.FLEX_START);
         mRecyclerview.setLayoutManager(mFlexboxLayoutManager);
         mRecyclerview.addItemDecoration(new ItemGridDividerItemDecoration());
         mRecyclerview.setAdapter(mItemAdapter);
@@ -122,11 +129,10 @@ public class PingjiaActivity extends BaseActivity {
                         if (mPingjia != null) {
 
                             mRbPingfen.setRating(mPingjia.score);
-                            List<String> mRe=StringUtils.stringToList(mPingjia.keyword.toString());
+                            List<String> mRe = StringUtils.stringToList(mPingjia.keyword.toString());
                             for (String mS : mItemAdapter.getData()) {
 
-                                for (String mS1:mRe)
-                                {
+                                for (String mS1 : mRe) {
                                     if (mS.equals(mS1)) {
                                         mItemAdapter.switchSelectedState(mStrings.indexOf(mS));
                                     }

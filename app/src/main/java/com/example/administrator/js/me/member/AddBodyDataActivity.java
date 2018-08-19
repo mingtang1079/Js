@@ -65,8 +65,8 @@ public class AddBodyDataActivity extends BaseActivity {
     @BindView(R.id.tv_weidu)
     TextView mTvWeidu;
 
-    @BindView(R.id.et_zhifang)
-    EditText mEtZhifang;
+    //    @BindView(R.id.et_zhifang)
+//    EditText mEtZhifang;
     @BindView(R.id.et_bodyzhishu)
     TextView mEtZhishu;
 
@@ -139,7 +139,7 @@ public class AddBodyDataActivity extends BaseActivity {
 
                 ARouter.getInstance().build("/member/AddWeiduActivity")
                         .withObject("mBodyData", mBodyData)
-                        .navigation((Activity) mContext,20);
+                        .navigation((Activity) mContext, 20);
                 break;
             case R.id.btn_sure:
 
@@ -148,11 +148,20 @@ public class AddBodyDataActivity extends BaseActivity {
                 break;
             case R.id.ll_time:
 
-                DatePickerDialogUtils.getDefaultDatePickerDialog(mContext, new OnDateSelectedListener() {
+                DatePickerDialogUtils.getDefaultDatePickerDialog5(mContext, new OnDateSelectedListener() {
                     @Override
                     public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
-                        date = mCalendarData.getTime();
-                        mTvTime.setText(date);
+                        long selectedTime = DateUtils.getLongTime(mCalendarData.getTimeWithHms());
+                        if (selectedTime>DateUtils.getCurrentTime())
+                        {
+                            showToast("选择的时间不能大于当前时间");
+                        }
+                        else {
+                            date = mCalendarData.getTimeWithHms();
+                            mTvTime.setText(date);
+
+                        }
+
                     }
                 }).show();
 
@@ -191,10 +200,10 @@ public class AddBodyDataActivity extends BaseActivity {
 
         }
 
-        if (!TextUtils.isEmpty(mEtZhifang.getText().toString())) {
-            mStringStringMap.put("visceralfat", mEtZhifang.getText().toString());
-
-        }
+//        if (!TextUtils.isEmpty(mEtZhifang.getText().toString())) {
+//            mStringStringMap.put("visceralfat", mEtZhifang.getText().toString());
+//
+//        }
         if (!TextUtils.isEmpty(mEtZhishu.getText().toString())) {
             mStringStringMap.put("bmi", mEtZhishu.getText().toString());
 
@@ -248,9 +257,8 @@ public class AddBodyDataActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==20&&resultCode==Activity.RESULT_OK)
-        {
-            mBodyData= (BodyData) data.getSerializableExtra("data");
+        if (requestCode == 20 && resultCode == Activity.RESULT_OK) {
+            mBodyData = (BodyData) data.getSerializableExtra("data");
         }
     }
 }

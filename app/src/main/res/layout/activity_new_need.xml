@@ -124,7 +124,7 @@
                             android:paddingLeft="8dp"
                             android:paddingRight="8dp"
                             android:paddingTop="4dp"
-                            android:text="12"
+                            android:text="1"
                             android:textSize="14sp" />
 
                         <TextView

@@ -30,6 +30,7 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.ChooseLocationActivity;
+import com.example.administrator.js.base.model.Location;
 import com.example.administrator.js.me.model.Collection;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.utils.StringUtils;
@@ -105,9 +106,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
 
     BigCourse mBigCourse;//选中的大课
     private String bigType;
-    private String address;
-    private String lon;
-    private String lat;
+    Location mLocation;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -237,6 +236,13 @@ public class BuySiJiaoKeActivity extends BaseActivity {
 
                             }
                             setUserData(mCourseTypes.teacher);
+                            //续课地址
+                            if (mCourseTypes.location != null) {
+                                mTvAddress.setText(mCourseTypes.location.address);
+                                mLocation = mCourseTypes.location;
+                            } else {
+                                mLocation = new Location();
+                            }
                         }
                         toggleShowLoading(false);
                     }
@@ -258,7 +264,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
             //年龄
             if (mUser.sex != null) {
                 if (mUser.age != null) {
-                    mTvAge.setText(mUser.age + "");
+                    mTvAge.setText(" " + mUser.age);
                 }
                 if (mUser.sex.equals("1")) {
                     //男性
@@ -329,7 +335,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
         }
         String mS = StringUtils.listToString(mStrings);
 
-        Http.getDefault().studentsave(id, cardid, UserManager.getInsatance().getUser().id, mBigCourse.id, mS, mEtCount.getText().toString(), address, lon, lat)
+        Http.getDefault().studentsave(id, cardid, UserManager.getInsatance().getUser().id, mBigCourse.id, mS, mEtCount.getText().toString(), mLocation.address, mLocation.clongtitude, mLocation.clatitude)
                 .as(RxHelper.<String>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override
@@ -387,10 +393,10 @@ public class BuySiJiaoKeActivity extends BaseActivity {
             //经纬度
             if (data != null) {
                 PoiItem mPoiItem = (PoiItem) data.getParcelableExtra("data");
-                lon = String.valueOf(mPoiItem.getLatLonPoint().getLongitude());
-                lat = String.valueOf(mPoiItem.getLatLonPoint().getLatitude());
-                address = mPoiItem.getSnippet() + mPoiItem.getTitle();
-                mTvAddress.setText(address);
+                mLocation.clongtitude = String.valueOf(mPoiItem.getLatLonPoint().getLongitude());
+                mLocation.clatitude = String.valueOf(mPoiItem.getLatLonPoint().getLatitude());
+                mLocation.address = mPoiItem.getSnippet() + mPoiItem.getTitle();
+                mTvAddress.setText(mLocation.address);
             }
         }
 

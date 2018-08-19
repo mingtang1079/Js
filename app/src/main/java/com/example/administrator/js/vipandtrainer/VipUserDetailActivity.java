@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseModel;
 import com.appbaselib.common.ImageLoader;
@@ -23,10 +24,14 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.me.model.UserDetail;
+import com.example.administrator.js.utils.StringUtils;
 import com.example.administrator.js.vipandtrainer.adapter.UserdetailImageAdapter;
 import com.foamtrace.photopicker.intent.PhotoPreviewIntent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -192,10 +197,10 @@ public class VipUserDetailActivity extends BaseActivity {
             mIvYuyue.setImageResource(R.drawable.icon_xingxing);
 
         }
-        mTvId.setText("ID："+mUser.no + "");
+        mTvId.setText("ID：" + mUser.no + "");
         ImageLoader.load(mContext, mUser.img, mIvHead);
         //年龄
-        if (mUser.sex.equals("0")) {
+        if (!TextUtils.isEmpty(mUser.sex)) {
 
             if (mUser.age != null) {
                 mTvAge.setText(mUser.age + "");
@@ -227,14 +232,13 @@ public class VipUserDetailActivity extends BaseActivity {
             if (!TextUtils.isEmpty(mUserDetail.need.detailimg)) {
                 String[] mStrings = mUserDetail.need.detailimg.split(",");
                 final ArrayList<String> mList = new ArrayList<>(mStrings.length);
-                for (String m:mStrings)
-                {
+                for (String m : mStrings) {
                     mList.add(m);
                 }
                 LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(mContext);
                 mLinearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 mRecyclerView.setLayoutManager(mLinearLayoutManager);
-                UserdetailImageAdapter mUserdetailImageAdapter=new UserdetailImageAdapter(R.layout.item_user_detail_image, mList);
+                UserdetailImageAdapter mUserdetailImageAdapter = new UserdetailImageAdapter(R.layout.item_user_detail_image, mList);
                 mRecyclerView.setAdapter(mUserdetailImageAdapter);
                 mUserdetailImageAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
@@ -259,13 +263,12 @@ public class VipUserDetailActivity extends BaseActivity {
 //黑名单不显示
                 mTvDazhaohu.setVisibility(View.GONE);
                 mViewLine.setVisibility(View.GONE);
-            } else if (mUserDetail.relation.status.equals("1")){
+            } else if (mUserDetail.relation.status.equals("1")) {
                 mTvGuanzhu.setVisibility(View.VISIBLE);
                 mMenuItem.setTitle("加入黑名单");
                 mTvGuanzhu.setText("取消关注");
                 mTvDazhaohu.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 //status==0
                 mTvGuanzhu.setVisibility(View.VISIBLE);
                 mMenuItem.setTitle("加入黑名单");
@@ -289,12 +292,12 @@ public class VipUserDetailActivity extends BaseActivity {
         //身体数据
 
         if (mUserDetail.bodydata != null) {
-            mTvTizhong.setText(mUserDetail.bodydata.weight + "");
-            mTvShengao.setText(mUserDetail.bodydata.height + "");
-            mTvDaixie.setText(mUserDetail.bodydata.bmr + "");
-            mTvZhibiao.setText(mUserDetail.bodydata.bmi + "");
-            mTvTizhi.setText(mUserDetail.bodydata.fat + "");
-            mTvNeizang.setText(mUserDetail.bodydata.visceralfat);
+            mTvTizhong.setText(StringUtils.getString(mUserDetail.bodydata.weight) + "");
+            mTvShengao.setText(StringUtils.getString(mUserDetail.bodydata.height) + "");
+            mTvDaixie.setText(StringUtils.getString(mUserDetail.bodydata.bmr) + "");
+            mTvZhibiao.setText(StringUtils.getString(mUserDetail.bodydata.bmi) + "");
+            mTvTizhi.setText(StringUtils.getString(mUserDetail.bodydata.fat) + "");
+            mTvNeizang.setText(StringUtils.getString(mUserDetail.bodydata.visceralfat));
 //            StringBuilder mStringBuilder = new StringBuilder();
 //            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiong))
 //                mStringBuilder.append("胸：" + mUserDetail.bodydata.wdxiong);
@@ -321,7 +324,7 @@ public class VipUserDetailActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.tv_dazhaohu, R.id.tv_guanzhu})
+    @OnClick({R.id.tv_dazhaohu, R.id.tv_guanzhu, R.id.iv_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_dazhaohu:
@@ -343,6 +346,13 @@ public class VipUserDetailActivity extends BaseActivity {
 
                 }
                 break;
+            case R.id.iv_head:
+
+                ARouter.getInstance().build("/activity/LookBigImageActivity")
+                        .withString("url", mUserDetail.userinfo.img)
+                        .navigation();
+
+                break;
         }
     }
 
@@ -358,6 +368,7 @@ public class VipUserDetailActivity extends BaseActivity {
                         }
                         mUserDetail.relation.status = mS;
                         setData(mUserDetail);
+                        EventBus.getDefault().post(new EventMessage.RelationStatusChangge());
 
                     }
 

@@ -146,6 +146,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                 mTextViewBirthday.setText(TimeUtils.getTime(mUser.birthdate));
             if (!TextUtils.isEmpty(mUser.openid)) {
                 mTvWeixin.setText("已绑定");
+                mTvWeixin.setText(mUser.wxnickname);
             } else {
                 mTvWeixin.setText("未绑定");
 
@@ -154,13 +155,23 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
     }
 
     @OnClick({R.id.ll_head, R.id.ll_nick, R.id.ll_sex, R.id.ll_area,
-            R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit, R.id.ll_zhifubao, R.id.ll_birthday})
+            R.id.ll_barcode, R.id.ll_weixin, R.id.ll_phone, R.id.ll_password, R.id.tv_exit, R.id.ll_zhifubao,
+            R.id.iv_head,
+            R.id.ll_birthday})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.iv_head:
+
+                ARouter.getInstance().build("/me/ChangeUserHeadActivity")
+                        .withString("name", mTvUserName.getText().toString())
+                        .navigation();
+                break;
+
             case R.id.ll_head:
 
                 ARouter.getInstance().build("/me/ChangeUserHeadActivity")
                         .withString("name", mTvUserName.getText().toString())
+                        .withBoolean("isStart", true)
                         .navigation();
 
                 break;
@@ -198,18 +209,39 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                 break;
             case R.id.ll_weixin:
 
-                if ("已绑定".equals(mTvWeixin.getText().toString())) {
-                    return;
-                }
-                if (!App.mInstance.api.isWXAppInstalled()) {
-                    showToast("请安装微信");
-                } else {
-                    final SendAuth.Req req = new SendAuth.Req();
-                    req.scope = "snsapi_userinfo";
-                    req.state = "wechat_sdk_demo_test";
-                    App.mInstance.api.sendReq(req);
-                }
+                if (!"未绑定".equals(mTvWeixin.getText().toString())) {
+                    DialogUtils.getDefaultDialog(mContext, "提示", "确定解除绑定吗？", "确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface mDialogInterface, int mI) {
 
+                            Http.getDefault().unbindwechat(UserManager.getInsatance().getUser().id)
+                                    .as(RxHelper.<String>handleResult(mContext))
+                                    .subscribe(new ResponceSubscriber<String>(mContext) {
+                                        @Override
+                                        protected void onSucess(String mS) {
+                                            mTvWeixin.setText("未绑定");
+                                        }
+
+                                        @Override
+                                        protected void onFail(String message) {
+                                            showToast(message);
+                                        }
+                                    });
+                        }
+                    }).show();
+
+                } else {
+
+                    if (!App.mInstance.api.isWXAppInstalled()) {
+                        showToast("请安装微信");
+                    } else {
+                        final SendAuth.Req req = new SendAuth.Req();
+                        req.scope = "snsapi_userinfo";
+                        req.state = "wechat_sdk_demo_test";
+                        App.mInstance.api.sendReq(req);
+                    }
+
+                }
 
                 break;
             case R.id.ll_phone:
@@ -222,7 +254,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
             case R.id.ll_zhifubao:
 
                 ARouter.getInstance().build("/me/AddAlipayActivity")
-                        .withString("name",  mTextViewZhifubao.getText().toString())
+                        .withString("name", mTextViewZhifubao.getText().toString())
                         .navigation();
                 break;
             case R.id.tv_exit:
@@ -289,11 +321,12 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                     @Override
                     protected void onSucess(User mUser) {
                         mTvWeixin.setText("已绑定");
+                        mTvWeixin.setText(mUser.wxnickname);
                     }
 
                     @Override
                     protected void onFail(String message) {
-
+                        showToast(message);
                     }
                 });
 

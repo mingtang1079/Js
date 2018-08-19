@@ -86,19 +86,19 @@ public class AddServicetimeActivity extends BaseActivity {
 
             mXingqis = new ArrayList<>();
             if ("1".equals(mServiceTime.day1))
-                mXingqis.add(new Xingqi("星期一,"));
+                mXingqis.add(new Xingqi("周一,"));
             if ("1".equals(mServiceTime.day2))
-                mXingqis.add(new Xingqi("星期二,"));
+                mXingqis.add(new Xingqi("周二,"));
             if ("1".equals(mServiceTime.day3))
-                mXingqis.add(new Xingqi("星期三,"));
+                mXingqis.add(new Xingqi("周三,"));
             if ("1".equals(mServiceTime.day4))
-                mXingqis.add(new Xingqi("星期四,"));
+                mXingqis.add(new Xingqi("周四,"));
             if ("1".equals(mServiceTime.day5))
-                mXingqis.add(new Xingqi("星期五,"));
+                mXingqis.add(new Xingqi("周五,"));
             if ("1".equals(mServiceTime.day6))
-                mXingqis.add(new Xingqi("星期六,"));
+                mXingqis.add(new Xingqi("周六,"));
             if ("1".equals(mServiceTime.day7))
-                mXingqis.add(new Xingqi("星期日"));
+                mXingqis.add(new Xingqi("周日"));
 
             convert();
         }
@@ -144,25 +144,25 @@ public class AddServicetimeActivity extends BaseActivity {
         } else {
 
             for (Xingqi mXingqi : mXingqis) {
-                if (mXingqi.name.equals("星期一")) {
+                if (mXingqi.name.equals("周一")) {
                     mMap.put("day1", "1");
                 }
-                if (mXingqi.name.equals("星期二")) {
+                if (mXingqi.name.equals("周二")) {
                     mMap.put("day2", "1");
                 }
-                if (mXingqi.name.equals("星期三")) {
+                if (mXingqi.name.equals("周三")) {
                     mMap.put("day3", "1");
                 }
-                if (mXingqi.name.equals("星期四")) {
+                if (mXingqi.name.equals("周四")) {
                     mMap.put("day4", "1");
                 }
-                if (mXingqi.name.equals("星期五")) {
+                if (mXingqi.name.equals("周五")) {
                     mMap.put("day5", "1");
                 }
-                if (mXingqi.name.equals("星期六")) {
+                if (mXingqi.name.equals("周六")) {
                     mMap.put("day6", "1");
                 }
-                if (mXingqi.name.equals("星期日")) {
+                if (mXingqi.name.equals("周日")) {
                     mMap.put("day7", "1");
                 }
             }

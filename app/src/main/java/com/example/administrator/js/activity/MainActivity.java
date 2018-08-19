@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.appbaselib.app.AppManager;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
 import com.appbaselib.network.ResponceSubscriber;
@@ -153,7 +154,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onReceived(Message mMessage, int mI) {
 
-                EventBus.getDefault().post(new EventMessage.NewMessageReceived(0));
+                if (AppManager.getInstance().getCurrentActivity() instanceof MessageActivity || AppManager.getInstance().getCurrentActivity() instanceof ChatActivity ||
+                        AppManager.getInstance().getCurrentActivity() instanceof SystemMessageActivity) {
+                    return false;
+                } else {
+                    EventBus.getDefault().post(new EventMessage.NewMessageReceived(0));
+                }
                 return false;
             }
         });

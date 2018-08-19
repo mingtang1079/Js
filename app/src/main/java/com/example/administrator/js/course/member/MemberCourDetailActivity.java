@@ -216,7 +216,7 @@ public class MemberCourDetailActivity extends BaseActivity {
         //年龄
         if (mCourseDetail.sex != null) {
             if (mCourseDetail.age != null) {
-                mTvAge.setText(mCourseDetail.age + "");
+                mTvAge.setText(" "+mCourseDetail.age);
             }
             if (mCourseDetail.sex.equals("1")) {
                 //男性
@@ -350,7 +350,7 @@ public class MemberCourDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_shangke})
+    @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_shangke,R.id.iv_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_call:
@@ -367,6 +367,13 @@ public class MemberCourDetailActivity extends BaseActivity {
 
 
                 xiake();
+
+                break;
+            case R.id.iv_head:
+
+                ARouter.getInstance().build("/activity/LookBigImageActivity")
+                        .withString("url",mCourseDetail.img)
+                        .navigation();
 
                 break;
         }

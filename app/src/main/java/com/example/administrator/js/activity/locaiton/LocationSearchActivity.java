@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.AndroidException;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -15,6 +16,7 @@ import com.amap.api.services.core.PoiItem;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.rx.RxHelper;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.LocationManager;
 import com.example.administrator.js.R;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 
 public class LocationSearchActivity extends BaseActivity {
@@ -73,8 +76,8 @@ public class LocationSearchActivity extends BaseActivity {
         mSearchView.setQueryHint("请输入地址关键字");
 
         RxTextView.textChanges(mSearchAutoComplete)
-                .skip(1)
                 .debounce(400, TimeUnit.MILLISECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<CharSequence>() {
                     @Override
                     public void accept(CharSequence mCharSequence) throws Exception {

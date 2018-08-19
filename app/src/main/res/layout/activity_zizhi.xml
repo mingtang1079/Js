@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/default_bg"
-    android:orientation="vertical"
-    tools:context="com.example.administrator.js.me.ZizhiActivity">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/default_bg"
+              android:orientation="vertical"
+              tools:context="com.example.administrator.js.me.ZizhiActivity">
 
 
-    <include layout="@layout/include_toolbar" />
+    <include layout="@layout/include_toolbar"/>
 
     <LinearLayout
         android:id="@+id/content"
@@ -28,14 +28,24 @@
             android:paddingRight="16dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="8dp"
+                android:paddingTop="16dp"
                 android:text="从业时间"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="*"
+                android:textColor="@color/red_color"
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_time"
@@ -47,7 +57,7 @@
                 android:gravity="right"
                 android:hint="暂无从业时间"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
 
         </LinearLayout>
@@ -66,7 +76,15 @@
                 android:drawablePadding="8dp"
                 android:text="擅长领域"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:text="*"
+                android:textColor="@color/red_color"
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -76,7 +94,7 @@
                 android:drawableRight="@drawable/icon_right"
                 android:gravity="right"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -93,7 +111,7 @@
                 android:drawablePadding="8dp"
                 android:text="成功案例"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -103,7 +121,7 @@
                 android:drawableRight="@drawable/icon_right"
                 android:gravity="right"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -115,13 +133,20 @@
             android:padding="16dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:drawablePadding="8dp"
                 android:text="资质证书"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:text="*"
+                android:textColor="@color/red_color"
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_status"
@@ -133,7 +158,7 @@
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"
-                tools:text="审核中" />
+                tools:text="审核中"/>
         </LinearLayout>
 
         <LinearLayout
@@ -151,45 +176,17 @@
                 android:drawablePadding="8dp"
                 android:text="健身格言"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_right" />
+                android:src="@drawable/icon_right"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_xinxiang"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:text="形象照"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_jinsheng"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="0.5dp"
@@ -200,9 +197,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="8dp"
+                android:text="形象照"
+                android:textColor="#4A576A"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:text="*"
+                android:textColor="@color/red_color"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="16dp"
+                android:drawableRight="@drawable/icon_right"
+                android:gravity="right"
+                android:textColor="#4A576A"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_jinsheng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0.5dp"
+            android:background="@color/white"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="8dp"
                 android:text="越级晋升申请"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_jinshen"
@@ -214,7 +248,7 @@
                 android:gravity="right"
                 android:textColor="#4A576A"
                 android:textSize="14sp"
-                tools:text="审核中" />
+                tools:text="审核中"/>
         </LinearLayout>
 
         <LinearLayout
@@ -232,7 +266,7 @@
                 android:drawablePadding="8dp"
                 android:text="简历口述"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -242,8 +276,9 @@
                 android:drawableRight="@drawable/icon_right"
                 android:gravity="right"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_yaoqingma"
 
@@ -259,7 +294,7 @@
                 android:drawablePadding="8dp"
                 android:text="填写邀请码"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -269,7 +304,7 @@
                 android:drawableRight="@drawable/icon_right"
                 android:gravity="right"
                 android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
         </LinearLayout>
 
     </LinearLayout>

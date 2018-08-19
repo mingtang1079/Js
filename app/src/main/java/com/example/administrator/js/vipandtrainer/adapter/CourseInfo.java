@@ -1,5 +1,6 @@
 package com.example.administrator.js.vipandtrainer.adapter;
 
+import com.example.administrator.js.base.model.Location;
 import com.example.administrator.js.me.model.User;
 
 import java.io.Serializable;
@@ -9,5 +10,6 @@ public class CourseInfo implements Serializable {
 
     public User teacher;
     public List<BigCourse> ctypes;
+    public Location location;
 
 }

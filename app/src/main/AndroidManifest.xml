@@ -117,8 +117,7 @@
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:screenOrientation="portrait"
-       />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".me.RealNameVerifyActivity"
             android:screenOrientation="portrait"/>
@@ -313,6 +312,8 @@
         <activity android:name=".exercise.YouhuiWorkActivity">
         </activity>
         <activity android:name=".me.YaoqingmaActivity">
+        </activity>
+        <activity android:name=".activity.LookBigImageActivity">
         </activity>
     </application>
 

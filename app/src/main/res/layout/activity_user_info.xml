@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawablePadding="8dp"
-                android:text="地区"
+                android:text="上课地址"
                 android:textColor="#4A576A"
                 android:textSize="14sp" />
 

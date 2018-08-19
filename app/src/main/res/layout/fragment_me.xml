@@ -112,12 +112,11 @@
                         android:layout_marginLeft="8dp"
                         android:background="@drawable/com_round_corner_solid_women"
                         android:drawableLeft="@drawable/icon_women"
-                        android:drawablePadding="4dp"
                         android:paddingLeft="4dp"
                         android:paddingRight="4dp"
                         android:textColor="@color/white_color"
                         android:textSize="11sp"
-                        tools:text="22"/>
+                        tools:text=" 22"/>
 
                 </LinearLayout>
 

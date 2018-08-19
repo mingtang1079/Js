@@ -117,7 +117,7 @@ public class RealNameVerifyActivity extends BaseActivity {
             @Override
             public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2) throws Exception {
 
-                return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2)&& (mCharSequence2.length() == 15||mCharSequence2.length() == 18);
+                return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2);
             }
         }).subscribe(new Consumer<Boolean>() {
             @Override
@@ -211,6 +211,11 @@ public class RealNameVerifyActivity extends BaseActivity {
 
     private void submit() {
 
+        if (mEtShenfenzheng.getText().toString().length()!=18)
+        {
+            showToast("身份证位数错误！");
+            return;
+        }
 
 //        mStrings.add(FileUtlis.getRealFilePath(mContext, zm));
 //        mStrings.add(FileUtlis.getRealFilePath(mContext, zs));

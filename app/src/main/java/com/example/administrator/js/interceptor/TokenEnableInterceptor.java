@@ -1,11 +1,14 @@
 package com.example.administrator.js.interceptor;
 
 import android.content.Intent;
+import android.os.Looper;
 import android.text.TextUtils;
 
 import com.appbaselib.app.AppManager;
 import com.appbaselib.utils.JsonUtil;
 import com.appbaselib.utils.LogUtils;
+import com.appbaselib.utils.ToastUtils;
+import com.example.administrator.js.App;
 import com.example.administrator.js.login.LoginActivity;
 
 import org.json.JSONException;
@@ -64,6 +67,9 @@ public class TokenEnableInterceptor implements Interceptor {
                         Intent intent = new Intent(AppManager.getInstance().getCurrentActivity(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         AppManager.getInstance().startActivity(intent);
+                        Looper.prepare();
+                        ToastUtils.showShort(App.mInstance,"您的客户端已在其他客户端登录,请重新登录");
+                        Looper.loop();
 
                     }
                 } catch (JSONException mE) {

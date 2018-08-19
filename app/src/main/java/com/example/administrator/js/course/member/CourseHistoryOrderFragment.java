@@ -82,5 +82,9 @@ public class CourseHistoryOrderFragment extends BaseRefreshFragment<HistoryOrder
     public void onStatusChange(EventMessage.CourseListStatusChange mListStatusChange) {
         refreshData(false);
     }
-
+    @Override
+    protected void onUserVisible() {
+        super.onUserVisible();
+        refreshData(false);
+    }
 }

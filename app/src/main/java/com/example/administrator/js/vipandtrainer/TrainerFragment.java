@@ -15,11 +15,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.exercise.member.SearchTrianerActivity;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.exercise.member.NearbyTrainerAdapter;
 import com.example.administrator.js.me.model.User;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.List;
@@ -69,6 +73,7 @@ public class TrainerFragment extends BaseRefreshFragment<User> {
         requestData();
 
     }
+
     @Override
     public void initAdapter() {
         mAdapter = new NearbyTrainerAdapter(R.layout.item_nearby_trainer, mList);
@@ -77,7 +82,7 @@ public class TrainerFragment extends BaseRefreshFragment<User> {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 ARouter.getInstance().build("/vipandtrainer/TrainerDetailActivity")
-                        .withString("id",mList.get(position).id)
+                        .withString("id", mList.get(position).id)
                         .navigation(mContext);
 
             }
@@ -109,5 +114,15 @@ public class TrainerFragment extends BaseRefreshFragment<User> {
                         loadError(message);
                     }
                 });
+    }
+
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.RelationStatusChangge mZizhiStatus) {
+        refreshData(false);
     }
 }

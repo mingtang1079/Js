@@ -75,4 +75,8 @@ public class EventMessage {
     public static class ZizhiStatus extends EventMessage{
 
     }
+
+    public static class RelationStatusChangge extends EventMessage{
+
+    }
 }

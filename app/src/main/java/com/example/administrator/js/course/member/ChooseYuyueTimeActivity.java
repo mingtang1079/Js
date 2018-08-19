@@ -124,7 +124,7 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
             RecyclerView mRecyclerView = new RecyclerView(mContext);
 
             final TimeChooseAdapter mTimeChooseAdapter = new TimeChooseAdapter(R.layout.item_choose_time, mWeekTimeLists.get(p).timelist);
-            GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext, 3);
+            GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext, 2);
             mRecyclerView.setLayoutManager(mGridLayoutManager);
             mRecyclerView.setAdapter(mTimeChooseAdapter);
 

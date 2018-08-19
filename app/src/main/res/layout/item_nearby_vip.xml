@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/white_color"
-    android:orientation="vertical">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white_color"
+              android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:id="@+id/iv_head"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_margin="16dp" />
+            android:layout_margin="16dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="#FF4A576A"
                     android:textSize="16sp"
-                    tools:text="Mo" />
+                    tools:text="Mo"/>
 
                 <TextView
                     android:id="@+id/tv_age"
@@ -48,12 +48,11 @@
                     android:layout_marginLeft="16dp"
                     android:background="@drawable/com_round_corner_solid_women"
                     android:drawableLeft="@drawable/icon_women"
-                    android:drawablePadding="4dp"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
                     android:textColor="@color/white_color"
                     android:textSize="11sp"
-                    tools:text="22" />
+                    tools:text=" 22"/>
 
                 <TextView
                     android:id="@+id/tv_time_juli"
@@ -63,7 +62,7 @@
                     android:gravity="right"
                     android:textColor="#BCC8DA"
                     android:textSize="14sp"
-                    tools:text="0.48km·8小时前" />
+                    tools:text="0.48km·8小时前"/>
 
             </LinearLayout>
 
@@ -74,7 +73,7 @@
                 android:layout_marginTop="8dp"
                 android:textColor="#FF8996AA"
                 android:textSize="13sp"
-                tools:text="增肌  减脂  塑形" />
+                tools:text="增肌  减脂  塑形"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -83,6 +82,6 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginLeft="80dp"
-        android:background="@color/default_bg" />
+        android:background="@color/default_bg"/>
 
 </LinearLayout>

@@ -101,10 +101,11 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
     @Override
     public void onUserGet(final User mUser) {
 
-        ((App) App.mInstance).connectRongYun();
-
         PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
         PreferenceUtils.setPrefString(mContext,Constans.TOKEN,mUser.apitoken);
+
+        ((App) App.mInstance).connectRongYun();
+
         ARouter.getInstance().build("/activity/MainActivity")
                 .navigation(mContext);
         finish();

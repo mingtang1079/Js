@@ -179,7 +179,7 @@ public class YuyueCourseActivity extends BaseActivity {
             //年龄
             if (mUser.sex != null) {
                 if (mUser.age != null) {
-                    mTvAge.setText(mUser.age + "");
+                    mTvAge.setText(" "+mUser.age);
                 }
                 if (mUser.sex.equals("1")) {
                     //男性

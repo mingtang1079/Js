@@ -14,10 +14,14 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.SearchUserActivity;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.exercise.adapter.NearbyVipAdapter;
 import com.example.administrator.js.exercise.model.VipUser;
 import com.example.administrator.js.me.model.User;
 import com.jakewharton.rxbinding2.widget.RxTextView;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.List;
@@ -96,5 +100,14 @@ public class VipUserFragment extends BaseRefreshFragment<User> {
                     }
                 });
 
+    }
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.RelationStatusChangge mZizhiStatus) {
+        refreshData(false);
     }
 }

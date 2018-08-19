@@ -335,6 +335,11 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 mEditText2.setText("");
                 beginprice = "";
                 endprice = "";
+                p1=-1;
+                p2=-1;
+                p3=-1;
+                mIntegers.clear();
+
                 mItemAdapter.setSingleChoosed(-1);
                 mItemAdapter1.setSingleChoosed(-1);
                 mItemAdapter2.setSingleChoosed(-1);

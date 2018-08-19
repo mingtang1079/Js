@@ -69,14 +69,14 @@
                     android:textColor="#ff4a576a"
                     android:textSize="16sp" />
 
-                <RatingBar
+                <android.support.v7.widget.AppCompatRatingBar
                     android:id="@+id/rb_pingfen"
                     style="?android:attr/ratingBarStyleIndicator"
                     android:layout_width="wrap_content"
                     android:isIndicator="false"
-                    tools:rating="3"
+
                     android:numStars="5"
-                    android:progressTint="@color/color_ffcd00"
+                    android:theme="@style/RatingBar"
                     android:stepSize="1.0"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp" />

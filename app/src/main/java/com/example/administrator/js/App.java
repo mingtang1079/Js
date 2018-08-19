@@ -64,7 +64,7 @@ public class App extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        mInstance=this;
+        mInstance = this;
         initIM();
         initBugly();
         initRouter();
@@ -93,7 +93,15 @@ public class App extends BaseApplication {
 
                 @Override
                 public boolean onConversationPortraitClick(Context mContext, Conversation.ConversationType mConversationType, String mS) {
-                    return false;
+
+                    if (mConversationType.toString().equals(Conversation.ConversationType.SYSTEM.toString())) {
+                        ARouter.getInstance().build("/activity/SystemMessageActivity")
+                                .navigation(mContext);
+                        return true;
+                    } else {
+                        return false;
+                    }
+
                 }
 
                 @Override
@@ -108,27 +116,32 @@ public class App extends BaseApplication {
 
                 @Override
                 public boolean onConversationClick(Context mContext, View mView, UIConversation uiConversation) {
-                    uiConversation.setUnReadMessageCount(0);
-                    RongIM.getInstance().clearMessagesUnreadStatus(uiConversation.getConversationType(),uiConversation.getConversationTargetId(),null);
+                    RongIM.getInstance().clearMessagesUnreadStatus(uiConversation.getConversationType(), uiConversation.getConversationTargetId(), null);
 
                     if (uiConversation.getConversationType().toString().equals(Conversation.ConversationType.SYSTEM.toString())) {
                         ARouter.getInstance().build("/activity/SystemMessageActivity")
                                 .navigation(mContext);
-                    }
-                    else {
+                    } else {
                         RongIM.getInstance().startConversation(mContext, Conversation.ConversationType.PRIVATE, uiConversation.getConversationTargetId(), uiConversation.getUIConversationTitle());
                     }
 
                     return true;
                 }
             });
+            //对话框里的对话列表
             RongIM.setConversationClickListener(new RongIM.ConversationClickListener() {
                 @Override
                 public boolean onUserPortraitClick(Context mContext, Conversation.ConversationType mConversationType, UserInfo mUserInfo, String mS) {
 
-                    ARouter.getInstance().build("/vip/VipUserDetailActivity")
-                            .withString("id", mUserInfo.getUserId())
-                            .navigation(mContext);
+                    if (UserManager.getInsatance().getUser().id.equals(mUserInfo.getUserId())){
+                        ARouter.getInstance().build("/me/UserInfoActivity")
+                                .navigation();
+                    }
+                    else {
+                        ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                                .withString("id", mUserInfo.getUserId())
+                                .navigation(mContext);
+                    }
                     return true;
                 }
 
@@ -290,5 +303,11 @@ public class App extends BaseApplication {
         super.attachBaseContext(base);
         // 安装tinker
         Beta.installTinker();
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        stopService(new Intent(this,LocationService.class));
     }
 }

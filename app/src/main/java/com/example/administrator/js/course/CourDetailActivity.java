@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -300,7 +301,7 @@ public class CourDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_yuyue})
+    @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_yuyue,R.id.iv_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_call:
@@ -317,6 +318,13 @@ public class CourDetailActivity extends BaseActivity {
 
 
                 cancelCourse();
+
+                break;
+            case R.id.iv_head:
+
+                ARouter.getInstance().build("/activity/LookBigImageActivity")
+                        .withString("url",mCourseDetail.img)
+                        .navigation();
 
                 break;
         }
@@ -354,6 +362,7 @@ public class CourDetailActivity extends BaseActivity {
                             @Override
                             protected void onFail(String message) {
                                 showToast(message);
+                                requestData();
                             }
                         });
             }

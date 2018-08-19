@@ -27,6 +27,7 @@ import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.locaiton.NewNeedAndType;
+import com.example.administrator.js.course.model.Item;
 import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.example.administrator.js.me.model.NewNeed;
 import com.example.administrator.js.utils.StringUtils;
@@ -126,7 +127,11 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
         mItemAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                mItemAdapter.switchSelectedState(position);
+                if (mItemAdapter.getSelectedItemCount() == 3 && !mItemAdapter.isSelected(position)) {
+                    return;
+                } else {
+                    mItemAdapter.switchSelectedState(position);
+                }
             }
         });
         mEtCount.addTextChangedListener(new TextWatcher() {

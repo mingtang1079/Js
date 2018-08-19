@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TabHost;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseModel;
@@ -70,6 +71,9 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
     @BindView(R.id.imageview)
     PhotoView mImageview;
 
+    @Autowired
+    boolean isStart = false;
+
     UserPresenter mUserPresenter;
     Uri mPortriat;
     MenuItem mMenuItem;
@@ -104,6 +108,9 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
             }
         });
 
+        if (isStart) {
+            onViewClicked();
+        }
     }
 
     @Override
@@ -151,7 +158,7 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
                     public ObservableSource<BaseModel<User>> apply(BaseModel<String> mStringBaseModel) throws Exception {
 
                         Map<String, String> mStringStringMap = new HashMap<>();
-                        mStringStringMap.put("id",UserManager.getInsatance().getUser().id);
+                        mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
                         mStringStringMap.put("img", mStringBaseModel.data);
                         return Http.getDefault().userEdit(mStringStringMap);
                     }
@@ -194,7 +201,12 @@ public class ChangeUserHeadActivity extends BaseActivity implements UserPresente
                         .start(this);
             }
 
-        } else if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+        }
+        else if (requestCode == PHOTO_REQUEST_GALLERY && resultCode == 0&&isStart)
+        {
+            finish();
+        }
+        else if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
 
             mPortriat = UCrop.getOutput(data);
             mMenuItem.setEnabled(true);

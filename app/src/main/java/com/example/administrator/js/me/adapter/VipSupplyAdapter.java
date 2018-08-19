@@ -46,7 +46,7 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
         if (item.age != null && item.sex != null) {
             TextView mTextView = helper.getView(R.id.tv_age);
             helper.setVisible(R.id.tv_age, true);
-            helper.setText(R.id.tv_age, item.age + "");
+            helper.setText(R.id.tv_age, " " + item.age);
             if (item.sex.equals("1")) {
                 //男性
                 mTextView.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
@@ -67,9 +67,9 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
 
         }
 
-        helper.setText(R.id.tv_course, item.ctypename + item.csum+"节");
-        helper.setText(R.id.time, item.distance + " " + item.updateDate);
-//a1已提交b2通过b3完成付款,b4不通过
+        helper.setText(R.id.tv_course, item.ctypename + item.csum + "节");
+        helper.setText(R.id.time, item.updateDate);
+//a1已提交b2通过b3完成付款,b4不通过 b56退款成功 b55 退款
         TextView mTextViewPass = helper.getView(R.id.pass);
         TextView mTextViewRefuse = helper.getView(R.id.jujue);
 
@@ -82,13 +82,23 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
             mTextViewRefuse.setText("已拒绝");
-
+        } else if ("b3".equals(item.status)) {
+            mTextViewPass.setVisibility(View.GONE);
+            mTextViewRefuse.setVisibility(View.VISIBLE);
+            mTextViewRefuse.setEnabled(false);
+            mTextViewRefuse.setText("完成付款");
         } else if ("b2".equals(item.status)) {
             mTextViewPass.setVisibility(View.GONE);
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
             mTextViewRefuse.setText("已通过");
-        } else if ("b56".equals(item.status)) {
+        }
+        else  if ("b55".equals(item.status))
+        {
+            mTextViewPass.setVisibility(View.VISIBLE);
+            mTextViewRefuse.setVisibility(View.GONE);
+        }
+        else if ("b56".equals(item.status)) {
             mTextViewPass.setVisibility(View.GONE);
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
@@ -99,18 +109,18 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
             @Override
             public void onClick(View mView) {
                 //通过有2状态  退课 体验课
-                if (item.status.equals("b55") && item.tryflag.equals("0")) {
-                    save("b56", item.id, helper.getLayoutPosition());
+                if (getData().get(helper.getLayoutPosition()).status.equals("b55")) {
+                    save("b56", getData().get(helper.getLayoutPosition()).id, helper.getLayoutPosition());
 
                 } else {
-                    save("b2", item.id, helper.getLayoutPosition());
+                    save("b2", getData().get(helper.getLayoutPosition()).id, helper.getLayoutPosition());
                 }
             }
         });
         mTextViewRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                save("b4", item.id, helper.getLayoutPosition());
+                save("b4", getData().get(helper.getLayoutPosition()).id, helper.getLayoutPosition());
             }
         });
 

@@ -173,7 +173,7 @@ public class OrderDetailActivity extends BaseActivity {
         mTvId.setText("ID：" + mOrder.no + "");
         //年龄
         if (mOrder.age != null && mOrder.sex != null) {
-            mTvAge.setText(mOrder.age + "");
+            mTvAge.setText(" "+mOrder.age);
             if (mOrder.sex.equals("1")) {
                 //男性
                 mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));

@@ -75,7 +75,9 @@ public class ExerciseFragment extends BaseFragment {
                     @Override
                     public void run() {
                         //
-                        mSwipeRefreshLayout.setRefreshing(false);
+                        if (mSwipeRefreshLayout != null) {
+                            mSwipeRefreshLayout.setRefreshing(false);
+                        }
                     }
                 }, 2000);
 
@@ -140,7 +142,7 @@ public class ExerciseFragment extends BaseFragment {
         if (mViewTag != null) {
             if (mm.message == 0) {
                 mViewTag.setVisibility(View.VISIBLE);
-            } else if (mm.message==1){
+            } else if (mm.message == 1) {
                 mViewTag.setVisibility(View.GONE);
 
             }

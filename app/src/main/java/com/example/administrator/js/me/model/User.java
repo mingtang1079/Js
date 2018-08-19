@@ -48,4 +48,5 @@ public class User {
 
     public String apitoken;
     public int progress;
+    public  String wxnickname;
 }

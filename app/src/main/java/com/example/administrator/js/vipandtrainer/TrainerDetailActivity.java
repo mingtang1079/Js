@@ -32,6 +32,7 @@ import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.course.member.YuyueCourseActivity;
 import com.example.administrator.js.login.LoginActivity;
 import com.example.administrator.js.me.model.UserDetail;
@@ -41,6 +42,7 @@ import com.example.administrator.js.vipandtrainer.adapter.WorkDateAdapter;
 import com.example.administrator.js.vipandtrainer.trainer.TrainerDetail;
 import com.example.administrator.js.vipandtrainer.trainer.Workdate;
 
+import org.greenrobot.eventbus.EventBus;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -216,7 +218,7 @@ public class TrainerDetailActivity extends BaseActivity {
             //年龄
             if (mTrainerDetail.userinfo.sex != null) {
                 if (mTrainerDetail.userinfo.age != null)
-                    mTvAge.setText(mTrainerDetail.userinfo.age + "");
+                    mTvAge.setText(" "+mTrainerDetail.userinfo.age);
                 if (mTrainerDetail.userinfo.sex.equals("1")) {
                     //男性
                     mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
@@ -295,7 +297,7 @@ public class TrainerDetailActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.btn_sixin, R.id.btn_guanzhu, R.id.tv_yuyue, R.id.tv_goumai, R.id.content})
+    @OnClick({R.id.btn_sixin, R.id.btn_guanzhu, R.id.tv_yuyue, R.id.tv_goumai, R.id.content,R.id.iv_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_sixin:
@@ -335,6 +337,13 @@ public class TrainerDetailActivity extends BaseActivity {
                 break;
             case R.id.content:
                 break;
+            case R.id.iv_head:
+
+                ARouter.getInstance().build("/activity/LookBigImageActivity")
+                        .withString("url",mTrainerDetail.userinfo.img)
+                        .navigation();
+
+                break;
         }
     }
 
@@ -372,6 +381,8 @@ public class TrainerDetailActivity extends BaseActivity {
                             mTrainerDetail.relation = new UserDetail.Relation();
                         }
                         mTrainerDetail.relation.status = mS;
+                        EventBus.getDefault().post(new EventMessage.RelationStatusChangge());
+
                         setData(mTrainerDetail);
 
                     }
