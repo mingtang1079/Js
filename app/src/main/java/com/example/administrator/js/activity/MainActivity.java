@@ -17,10 +17,16 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+
+
 @Route(path = "/activity/MainActivity")
 public class MainActivity extends BaseActivity2<ActivityMainBinding> {
 
+    ActivityMainBinding mActivityMainBinding;
+
+
     Navigator mNavigator;
+
 
     @Override
     protected int getContentViewLayoutID() {
