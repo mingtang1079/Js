@@ -3,6 +3,7 @@ package com.example.administrator.js.me.member;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -65,7 +66,7 @@ public class BodyDataActivity extends Html5Activity {
             }
         });
 
-        url = "https://www.cdmuscle.com/h5/bodydata/detail?userid="+ UserManager.getInsatance().getUser().id;
+        url = "https://www.cdmuscle.com/h5/bodydata/detail?userid=" + UserManager.getInsatance().getUser().id;
         super.initView();
     }
 
@@ -82,5 +83,17 @@ public class BodyDataActivity extends Html5Activity {
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+
     }
 }
