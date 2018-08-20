@@ -12,9 +12,11 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -46,6 +48,11 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
     Button mButtonSure;
     @BindView(R.id.tv_name)
     TextView mTextViewName;
+
+    @BindView(R.id.iv_left)
+    ImageView mIvLeft;
+    @BindView(R.id.iv_right)
+    ImageView mIvRight;
 
     ItemAdapter mItemAdapter;
     Integer position = null;//第几列
@@ -106,13 +113,33 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int p = manager.findLastCompletelyVisibleItemPosition();
                     if (p != -1 && p < mWeekTimeLists.size()) {
-                        mTextViewName.setText("周"+mWeekTimeLists.get(p).weekindex +" "+ mWeekTimeLists.get(p).month + "." + mWeekTimeLists.get(p).day);
+                        mTextViewName.setText("周" + mWeekTimeLists.get(p).weekindex + " " + mWeekTimeLists.get(p).month + "." + mWeekTimeLists.get(p).day);
                     }
 
                 }
             }
         });
-        mTextViewName.setText("周"+mWeekTimeLists.get(0).weekindex + mWeekTimeLists.get(0).month + "." + mWeekTimeLists.get(0).day);
+        mTextViewName.setText("周" + mWeekTimeLists.get(0).weekindex + mWeekTimeLists.get(0).month + "." + mWeekTimeLists.get(0).day);
+
+        mIvLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                int p = manager.findFirstVisibleItemPosition();
+                if (p > 0) {
+                    mRecyclerView.smoothScrollToPosition(p - 1);
+                }
+            }
+        });
+        mIvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                int p = manager.findFirstVisibleItemPosition();
+                if (p < mItemAdapter.getData().size()-1) {
+                    mRecyclerView.smoothScrollToPosition(p + 1);
+                }
+            }
+        });
+
     }
 
 
@@ -198,8 +225,12 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
             RecyclerView mRecyclerView = helper.getView(R.id.recyclerview);
             final TimeChooseAdapter mTimeChooseAdapter = new TimeChooseAdapter(R.layout.item_choose_time, item.timelist);
             mTimeChooseAdapter.p = helper.getAdapterPosition();
-            GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext, 3);
+            GridLayoutManager mGridLayoutManager = new GridLayoutManager(mContext, 2);
             mRecyclerView.setLayoutManager(mGridLayoutManager);
+
+            View mView = LayoutInflater.from(mContext).inflate(R.layout.view_time_empty, (ViewGroup) mRecyclerView.getParent(), false);
+            mTimeChooseAdapter.setEmptyView(mView);
+
             mRecyclerView.setAdapter(mTimeChooseAdapter);
             mTimeChooseAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
