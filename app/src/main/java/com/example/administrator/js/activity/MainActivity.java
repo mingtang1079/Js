@@ -12,18 +12,15 @@ import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseActivity2;
 import com.appbaselib.base.Navigator;
 import com.example.administrator.js.R;
+import com.example.administrator.js.databinding.ActivityMainBinding;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 
-
 @Route(path = "/activity/MainActivity")
 public class MainActivity extends BaseActivity2<ActivityMainBinding> {
-
-    ActivityMainBinding mActivityMainBinding;
-
 
     Navigator mNavigator;
 
@@ -45,9 +42,9 @@ public class MainActivity extends BaseActivity2<ActivityMainBinding> {
 
     @Override
     protected void initView() {
-//        mBnve .enableItemShiftingMode(false);
-//        mBnve.enableShiftingMode(false);
-//        mBnve.enableAnimation(false);
+        mViewDataBinding.bnve.enableItemShiftingMode(false);
+        mViewDataBinding.bnve.enableShiftingMode(false);
+        mViewDataBinding.bnve.enableAnimation(false);
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.content);
         Fragment mFragment = (Fragment) ARouter.getInstance().build("/me/MeFragment")
                 .navigation();
