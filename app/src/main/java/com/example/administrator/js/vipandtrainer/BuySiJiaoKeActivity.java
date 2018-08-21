@@ -187,6 +187,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
         mTvPrice.setText("￥ " + mBigCourses.get(position).price);
         BigCourse mCourseType = (BigCourse) mCourseTypeAdapterBig.getData().get(position);
         if (mCourseType.list != null) {
+            mCourseTypeAdapterSmall.clearSelectedState();
             mCourseTypeAdapterSmall.setNewData2(mCourseType.list);
         }
 

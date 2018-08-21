@@ -290,7 +290,6 @@ public class App extends BaseApplication {
             io.reactivex.Observable<BaseModel<User>> mObservable = Http.getDefault().getUser(mS);
             BaseModel<User> mUserBaseModel = mObservable.blockingFirst();
             if (mUserBaseModel.status) {
-
                 return new UserInfo(mUserBaseModel.data.id, mUserBaseModel.data.nickname, Uri.parse(mUserBaseModel.data.img));
             } else {
                 return null;

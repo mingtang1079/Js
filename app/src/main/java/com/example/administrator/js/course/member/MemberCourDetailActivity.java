@@ -360,7 +360,7 @@ public class MemberCourDetailActivity extends BaseActivity {
             case R.id.map:
                 break;
             case R.id.tv_dazhaohu:
-                RongIM.getInstance().startPrivateChat(this, mCourseDetail.uid, mCourseDetail.nickname);
+                RongIM.getInstance().startPrivateChat(this, mCourseDetail.tid, mCourseDetail.nickname);
 
                 break;
             case R.id.tv_shangke:

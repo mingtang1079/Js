@@ -123,9 +123,9 @@ public class ChooseLocationActivity extends BaseActivity implements AMapLocation
         //设置定位监听
         aMap.setLocationSource(this);
         // 是否显示定位按钮
-        settings.setMyLocationButtonEnabled(true);
+        settings.setMyLocationButtonEnabled(false);
         // 是否可触发定位并显示定位层
-        aMap.setMyLocationEnabled(true);
+        aMap.setMyLocationEnabled(false);
         aMap.setOnCameraChangeListener(this); // 添加移动地图事件监听器
         settings.setZoomControlsEnabled(false);//缩放按钮
         initMap();

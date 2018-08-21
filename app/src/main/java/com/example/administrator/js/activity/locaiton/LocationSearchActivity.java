@@ -1,5 +1,6 @@
 package com.example.administrator.js.activity.locaiton;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -142,7 +143,7 @@ public class LocationSearchActivity extends BaseActivity {
                 PoiItem tip = mPoiItems.get(position);
                 Intent intent = new Intent();
                 intent.putExtra("PoiItem", tip);
-                setResult(1, intent);
+                setResult(Activity.RESULT_OK, intent);
                 finish();
 
             }
