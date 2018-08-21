@@ -19,7 +19,7 @@
         android:icon="@drawable/three"
         android:title="课程" />
     <item
-        android:id="@+id/i_visibility"
+        android:id="@+id/i_me"
         android:icon="@drawable/four"
         android:title="我" />
 </menu>

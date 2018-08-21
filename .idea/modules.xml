@@ -8,7 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/../CommonLibrary/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/../CommonLibrary/baselibrary/baselibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/core.iml" filepath="$PROJECT_DIR$/core/core.iml" />
       <module fileurl="file://$PROJECT_DIR$/mine/mine.iml" filepath="$PROJECT_DIR$/mine/mine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/one/one.iml" filepath="$PROJECT_DIR$/one/one.iml" />
       <module fileurl="file://$PROJECT_DIR$/../CommonLibrary/photopicker/photopicker.iml" filepath="$PROJECT_DIR$/../CommonLibrary/photopicker/photopicker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/two/two.iml" filepath="$PROJECT_DIR$/two/two.iml" />
     </modules>
   </component>
 </project>
