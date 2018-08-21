@@ -211,9 +211,12 @@ public class RealNameVerifyActivity extends BaseActivity {
 
     private void submit() {
 
-        if (mEtShenfenzheng.getText().toString().length()!=18)
-        {
+        if (mEtShenfenzheng.getText().toString().length() != 18) {
             showToast("身份证位数错误！");
+            return;
+        }
+        if (mSelects == null || mSelects.size() != 2) {
+            showToast("请选择身份证正反面");
             return;
         }
 
@@ -334,18 +337,16 @@ public class RealNameVerifyActivity extends BaseActivity {
                 ImageLoader.load(mContext, sfzz, mIvShenfengzheng);
                 if (mSelects.size() > 0) {
                     mSelects.set(0, FileUtlis.getRealFilePath(mContext, sfzz));
-                }
-                else {
+                } else {
                     mSelects.add(FileUtlis.getRealFilePath(mContext, sfzz));
                 }
 
             } else if (requestCode == 30) {
                 sfzf = Uri.parse("file://" + data.getStringArrayListExtra(PhotoPickerActivity.EXTRA_RESULT).get(0));
                 ImageLoader.load(mContext, sfzf, mIvShengfenzhengback);
-                if (mSelects.size()>1) {
+                if (mSelects.size() > 1) {
                     mSelects.set(1, FileUtlis.getRealFilePath(mContext, sfzf));
-                }
-                else {
+                } else {
                     mSelects.add(FileUtlis.getRealFilePath(mContext, sfzf));
 
                 }

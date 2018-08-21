@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-                                              xmlns:app="http://schemas.android.com/apk/res-auto"
-                                              xmlns:tools="http://schemas.android.com/tools"
-                                              android:layout_width="match_parent"
-                                              android:layout_height="match_parent"
-                                              android:background="@color/white_color"
-                                              android:orientation="vertical"
-                                              tools:context=".me.member.AddWeiduActivity">
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_color"
+    android:orientation="vertical"
+    tools:context=".me.member.AddWeiduActivity">
 
 
     <include layout="@layout/include_toolbar"/>
@@ -44,10 +45,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="numberDecimal"
-
                         android:background="@color/white_color"
+
                         android:gravity="right"
+                        android:inputType="numberDecimal"
                         android:textSize="14sp"/>
 
                 </LinearLayout>
@@ -57,6 +58,7 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:background="#f5f5f5"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,18 +93,20 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="numberDecimal"
-
                         android:background="@color/white_color"
+
                         android:gravity="right"
+                        android:inputType="numberDecimal"
                         android:textSize="14sp"/>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:background="#f5f5f5"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -129,7 +133,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="小腿"
+                        android:text="左小腿"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp"/>
 
@@ -138,18 +142,20 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="numberDecimal"
-
                         android:background="@color/white_color"
+
                         android:gravity="right"
+                        android:inputType="numberDecimal"
                         android:textSize="14sp"/>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:background="#f5f5f5"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -161,6 +167,55 @@
 
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="右小腿"
+                        android:textColor="#ff4a576a"
+                        android:textSize="14sp"/>
+
+                    <EditText
+                        android:id="@+id/et_xiaotui_right"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white_color"
+
+                        android:gravity="right"
+                        android:inputType="numberDecimal"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#f5f5f5"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="right"
+                    android:text="单位：cm"
+                    android:textColor="#ffdbdbdb"
+                    android:textSize="10sp"/>
+
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -176,7 +231,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="大腿"
+                        android:text="左大腿"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp"/>
 
@@ -185,18 +240,68 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="numberDecimal"
-
                         android:background="@color/white_color"
+
                         android:gravity="right"
+                        android:inputType="numberDecimal"
                         android:textSize="14sp"/>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:background="#f5f5f5"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="right"
+                    android:text="单位：cm"
+                    android:textColor="#ffdbdbdb"
+                    android:textSize="10sp"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="右大腿"
+                        android:textColor="#ff4a576a"
+                        android:textSize="14sp"/>
+
+                    <EditText
+                        android:id="@+id/et_datui_right"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white_color"
+
+                        android:gravity="right"
+                        android:inputType="numberDecimal"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#f5f5f5"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -223,7 +328,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="大臂"
+                        android:text="左大臂"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp"/>
 
@@ -232,18 +337,20 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="numberDecimal"
-
                         android:background="@color/white_color"
+
                         android:gravity="right"
+                        android:inputType="numberDecimal"
                         android:textSize="14sp"/>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:background="#f5f5f5"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -269,27 +376,29 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="小臂"
+                        android:text="右大臂"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp"/>
 
                     <EditText
-                        android:id="@+id/et_xiaobi"
+                        android:id="@+id/et_dabi_right"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="numberDecimal"
-
                         android:background="@color/white_color"
+
                         android:gravity="right"
+                        android:inputType="numberDecimal"
                         android:textSize="14sp"/>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:background="#f5f5f5"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -301,6 +410,104 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="左小臂"
+                        android:textColor="#ff4a576a"
+                        android:textSize="14sp"/>
+
+                    <EditText
+                        android:id="@+id/et_xiaobi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white_color"
+
+                        android:gravity="right"
+                        android:inputType="numberDecimal"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#f5f5f5"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="right"
+                    android:text="单位：cm"
+                    android:textColor="#ffdbdbdb"
+                    android:textSize="10sp"/>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="右小臂"
+                        android:textColor="#ff4a576a"
+                        android:textSize="14sp"/>
+
+                    <EditText
+                        android:id="@+id/et_xiaobi_right"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white_color"
+
+                        android:gravity="right"
+                        android:inputType="numberDecimal"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#f5f5f5"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="right"
+                    android:text="单位：cm"
+                    android:textColor="#ffdbdbdb"
+                    android:textSize="10sp"/>
+
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -324,18 +531,20 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="numberDecimal"
-
                         android:background="@color/white_color"
+
                         android:gravity="right"
+                        android:inputType="numberDecimal"
                         android:textSize="14sp"/>
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="16dp"
                     android:background="#f5f5f5"/>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

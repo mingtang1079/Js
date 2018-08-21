@@ -13,19 +13,11 @@ import android.widget.EditText;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
-import com.appbaselib.network.ResponceSubscriber;
-import com.appbaselib.rx.RxHelper;
-import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
-import com.jakewharton.rxbinding2.widget.RxTextView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
 
 @Route(path = "/member/AddWeiduActivity")
 public class AddWeiduActivity extends BaseActivity {
@@ -51,6 +43,16 @@ public class AddWeiduActivity extends BaseActivity {
     EditText mEtTun;
     @BindView(R.id.btn_sure)
     Button mBtnSure;
+
+
+    @BindView(R.id.et_xiaotui_right)
+    EditText mEtXiaotuiRight;
+    @BindView(R.id.et_datui_right)
+    EditText mEtDatuiRight;
+    @BindView(R.id.et_dabi_right)
+    EditText mEtDabiRight;
+    @BindView(R.id.et_xiaobi_right)
+    EditText mEtXiaobiRight;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -79,6 +81,12 @@ public class AddWeiduActivity extends BaseActivity {
             mEtDabi.setText(mBodyData.wddabi);
             mEtXiaobi.setText(mBodyData.wdxiaobi);
             mEtTun.setText(mBodyData.wdtun);
+
+            mEtXiaotuiRight.setText(mBodyData.rightwdxiaotui);
+            mEtDatuiRight.setText(mBodyData.rightwddatui);
+            mEtDabiRight.setText(mBodyData.rightwddabi);
+            mEtXiaobiRight.setText(mBodyData.rightwdxiaobi);
+
         } else {
             mBodyData = new BodyData();
         }
@@ -131,6 +139,36 @@ public class AddWeiduActivity extends BaseActivity {
             }
         });
 
+        //
+        mEtXiaotuiRight.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
+                mBodyData.rightwdxiaotui = mCharSequence.toString();
+
+            }
+        });
+        mEtDatuiRight.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
+                mBodyData.rightwddatui = mCharSequence.toString();
+
+            }
+        });
+        mEtDabiRight.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
+                mBodyData.rightwddabi = mCharSequence.toString();
+
+            }
+        });
+        mEtXiaobiRight.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
+                mBodyData.rightwdxiaobi = mCharSequence.toString();
+
+            }
+        });
+
     }
 
     @OnClick(R.id.btn_sure)
@@ -140,6 +178,20 @@ public class AddWeiduActivity extends BaseActivity {
         mIntent.putExtra("data", mBodyData);
         setResult(Activity.RESULT_OK, mIntent);
         finish();
+    }
+
+    @OnClick({R.id.et_xiaotui_right, R.id.et_datui_right, R.id.et_dabi_right, R.id.et_xiaobi_right})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.et_xiaotui_right:
+                break;
+            case R.id.et_datui_right:
+                break;
+            case R.id.et_dabi_right:
+                break;
+            case R.id.et_xiaobi_right:
+                break;
+        }
     }
 
 

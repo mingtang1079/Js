@@ -2,7 +2,7 @@ package com.example.administrator.js.me.member;
 
 import java.io.Serializable;
 
-public  class BodyData  implements Serializable{
+public class BodyData implements Serializable {
 
     /**
      * id : 10011
@@ -47,10 +47,18 @@ public  class BodyData  implements Serializable{
     public String bodywater;
     public String wdxiong;
     public String wdyao;
+
     public String wdxiaotui;
     public String wddatui;
     public String wdxiaobi;
     public String wddabi;
+
+    public String rightwdxiaotui;
+    public String rightwddatui;
+    public String rightwdxiaobi;
+    public String rightwddabi;
+
+
     public String wdtun;
     public String wdjian;
     public String writedate;

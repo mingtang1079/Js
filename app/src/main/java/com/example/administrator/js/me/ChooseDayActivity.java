@@ -36,13 +36,13 @@ public class ChooseDayActivity extends MyBaseRefreshActivity<Xingqi> {
     public void requestData() {
 
         List<Xingqi> mXingqis = new ArrayList<>();
-        Xingqi mXingqi1 = new Xingqi("星期一");
-        Xingqi mXingqi2 = new Xingqi("星期二");
-        Xingqi mXingqi3 = new Xingqi("星期三");
-        Xingqi mXingqi4 = new Xingqi("星期四");
-        Xingqi mXingqi5 = new Xingqi("星期五");
-        Xingqi mXingqi6 = new Xingqi("星期六");
-        Xingqi mXingqi7 = new Xingqi("星期日");
+        Xingqi mXingqi1 = new Xingqi("周一");
+        Xingqi mXingqi2 = new Xingqi("周二");
+        Xingqi mXingqi3 = new Xingqi("周三");
+        Xingqi mXingqi4 = new Xingqi("周四");
+        Xingqi mXingqi5 = new Xingqi("周五");
+        Xingqi mXingqi6 = new Xingqi("周六");
+        Xingqi mXingqi7 = new Xingqi("周日");
 
         mXingqis.add(mXingqi1);
         mXingqis.add(mXingqi2);

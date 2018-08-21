@@ -394,7 +394,6 @@
                         android:layout_height="wrap_content"
                         android:drawablePadding="8dp"
                         android:drawableRight="@drawable/icon_right"
-                        android:hint="请填写"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp" />
 

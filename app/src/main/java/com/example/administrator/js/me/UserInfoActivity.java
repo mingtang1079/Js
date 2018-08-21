@@ -254,7 +254,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
             case R.id.ll_zhifubao:
 
                 ARouter.getInstance().build("/me/AddAlipayActivity")
-                        .withString("name", mTextViewZhifubao.getText().toString())
+                        .withString("name", UserManager.getInsatance().getUser().alipay)
                         .navigation();
                 break;
             case R.id.tv_exit:

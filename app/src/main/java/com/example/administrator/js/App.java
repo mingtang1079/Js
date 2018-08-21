@@ -185,7 +185,7 @@ public class App extends BaseApplication {
          * 每一条Crash都会被立即上报；
          * 自定义日志将会在Logcat中输出。
          * 建议在测试阶段建议设置成true，发布时设置为false */
-        Bugly.init(getApplicationContext(), "b10f100f0d", false);
+        Bugly.init(getApplicationContext(), "3988827242", false);
     }
 
     private void initRouter() {

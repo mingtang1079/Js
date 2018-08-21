@@ -88,8 +88,6 @@ public class MeFragment extends BaseFragment {
     @Override
     protected void initView() {
         mUser = UserManager.getInsatance().getUser();
-        setUser();
-        requestData();
     }
 
     @Override
@@ -104,38 +102,7 @@ public class MeFragment extends BaseFragment {
 
                         if (mUser != null) {
                             PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
-
-                            if (!TextUtils.isEmpty(mUser.provestatus)) {
-                                if ("1".equals(mUser.provestatus)) {
-                                    mTextViewVerify.setText("已认证");
-                                } else if ("2".equals(mUser.provestatus)) {
-                                    mTextViewVerify.setText("认证不通过");
-
-                                } else if ("3".equals(mUser.provestatus)) {
-                                    mTextViewVerify.setText("审核中");
-                                } else {
-                                    //未审核
-                                }
-                            }
-                            //教学资质
-                            if (!TextUtils.isEmpty(mUser.teachstatus)) {
-                                if ("1".equals(mUser.teachstatus)) {
-                                    mTextViewVirify2.setText("已认证");
-                                } else if ("2".equals(mUser.teachstatus)) {
-                                    mTextViewVirify2.setText("认证不通过");
-
-                                } else if ("3".equals(mUser.teachstatus)) {
-                                    mTextViewVirify2.setText("审核中");
-                                } else {
-                                    //未审核
-                                }
-                            }
-
-
-                        } else {
-                            mTextViewVerify.setText("未认证");
-                            mTextViewVirify2.setText("未认证");
-
+                            setUser();
                         }
                     }
 
@@ -153,6 +120,17 @@ public class MeFragment extends BaseFragment {
         requestData();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {   // 不在最前端显示 相当于调用了onPause();
+            requestData();
+            return;
+        } else {  // 在最前端显示 相当于调用了onResume();
+            //网络数据刷新
+        }
+    }
+
     //申请退押金
     private void requestTuiYajin() {
 
@@ -163,10 +141,9 @@ public class MeFragment extends BaseFragment {
                     @Override
                     protected void onSucess(String mS) {
 
-                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
                         mUser.depositstatus = mS;
+                        PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
                         setUser();
-
 
                         if ("0".equals(mS)) {
                             mTextViewYajingStatus.setText("未交");
@@ -186,17 +163,6 @@ public class MeFragment extends BaseFragment {
                 });
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {   // 不在最前端显示 相当于调用了onPause();
-            requestData();
-            return;
-        } else {  // 在最前端显示 相当于调用了onResume();
-            //网络数据刷新
-
-        }
-    }
 
     private void setUser() {
         mUser = UserManager.getInsatance().getUser();
@@ -220,12 +186,42 @@ public class MeFragment extends BaseFragment {
                 }
             }
 
+            if (!TextUtils.isEmpty(mUser.provestatus)) {
+                if ("1".equals(mUser.provestatus)) {
+                    mTextViewVerify.setText("已认证");
+                } else if ("2".equals(mUser.provestatus)) {
+                    mTextViewVerify.setText("认证不通过");
+
+                } else if ("3".equals(mUser.provestatus)) {
+                    mTextViewVerify.setText("审核中");
+                } else {
+                    //未审核
+                    mTextViewVerify.setText("未审核");
+
+                }
+            }
+            //教学资质
+            if (!TextUtils.isEmpty(mUser.teachstatus)) {
+                if ("1".equals(mUser.teachstatus)) {
+                    mTextViewVirify2.setText("已认证");
+                } else if ("2".equals(mUser.teachstatus)) {
+                    mTextViewVirify2.setText("认证不通过");
+
+                } else if ("3".equals(mUser.teachstatus)) {
+                    mTextViewVirify2.setText("审核中");
+                } else {
+                    //未审核
+                    mTextViewVirify2.setText("未审核");
+
+                }
+            }
+
             //年龄
             //年龄
             if (mUser.sex != null) {
                 mTextViewAge.setVisibility(View.VISIBLE);
                 if (mUser.age != null) {
-                    mTextViewAge.setText(" "+mUser.age);
+                    mTextViewAge.setText(" " + mUser.age);
                 }
                 if (mUser.sex.equals("1")) {
                     //男性
@@ -304,7 +300,7 @@ public class MeFragment extends BaseFragment {
             case R.id.ll_zizhi:
 
                 if (mUser != null) {
-                    if (mUser.provestatus.equals("1") &&! mUser.teachstatus.equals("3")) {
+                    if (mUser.provestatus.equals("1") && !mUser.teachstatus.equals("3")) {
                         start(ZizhiActivity.class);
                     } else {
                         if (!mUser.provestatus.equals("1")) {
@@ -387,7 +383,7 @@ public class MeFragment extends BaseFragment {
             case R.id.iv_head:
 
                 ARouter.getInstance().build("/activity/LookBigImageActivity")
-                        .withString("url",mUser.img)
+                        .withString("url", mUser.img)
                         .navigation();
 
                 break;
@@ -413,7 +409,7 @@ public class MeFragment extends BaseFragment {
                                                 .withString("orderType", "1")
                                                 .withInt("price", Integer.parseInt(mS))
                                                 .withString("title", "押金")
-                                                .withTransition(R.anim.alpha_enter,0)
+                                                .withTransition(R.anim.alpha_enter, 0)
                                                 .navigation(mContext);
                                     }
 

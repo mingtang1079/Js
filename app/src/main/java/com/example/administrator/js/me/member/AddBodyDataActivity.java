@@ -100,12 +100,13 @@ public class AddBodyDataActivity extends BaseActivity {
             mEtShengao.setText(mBodyData.height);
             mEtTizhi.setText(mBodyData.fat);
             mEtDaixie.setText(mBodyData.bmr);
+            mEtZhishu.setText(mBodyData.bmi);
             mEtJirou.setText(mBodyData.muscle);
             date = mBodyData.writedate;
             mTvTime.setText(date);
         } else {
             date = DateUtils.getCurrentTimeInString();
-
+            mTvTime.setText(date);
         }
 
         Observable<CharSequence> mObservable1 = RxTextView.textChanges(mEtTizhong);
@@ -152,11 +153,9 @@ public class AddBodyDataActivity extends BaseActivity {
                     @Override
                     public void onDateSelected(GregorianLunarCalendarView.CalendarData mCalendarData) {
                         long selectedTime = DateUtils.getLongTime(mCalendarData.getTimeWithHms());
-                        if (selectedTime>DateUtils.getCurrentTime())
-                        {
+                        if (selectedTime > DateUtils.getCurrentTime()) {
                             showToast("选择的时间不能大于当前时间");
-                        }
-                        else {
+                        } else {
                             date = mCalendarData.getTimeWithHms();
                             mTvTime.setText(date);
 
@@ -232,6 +231,21 @@ public class AddBodyDataActivity extends BaseActivity {
             if (!TextUtils.isEmpty(mBodyData.wdtun)) {
                 mStringStringMap.put("wdtun", mBodyData.wdtun);
             }
+
+            //新增加的
+            if (!TextUtils.isEmpty(mBodyData.rightwddabi)) {
+                mStringStringMap.put("rightwddabi", mBodyData.rightwddabi);
+            }
+            if (!TextUtils.isEmpty(mBodyData.rightwddatui)) {
+                mStringStringMap.put("rightwddatui", mBodyData.rightwddatui);
+            }
+            if (!TextUtils.isEmpty(mBodyData.rightwdxiaobi)) {
+                mStringStringMap.put("rightwdxiaobi", mBodyData.rightwdxiaobi);
+            }
+            if (!TextUtils.isEmpty(mBodyData.rightwdxiaotui)) {
+                mStringStringMap.put("rightwdxiaotui", mBodyData.rightwdxiaotui);
+            }
+
         }
 
 
