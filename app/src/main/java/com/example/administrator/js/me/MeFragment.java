@@ -413,6 +413,7 @@ public class MeFragment extends BaseFragment {
                                                 .withString("orderType", "1")
                                                 .withInt("price", Integer.parseInt(mS))
                                                 .withString("title", "押金")
+                                                .withTransition(R.anim.alpha_enter,0)
                                                 .navigation(mContext);
                                     }
 

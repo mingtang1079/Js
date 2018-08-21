@@ -158,5 +158,9 @@
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorControlActivated">@color/color_ffcd00</item>
     </style>
+    <style name="payButton" parent="Theme.AppCompat">
+        <item name="buttonStyle">@style/Widget.AppCompat.Button</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+    </style>
 
 </resources>

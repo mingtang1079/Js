@@ -88,6 +88,7 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
                             .withInt("price", mList.get(position).crealprice)
                             .withInt("totalPrice", mList.get(position).ctotalprice)
                             .withString("title",mList.get(position).ctypename)
+                            .withTransition(R.anim.alpha_enter,0)
                             .navigation(mContext);
 
 

@@ -328,6 +328,7 @@ public class OrderDetailActivity extends BaseActivity {
                         .withInt("price", mOrder.crealprice)
                         .withInt("totalPrice", mOrder.ctotalprice)
                         .withString("title", mOrder.ctypename)
+                        .withTransition(R.anim.alpha_enter,0)
                         .navigation(mContext);
 
                 break;

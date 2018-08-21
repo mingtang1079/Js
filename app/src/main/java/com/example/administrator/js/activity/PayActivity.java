@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -61,9 +62,11 @@ public class PayActivity extends BaseActivity {
     @Autowired
     String title;
 
-
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.iv_close)
+    ImageView mImageViewClose;
+    View mSpace;
+    @BindView(R.id.tv_title)
+    TextView mTextViewTitle;
     @BindView(R.id.tv_all_price)
     TextView mTvShijiPrice;//实际价格
     @BindView(R.id.tv_total_price)
@@ -93,13 +96,25 @@ public class PayActivity extends BaseActivity {
 
     @Override
     public Toolbar getToolbar() {
-        return mToolbar;
+        return null;
     }
 
     @Override
     protected void initView() {
-
-        mToolbar.setTitle(title);
+        mSpace = findViewById(R.id.space);
+        mSpace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                finish();
+            }
+        });
+        mImageViewClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                finish();
+            }
+        });
+        mTextViewTitle.setText(title);
         mStrings.add("支付宝支付");
         mStrings.add("微信支付");
         mPayAdapter = new PayAdapter(R.layout.item_pay, mStrings);
@@ -123,7 +138,7 @@ public class PayActivity extends BaseActivity {
         BigDecimal b;
         a = new BigDecimal(price);
         b = new BigDecimal(100);
-        mTvShijiPrice.setText(a.divide(b, 2, RoundingMode.HALF_UP).toString() + "元");
+        mTvShijiPrice.setText("￥" + a.divide(b, 2, RoundingMode.HALF_UP).toString() + "元");
 
         //订单情况
         if (!"押金".equals(title)) {
@@ -136,13 +151,12 @@ public class PayActivity extends BaseActivity {
                 b1 = new BigDecimal(100);
                 mTextViewYouhuijiage.setText(a1.divide(b1, 2, RoundingMode.HALF_UP).toString() + "元");
             }
-            BigDecimal aa=new BigDecimal(totalPrice);
-            mTextViewTotolPrice.setText("￥"+aa.divide(new BigDecimal(100)).doubleValue() + "元");
-        }
-        else {
+            BigDecimal aa = new BigDecimal(totalPrice);
+            mTextViewTotolPrice.setText(aa.divide(new BigDecimal(100)).doubleValue() + "元");
+        } else {
 
-            BigDecimal aa=new BigDecimal(price);//押金的实际价格 就是总价
-            mTextViewTotolPrice.setText("￥"+aa.divide(new BigDecimal(100)).doubleValue() + "元");
+            BigDecimal aa = new BigDecimal(price);//押金的实际价格 就是总价
+            mTextViewTotolPrice.setText(aa.divide(new BigDecimal(100)).doubleValue() + "元");
             mTextViewYouhuijiage.setText("无优惠");
 
         }
@@ -290,6 +304,12 @@ public class PayActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStatusChange(EventMessage.closePayActivity mListStatusChange) {
         finish();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, R.anim.alpha_out);
     }
 
 }
