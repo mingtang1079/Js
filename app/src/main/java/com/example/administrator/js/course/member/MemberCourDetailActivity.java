@@ -36,12 +36,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.constant.EventMessage;
 import com.example.administrator.js.course.CourseModel;
 import com.example.administrator.js.course.model.CourseDetail;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.utils.Utils;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -216,7 +219,7 @@ public class MemberCourDetailActivity extends BaseActivity {
         //年龄
         if (mCourseDetail.sex != null) {
             if (mCourseDetail.age != null) {
-                mTvAge.setText(" "+mCourseDetail.age);
+                mTvAge.setText(" " + mCourseDetail.age);
             }
             if (mCourseDetail.sex.equals("1")) {
                 //男性
@@ -350,7 +353,7 @@ public class MemberCourDetailActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_shangke,R.id.iv_head})
+    @OnClick({R.id.tv_call, R.id.map, R.id.tv_dazhaohu, R.id.tv_shangke, R.id.iv_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_call:
@@ -372,7 +375,7 @@ public class MemberCourDetailActivity extends BaseActivity {
             case R.id.iv_head:
 
                 ARouter.getInstance().build("/activity/LookBigImageActivity")
-                        .withString("url",mCourseDetail.img)
+                        .withString("url", mCourseDetail.img)
                         .navigation();
 
                 break;
@@ -397,7 +400,7 @@ public class MemberCourDetailActivity extends BaseActivity {
                     .withString("tid", this.mCourseModel.tid)
                     .withString("id", mCourseDetail.id)
                     .navigation(mContext);
-            finish();
+            //  finish();
             return;
         }
         final String finalStatus = status;
@@ -412,6 +415,7 @@ public class MemberCourDetailActivity extends BaseActivity {
                             @Override
                             protected void onSucess(String mS) {
                                 mCourseDetail.status = finalStatus1;
+                                EventBus.getDefault().post(new EventMessage.CourseListStatusChange());
                                 setStatus();
                             }
 

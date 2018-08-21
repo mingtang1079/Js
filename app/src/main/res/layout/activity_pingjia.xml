@@ -74,7 +74,7 @@
                     style="?android:attr/ratingBarStyleIndicator"
                     android:layout_width="wrap_content"
                     android:isIndicator="false"
-
+                    android:rating="5"
                     android:numStars="5"
                     android:theme="@style/RatingBar"
                     android:stepSize="1.0"

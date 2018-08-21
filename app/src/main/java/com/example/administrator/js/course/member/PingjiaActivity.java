@@ -5,6 +5,7 @@ import android.support.v7.widget.AppCompatRatingBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -129,15 +130,17 @@ public class PingjiaActivity extends BaseActivity {
                         if (mPingjia != null) {
 
                             mRbPingfen.setRating(mPingjia.score);
-                            List<String> mRe = StringUtils.stringToList(mPingjia.keyword.toString());
-                            for (String mS : mItemAdapter.getData()) {
+                            if (!TextUtils.isEmpty(mPingjia.keyword)) {
+                                List<String> mRe = StringUtils.stringToList(mPingjia.keyword.toString());
+                                for (String mS : mItemAdapter.getData()) {
 
-                                for (String mS1 : mRe) {
-                                    if (mS.equals(mS1)) {
-                                        mItemAdapter.switchSelectedState(mStrings.indexOf(mS));
+                                    for (String mS1 : mRe) {
+                                        if (mS.equals(mS1)) {
+                                            mItemAdapter.switchSelectedState(mStrings.indexOf(mS));
+                                        }
                                     }
-                                }
 
+                                }
                             }
                             mEtContent.setText(mPingjia.praisedesc);
                         }

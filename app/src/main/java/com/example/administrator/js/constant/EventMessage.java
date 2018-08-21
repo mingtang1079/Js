@@ -79,4 +79,8 @@ public class EventMessage {
     public static class RelationStatusChangge extends EventMessage{
 
     }
+
+    public static class CouseStatusChangge extends EventMessage{
+
+    }
 }

@@ -26,9 +26,9 @@ public class Pingjia implements Serializable {
 
     public String id;
     public boolean isNewRecord;
-    public Object remarks;
-    public Object createDate;
-    public Object updateDate;
+    public String remarks;
+    public String createDate;
+    public String updateDate;
     public String tid;
     public String courseid;
     public String userid;
@@ -36,6 +36,6 @@ public class Pingjia implements Serializable {
     public Object item2;
     public Object item3;
     public Object item4;
-    public Object keyword;
+    public String keyword;
     public String praisedesc;
 }

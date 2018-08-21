@@ -13,6 +13,8 @@ public class Constans {
     public static String rongAppKey = "0vnjpoad06u6z";
     public static String rongAppScrect = "AYGUlxRNLPUr";
     public static String weixin = "wx4f356883cc9ad92a";
+    public static  String shareTitle="约铁不私教app";
+    public  static  String shareContent="约铁不，为您提供专属的私人教练服务";
 
     //新浪微博
     /**

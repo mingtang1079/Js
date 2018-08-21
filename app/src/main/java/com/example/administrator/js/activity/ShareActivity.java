@@ -76,13 +76,13 @@ public class ShareActivity extends BaseActivity implements WbShareCallback {
             @Override
             public void onClick(View mView) {
 
-                shareUtil.shareToWXSceneSession("http://www.cdmuscle.com", "分享", "健身描述");
+                shareUtil.shareToWXSceneSession("http://www.cdmuscle.com", Constans.shareTitle, Constans.shareContent);
             }
         });
         mImageViewqq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                shareUtil.shareToQQ((Activity) mContext, "http://www.cdmuscle.com", "分享", "健身描述", new IUiListener() {
+                shareUtil.shareToQQ((Activity) mContext, "http://www.cdmuscle.com", Constans.shareTitle,  Constans.shareContent, new IUiListener() {
                     @Override
                     public void onComplete(Object mO) {
                         onWbShareSuccess();

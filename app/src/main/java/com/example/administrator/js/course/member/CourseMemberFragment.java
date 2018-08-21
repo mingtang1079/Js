@@ -93,9 +93,5 @@ public class CourseMemberFragment extends BaseRefreshFragment<CourseModel> {
     public void onStatusChange(EventMessage.CourseListStatusChange mListStatusChange) {
         refreshData(false);
     }
-    @Override
-    protected void onUserVisible() {
-        super.onUserVisible();
-        refreshData(false);
-    }
+
 }

@@ -61,7 +61,7 @@ public class BuySiJiaoKeActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.content)
-    NestedScrollView mNestedScrollView;
+    LinearLayout mNestedScrollView;
 
     @BindView(R.id.iv_head)
     CircleImageView mIvHead;
