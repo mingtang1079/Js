@@ -78,6 +78,13 @@ public class CourseHistoryOrderFragment extends BaseRefreshFragment<HistoryOrder
 
 
     }
+
+    @Override
+    protected boolean registerEventBus() {
+
+        return true;
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStatusChange(EventMessage.CourseListStatusChange mListStatusChange) {
         refreshData(false);

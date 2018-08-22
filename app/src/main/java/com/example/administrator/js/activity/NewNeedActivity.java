@@ -1,6 +1,7 @@
 package com.example.administrator.js.activity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,6 +23,7 @@ import com.appbaselib.base.BaseModel;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.AdressHelper;
+import com.appbaselib.utils.DialogUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
@@ -268,7 +270,7 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
     private void setData(NewNeed mNewNeedBaseModel) {
 
         mEtWenzi.setText(mNewNeedBaseModel.detail);
-        mEtCount.setText(mNewNeedBaseModel.csum + "");
+        mEtCount.setText(mNewNeedBaseModel.csum == null ? "1" : mNewNeedBaseModel.csum + "");
         if (StringUtils.stringToList(mNewNeedBaseModel.detailimg) != null) {
             mSelected.addAll(StringUtils.stringToList(mNewNeedBaseModel.detailimg));
         }
@@ -312,8 +314,25 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
                 });
                 break;
             case R.id.btn_sure:
+                if (TextUtils.isEmpty(mNewNeed.areacode)) {
+                    showToast("请选择地址");
+                    return;
+                }
 
-                save();
+                if (UserManager.getInsatance().getUser().areacode.equals(mNewNeed.areacode)) {
+                    save();
+                } else {
+
+                    DialogUtils.getDefaultDialog(mContext, "", "您的上课地址更换到" + mTvAddress.getText().toString() + ",确定更新并发布吗？", "确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                            save();
+
+                        }
+                    }).show();
+
+                }
 
                 break;
         }
@@ -324,6 +343,15 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
 
     @SuppressLint("CheckResult")
     private void save() {
+
+        if (TextUtils.isEmpty(mNewNeed.coursetypeids)) {
+            showToast("请选择需求类型");
+            return;
+        }
+        if (TextUtils.isEmpty(mNewNeed.detail)) {
+            showToast("请填写详细描述");
+            return;
+        }
 
         final Map<String, Object> mStringObjectMap = new HashMap<>();
         mStringObjectMap.put("userid", UserManager.getInsatance().getUser().id);

@@ -206,10 +206,10 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         }
     }
 
-    int p1=-1;
-    int p2=-1;
-    int p3=-3;
-    List<Integer> mIntegers=new ArrayList<>();
+    int p1 = -1;
+    int p2 = -1;
+    int p3 = -3;
+    List<Integer> mIntegers = new ArrayList<>();
 
     private void showXiangShaixuan() {
         View mView = getLayoutInflater().inflate(R.layout.view_trainer_shaixuan, null, false);
@@ -254,7 +254,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 mItemAdapter.setSingleChoosed(position);
-                p1=position;
+                p1 = position;
             }
         });
 //-----------------------------------------------------------------我是分割线-----------------------------------------------
@@ -276,7 +276,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 mItemAdapter1.setSingleChoosed(position);
-                p2=position;
+                p2 = position;
             }
         });
 //-----------------------------------------------------------------我是分割线-----------------------------------------------
@@ -296,7 +296,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 mItemAdapter2.setSingleChoosed(position);
-                p3=position;
+                p3 = position;
             }
         });
         //-----------------------------------------------------------------我是分割线-----------------------------------------------
@@ -313,8 +313,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
         mRecyclerView3.setLayoutManager(mFlexboxLayoutManager3);
         mRecyclerView3.addItemDecoration(new ItemGridDividerItemDecoration());
         mRecyclerView3.setAdapter(mItemAdapter3);
-        for (Integer mInteger:mIntegers)
-        {
+        for (Integer mInteger : mIntegers) {
             mItemAdapter3.switchSelectedState(mInteger);
 
         }
@@ -330,14 +329,14 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             @Override
             public void onClick(View mView) {
 
-                //重置
+                //view重置
                 mEditText.setText("");
                 mEditText2.setText("");
                 beginprice = "";
                 endprice = "";
-                p1=-1;
-                p2=-1;
-                p3=-1;
+                p1 = -1;
+                p2 = -1;
+                p3 = -1;
                 mIntegers.clear();
 
                 mItemAdapter.setSingleChoosed(-1);
@@ -345,6 +344,15 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                 mItemAdapter2.setSingleChoosed(-1);
                 mItemAdapter3.clearSelectedState();
 
+                //参数重置
+                distance = 0;
+                degree = "";
+                sex = "";
+                skillids = "";
+                orderby = "";
+                pageNo = 1;
+                mBottomSheetDialog.dismiss();
+                refreshData(true);
             }
         });
         mTextView1.setOnClickListener(new View.OnClickListener() {
@@ -379,7 +387,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                     degree = "3";
                 }
 
-                if (mItemAdapter3.getSelectedItemsKey() != null&&mItemAdapter3.getSelectedItemsKey().size()!=0) {
+                if (mItemAdapter3.getSelectedItemsKey() != null && mItemAdapter3.getSelectedItemsKey().size() != 0) {
                     StringBuilder mStringBuilder = new StringBuilder();
                     for (Integer m : mItemAdapter3.getSelectedItemsKey()) {
                         mStringBuilder.append(mSkills.get(m).id + ",");
@@ -439,7 +447,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
                 if (position == 0) {
-                    orderby="";
+                    orderby = "";
                     mJuli.setText("距离");
                 } else if (position == 1) {
                     orderby = "a.distance";

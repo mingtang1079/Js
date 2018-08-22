@@ -27,7 +27,7 @@ public class NewNeed implements Serializable{
     public String coursetypeids;
     public String coursetypenames;
     public String areaname;
-    public int csum;
+    public Integer csum;
     public boolean isNewRecord;
     public String userid;
     public String areacode;

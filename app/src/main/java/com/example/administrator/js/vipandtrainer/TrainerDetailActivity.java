@@ -245,13 +245,13 @@ public class TrainerDetailActivity extends BaseActivity {
 
 
             if (mTrainerDetail.relation.status.equals("2")) {
-                mBtnGuanzhu.setVisibility(View.GONE);
-                mBtnSixin.setVisibility(View.GONE);
+                mLinearLayoutButton.setVisibility(View.GONE);
+                mLinearLayoutButton0.setVisibility(View.GONE);
                 mMenuItem.setTitle("取消黑名单");
             } else {
-                mBtnGuanzhu.setVisibility(View.VISIBLE);
                 mMenuItem.setTitle("加入黑名单");
-                mBtnSixin.setVisibility(View.VISIBLE);
+                mLinearLayoutButton.setVisibility(View.VISIBLE);
+                mLinearLayoutButton0.setVisibility(View.VISIBLE);
             }
             //已接单不能拉黑
             if (!TextUtils.isEmpty(mTrainerDetail.relation.tradestatus) && mTrainerDetail.relation.tradestatus.equals("1")) {

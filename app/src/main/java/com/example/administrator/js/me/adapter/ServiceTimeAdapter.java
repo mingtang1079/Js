@@ -37,17 +37,17 @@ public class ServiceTimeAdapter extends BaseRecyclerViewAdapter<ServiceTime> {
         StringBuilder mStringBuilder = new StringBuilder();
 
         if ("1".equals(item.day1))
-            mStringBuilder.append("周一,");
+            mStringBuilder.append("周一 ");
         if ("1".equals(item.day2))
-            mStringBuilder.append("周二,");
+            mStringBuilder.append("周二 ");
         if ("1".equals(item.day3))
-            mStringBuilder.append("周三,");
+            mStringBuilder.append("周三 ");
         if ("1".equals(item.day4))
-            mStringBuilder.append("周四,");
+            mStringBuilder.append("周四 ");
         if ("1".equals(item.day5))
-            mStringBuilder.append("周五,");
+            mStringBuilder.append("周五 ");
         if ("1".equals(item.day6))
-            mStringBuilder.append("周六,");
+            mStringBuilder.append("周六 ");
         if ("1".equals(item.day7))
             mStringBuilder.append("周日");
 

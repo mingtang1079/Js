@@ -86,17 +86,17 @@ public class AddServicetimeActivity extends BaseActivity {
 
             mXingqis = new ArrayList<>();
             if ("1".equals(mServiceTime.day1))
-                mXingqis.add(new Xingqi("周一,"));
+                mXingqis.add(new Xingqi("周一"));
             if ("1".equals(mServiceTime.day2))
-                mXingqis.add(new Xingqi("周二,"));
+                mXingqis.add(new Xingqi("周二"));
             if ("1".equals(mServiceTime.day3))
-                mXingqis.add(new Xingqi("周三,"));
+                mXingqis.add(new Xingqi("周三"));
             if ("1".equals(mServiceTime.day4))
-                mXingqis.add(new Xingqi("周四,"));
+                mXingqis.add(new Xingqi("周四"));
             if ("1".equals(mServiceTime.day5))
-                mXingqis.add(new Xingqi("周五,"));
+                mXingqis.add(new Xingqi("周五"));
             if ("1".equals(mServiceTime.day6))
-                mXingqis.add(new Xingqi("周六,"));
+                mXingqis.add(new Xingqi("周六"));
             if ("1".equals(mServiceTime.day7))
                 mXingqis.add(new Xingqi("周日"));
 
