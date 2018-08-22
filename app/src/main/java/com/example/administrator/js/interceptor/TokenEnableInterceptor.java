@@ -63,12 +63,13 @@ public class TokenEnableInterceptor implements Interceptor {
                 //***********************do something*****************************
                 try {
                     int code = new JSONObject(result).getInt("code");
+                    String mS=new JSONObject(result).getString("msg");
                     if (code == 401) {
                         Intent intent = new Intent(AppManager.getInstance().getCurrentActivity(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         AppManager.getInstance().startActivity(intent);
                         Looper.prepare();
-                        ToastUtils.showShort(App.mInstance,"您的客户端已在其他客户端登录,请重新登录");
+                        ToastUtils.showShort(App.mInstance,mS);
                         Looper.loop();
 
                     }

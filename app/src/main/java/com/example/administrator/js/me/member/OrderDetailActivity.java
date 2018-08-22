@@ -203,11 +203,7 @@ public class OrderDetailActivity extends BaseActivity {
             mTvYouhuiPrice.setText("-" + BigBigDecimalUtils.divide(new BigDecimal(mOrder.ctotalprice - mOrder.crealprice), new BigDecimal(100)) + "元");
         }
         mTvOrderNumber.setText(mOrder.payno + "");
-        if ("1".equals(mOrder.paytype))
-            mTvOrderWay.setText("微信支付");
-        else {
-            mTvOrderWay.setText("支付宝支付");
-        }
+
         mTvOrderChuangjianTime.setText(mOrder.createDate);
         mTvOrderChengjiaoTime.setText(mOrder.paydate);
 
@@ -286,7 +282,14 @@ public class OrderDetailActivity extends BaseActivity {
             mLinearLayoutPayWay.setVisibility(View.GONE);
             mLinearLayoutTuike.setVisibility(View.GONE);
         }
-
+        if ("1".equals(mOrder.paytype))
+            mTvOrderWay.setText("微信支付");
+        else if ("0".equals(mOrder.paytype)){
+            mTvOrderWay.setText("支付宝支付");
+        }
+        else {
+            mLinearLayoutPayWay.setVisibility(View.GONE);
+        }
     }
 
     @OnClick({R.id.tv_tuike, R.id.tv_cancel, R.id.tv_quxiao_tuikuan, R.id.tv_pay, R.id.tv_tuikuan})
