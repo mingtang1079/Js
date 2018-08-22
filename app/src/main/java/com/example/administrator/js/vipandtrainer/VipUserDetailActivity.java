@@ -292,12 +292,12 @@ public class VipUserDetailActivity extends BaseActivity {
         //身体数据
 
         if (mUserDetail.bodydata != null) {
-            mTvTizhong.setText(StringUtils.getString(mUserDetail.bodydata.weight) + "");
-            mTvShengao.setText(StringUtils.getString(mUserDetail.bodydata.height) + "");
-            mTvDaixie.setText(StringUtils.getString(mUserDetail.bodydata.bmr) + "");
+            mTvTizhong.setText(StringUtils.getString(mUserDetail.bodydata.weight) + " kg");
+            mTvShengao.setText(StringUtils.getString(mUserDetail.bodydata.height) + " cm");
+            mTvDaixie.setText(StringUtils.getString(mUserDetail.bodydata.bmr) + " kcal");
             mTvZhibiao.setText(StringUtils.getString(mUserDetail.bodydata.bmi) + "");
-            mTvTizhi.setText(StringUtils.getString(mUserDetail.bodydata.fat) + "");
-            mTvNeizang.setText(StringUtils.getString(mUserDetail.bodydata.visceralfat));
+            mTvTizhi.setText(StringUtils.getString(mUserDetail.bodydata.fat) + " %");
+            mTvNeizang.setText(StringUtils.getString(mUserDetail.bodydata.muscle)+" kg");//换成肌肉量
 //            StringBuilder mStringBuilder = new StringBuilder();
 //            if (!TextUtils.isEmpty(mUserDetail.bodydata.wdxiong))
 //                mStringBuilder.append("胸：" + mUserDetail.bodydata.wdxiong);

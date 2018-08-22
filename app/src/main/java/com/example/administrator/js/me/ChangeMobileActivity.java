@@ -59,12 +59,15 @@ public class ChangeMobileActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone).skip(1);
+        Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone);
         Observable<CharSequence> mObservableYzm = RxTextView.textChanges(mEdYzm);
 
         Observable.combineLatest(mObservablePhone, mObservableYzm, new BiFunction<CharSequence, CharSequence, Boolean>() {
             @Override
             public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2) throws Exception {
+
+                mBtYzm.setEnabled((!TextUtils.isEmpty(mCharSequence) && mCharSequence.length() == 11));
+
                 return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2);
             }
         }).subscribe(new Consumer<Boolean>() {
