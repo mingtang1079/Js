@@ -193,21 +193,6 @@ public class TrainerDetailActivity extends BaseActivity {
 
     private void setData(final TrainerDetail mTrainerDetail) {
 
-        //黑名单或者其他原因不能展示
-        if (mTrainerDetail.code != 0) {
-            mLinearLayoutDetail.setVisibility(View.GONE);
-            mLinearLayoutButton.setVisibility(View.GONE);
-            mLinearLayoutButton0.setVisibility(View.GONE);
-
-            mTextViewMeassage.setVisibility(View.VISIBLE);
-        } else {
-            mLinearLayoutDetail.setVisibility(View.VISIBLE);
-            mLinearLayoutButton.setVisibility(View.VISIBLE);
-            mLinearLayoutButton0.setVisibility(View.VISIBLE);
-
-            mTextViewMeassage.setVisibility(View.GONE);
-
-        }
 
 
         if (mTrainerDetail.userinfo != null) {
@@ -294,6 +279,21 @@ public class TrainerDetailActivity extends BaseActivity {
         }
 
 
+        //黑名单或者其他原因不能展示
+        if (mTrainerDetail.code != 0) {
+            mLinearLayoutDetail.setVisibility(View.GONE);
+            mLinearLayoutButton.setVisibility(View.GONE);
+            mLinearLayoutButton0.setVisibility(View.GONE);
+
+            mTextViewMeassage.setVisibility(View.VISIBLE);
+        } else {
+            mLinearLayoutDetail.setVisibility(View.VISIBLE);
+            mLinearLayoutButton.setVisibility(View.VISIBLE);
+            mLinearLayoutButton0.setVisibility(View.VISIBLE);
+
+            mTextViewMeassage.setVisibility(View.GONE);
+
+        }
     }
 
 

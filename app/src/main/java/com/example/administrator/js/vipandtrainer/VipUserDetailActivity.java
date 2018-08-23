@@ -174,19 +174,6 @@ public class VipUserDetailActivity extends BaseActivity {
 
     private void setData(UserDetail mUserDetail) {
 
-        //黑名单或者其他原因不能展示
-        if (mUserDetail.code != 0) {
-            mLinearLayoutDetailAndBody.setVisibility(View.GONE);
-            mLinearLayoutButton.setVisibility(View.GONE);
-            mLinearLayoutYuyue.setVisibility(View.GONE);
-            mTextViewMeassage.setVisibility(View.VISIBLE);
-        } else {
-            mLinearLayoutDetailAndBody.setVisibility(View.VISIBLE);
-            mLinearLayoutButton.setVisibility(View.VISIBLE);
-            mLinearLayoutYuyue.setVisibility(View.VISIBLE);
-            mTextViewMeassage.setVisibility(View.GONE);
-
-        }
 
 
         User mUser = mUserDetail.userinfo;
@@ -319,6 +306,19 @@ public class VipUserDetailActivity extends BaseActivity {
 //
 //            mTvWeidu.setText(mStringBuilder);
             mTvWeidu.setText(mUserDetail.bodydata.wddetail);
+        }
+        //黑名单或者其他原因不能展示
+        if (mUserDetail.code != 0) {
+            mLinearLayoutDetailAndBody.setVisibility(View.GONE);
+            mLinearLayoutButton.setVisibility(View.GONE);
+            mLinearLayoutYuyue.setVisibility(View.GONE);
+            mTextViewMeassage.setVisibility(View.VISIBLE);
+        } else {
+            mLinearLayoutDetailAndBody.setVisibility(View.VISIBLE);
+            mLinearLayoutButton.setVisibility(View.VISIBLE);
+            mLinearLayoutYuyue.setVisibility(View.VISIBLE);
+            mTextViewMeassage.setVisibility(View.GONE);
+
         }
 
     }

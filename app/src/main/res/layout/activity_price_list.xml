@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="8dp"
-            android:text="专业课"
+            android:text="康复课"
             android:textColor="#4A576A"
             android:textSize="14sp" />
 z
