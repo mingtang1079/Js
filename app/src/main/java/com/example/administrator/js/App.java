@@ -138,9 +138,17 @@ public class App extends BaseApplication {
                                 .navigation();
                     }
                     else {
-                        ARouter.getInstance().build("/vip/VipUserDetailActivity")
-                                .withString("id", mUserInfo.getUserId())
-                                .navigation(mContext);
+                        if (UserManager.getInsatance().getRole().equals("1")) {
+
+                            ARouter.getInstance().build("/vipandtrainer/TrainerDetailActivity")
+                                    .withString("id",mUserInfo.getUserId())
+                                    .navigation(mContext);
+                        }
+                        else {
+                            ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                                    .withString("id", mUserInfo.getUserId())
+                                    .navigation(mContext);
+                        }
                     }
                     return true;
                 }
