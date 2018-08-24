@@ -76,7 +76,7 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingTop="16dp"
-                android:src="@drawable/umeng_socialize_wechat"
+                android:src="@drawable/icon_pyq"
                 />
 
             <TextView

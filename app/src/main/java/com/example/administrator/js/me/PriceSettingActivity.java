@@ -176,6 +176,7 @@ public class PriceSettingActivity extends BaseActivity {
                     @Override
                     protected void onSucess(String mS) {
                         showToast("保存成功！");
+                        finish();
                     }
 
                     @Override
