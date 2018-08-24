@@ -5,8 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.appbaselib.utils.BitmapUtil;
 import com.example.administrator.js.R;
@@ -31,6 +36,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 public class ShareUtils {
@@ -145,16 +151,19 @@ public class ShareUtils {
     /**
      * 分享到微信朋友圈
      */
-    public void shareToWXSceneTimeline(String url, String shareTitle, String description, String imageUrl) {
+    public void shareToWXSceneTimeline(String url, String shareTitle, String description, Drawable drawable) {
 
         WXWebpageObject webpageObject = new WXWebpageObject();
         webpageObject.webpageUrl = url;
         WXMediaMessage mediaMessage = new WXMediaMessage(webpageObject);
         mediaMessage.title = shareTitle;
         mediaMessage.description = description;
-        Bitmap bitmap = BitmapFactory.decodeFile(imageUrl);
-        Bitmap thumBmp = Bitmap.createScaledBitmap(bitmap, 150, 150, true);//图片大小有限制，太大分享不了
-        mediaMessage.thumbData = BitmapUtil.bitmapToByte(thumBmp);
+        if (drawable != null) {
+            BitmapDrawable bd = (BitmapDrawable) drawable;
+            Bitmap thumBmp = bd.getBitmap();
+            thumBmp = Bitmap.createScaledBitmap(thumBmp, 150, 150, true);//图片大小有限制，太大分享不了
+            mediaMessage.thumbData =bmpToByteArray(thumBmp,true);
+        }
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = String.valueOf(System.currentTimeMillis());
         req.message = mediaMessage;
@@ -245,4 +254,41 @@ public class ShareUtils {
 //        mediaObject.actionUrl = cons.USUAL_ISSUE_URL;
 //        return mediaObject;
 //    }
+
+    public  byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
+
+        int i;
+        int j;
+        if (bmp.getHeight() > bmp.getWidth()) {
+            i = bmp.getWidth();
+            j = bmp.getWidth();
+        } else {
+            i = bmp.getHeight();
+            j = bmp.getHeight();
+        }
+
+        Bitmap localBitmap = Bitmap.createBitmap(i, j, Bitmap.Config.RGB_565);
+        Canvas localCanvas = new Canvas(localBitmap);
+
+        while (true) {
+            localCanvas.drawBitmap(bmp, new Rect(0, 0, i, j), new Rect(0, 0,i, j), null);
+            if (needRecycle)
+                bmp.recycle();
+            ByteArrayOutputStream localByteArrayOutputStream = new ByteArrayOutputStream();
+            localBitmap.compress(Bitmap.CompressFormat.JPEG, 100,
+                    localByteArrayOutputStream);
+            localBitmap.recycle();
+            byte[] arrayOfByte = localByteArrayOutputStream.toByteArray();
+            try {
+                localByteArrayOutputStream.close();
+                return arrayOfByte;
+            } catch (Exception e) {
+                //F.out(e);
+            }
+            i = bmp.getHeight();
+            j = bmp.getHeight();
+        }
+
+    }
+
 }

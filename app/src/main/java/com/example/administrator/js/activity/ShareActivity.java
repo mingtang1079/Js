@@ -33,6 +33,7 @@ public class ShareActivity extends BaseActivity implements WbShareCallback {
     ImageView mImageViewWeixin;
     ImageView mImageViewWeibo;
     ImageView mImageViewqq;
+    ImageView mImageViewPyq;
     View mSpace;
 
     @Override
@@ -71,6 +72,7 @@ public class ShareActivity extends BaseActivity implements WbShareCallback {
         mImageViewWeixin = findViewById(R.id.iv_weixin);
         mImageViewqq = findViewById(R.id.iv_qq);
         mImageViewWeibo = findViewById(R.id.iv_weibo);
+        mImageViewPyq = findViewById(R.id.iv_pyq);
 
         mImageViewWeixin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,10 +81,18 @@ public class ShareActivity extends BaseActivity implements WbShareCallback {
                 shareUtil.shareToWXSceneSession("http://www.cdmuscle.com", Constans.shareTitle, Constans.shareContent);
             }
         });
+
+        mImageViewPyq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View mView) {
+                shareUtil.shareToWXSceneTimeline("http://www.cdmuscle.com", Constans.shareTitle, Constans.shareContent, mContext.getResources().getDrawable(R.mipmap.ic_launcher));
+            }
+        });
+
         mImageViewqq.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                shareUtil.shareToQQ((Activity) mContext, "http://www.cdmuscle.com", Constans.shareTitle,  Constans.shareContent, new IUiListener() {
+                shareUtil.shareToQQ((Activity) mContext, "http://www.cdmuscle.com", Constans.shareTitle, Constans.shareContent, new IUiListener() {
                     @Override
                     public void onComplete(Object mO) {
                         onWbShareSuccess();
