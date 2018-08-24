@@ -435,7 +435,9 @@ public class MemberCourDetailActivity extends BaseActivity {
 
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
         mBuilder.setTitle("课程取消原因");
-        View mView = LayoutInflater.from(mContext).inflate(R.layout.view_input, null, false);
+        View mView = LayoutInflater.from(mContext).inflate(R.layout.view_member_input, null, false);
+        TextView mTextView=mView.findViewById(R.id.tv_remark);
+        mTextView.setText("本月还可取消预约"+mCourseDetail.canceltimes+"次");
         final TextInputEditText mTextInputEditText = mView.findViewById(R.id.et);
         mBuilder.setView(mView);
         mBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -68,4 +68,5 @@ public class CourseDetail implements Serializable {
     public Integer age; // 年龄
 
     public String mobile;
+    public String canceltimes;
 }

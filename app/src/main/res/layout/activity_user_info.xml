@@ -10,314 +10,321 @@
 
     <include layout="@layout/include_toolbar" />
 
-    <LinearLayout
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
-        android:orientation="vertical">
+        android:layout_weight="7">
+
 
         <LinearLayout
-            android:id="@+id/ll_head"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:paddingRight="16dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/ll_head"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
-                android:text="头像"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingRight="16dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_head"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/icon_user_default" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="头像"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
 
-            <ImageView
-                android:layout_width="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/icon_user_default" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_nick"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_right" />
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="昵称"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:gravity="right"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp"
+                    tools:text="HebeFans" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_sex"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="性别"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_sex"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:gravity="right"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp"
+                    tools:text="男" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="生日"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_birthday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:gravity="right"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp"
+                    tools:text="1992-02-02" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_area"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="8dp"
+                    android:text="上课地址"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:gravity="right"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp"
+                    tools:text="四川-成都-武侯区" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_barcode"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="8dp"
+                    android:text="我的二维码"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/icon_barcode" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_right" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_weixin"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="绑定微信号"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_weixin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:gravity="right"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp"
+                    tools:text="sain5774" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_zhifubao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="绑定支付宝账号"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_zhifubao"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:gravity="right"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp"
+                    tools:text="sain5774" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_phone"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="修改手机号"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:gravity="right"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp"
+                    tools:text="17612870000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_password"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0.5dp"
+                android:background="@color/white"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="修改登陆密码"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_password"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawablePadding="16dp"
+                    android:drawableRight="@drawable/icon_right"
+                    android:gravity="right"
+                    android:textColor="#4A576A"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_nick"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:text="昵称"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_user_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                tools:text="HebeFans" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_sex"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:text="性别"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_sex"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                tools:text="男" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:text="生日"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_birthday"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                tools:text="1992-02-02" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_area"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="8dp"
-                android:text="上课地址"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_address"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                tools:text="四川-成都-武侯区" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_barcode"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="8dp"
-                android:text="我的二维码"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/icon_barcode" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_right" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_weixin"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:text="绑定微信号"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_weixin"
-                android:drawableRight="@drawable/icon_right"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                tools:text="sain5774" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_zhifubao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:text="绑定支付宝账号"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_zhifubao"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                tools:text="sain5774" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_phone"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:text="修改手机号"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_phone"
-
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp"
-                tools:text="17612870000" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_password"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0.5dp"
-            android:background="@color/white"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="8dp"
-                android:text="修改登陆密码"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tv_password"
-
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:drawablePadding="16dp"
-                android:drawableRight="@drawable/icon_right"
-                android:gravity="right"
-                android:textColor="#4A576A"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/tv_exit"
