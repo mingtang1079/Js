@@ -2,12 +2,10 @@ package com.example.administrator.js.me.member;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
@@ -21,10 +19,7 @@ import com.appbaselib.utils.DialogUtils;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
-import com.example.administrator.js.base.model.WrapperModel;
 import com.example.administrator.js.constant.EventMessage;
-import com.example.administrator.js.course.member.ShangkeRecord;
-import com.example.administrator.js.course.member.ShangkeRecordActivity;
 import com.example.administrator.js.utils.BigBigDecimalUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,7 +31,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -173,7 +167,7 @@ public class OrderDetailActivity extends BaseActivity {
         mTvId.setText("ID：" + mOrder.no + "");
         //年龄
         if (mOrder.age != null && mOrder.sex != null) {
-            mTvAge.setText(" "+mOrder.age);
+            mTvAge.setText(" " + mOrder.age);
             if (mOrder.sex.equals("1")) {
                 //男性
                 mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
@@ -255,9 +249,9 @@ public class OrderDetailActivity extends BaseActivity {
             //   mTvTuikuan.setText("退课详情");
             //退款显示的内容
             mLinearLayoutTuike.setVisibility(View.VISIBLE);
-            mTextViewTuikeCount.setText(mOrder.csum - mOrder.cuse+"节");
-            BigDecimal mBigDecimal=new BigDecimal(mOrder.refundmoney);
-            mTextViewTuikePrice.setText(mBigDecimal.divide(new BigDecimal(100)).doubleValue()+"");
+            mTextViewTuikeCount.setText(mOrder.csum - mOrder.cuse + "节");
+            BigDecimal mBigDecimal = new BigDecimal(mOrder.refundmoney);
+            mTextViewTuikePrice.setText(mBigDecimal.divide(new BigDecimal(100)).doubleValue() + "");
 
             mLinearLayoutTime.setVisibility(View.VISIBLE);
             mLinearLayoutPayWay.setVisibility(View.VISIBLE);
@@ -284,10 +278,9 @@ public class OrderDetailActivity extends BaseActivity {
         }
         if ("1".equals(mOrder.paytype))
             mTvOrderWay.setText("微信支付");
-        else if ("0".equals(mOrder.paytype)){
+        else if ("0".equals(mOrder.paytype)) {
             mTvOrderWay.setText("支付宝支付");
-        }
-        else {
+        } else {
             mLinearLayoutPayWay.setVisibility(View.GONE);
         }
     }
@@ -331,7 +324,7 @@ public class OrderDetailActivity extends BaseActivity {
                         .withInt("price", mOrder.crealprice)
                         .withInt("totalPrice", mOrder.ctotalprice)
                         .withString("title", mOrder.ctypename)
-                        .withTransition(R.anim.alpha_enter,0)
+                        .withTransition(R.anim.alpha_enter, 0)
                         .navigation(mContext);
 
                 break;
@@ -357,7 +350,7 @@ public class OrderDetailActivity extends BaseActivity {
                     @Override
                     protected void onSucess(String mS) {
                         finish();
-                        EventBus.getDefault().post(new EventMessage.ListStatusChange());
+                        EventBus.getDefault().post(new EventMessage.PaySucessResult());
                     }
 
                     @Override
@@ -368,9 +361,13 @@ public class OrderDetailActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected boolean registerEventBus() {
+        return  true;
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onStatusChange(EventMessage.ListStatusChange mListStatusChange) {
-      finish();
+    public void onStatusChange(EventMessage.PaySucessResult mPaySucessResult) {
+        requestData();
     }
 }

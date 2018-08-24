@@ -1,27 +1,20 @@
 package com.example.administrator.js.wxapi;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.Navigator;
-import com.appbaselib.utils.PreferenceUtils;
-import com.appbaselib.utils.ToastUtils;
 import com.example.administrator.js.R;
 import com.example.administrator.js.activity.fragment.PayFailFragment;
 import com.example.administrator.js.activity.fragment.PaySuccessFragment;
 import com.example.administrator.js.constant.Constans;
 import com.example.administrator.js.constant.EventMessage;
-import com.ldf.calendar.Const;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
-import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
@@ -29,7 +22,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
+
 /**
  * 微信支付
  */
@@ -94,7 +87,7 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
             switch (code) {
                 case 0:
                     //更新订单列表状态
-                    EventBus.getDefault().post(new EventMessage.ListStatusChange());
+                    EventBus.getDefault().post(new EventMessage.PaySucessResult());
                     mNavigator.showFragment(new PaySuccessFragment());
                     break;
                 case -1:

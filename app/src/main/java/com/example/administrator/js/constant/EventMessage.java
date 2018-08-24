@@ -36,7 +36,7 @@ public class EventMessage {
     }
 
     //支付成功
-    public static class ListStatusChange extends EventMessage {
+    public static class PaySucessResult extends EventMessage {
 
     }
 

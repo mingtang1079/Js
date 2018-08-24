@@ -14,6 +14,10 @@ import com.appbaselib.adapter.FragmentAdapter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.utils.TablayoutUtils;
 import com.example.administrator.js.R;
+import com.example.administrator.js.constant.EventMessage;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,5 +105,15 @@ public class MyOrderActivity extends BaseActivity {
         mTab.setupWithViewPager(mViewpager);
         TablayoutUtils.setTabLine(mTab, 10, 10, mContext);
 
+    }
+
+    @Override
+    protected boolean registerEventBus() {
+        return  true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onStatusChange(EventMessage.PaySucessResult mPaySucessResult) {
+     mViewpager.setCurrentItem(3);
     }
 }

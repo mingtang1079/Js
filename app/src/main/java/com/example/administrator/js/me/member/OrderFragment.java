@@ -22,7 +22,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -115,7 +114,7 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
                     @Override
                     protected void onSucess(String mS) {
                         mAdapter.remove(mPosition);
-                        EventBus.getDefault().post(new EventMessage.ListStatusChange());
+                        EventBus.getDefault().post(new EventMessage.PaySucessResult());
                     }
 
                     @Override
@@ -151,7 +150,7 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onStatusChange(EventMessage.ListStatusChange mListStatusChange) {
+    public void onStatusChange(EventMessage.PaySucessResult mPaySucessResult) {
         refreshData(false);
     }
 }

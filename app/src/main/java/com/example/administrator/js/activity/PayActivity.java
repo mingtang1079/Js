@@ -219,7 +219,7 @@ public class PayActivity extends BaseActivity {
                         if (TextUtils.equals(resultStatus, "9000")) {
                             // MyUtil.showToast("支付成功");
                             //更新订单列表状态
-                            EventBus.getDefault().post(new EventMessage.ListStatusChange());
+                            EventBus.getDefault().post(new EventMessage.PaySucessResult());
                             ARouter.getInstance().build("/activity/PaySuccessfulActivity")
                                     .withString("orderId", orderId)
                                     .navigation(mContext);
