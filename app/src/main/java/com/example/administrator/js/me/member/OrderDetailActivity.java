@@ -259,9 +259,9 @@ public class OrderDetailActivity extends BaseActivity {
             //退款显示的内容
             mLinearLayoutTuike.setVisibility(View.VISIBLE);
             mTextViewTuikeCount.setText(mOrder.csum - mOrder.cuse + "节");
-            BigDecimal mBigDecimal = new BigDecimal(mOrder.refundmoney);
+            BigDecimal mBigDecimal = new BigDecimal(mOrder.refundmoney+"元");
             mTextViewTuikePrice.setText(mBigDecimal.divide(new BigDecimal(100)).doubleValue() + "");
-
+//------------------
             mLinearLayoutTime.setVisibility(View.VISIBLE);
             mLinearLayoutPayWay.setVisibility(View.VISIBLE);
 
@@ -271,8 +271,12 @@ public class OrderDetailActivity extends BaseActivity {
             mTvPay.setVisibility(View.GONE);
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
+            //退款显示的内容
             mLinearLayoutTuike.setVisibility(View.VISIBLE);
-
+            mTextViewTuikeCount.setText(mOrder.csum - mOrder.cuse + "节");
+            BigDecimal mBigDecimal = new BigDecimal(mOrder.refundmoney);
+            mTextViewTuikePrice.setText(mBigDecimal.divide(new BigDecimal(100)).doubleValue() + "元");
+//------------------
             mLinearLayoutTime.setVisibility(View.VISIBLE);
             mLinearLayoutPayWay.setVisibility(View.VISIBLE);
 

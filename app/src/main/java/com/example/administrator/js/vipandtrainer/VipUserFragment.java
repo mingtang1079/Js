@@ -39,7 +39,7 @@ public class VipUserFragment extends BaseRefreshFragment<User> {
     String status;
 
     @BindView(R.id.et_search)
-    TextView mEditTextSearch;
+    EditText mEditTextSearch;
 
     @Override
     protected void initView() {
@@ -53,14 +53,13 @@ public class VipUserFragment extends BaseRefreshFragment<User> {
                         refreshData(true);
                     }
                 });
-        mEditTextSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View mView) {
-                start(SearchUserActivity.class);
-
-            }
-        });
-
+//        mEditTextSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View mView) {
+//                start(SearchUserActivity.class);
+//
+//            }
+//        });
 
         toggleShowLoading(true, "加载中……");
         requestData();

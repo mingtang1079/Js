@@ -43,7 +43,7 @@ public class TrainerFragment extends BaseRefreshFragment<User> {
     @Autowired
     String status;
     @BindView(R.id.et_search)
-    TextView mEditTextSearch;
+    EditText mEditTextSearch;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -62,13 +62,13 @@ public class TrainerFragment extends BaseRefreshFragment<User> {
                         refreshData(true);
                     }
                 });
-        mEditTextSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View mView) {
-                start(SearchTrianerActivity.class);
-
-            }
-        });
+//        mEditTextSearch.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View mView) {
+//                start(SearchTrianerActivity.class);
+//
+//            }
+//        });
         toggleShowLoading(true, "加载中……");
         requestData();
 

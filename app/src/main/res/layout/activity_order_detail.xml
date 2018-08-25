@@ -202,7 +202,7 @@
                     android:id="@+id/tv_all_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥ 123.21"
+                    tools:text="￥ 123.21"
                     android:textColor="#ff4a576a"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -236,7 +236,7 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="-123.21"
+                    tools:text="-123.21"
                     android:textColor="#ff4a576a"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -270,7 +270,7 @@
                     android:id="@+id/tv_shiji_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="￥ 123.21"
+                    tools:text="￥ 123.21"
                     android:textColor="#FD516E"
                     android:textSize="14sp"/>
             </LinearLayout>
@@ -343,7 +343,7 @@
                         android:id="@+id/tv_tuikuan_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="￥ 123.21"
+                        tools:text="￥ 123.21"
                         android:textColor="#ff4a576a"
                         android:textSize="14sp"/>
                 </LinearLayout>

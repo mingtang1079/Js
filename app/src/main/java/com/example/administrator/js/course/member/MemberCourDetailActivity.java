@@ -455,6 +455,7 @@ public class MemberCourDetailActivity extends BaseActivity {
                         .subscribe(new ResponceSubscriber<String>() {
                             @Override
                             protected void onSucess(String mS) {
+                                EventBus.getDefault().post(new EventMessage.CourseListStatusChange());
                                 showToast("取消成功");
                                 finish();
                             }

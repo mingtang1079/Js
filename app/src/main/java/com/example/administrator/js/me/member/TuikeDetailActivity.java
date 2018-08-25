@@ -108,7 +108,7 @@ public class TuikeDetailActivity extends BaseActivity {
             mTvAge.setVisibility(View.GONE);
         }
         mTvReason.setText("退款原因：" + mOrder.refundtype);
-        mTvTime.setText("申请时间：" + mOrder.tuikeTime);
+        mTvTime.setText("申请时间：" + mOrder.updateDate);
         mTvNumber.setText("订单号：" + mOrder.payno + "");
 
         BigDecimal mBigDecimal=new BigDecimal(mOrder.refundmoney);

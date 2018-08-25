@@ -86,7 +86,7 @@ public class ExerciseFragment extends BaseFragment {
         mImageViewMes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                EventBus.getDefault().post(new EventMessage.NewMessageReceived(1));
+                EventBus.getDefault().postSticky(new EventMessage.NewMessageReceived(1));
                 start(MessageActivity.class);
                 mViewTag.setVisibility(View.GONE);
             }
