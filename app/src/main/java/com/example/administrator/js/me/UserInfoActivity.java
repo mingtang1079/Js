@@ -263,9 +263,7 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                     @Override
                     public void onClick(DialogInterface mDialogInterface, int mI) {
 
-                        RongIM.getInstance().logout();
-                        PreferenceUtils.clearDefaultPreference(mContext);
-                        UserManager.getInsatance().setUser(null);
+                        UserManager.getInsatance().logout();
                         Intent intent = new Intent(mContext, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

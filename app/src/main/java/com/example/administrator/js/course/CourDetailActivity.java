@@ -205,7 +205,7 @@ public class CourDetailActivity extends BaseActivity {
             mTvYuyue.setVisibility(View.GONE);
 
         } else if ("2".equals(mCourseDetail.status)) {
-            mTvCourseTime.setText(mCourseDetail.starttime + "-" + mCourseDetail.endtime);
+            mTvCourseTime.setText(mCourseDetail.starttime + "\n" + mCourseDetail.endtime);
             mTvProgress.setText("已结束");
             mTvYuyue.setVisibility(View.GONE);
 

@@ -9,6 +9,7 @@ import com.appbaselib.utils.JsonUtil;
 import com.appbaselib.utils.LogUtils;
 import com.appbaselib.utils.ToastUtils;
 import com.example.administrator.js.App;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.login.LoginActivity;
 
 import org.json.JSONException;
@@ -65,6 +66,8 @@ public class TokenEnableInterceptor implements Interceptor {
                     int code = new JSONObject(result).getInt("code");
                     String mS=new JSONObject(result).getString("msg");
                     if (code == 401) {
+
+                        UserManager.getInsatance().logout();
                         Intent intent = new Intent(AppManager.getInstance().getCurrentActivity(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         AppManager.getInstance().startActivity(intent);

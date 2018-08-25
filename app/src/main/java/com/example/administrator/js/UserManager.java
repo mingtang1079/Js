@@ -7,6 +7,8 @@ import com.appbaselib.constant.Constants;
 import com.appbaselib.utils.PreferenceUtils;
 import com.example.administrator.js.me.model.User;
 
+import io.rong.imkit.RongIM;
+
 /**
  * Created by tangming on 2018/4/19.
  */
@@ -46,9 +48,9 @@ public class UserManager implements SharedPreferences.OnSharedPreferenceChangeLi
             return mUser;
         }
     }
-    public void setUser(User mUser)
-    {
-        this.mUser=mUser;
+
+    public void setUser(User mUser) {
+        this.mUser = mUser;
     }
 
     // 角色0教练1学员
@@ -58,5 +60,11 @@ public class UserManager implements SharedPreferences.OnSharedPreferenceChangeLi
             this.mUser = mUser;
         }
         return mUser.role;
+    }
+
+    public void logout() {
+        RongIM.getInstance().logout();
+        PreferenceUtils.clearDefaultPreference(App.mInstance);
+        UserManager.getInsatance().setUser(null);
     }
 }
