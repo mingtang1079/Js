@@ -230,7 +230,16 @@ public class OrderDetailActivity extends BaseActivity {
             mTvOrderStatus.setText("已完成");
             mTvCancel.setVisibility(View.GONE);
             mTvPay.setVisibility(View.GONE);
-            mTvTuikuan.setVisibility(View.VISIBLE);
+
+            //.私教课 && cuse<csum && status = 'b3'
+            if (!"体验课".equals(mOrder.ctypename)&&(mOrder.cuse!=mOrder.csum)) {
+                mTvTuikuan.setVisibility(View.VISIBLE);
+
+            } else {
+                mTvTuikuan.setVisibility(View.GONE);
+
+            }
+
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
 
             mLinearLayoutTime.setVisibility(View.VISIBLE);

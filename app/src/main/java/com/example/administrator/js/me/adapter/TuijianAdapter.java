@@ -28,7 +28,7 @@ public class TuijianAdapter extends BaseRecyclerViewAdapter<User> {
         helper.setText(R.id.tv_name, item.nickname);
         helper.setText(R.id.tv_id, "ID:"+item.no);
         // TODO: 2018/6/3 time 设置
-        helper.setText(R.id.tv_time, item.starttime);
+   //     helper.setText(R.id.tv_time, item.starttime);
 
         //年龄
 //        if (item.age != null &&item.sex!= null) {
