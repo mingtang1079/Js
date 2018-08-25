@@ -141,7 +141,7 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
                                 mRegisterFragment.nickname = mUser.nickname;
                                 mRegisterFragment.img = mUser.img;
                                 mRegisterFragment.sex = mUser.sex;
-                                mNavigator.showFragment(mRegisterFragment);
+                                mNavigator.showFragment(mUserTypeFragment);
 
                             }
                         }

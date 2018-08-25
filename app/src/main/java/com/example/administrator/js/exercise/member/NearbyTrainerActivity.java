@@ -397,7 +397,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                     degree = "1";
                 } else if (mItemAdapter2.mSinglePosition == 1) {
                     degree = "2";
-                } else {
+                } else if (mItemAdapter2.mSinglePosition == 2){
                     degree = "3";
                 }
 
