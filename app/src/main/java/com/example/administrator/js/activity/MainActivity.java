@@ -158,7 +158,7 @@ public class MainActivity extends BaseActivity {
                         AppManager.getInstance().getCurrentActivity() instanceof SystemMessageActivity) {
                     return false;
                 } else {
-                    EventBus.getDefault().post(new EventMessage.NewMessageReceived(0));
+                    EventBus.getDefault().postSticky(new EventMessage.NewMessageReceived(0));
                 }
                 return false;
             }

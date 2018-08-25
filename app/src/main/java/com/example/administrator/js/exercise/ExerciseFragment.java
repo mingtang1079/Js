@@ -136,7 +136,7 @@ public class ExerciseFragment extends BaseFragment {
         return true;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void showMessage(EventMessage.NewMessageReceived mm) {
 
         if (mViewTag != null) {

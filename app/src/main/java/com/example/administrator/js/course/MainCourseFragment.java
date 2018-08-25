@@ -91,7 +91,7 @@ public class MainCourseFragment extends BaseFragment {
 
 
         } else {
-            return new String[]{"进行中","已结束", "历史订单"};
+            return new String[]{"进行中", "已结束", "历史订单"};
 
         }
 
@@ -138,21 +138,24 @@ public class MainCourseFragment extends BaseFragment {
 
         return mFragments;
     }
+
     @Override
     protected boolean registerEventBus() {
         return true;
     }
+
     @Override
     protected View getLoadingTargetView() {
         return null;
     }
-    @Subscribe(threadMode = ThreadMode.MAIN)
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void showMessage(EventMessage.NewMessageReceived mm) {
 
         if (mViewTag != null) {
             if (mm.message == 0) {
                 mViewTag.setVisibility(View.VISIBLE);
-            } else if (mm.message==1){
+            } else if (mm.message == 1) {
                 mViewTag.setVisibility(View.GONE);
 
             }

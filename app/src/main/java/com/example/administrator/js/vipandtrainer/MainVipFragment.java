@@ -226,7 +226,7 @@ public class MainVipFragment extends BaseFragment {
     protected boolean registerEventBus() {
         return true;
     }
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void showMessage(EventMessage.NewMessageReceived mm) {
 
         if (mViewTag != null) {
