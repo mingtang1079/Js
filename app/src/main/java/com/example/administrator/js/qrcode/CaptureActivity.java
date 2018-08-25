@@ -21,6 +21,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.utils.JsonUtil;
 import com.example.administrator.js.R;
+import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.BarcodeModel;
 import com.example.administrator.js.qrcode.camera.CameraManager;
 import com.example.administrator.js.qrcode.decode.DecodeUtils;
@@ -250,19 +251,38 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
      */
     //解码二维码
     public void handleDecode(String result, Bundle bundle) {
+        BarcodeModel mBarcodeModel = null;
+        try {
+            mBarcodeModel = JsonUtil.fromJson(result, BarcodeModel.class);
 
-        BarcodeModel mBarcodeModel = JsonUtil.fromJson(result, BarcodeModel.class);
+        } catch (Exception mE) {
+            if (UserManager.getInsatance().getRole().equals("1")) {
+                showToast("请扫码教练端二维码");
+            } else {
+                showToast("请扫码会员端二维码");
+            }
+            finish();
+        }
         if (mBarcodeModel != null) {
 
-            if ("1".equals(mBarcodeModel.type)) {
-                ARouter.getInstance().build("/vip/VipUserDetailActivity")
-                        .withString("id", mBarcodeModel.id)
-                        .navigation(mContext);
-            }
-            else {
-                ARouter.getInstance().build("/vipandtrainer/TrainerDetailActivity")
-                        .withString("id",mBarcodeModel.id)
-                        .navigation(mContext);
+            if (mBarcodeModel.type.equals(UserManager.getInsatance().getRole())) {
+                if (UserManager.getInsatance().getRole().equals("1")) {
+                    showToast("请扫码教练端二维码");
+                } else {
+                    showToast("请扫码会员端二维码");
+                }
+            } else {
+
+                if ("1".equals(mBarcodeModel.type)) {
+                    ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                            .withString("id", mBarcodeModel.id)
+                            .navigation(mContext);
+                } else {
+                    ARouter.getInstance().build("/vipandtrainer/TrainerDetailActivity")
+                            .withString("id", mBarcodeModel.id)
+                            .navigation(mContext);
+                }
+
             }
             finish();
         }
