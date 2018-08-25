@@ -117,8 +117,7 @@ public class RegisterFragment extends BaseFragment {
                 break;
             case R.id.bt_register:
 
-                if (mOnbackClickListener instanceof OnbackClickListener)
-                    mOnbackClickListener.onBackClick(3);
+                register();
 
                 break;
         }
@@ -129,12 +128,12 @@ public class RegisterFragment extends BaseFragment {
         return true;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
     public void onEventMessage(EventMessage.UsertypeMessage message) {
 
-        if (message != null)
+        if (message != null) {
             role = message.i + "";
-        register();
+        }
 
     }
 

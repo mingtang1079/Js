@@ -16,6 +16,7 @@ import com.appbaselib.utils.BottomDialogUtils;
 import com.appbaselib.utils.JsonUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
+import com.example.administrator.js.LocationManager;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.SearchUserActivity;
@@ -113,6 +114,12 @@ public class NearbyVipActivity extends BaseRefreshActivity<User> {
 
         Map<String, Object> mStringStringMap = new HashMap<>();
         mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
+        if (!TextUtils.isEmpty(LocationManager.getInsatance().longitude)) {
+            mStringStringMap.put("longitude", LocationManager.getInsatance().longitude);
+        }
+        if (!TextUtils.isEmpty(LocationManager.getInsatance().latitude)) {
+            mStringStringMap.put("latitude", LocationManager.getInsatance().latitude);
+        }
         if (distance != 0) {
             mStringStringMap.put("distance", distance);
         }

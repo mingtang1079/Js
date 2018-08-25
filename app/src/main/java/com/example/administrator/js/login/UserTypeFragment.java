@@ -30,7 +30,6 @@ public class UserTypeFragment extends BaseFragment {
     FrameLayout mFlXueyuan;
     @BindView(R.id.fl_jiaolian)
     FrameLayout mFlJiaolian;
-    Unbinder unbinder;
 
     @Override
     protected int getContentViewLayoutID() {
@@ -53,20 +52,20 @@ public class UserTypeFragment extends BaseFragment {
             case R.id.iv_back:
 
                 if (mOnbackClickListener instanceof OnbackClickListener)
-                    mOnbackClickListener.onBackClick(2);
+                    mOnbackClickListener.onBackClick(1);
 
                 break;
             case R.id.fl_xueyuan:
                 if (mOnbackClickListener instanceof OnbackClickListener)
                     mOnbackClickListener.onBackClick(2);
-                EventBus.getDefault().post(new EventMessage.UsertypeMessage(1));
+                EventBus.getDefault().postSticky(new EventMessage.UsertypeMessage(1));
 
 
                 break;
             case R.id.fl_jiaolian:
                 if (mOnbackClickListener instanceof OnbackClickListener)
                     mOnbackClickListener.onBackClick(2);
-                EventBus.getDefault().post(new EventMessage.UsertypeMessage(0));
+                EventBus.getDefault().postSticky(new EventMessage.UsertypeMessage(0));
 
                 break;
         }

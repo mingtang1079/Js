@@ -90,9 +90,9 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
     public void onBackPressed() {
 
         if (mRegisterFragment.isVisible())
-            mNavigator.showFragment(mLoginFragment);
+            mNavigator.showFragment(mUserTypeFragment);
         else if (mUserTypeFragment.isVisible()) {
-            mNavigator.showFragment(mRegisterFragment);
+            mNavigator.showFragment(mLoginFragment);
         } else
             finish();
 

@@ -106,7 +106,7 @@ public class LoginFragment extends BaseFragment {
             case R.id.bt_register:
 
                 if (mOnbackClickListener instanceof OnbackClickListener)
-                    mOnbackClickListener.onBackClick(2);
+                    mOnbackClickListener.onBackClick(3);
 
                 break;
             case R.id.iv_weixin:

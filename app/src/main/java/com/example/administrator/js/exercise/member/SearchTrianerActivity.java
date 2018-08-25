@@ -10,6 +10,7 @@ import com.appbaselib.base.BaseRefreshActivity;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
+import com.example.administrator.js.LocationManager;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.base.model.WrapperModel;
@@ -68,6 +69,12 @@ public class SearchTrianerActivity  extends BaseRefreshActivity<User> {
         mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
         mStringStringMap.put("no", mTextViewSearch.getText().toString());
         mStringStringMap.put("pageNo",pageNo);
+        if (!TextUtils.isEmpty(LocationManager.getInsatance().longitude)) {
+            mStringStringMap.put("longitude", LocationManager.getInsatance().longitude);
+        }
+        if (!TextUtils.isEmpty(LocationManager.getInsatance().latitude)) {
+            mStringStringMap.put("latitude", LocationManager.getInsatance().latitude);
+        }
 
         Http.getDefault().seacrchUser(mStringStringMap)
                 .as(RxHelper.<WrapperModel<VipUser>>handleResult(mContext))

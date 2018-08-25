@@ -1,10 +1,13 @@
 package com.example.administrator.js.exercise.member;
 
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -20,6 +23,7 @@ import com.appbaselib.utils.BottomDialogUtils;
 import com.appbaselib.utils.JsonUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
+import com.example.administrator.js.LocationManager;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.activity.ItemAdapter;
@@ -140,7 +144,12 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
 
         Map<String, Object> mStringStringMap = new HashMap<>();
         mStringStringMap.put("id", UserManager.getInsatance().getUser().id);
-
+        if (!TextUtils.isEmpty(LocationManager.getInsatance().longitude)) {
+            mStringStringMap.put("longitude", LocationManager.getInsatance().longitude);
+        }
+        if (!TextUtils.isEmpty(LocationManager.getInsatance().latitude)) {
+            mStringStringMap.put("latitude", LocationManager.getInsatance().latitude);
+        }
         if (!TextUtils.isEmpty(orderby)) {
             mStringStringMap.put("orderby", orderby);
         }
@@ -214,6 +223,11 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
     private void showXiangShaixuan() {
         View mView = getLayoutInflater().inflate(R.layout.view_trainer_shaixuan, null, false);
         final BottomSheetDialog mBottomSheetDialog = BottomDialogUtils.showBottomDialog(mContext, mView);
+
+        //展开
+        BottomSheetBehavior mDialogBehavior = BottomSheetBehavior.from((View) mView.getParent());
+        mDialogBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);//展开
+//----------------
 
         final EditText mEditText = mView.findViewById(R.id.et_pricedi);
         mEditText.setText(beginprice);
