@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/default_bg"
-              android:orientation="vertical"
-              tools:context=".course.CourDetailActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical"
+    tools:context=".course.CourDetailActivity">
 
-    <include layout="@layout/include_toolbar"/>
+    <include layout="@layout/include_toolbar" />
 
     <LinearLayout
         android:id="@+id/content"
@@ -25,10 +25,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -58,7 +54,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#FF4A576A"
                                     android:textSize="18sp"
-                                    tools:text="Mo"/>
+                                    tools:text="Mo" />
 
                                 <TextView
                                     android:id="@+id/tv_age"
@@ -71,7 +67,7 @@
                                     android:paddingRight="4dp"
                                     android:textColor="@color/white_color"
                                     android:textSize="11sp"
-                                    tools:text=" 22"/>
+                                    tools:text=" 22" />
                             </LinearLayout>
 
                             <TextView
@@ -81,7 +77,7 @@
                                 android:layout_marginTop="8dp"
                                 android:textColor="#FF8996AA"
                                 android:textSize="13sp"
-                                tools:text="ID:23u024u23"/>
+                                tools:text="ID:23u024u23" />
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -95,7 +91,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="课程类型："
                                     android:textColor="#FF8996AA"
-                                    android:textSize="13sp"/>
+                                    android:textSize="13sp" />
 
                                 <TextView
                                     android:id="@+id/tv_course_type"
@@ -103,7 +99,7 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="增肌  减脂  塑形"/>
+                                    tools:text="增肌  减脂  塑形" />
 
                             </LinearLayout>
 
@@ -118,7 +114,7 @@
                                     android:layout_marginTop="16dp"
                                     android:text="上课时间："
                                     android:textColor="#FF8996AA"
-                                    android:textSize="13sp"/>
+                                    android:textSize="13sp" />
 
                                 <TextView
                                     android:id="@+id/tv_course_time"
@@ -128,7 +124,7 @@
 
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="6月20日 15：30"/>
+                                    tools:text="6月20日 15：30" />
 
                             </LinearLayout>
 
@@ -145,7 +141,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="课程进展："
                                     android:textColor="#FF8996AA"
-                                    android:textSize="13sp"/>
+                                    android:textSize="13sp" />
 
                                 <TextView
                                     android:id="@+id/tv_progress"
@@ -153,42 +149,44 @@
                                     android:layout_height="wrap_content"
                                     android:textColor="#002700"
                                     android:textSize="13sp"
-                                    tools:text="四川-成都-武侯区"/>
+                                    tools:text="四川-成都-武侯区" />
 
                             </LinearLayout>
                         </LinearLayout>
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/iv_head"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_margin="16dp"
-                            android:src="@drawable/icon_user_default"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|right"
-                        android:layout_margin="16dp"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tv_call"
+                        <LinearLayout
+                            android:gravity="center_horizontal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:drawablePadding="8dp"
-                            android:drawableTop="@drawable/icon_phone"
-                            android:text="拨打电话"
-                            android:textSize="13sp"/>
+                            android:orientation="vertical">
 
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/iv_head"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_margin="16dp"
+                                android:src="@drawable/icon_user_default" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/tv_call"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawablePadding="8dp"
+                                    android:drawableTop="@drawable/icon_phone"
+                                    android:text="拨打电话"
+                                    android:textSize="13sp" />
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                </FrameLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -207,9 +205,9 @@
                         android:layout_marginTop="14dp"
                         android:drawableLeft="@drawable/icon_address"
                         android:drawablePadding="16dp"
-                        tools:text="训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区"
                         android:textColor="#4A576A"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        tools:text="训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区训练地址：成都是高新区" />
 
                 </LinearLayout>
 
@@ -228,14 +226,14 @@
                         android:layout_margin="16dp"
                         android:text="训练场地"
                         android:textColor="#4A576A"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp" />
 
                     <com.amap.api.maps.MapView
                         android:id="@+id/map"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"/>
+                        android:layout_marginRight="16dp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -258,7 +256,7 @@
                 android:padding="14dp"
                 android:text="发消息"
                 android:textColor="@color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <View
                 android:id="@+id/view_line"
@@ -266,7 +264,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginBottom="14dp"
                 android:layout_marginTop="14dp"
-                android:background="#77808f"/>
+                android:background="#77808f" />
 
 
             <TextView
@@ -280,7 +278,7 @@
                 android:text="开始上课"
                 android:textColor="@color/white"
 
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
     </LinearLayout>

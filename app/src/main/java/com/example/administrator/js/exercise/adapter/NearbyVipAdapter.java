@@ -27,6 +27,8 @@ public class NearbyVipAdapter extends BaseRecyclerViewAdapter<User> {
     @Override
     protected void convert(BaseViewHolder helper, final User item) {
 
+        if (item==null)
+            return;
         if (!TextUtils.isEmpty(item.img)) {
             ImageLoader.load(mContext, item.img, (CircleImageView) helper.getView(R.id.iv_head));
         }
