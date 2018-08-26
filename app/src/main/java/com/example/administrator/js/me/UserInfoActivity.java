@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
+import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.AdressHelper;
@@ -220,6 +221,10 @@ public class UserInfoActivity extends BaseActivity implements UserPresenter.User
                                         @Override
                                         protected void onSucess(String mS) {
                                             mTvWeixin.setText("未绑定");
+                                            User mUser = UserManager.getInsatance().getUser();
+                                            mUser.openid=null;
+                                            PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
+
                                         }
 
                                         @Override

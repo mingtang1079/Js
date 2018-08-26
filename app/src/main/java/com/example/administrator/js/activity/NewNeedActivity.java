@@ -20,10 +20,12 @@ import android.widget.TextView;
 
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.base.BaseModel;
+import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
 import com.appbaselib.utils.AdressHelper;
 import com.appbaselib.utils.DialogUtils;
+import com.appbaselib.utils.PreferenceUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
@@ -32,6 +34,7 @@ import com.example.administrator.js.activity.locaiton.NewNeedAndType;
 import com.example.administrator.js.course.model.Item;
 import com.example.administrator.js.exercise.model.SmallCourseType;
 import com.example.administrator.js.me.model.NewNeed;
+import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.utils.StringUtils;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexWrap;
@@ -431,8 +434,32 @@ public class NewNeedActivity extends MutichoosePhotoActivity {
                 .subscribe(new ResponceSubscriber<NewNeed>(mContext) {
                     @Override
                     protected void onSucess(NewNeed mS) {
-                        showToast("发布成功！");
-                        finish();
+
+                        updateUser();
+
+
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
+
+    }
+
+    private void updateUser() {
+        Http.getDefault().getUserInfo(UserManager.getInsatance().getUser().id)
+                .as(RxHelper.<User>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<User>() {
+                    @Override
+                    protected void onSucess(User mUser) {
+
+                        if (mUser != null) {
+                            PreferenceUtils.saveObjectAsGson(mContext, Constants.PRE_USER, mUser);
+                            showToast("发布成功！");
+                            finish();
+                        }
                     }
 
                     @Override
