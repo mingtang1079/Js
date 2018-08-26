@@ -53,7 +53,7 @@ import retrofit2.http.Url;
 public interface API {
 
 
-    String AUTHORIRY = BuildConfig.BASE_URL;
+  //  String AUTHORIRY = BuildConfig.BASE_URL;
 
     /**
      * 登录
@@ -63,7 +63,7 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/login")
+    @POST("user/login")
     Observable<BaseModel<User>> login(@Field("mobile") String phone, @Field("password") String password);
 
     /**
@@ -74,7 +74,7 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/reg")
+    @POST("user/reg")
     Observable<BaseModel<User>> register(@Field("zhucetype") String type,
                                          @Field("openid") String openid,
                                          @Field("mobile") String phone,
@@ -95,7 +95,7 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/changemobile")
+    @POST("user/changemobile")
     Observable<BaseModel<String>> changemobile(
             @Field("mobile") String phone,
             @Field("code") String code,
@@ -109,7 +109,7 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/changepsw")
+    @POST("user/changepsw")
     Observable<BaseModel<String>> alterPassword(
             @Field("mobile") String phone,
             @Field("code") String code,
@@ -130,7 +130,7 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/edit")
+    @POST("user/edit")
     Observable<BaseModel<User>> userEdit(@FieldMap Map<String, String> mStringStringMap);
 
     /**
@@ -140,7 +140,7 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/sms/get")
+    @POST("sms/get")
     Observable<BaseModel<String>> getCode(@Field("type") String type,
                                           @Field("mobile") String phone
     );
@@ -149,7 +149,7 @@ public interface API {
      * @return
      */
     @Multipart
-    @POST(AUTHORIRY + "/upload")
+    @POST("upload")
     Observable<BaseModel<String>> uploadImage(@Part() MultipartBody.Part mPart);
 
 
@@ -157,39 +157,39 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/saveauth")
+    @POST("user/saveauth")
     Observable<BaseModel<String>> verifyzizhi(@FieldMap Map<String, String> map);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/getauth")
+    @POST("user/getauth")
     Observable<BaseModel<VerifyUser>> getAuth(@Field("userid") String id);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/getRealNameauth")
+    @POST("user/getRealNameauth")
     Observable<BaseModel<RealUserInfo>> getRealNameInfo(@Field("userid") String id);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/get")
+    @POST("user/get")
     Observable<BaseModel<User>> getUser(@Field("id") String id);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/teachingQualificationSave")
+    @POST("user/teachingQualificationSave")
     Observable<BaseModel<Zizhi>> editZizhi(@FieldMap Map<String, String> map);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/news/list")
+    @POST("news/list")
     Observable<BaseModel<WrapperModel<Main>>> getMain(@Field("userid") String userId, @Field("type") int type, @Field("pageNo") int pageNo, @Field("pageSize") int pageSize);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/contact/search")
+    @POST("contact/search")
     Observable<BaseModel<WrapperModel<VipUser>>> seacrchUser(@FieldMap Map<String, Object> mStringStringMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/contact/list")
+    @POST("contact/list")
     Observable<BaseModel<List<VipUser>>> getUser(@FieldMap Map<String, String> mStringStringMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/feedback")
+    @POST("user/feedback")
     Observable<BaseModel<String>> feed(@FieldMap Map<String, String> mMap);
 
     //融云api
@@ -197,11 +197,11 @@ public interface API {
     @FormUrlEncoded
     Observable<JsonObject> getUserRongYunToken(@Url String url, @Field("userid") String id, @Field("name") String name, @Field("portraitUri") String portraitUri);
 
-    @POST(AUTHORIRY + "/media/useraction")
+    @POST("media/useraction")
     @FormUrlEncoded
     Observable<BaseModel<String>> collection(@Field("userid") String userId, @Field("id") String id, @Field("action") String isCollection);
 
-    @POST(AUTHORIRY + "/contact/studentDetail")
+    @POST("contact/studentDetail")
     @FormUrlEncoded
     Observable<BaseModel<UserDetail>> userDetail(@Field("tid") String jiaolianId, @Field("uid") String useId);
 
@@ -212,7 +212,7 @@ public interface API {
      * @param useId
      * @return
      */
-    @POST(AUTHORIRY + "/course/get")
+    @POST("course/get")
     @FormUrlEncoded
     Observable<BaseModel<CourseDetail>> courseDetail(@Field("tid") String jiaolianId, @Field("id") String useId);
 
@@ -222,7 +222,7 @@ public interface API {
      * @param userId
      * @return
      */
-    @POST(AUTHORIRY + "/course/get")
+    @POST("course/get")
     @FormUrlEncoded
     Observable<BaseModel<CourseDetail>> courseDetail2(@Field("uid") String userId, @Field("id") String courseID);
 
@@ -230,11 +230,11 @@ public interface API {
      * J教练端
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/list")
+    @POST("course/list")
     Observable<BaseModel<WrapperModel<CourseModel>>> getCourse(@FieldMap Map<String, Object> mMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/list")
+    @POST("course/list")
     Observable<BaseModel<WrapperModel<CourseModel>>> getHasCourseList(@Field("uid") String jiaolianId, @Field("status") String status,
                                                                       @Field("pageNo") int pageNo, @Field("orderid") String orderid);
 
@@ -248,7 +248,7 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/list")
+    @POST("course/list")
     Observable<BaseModel<WrapperModel<CourseModel>>> getCourse2(@Field("uid") String jiaolianId, @Field("status") String status,
                                                                 @Field("pageNo") int pageNo, @Field("starttime") String starttime);
 
@@ -259,141 +259,141 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/contact/handle")
+    @POST("contact/handle")
     Observable<BaseModel<String>> handleUser(@Field("id") String id, @Field("fid") String fid, @Field("status") String status);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/order/list")
+    @POST("order/list")
     Observable<BaseModel<WrapperModel<VipSupply>>> vipSupply(@FieldMap Map<String, Object> mStringObjectMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/media/favoritepage")
+    @POST("media/favoritepage")
     Observable<BaseModel<WrapperModel<Main>>> getCollection(@Field("userid") String id, @Field("pageNo") int pageNo);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/order/save")
+    @POST("order/save")
     Observable<BaseModel<String>> passOrRefuse(@Field("id") String id, @Field("tid") String tid, @Field("status") String status);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/cancel")
+    @POST("course/cancel")
     Observable<BaseModel<String>> cancelCourse(@Field("id") String id, @Field("tid") String tid, @Field("cancelreason") String cancelreason);
 
     //会员端用
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/cancel")
+    @POST("course/cancel")
     Observable<BaseModel<String>> cancelCourse2(@Field("id") String id, @Field("uid") String tid, @Field("cancelreason") String cancelreason);
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/invitelist")
+    @POST("user/invitelist")
     Observable<BaseModel<Tuijian>> getTuijian(@Field("id") String userid);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/count")
+    @POST("user/count")
     Observable<BaseModel<List<Tongji>>> tongji(@Field("tid") String tid);
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/servicetimeList")
+    @POST("user/servicetimeList")
     Observable<BaseModel<List<ServiceTime>>> servicetimeList(@Field("tid") String tid);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/servicetimeSave")
+    @POST("user/servicetimeSave")
     Observable<BaseModel<String>> servicetimeSaveAndAlter(@FieldMap Map<String, String> mStringObjectMap);
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/servicetimeDelete")
+    @POST("user/servicetimeDelete")
     Observable<BaseModel<String>> servicetimeDelete(@Field("id") String tid);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/getprice")
+    @POST("user/getprice")
     Observable<BaseModel<Price>> getprice(@Field("id") String id);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/saveprice")
+    @POST("user/saveprice")
     Observable<BaseModel<String>> saveprice(@FieldMap Map<String, Object> mMap);
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/cardlist")
+    @POST("course/cardlist")
     Observable<BaseModel<WrapperModel<HistoryOrder>>> cardlist(@Field("uid") String uid, @Field("pageNo") String pageNo);
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/getNeed")
+    @POST("user/getNeed")
     Observable<BaseModel<NewNeed>> getNeed(@Field("userid") String uid);
 
-    @POST(AUTHORIRY + "/course/getcoursetypestags")
+    @POST("course/getcoursetypestags")
     Observable<BaseModel<List<SmallCourseType>>> getSmallcourseType();
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/publishNeed")
+    @POST("user/publishNeed")
     Observable<BaseModel<NewNeed>> publishNeed(@FieldMap Map<String, Object> mStringObjectMap);
 
 
-    @POST(AUTHORIRY + "/course/gettags")
+    @POST("course/gettags")
     Observable<BaseModel<List<String>>> getPinjiatags();
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/contact/teacherDetail")
+    @POST("contact/teacherDetail")
     Observable<BaseModel<TrainerDetail>> teacherDetail(@Field("tid") String tid, @Field("uid") String uid);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/order/studentsave")
+    @POST("order/studentsave")
     Observable<BaseModel<String>> applyYuyueke(@FieldMap Map<String, Object> mMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/order/getcourseinfo")
+    @POST("order/getcourseinfo")
     Observable<BaseModel<CourseInfo>> getcourseinfo(@Field("tid") String tid, @Field("cardid") String cardid);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/order/studentsave")
+    @POST("order/studentsave")
     Observable<BaseModel<String>> studentsave(@Field("tid") String tid, @Field("cardid") String cardid, @Field("uid") String uid, @Field("ctype") String ctype,
                                               @Field("coursetypeids") String coursetypeids, @Field("csum") String csum
             , @Field("address") String address, @Field("clongtitude") String clongtitude, @Field("clatitude") String clatitude);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/subscribepage")
+    @POST("course/subscribepage")
     Observable<BaseModel<YuyueInfo>> getYuyuTime(@Field("uid") String uid, @Field("cardid") String cardid);
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/subscribesave")
+    @POST("course/subscribesave")
     Observable<BaseModel<String>> saveYuekeCourse(@Field("uid") String uid, @Field("cardid") String cardid,
                                                   @Field("startdate") String startdate, @Field("starttime") String starttime
             , @Field("address") String address, @Field("latitude") String latitude, @Field("longtitude") String longtitude);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/order/list")
+    @POST("order/list")
     Observable<BaseModel<WrapperModel<MyOrder>>> getOrderlist(@Field("uid") String uid, @Field("status") String status, @Field("pageNo") String pageNo);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/order/detail")
+    @POST("order/detail")
     Observable<BaseModel<MyOrder>> getOrderDetail(@Field("uid") String uid, @Field("id") String id);
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/order/gettuikereasons")
+    @POST("order/gettuikereasons")
     Observable<BaseModel<List<String>>> gettuikereasons(@Field("uid") String uid);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/bodydataList")
+    @POST("user/bodydataList")
     Observable<BaseModel<WrapperModel<BodyData>>> getBodyList(@Field("userid") String userid, @Field("pageNo") int pageNo);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/bodydataSave")
+    @POST("user/bodydataSave")
     Observable<BaseModel<String>> bodydataSave(@FieldMap Map<String, String> mStringStringMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/handle")
+    @POST("course/handle")
     Observable<BaseModel<String>> xiake(@Field("uid") String uid, @Field("id") String id, @Field("status") String status);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/appraiseSave")
+    @POST("course/appraiseSave")
     Observable<BaseModel<Pingjia>> savePingjia(@FieldMap Map<String, Object> mMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/appraise")
+    @POST("course/appraise")
     Observable<BaseModel<Pingjia>> getPingjia(@Field("courseid") String courseid, @Field("userid") String userid);
 
     /**
@@ -407,52 +407,52 @@ public interface API {
      * @return
      */
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/pay/submit")
+    @POST("pay/submit")
     Observable<BaseModel<String>> pay(@Field("userid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/pay/submit")
+    @POST("pay/submit")
     Observable<BaseModel<WeixinResult>> payWeixin(@Field("userid") String uid, @Field("orderid") String orderid, @Field("paytype") String paytype, @Field("ordertype") String ordertype);
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/getUserInfoByWxCode")
+    @POST("user/getUserInfoByWxCode")
     Observable<BaseModel<User>> getUserInfoByWxCode(@FieldMap Map<String, String> mStringStringMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/pay/getDepositMoney")
+    @POST("pay/getDepositMoney")
     Observable<BaseModel<String>> getDepositMoney(@Field("userid") String code);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/pay/returnDepositMoney")
+    @POST("pay/returnDepositMoney")
     Observable<BaseModel<String>> returnDepositMoney(@Field("userid") String code);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/msgList")
+    @POST("user/msgList")
     Observable<BaseModel<WrapperModel<SystemMessage>>> msgList(@Field("userid") String code, @Field("pageNo") int pageNo);
 
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/readmsg")
+    @POST("user/readmsg")
     Observable<BaseModel<String>> readmsg(@Field("id") String id);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/promotionSave")
+    @POST("user/promotionSave")
     Observable<BaseModel<ShenheInfo>> promotionSave(@Field("userid") String id);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/getPromotion")
+    @POST("user/getPromotion")
     Observable<BaseModel<ShenheInfo>> getPromotion(@Field("userid") String id);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/course/mydate")
+    @POST("course/mydate")
     Observable<BaseModel<MyDate>> getMydate(@FieldMap Map<String, String> mStringStringMap);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/get")
+    @POST("user/get")
     Observable<BaseModel<User>> getUserInfo(@Field("id") String id);
 
     @FormUrlEncoded
-    @POST(AUTHORIRY + "/user/unbindwechat")
+    @POST("user/unbindwechat")
     Observable<BaseModel<String>> unbindwechat(@Field("id") String id);
 }

@@ -17,7 +17,7 @@ import okhttp3.Interceptor;
 public class Http extends AbstractRetrofitHelper<API> {
     @Override
     protected String getHost() {
-        return "http://192.168.0.211/";
+        return BuildConfig.BASE_URL;
     }
 
     @Override
