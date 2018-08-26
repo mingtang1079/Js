@@ -374,8 +374,10 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
             public void onClick(View mView) {
                 if (mItemAdapter.mSinglePosition == 0) {
                     sex = "1";
-                } else {
+                } else if (mItemAdapter.mSinglePosition == 1) {
                     sex = "2";
+                } else {
+                    sex = "";
                 }
 
                 //------分割线-------
@@ -390,6 +392,8 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                     distance = 5 * 1000;
                 } else if (mItemAdapter1.mSinglePosition == 4) {
                     distance = 10 * 1000;
+                } else {
+                    distance = 0;
                 }
 
                 //------分割线-------
@@ -397,7 +401,7 @@ public class NearbyTrainerActivity extends BaseRefreshActivity<User> {
                     degree = "1";
                 } else if (mItemAdapter2.mSinglePosition == 1) {
                     degree = "2";
-                } else if (mItemAdapter2.mSinglePosition == 2){
+                } else if (mItemAdapter2.mSinglePosition == 2) {
                     degree = "3";
                 }
 

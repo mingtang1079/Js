@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import com.example.administrator.js.UserManager;
 import com.example.administrator.js.me.model.ServiceTime;
 import com.example.administrator.js.me.model.Xingqi;
 import com.example.administrator.js.utils.MyDateUtils;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,6 +36,9 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function3;
 
 @Route(path = "/me/AddServicetimeActivity")
 public class AddServicetimeActivity extends BaseActivity {
@@ -74,9 +79,15 @@ public class AddServicetimeActivity extends BaseActivity {
     @Override
     protected void initView() {
 
+        mToolbar.inflateMenu(R.menu.toolbar_menu_common);
+        mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
+        mMenuItem.setTitle("保存");
+
         if (mServiceTime == null) {
             mToolbar.setTitle("添加服务时间");
+            mMenuItem.setEnabled(false);
         } else {
+            mMenuItem.setEnabled(true);
             mToolbar.setTitle("编辑服务时间");
             mTvStartTime.setText(mServiceTime.starttime);
             mTvEndTime.setText(mServiceTime.endtime);
@@ -103,9 +114,6 @@ public class AddServicetimeActivity extends BaseActivity {
             convert();
         }
 
-        mToolbar.inflateMenu(R.menu.toolbar_menu_common);
-        mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
-        mMenuItem.setTitle("保存");
 
         mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -121,6 +129,21 @@ public class AddServicetimeActivity extends BaseActivity {
                     }
                 }
                 return true;
+            }
+        });
+
+        Observable<CharSequence> mObservablePhon1 = RxTextView.textChanges(mTvStartTime);
+        Observable<CharSequence> mObservablePhon2 = RxTextView.textChanges(mTvEndTime);
+        Observable<CharSequence> mObservablePhon3 = RxTextView.textChanges(mTvDays);
+        Observable.combineLatest(mObservablePhon1, mObservablePhon2, mObservablePhon3, new Function3<CharSequence, CharSequence, CharSequence, Boolean>() {
+            @Override
+            public Boolean apply(CharSequence mCharSequence, CharSequence mCharSequence2, CharSequence mCharSequence3) throws Exception {
+                return !TextUtils.isEmpty(mCharSequence.toString()) && !TextUtils.isEmpty(mCharSequence2) && !TextUtils.isEmpty(mCharSequence3);
+            }
+        }).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean mBoolean) throws Exception {
+                mMenuItem.setEnabled(mBoolean);
             }
         });
 

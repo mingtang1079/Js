@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseFragment;
+import com.appbaselib.common.ImageLoader;
 import com.appbaselib.constant.Constants;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
@@ -54,6 +55,7 @@ public class LoginFragment extends BaseFragment {
     @BindView(R.id.iv_weixin)
     ImageView mIvWeixin;
 
+
     private IWXAPI api;
 
     @Override
@@ -68,6 +70,9 @@ public class LoginFragment extends BaseFragment {
             mTvPhone.setText("18380224875");
             mPassword.setText("qqqq1111");
         }
+
+     //   ImageLoader.load(mContext, R.drawable.spalash, mImageViewSpa);
+        //mImageViewSpa.setImageDrawable(mContext.getResources().getDrawable(R.drawable.spalash));
 
         Observable<CharSequence> mObservablePhone = RxTextView.textChanges(mTvPhone);
         Observable<CharSequence> mCharSequenceObservablePassword = RxTextView.textChanges(mPassword);
@@ -147,7 +152,7 @@ public class LoginFragment extends BaseFragment {
 
                     @Override
                     protected void onFail(String message) {
-                        ToastUtils.showShort(App.mInstance,message);
+                        ToastUtils.showShort(App.mInstance, message);
                         mBtLogin.setEnabled(true);
                         mBtLogin.setText("登录");
                     }
