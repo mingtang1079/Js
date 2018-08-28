@@ -13,6 +13,10 @@ import com.appbaselib.adapter.FragmentAdapter;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.utils.TablayoutUtils;
 import com.example.administrator.js.R;
+import com.example.administrator.js.constant.EventMessage;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,5 +85,14 @@ public class MessageActivity extends BaseActivity {
         return null;
     }
 
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onStatusChange(EventMessage.ChatButtonClick mZizhiStatus) {
+        finish();
+
+    }
 }

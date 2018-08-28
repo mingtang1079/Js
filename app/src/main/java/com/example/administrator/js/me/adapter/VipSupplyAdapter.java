@@ -1,5 +1,6 @@
 package com.example.administrator.js.me.adapter;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.appbaselib.base.BaseRecyclerViewAdapter;
 import com.appbaselib.common.ImageLoader;
 import com.appbaselib.network.ResponceSubscriber;
 import com.appbaselib.rx.RxHelper;
+import com.appbaselib.utils.DialogUtils;
 import com.appbaselib.utils.ToastUtils;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.administrator.js.Http;
@@ -22,6 +24,9 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
+
+    boolean isIn = false;
+
     public VipSupplyAdapter(int layoutResId, List<VipSupply> data) {
         super(layoutResId, data);
     }
@@ -92,13 +97,10 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
             mTextViewRefuse.setText("已通过");
-        }
-        else  if ("b55".equals(item.status))
-        {
+        } else if ("b55".equals(item.status)) {
             mTextViewPass.setVisibility(View.VISIBLE);
             mTextViewRefuse.setVisibility(View.GONE);
-        }
-        else if ("b56".equals(item.status)) {
+        } else if ("b56".equals(item.status)) {
             mTextViewPass.setVisibility(View.GONE);
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
@@ -113,6 +115,7 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
                     save("b56", getData().get(helper.getLayoutPosition()).id, helper.getLayoutPosition());
 
                 } else {
+                    isIn = true;
                     save("b2", getData().get(helper.getLayoutPosition()).id, helper.getLayoutPosition());
                 }
             }
@@ -120,7 +123,14 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
         mTextViewRefuse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                save("b4", getData().get(helper.getLayoutPosition()).id, helper.getLayoutPosition());
+                DialogUtils.getDefaultDialog(mContext, "", "您确定要取消吗？", "确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface mDialogInterface, int mI) {
+                        save("b4", getData().get(helper.getLayoutPosition()).id, helper.getLayoutPosition());
+                    }
+
+                }).show();
+
             }
         });
 
@@ -141,6 +151,13 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override
                     protected void onSucess(String mS) {
+                        if (isIn) {
+                            //进用户详情
+                            ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                                    .withString("id", mData.get(p).uid)
+                                    .navigation(mContext);
+                            isIn = false;
+                        }
                         remove(p);
                     }
 

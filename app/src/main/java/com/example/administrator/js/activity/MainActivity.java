@@ -33,6 +33,8 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -193,6 +195,17 @@ public class MainActivity extends BaseActivity {
 
         //   start(NewNeedActivity.class);
         start(NewNeedActivity.class);
+    }
+
+    @Override
+    protected boolean registerEventBus() {
+        return true;
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    public void onStatusChange(EventMessage.ChatButtonClick mZizhiStatus) {
+        mNavigator.showFragment(mMainCourseFragment);
+
     }
 
 }

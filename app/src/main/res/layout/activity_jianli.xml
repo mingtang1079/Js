@@ -17,7 +17,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/white_color"
         android:gravity="top|left"
-        android:hint="请简述您的健身经历事迹"
+        android:hint="例如毕业院校,认证证书,荣誉等"
         android:padding="8dp"
         android:textSize="14sp" />
 

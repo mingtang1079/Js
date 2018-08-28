@@ -83,4 +83,7 @@ public class EventMessage {
     public static class CouseStatusChangge extends EventMessage{
 
     }
+    public static class ChatButtonClick extends EventMessage{
+
+    }
 }

@@ -160,7 +160,10 @@ public class MainCourseFragment extends BaseFragment {
 
             }
         }
+    }
 
-
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    public void onStatusChange(EventMessage.ChatButtonClick mZizhiStatus) {
+        mViewpager.setCurrentItem(2);
     }
 }

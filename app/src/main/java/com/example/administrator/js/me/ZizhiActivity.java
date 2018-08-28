@@ -89,7 +89,7 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
             @Override
             public boolean onMenuItemClick(MenuItem mMenuItem) {
 
-                //必须有四个值，时间，擅长哪个，资助证书，形象照
+                //必须有四个值，时间，擅长哪个，资助证书，形象照,+j简历口述
 
                 isFinish = true;
                 mZizhiPresenter.updateZizhi("teachstatus", "3");
@@ -103,16 +103,18 @@ public class ZizhiActivity extends BaseActivity implements ZizhiPresenter.ZizhiR
 
     private void panDuanButton() {
 
-        if (mVerifyUser==null)
-        {
+        if (mVerifyUser == null) {
             mMenuItem.setEnabled(false);
             return;
         }
 
-        if (!TextUtils.isEmpty(mVerifyUser.workdate)&&!TextUtils.isEmpty(mVerifyUser.skillname)&&!TextUtils.isEmpty(mVerifyUser.certpath)&&!TextUtils.isEmpty(mVerifyUser.photopath))
-        {
+        if (!TextUtils.isEmpty(mVerifyUser.workdate) && !
+                TextUtils.isEmpty(mVerifyUser.skillname) && !
+                TextUtils.isEmpty(mVerifyUser.certpath) && !
+                TextUtils.isEmpty(mVerifyUser.photopath) && !
+                TextUtils.isEmpty(mVerifyUser.intro)) {
             mMenuItem.setEnabled(true);
-        }else {
+        } else {
             mMenuItem.setEnabled(false);
 
         }
