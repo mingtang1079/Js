@@ -144,6 +144,53 @@
                                     tools:text="四川-成都-武侯区"/>
 
                             </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="从业时间："
+                                    android:textColor="#FF8996AA"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:id="@+id/tv_congyetime"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#002700"
+                                    android:textSize="13sp"
+                                    tools:text="2020nian "/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="12dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="简介："
+                                    android:textColor="#FF8996AA"
+                                    android:textSize="13sp"/>
+
+                                <TextView
+                                    android:id="@+id/tv_jianjie"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#002700"
+                                    android:textSize="13sp"
+                                    tools:text="法大师傅士大夫 "/>
+
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/ll_button0"

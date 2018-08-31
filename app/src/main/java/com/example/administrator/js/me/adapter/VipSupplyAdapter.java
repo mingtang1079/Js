@@ -153,12 +153,29 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
                     protected void onSucess(String mS) {
                         if (isIn) {
                             //进用户详情
-                            ARouter.getInstance().build("/vip/VipUserDetailActivity")
-                                    .withString("id", mData.get(p).uid)
-                                    .navigation(mContext);
-                            isIn = false;
+
+
+                            DialogUtils.getDefaultDialog(mContext, "提示", "联系会员吗？", "确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface mDialogInterface, int mI) {
+
+                                    ARouter.getInstance().build("/vip/VipUserDetailActivity")
+                                            .withString("id", mData.get(p).uid)
+                                            .navigation(mContext);
+                                    isIn = false;
+                                    remove(p);
+                                }
+                            }, "取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface mDialogInterface, int mI) {
+                                    remove(p);
+                                }
+                            }).show();
+
+                        } else {
+                            remove(p);
+
                         }
-                        remove(p);
                     }
 
                     @Override

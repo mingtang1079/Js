@@ -37,6 +37,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_prompt"
         android:paddingLeft="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,6 +45,6 @@
         android:paddingBottom="16dp"
         android:textColor="#ffbcc8da"
         android:textSize="12sp"
-        tools:hint="打开后陌生人将无法与您取得沟通"/>
+        android:hint="打开后陌生人将无法与您取得沟通"/>
 
 </LinearLayout>

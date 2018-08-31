@@ -110,6 +110,11 @@ public class TrainerDetailActivity extends BaseActivity {
     @BindView(R.id.tv_message)
     TextView mTextViewMeassage;
 
+    @BindView(R.id.tv_congyetime)
+    TextView mTextViewCongyeTime;
+    @BindView(R.id.tv_jianjie)
+    TextView mTextViewJianjie;
+
     TrainerDetail mTrainerDetail;
 
     MenuItem mMenuItem;
@@ -193,7 +198,10 @@ public class TrainerDetailActivity extends BaseActivity {
 
     private void setData(final TrainerDetail mTrainerDetail) {
 
-
+        if (mTrainerDetail.moreuserinfo != null) {
+            mTextViewCongyeTime.setText(mTrainerDetail.moreuserinfo.workdate);
+            mTextViewJianjie.setText(mTrainerDetail.moreuserinfo.intro);
+        }
 
         if (mTrainerDetail.userinfo != null) {
             ImageLoader.load(mContext, mTrainerDetail.userinfo.img, mIvHead);
@@ -203,7 +211,7 @@ public class TrainerDetailActivity extends BaseActivity {
             //年龄
             if (mTrainerDetail.userinfo.sex != null) {
                 if (mTrainerDetail.userinfo.age != null)
-                    mTvAge.setText(" "+mTrainerDetail.userinfo.age);
+                    mTvAge.setText(" " + mTrainerDetail.userinfo.age);
                 if (mTrainerDetail.userinfo.sex.equals("1")) {
                     //男性
                     mTvAge.setBackground(mContext.getResources().getDrawable(R.drawable.com_round_corner_solid_men));
@@ -297,7 +305,7 @@ public class TrainerDetailActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.btn_sixin, R.id.btn_guanzhu, R.id.tv_yuyue, R.id.tv_goumai, R.id.content,R.id.iv_head})
+    @OnClick({R.id.btn_sixin, R.id.btn_guanzhu, R.id.tv_yuyue, R.id.tv_goumai, R.id.content, R.id.iv_head})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_sixin:
@@ -340,7 +348,7 @@ public class TrainerDetailActivity extends BaseActivity {
             case R.id.iv_head:
 
                 ARouter.getInstance().build("/activity/LookBigImageActivity")
-                        .withString("url",mTrainerDetail.userinfo.img)
+                        .withString("url", mTrainerDetail.userinfo.img)
                         .navigation();
 
                 break;

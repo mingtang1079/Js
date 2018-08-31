@@ -5,6 +5,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.utils.LogUtils;
@@ -23,6 +24,8 @@ public class YinsiSettingActivity extends BaseActivity implements UserPresenter.
     Toolbar mToolbar;
     @BindView(R.id.switchcomat)
     SwitchCompat mSwitchcomat;
+    @BindView(R.id.tv_prompt)
+    TextView mTextViewPro;
 
     UserPresenter mUserPresenter;
 
@@ -66,6 +69,18 @@ public class YinsiSettingActivity extends BaseActivity implements UserPresenter.
                 }
             }
         });
+
+        if (UserManager.getInsatance().getUser() != null) {
+            if ("0".equals(UserManager.getInsatance().getUser().role)) {
+
+                //        mIvAdd.setVisibility(View.GONE);
+                mTextViewPro.setText("打开后,陌生会员将无法与您取得沟通");
+            } else {
+                mTextViewPro.setText("打开后,陌生教练将无法与您取得沟通");
+
+            }
+        }
+
     }
 
     @Override
