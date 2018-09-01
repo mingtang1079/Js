@@ -202,10 +202,9 @@ public class MainActivity extends BaseActivity {
         return true;
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN,sticky = true)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onStatusChange(EventMessage.ChatButtonClick mZizhiStatus) {
-        mNavigator.showFragment(mMainCourseFragment);
-
+        mBnve.setCurrentItem(3);
     }
 
 }

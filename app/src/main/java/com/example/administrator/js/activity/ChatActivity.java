@@ -1,5 +1,6 @@
 package com.example.administrator.js.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -83,7 +84,11 @@ public class ChatActivity extends BaseActivity {
 //                        .navigation(mContext);
 
                 EventBus.getDefault().postSticky(new EventMessage.ChatButtonClick());
-                finish();
+
+                Intent mIntent=new Intent(mContext,MainActivity.class);
+                mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(mIntent);
+
                 return true;
             }
         });

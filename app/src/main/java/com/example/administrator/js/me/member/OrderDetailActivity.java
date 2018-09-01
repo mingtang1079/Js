@@ -101,6 +101,8 @@ public class OrderDetailActivity extends BaseActivity {
     @BindView(R.id.ll_time)
     LinearLayout mLinearLayoutTime;
 
+    @BindView(R.id.ll_button)
+    LinearLayout mLinearLayoutLlbutton;//底部
 
     @Override
     protected int getContentViewLayoutID() {
@@ -203,8 +205,12 @@ public class OrderDetailActivity extends BaseActivity {
 
         if ("a1".equals(mOrder.status)) {
             mTvOrderStatus.setText("待接单");
+
             mTvCancel.setVisibility(View.VISIBLE);
             mTvPay.setVisibility(View.GONE);
+            mLinearLayoutLlbutton.setVisibility(View.VISIBLE);
+            //============
+
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
             //成交时间
@@ -215,8 +221,11 @@ public class OrderDetailActivity extends BaseActivity {
             mTextViewRecord.setVisibility(View.GONE);
         } else if ("b2".equals(mOrder.status)) {
             mTvOrderStatus.setText("待付款");
+
             mTvCancel.setVisibility(View.VISIBLE);
             mTvPay.setVisibility(View.VISIBLE);
+            mLinearLayoutLlbutton.setVisibility(View.VISIBLE);
+            //============
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
 
@@ -228,11 +237,13 @@ public class OrderDetailActivity extends BaseActivity {
 
         } else if ("b3".equals(mOrder.status)) {
             mTvOrderStatus.setText("已完成");
+            //===========
             mTvCancel.setVisibility(View.GONE);
             mTvPay.setVisibility(View.GONE);
-
+            mLinearLayoutLlbutton.setVisibility(View.GONE);
+            //============
             //.私教课 && cuse<csum && status = 'b3'
-            if (!"体验课".equals(mOrder.ctypename)&&(mOrder.cuse!=mOrder.csum)) {
+            if (!"体验课".equals(mOrder.ctypename) && (mOrder.cuse != mOrder.csum)) {
                 mTvTuikuan.setVisibility(View.VISIBLE);
 
             } else {
@@ -249,8 +260,12 @@ public class OrderDetailActivity extends BaseActivity {
 
         } else if ("b55".equals(mOrder.status)) {
             mTvOrderStatus.setText("退款中");
+            //============
             mTvCancel.setVisibility(View.GONE);
             mTvPay.setVisibility(View.GONE);
+            mLinearLayoutLlbutton.setVisibility(View.GONE);
+            //============
+
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.VISIBLE);
             mTvTuike.setVisibility(View.VISIBLE);
@@ -267,8 +282,12 @@ public class OrderDetailActivity extends BaseActivity {
 
         } else if ("b56".equals(mOrder.status)) {
             mTvOrderStatus.setText("已退款");
+
             mTvCancel.setVisibility(View.GONE);
             mTvPay.setVisibility(View.GONE);
+            mLinearLayoutLlbutton.setVisibility(View.GONE);
+            //============
+
             mTvTuikuan.setVisibility(View.GONE);
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
             //退款显示的内容
@@ -282,8 +301,11 @@ public class OrderDetailActivity extends BaseActivity {
 
         } else {
             mTvCancel.setVisibility(View.GONE);
+
             mTvPay.setVisibility(View.GONE);
             mTvTuikuan.setVisibility(View.GONE);
+            mLinearLayoutLlbutton.setVisibility(View.GONE);
+            //============
             mTvQuxiaoTuikuan.setVisibility(View.GONE);
             mLinearLayoutTime.setVisibility(View.GONE);
             mLinearLayoutPayWay.setVisibility(View.GONE);
@@ -376,7 +398,7 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Override
     protected boolean registerEventBus() {
-        return  true;
+        return true;
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

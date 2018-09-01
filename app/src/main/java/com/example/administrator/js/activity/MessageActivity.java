@@ -85,14 +85,4 @@ public class MessageActivity extends BaseActivity {
         return null;
     }
 
-    @Override
-    protected boolean registerEventBus() {
-        return true;
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
-    public void onStatusChange(EventMessage.ChatButtonClick mZizhiStatus) {
-        finish();
-
-    }
 }

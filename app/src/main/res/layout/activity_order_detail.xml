@@ -11,6 +11,9 @@
 
     <include layout="@layout/include_toolbar"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/content"
         android:layout_width="match_parent"
@@ -202,9 +205,9 @@
                     android:id="@+id/tv_all_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="￥ 123.21"
                     android:textColor="#ff4a576a"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    tools:text="￥ 123.21"/>
             </LinearLayout>
 
             <View
@@ -236,9 +239,9 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="-123.21"
                     android:textColor="#ff4a576a"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    tools:text="-123.21"/>
             </LinearLayout>
 
 
@@ -270,9 +273,9 @@
                     android:id="@+id/tv_shiji_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="￥ 123.21"
                     android:textColor="#FD516E"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    tools:text="￥ 123.21"/>
             </LinearLayout>
 
 
@@ -343,9 +346,9 @@
                         android:id="@+id/tv_tuikuan_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="￥ 123.21"
                         android:textColor="#ff4a576a"
-                        android:textSize="14sp"/>
+                        android:textSize="14sp"
+                        tools:text="￥ 123.21"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -508,13 +511,6 @@
                 android:padding="12dp"
                 app:justifyContent="flex_end">
 
-                <TextView
-                    android:id="@+id/tv_cancel"
-                    style="@style/default_circle_button_bg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="取消订单"/>
 
                 <TextView
                     android:id="@+id/tv_quxiao_tuikuan"
@@ -523,14 +519,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:text="取消退款"/>
-
-                <TextView
-                    android:id="@+id/tv_pay"
-                    style="@style/default_circle_button_bg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:text="付款"/>
 
                 <TextView
                     android:id="@+id/tv_tuikuan"
@@ -562,9 +550,54 @@
             </com.google.android.flexbox.FlexboxLayout>
 
 
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_gravity="bottom"
+            android:id="@+id/ll_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="取消订单"
+                android:textColor="@color/white"
+                android:textSize="14sp"/>
+
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="14dp"
+                android:layout_marginTop="14dp"
+                android:background="#77808f"/>
+
+            <TextView
+                android:id="@+id/tv_pay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:padding="14dp"
+                android:text="付款"
+                android:textColor="@color/white"
+
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 </LinearLayout>

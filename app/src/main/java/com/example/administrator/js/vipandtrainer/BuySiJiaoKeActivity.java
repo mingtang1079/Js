@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.amap.api.services.core.PoiItem;
 import com.appbaselib.base.BaseActivity;
 import com.appbaselib.common.ImageLoader;
@@ -342,7 +343,11 @@ public class BuySiJiaoKeActivity extends BaseActivity {
                     @Override
                     protected void onSucess(String mS) {
 
-                        start(ApplySuccessActivity.class);
+                    //    start(ApplySuccessActivity.class);
+
+                        ARouter.getInstance().build("/me/member/OrderDetailActivity")
+                                .withString("id", mS)
+                                .navigation(mContext);
                         finish();
                     }
 
