@@ -78,7 +78,7 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
         TextView mTextViewPass = helper.getView(R.id.pass);
         TextView mTextViewRefuse = helper.getView(R.id.jujue);
 
-        if ("b1".equals(item.status)) {
+        if ("b3".equals(item.status)) {
             mTextViewPass.setVisibility(View.VISIBLE);
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(true);
@@ -87,12 +87,14 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
             mTextViewRefuse.setText("已拒绝");
-        } else if ("b3".equals(item.status)) {
-            mTextViewPass.setVisibility(View.GONE);
-            mTextViewRefuse.setVisibility(View.VISIBLE);
-            mTextViewRefuse.setEnabled(false);
-            mTextViewRefuse.setText("完成付款");
-        } else if ("b2".equals(item.status)) {
+        }
+//        else if ("b3".equals(item.status)) {
+//            mTextViewPass.setVisibility(View.GONE);
+//            mTextViewRefuse.setVisibility(View.VISIBLE);
+//            mTextViewRefuse.setEnabled(false);
+//            mTextViewRefuse.setText("完成付款");
+//        }
+        else if ("b2".equals(item.status)) {
             mTextViewPass.setVisibility(View.GONE);
             mTextViewRefuse.setVisibility(View.VISIBLE);
             mTextViewRefuse.setEnabled(false);
@@ -110,7 +112,7 @@ public class VipSupplyAdapter extends BaseRecyclerViewAdapter<VipSupply> {
         mTextViewPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
-                //通过有2状态  退课 体验课
+                //通过有2状态  退课/完成付款变为通过
                 if (getData().get(helper.getLayoutPosition()).status.equals("b55")) {
                     save("b56", getData().get(helper.getLayoutPosition()).id, helper.getLayoutPosition());
 

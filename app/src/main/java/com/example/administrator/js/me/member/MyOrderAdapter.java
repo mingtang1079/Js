@@ -80,13 +80,13 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
         TextView mTextViewQuxiaoTuikuan = helper.getView(R.id.tv_quxiao_tuikuan);
 
 
-        if ("a1".equals(item.status)) {
+        if ("b3".equals(item.status)) {
             helper.setText(R.id.tv_status, "待接单");
             mTextViewCancel.setVisibility(View.VISIBLE);
             mTextViewPay.setVisibility(View.GONE);
             mTextViewTuikuan.setVisibility(View.GONE);
             mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
-        } else if ("b2".equals(item.status)) {
+        } else if ("a1".equals(item.status)) {
             helper.setText(R.id.tv_status, "待付款");
             mTextViewCancel.setVisibility(View.VISIBLE);
             mTextViewPay.setVisibility(View.VISIBLE);
@@ -94,7 +94,7 @@ class MyOrderAdapter extends BaseRecyclerViewAdapter<MyOrder> {
             mTextViewQuxiaoTuikuan.setVisibility(View.GONE);
 
 
-        } else if ("b3".equals(item.status)) {
+        } else if ("b2".equals(item.status)) {
             helper.setText(R.id.tv_status, "已完成");
             mTextViewCancel.setVisibility(View.GONE);
             mTextViewPay.setVisibility(View.GONE);

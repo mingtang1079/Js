@@ -46,14 +46,14 @@ public class VipSupplyFragment extends BaseRefreshFragment<VipSupply> {
         Map<String, Object> mMap = new HashMap<>();
         mMap.put("tid", UserManager.getInsatance().getUser().id);
         if ("1".equals(status)) {
-            mMap.put("status", "1");
+            mMap.put("status", "3");
             mMap.put("tryflag", "1");
         } else if ("2".equals(status)) {
+            mMap.put("status", "3");
             mMap.put("tryflag", "0");
-            mMap.put("status", "1");
         } else if ("3".equals(status)) {
-            mMap.put("tryflag", "0");
             mMap.put("status", "b55");
+            mMap.put("tryflag", "0");
         } else {
             mMap.put("status", "b");
         }

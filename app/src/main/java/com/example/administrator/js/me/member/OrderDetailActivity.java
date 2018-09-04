@@ -203,7 +203,7 @@ public class OrderDetailActivity extends BaseActivity {
         mTvOrderChuangjianTime.setText(mOrder.createDate);
         mTvOrderChengjiaoTime.setText(mOrder.paydate);
 
-        if ("a1".equals(mOrder.status)) {
+        if ("b3".equals(mOrder.status)) {
             mTvOrderStatus.setText("待接单");
 
             mTvCancel.setVisibility(View.VISIBLE);
@@ -219,7 +219,7 @@ public class OrderDetailActivity extends BaseActivity {
 
             mLinearLayoutTuike.setVisibility(View.GONE);
             mTextViewRecord.setVisibility(View.GONE);
-        } else if ("b2".equals(mOrder.status)) {
+        } else if ("a1".equals(mOrder.status)) {
             mTvOrderStatus.setText("待付款");
 
             mTvCancel.setVisibility(View.VISIBLE);
@@ -235,7 +235,7 @@ public class OrderDetailActivity extends BaseActivity {
             mLinearLayoutTuike.setVisibility(View.GONE);
             mTextViewRecord.setVisibility(View.GONE);
 
-        } else if ("b3".equals(mOrder.status)) {
+        } else if ("b2".equals(mOrder.status)) {
             mTvOrderStatus.setText("已完成");
             //===========
             mTvCancel.setVisibility(View.GONE);
@@ -348,7 +348,7 @@ public class OrderDetailActivity extends BaseActivity {
                 break;
             case R.id.tv_quxiao_tuikuan:
 
-                cancel("b3");
+                cancel("b2");
 
                 break;
             case R.id.tv_pay:

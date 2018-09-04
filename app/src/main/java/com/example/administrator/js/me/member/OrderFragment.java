@@ -74,7 +74,7 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
                         @Override
                         public void onClick(DialogInterface mDialogInterface, int mI) {
 
-                            cancel(position, "b3");
+                            cancel(position, "b2");
                         }
                     }).show();
 

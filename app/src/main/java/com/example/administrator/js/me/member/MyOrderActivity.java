@@ -42,7 +42,7 @@ public class MyOrderActivity extends BaseActivity {
 
     protected String[] getTabTitle() {
 
-        return new String[]{"全部", "待接单", "待付款", "已完成", "退款中", "已退款"};
+        return new String[]{"全部", "待付款", "待接单", "已完成", "退款中", "已退款"};
     }
 
     ;
@@ -61,10 +61,10 @@ public class MyOrderActivity extends BaseActivity {
                     status = "a1";
                     break;
                 case 2:
-                    status = "b2";
+                    status = "b3";
                     break;
                 case 3:
-                    status = "b3";
+                    status = "b2";
                     break;
                 case 4:
                     status = "b55";
