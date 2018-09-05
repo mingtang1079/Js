@@ -114,7 +114,7 @@ public class OrderFragment extends BaseRefreshFragment<MyOrder> {
                     @Override
                     protected void onSucess(String mS) {
                         mAdapter.remove(mPosition);
-                        EventBus.getDefault().post(new EventMessage.PaySucessResult());
+                     //  EventBus.getDefault().post(new EventMessage.PaySucessResult());
                     }
 
                     @Override

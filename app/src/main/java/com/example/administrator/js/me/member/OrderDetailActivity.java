@@ -255,7 +255,7 @@ public class OrderDetailActivity extends BaseActivity {
 
             mLinearLayoutTime.setVisibility(View.VISIBLE);
             mLinearLayoutPayWay.setVisibility(View.VISIBLE);
-
+            mTextViewRecord.setVisibility(View.VISIBLE);
             mLinearLayoutTuike.setVisibility(View.GONE);
 
         } else if ("b55".equals(mOrder.status)) {
@@ -270,6 +270,7 @@ public class OrderDetailActivity extends BaseActivity {
             mTvQuxiaoTuikuan.setVisibility(View.VISIBLE);
             mTvTuike.setVisibility(View.VISIBLE);
             mTvTuikuan.setVisibility(View.GONE);
+            mTextViewRecord.setVisibility(View.VISIBLE);
             //   mTvTuikuan.setText("退课详情");
             //退款显示的内容
             mLinearLayoutTuike.setVisibility(View.VISIBLE);
@@ -298,6 +299,7 @@ public class OrderDetailActivity extends BaseActivity {
 //------------------
             mLinearLayoutTime.setVisibility(View.VISIBLE);
             mLinearLayoutPayWay.setVisibility(View.VISIBLE);
+            mTextViewRecord.setVisibility(View.VISIBLE);
 
         } else {
             mTvCancel.setVisibility(View.GONE);
