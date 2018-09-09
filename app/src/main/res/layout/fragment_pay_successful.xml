@@ -30,10 +30,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="42dp"
         android:layout_marginRight="42dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:orientation="horizontal">
 
         <TextView
+            android:visibility="gone"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:id="@+id/tv_back_home"
@@ -50,10 +51,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:id="@+id/tv_back_top"
-            style="@style/default_circle_button_bg"
+            style="@style/default_circle_solid_button_bg"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
             android:text="查看订单"
             android:textSize="12sp" />
 

@@ -53,7 +53,7 @@ import retrofit2.http.Url;
 public interface API {
 
 
-  //  String AUTHORIRY = BuildConfig.BASE_URL;
+    //  String AUTHORIRY = BuildConfig.BASE_URL;
 
     /**
      * 登录
@@ -282,6 +282,7 @@ public interface API {
     @FormUrlEncoded
     @POST("course/cancel")
     Observable<BaseModel<String>> cancelCourse2(@Field("id") String id, @Field("uid") String tid, @Field("cancelreason") String cancelreason);
+
     @FormUrlEncoded
     @POST("user/invitelist")
     Observable<BaseModel<Tuijian>> getTuijian(@Field("id") String userid);
@@ -455,4 +456,9 @@ public interface API {
     @FormUrlEncoded
     @POST("user/unbindwechat")
     Observable<BaseModel<String>> unbindwechat(@Field("id") String id);
+
+
+    @FormUrlEncoded
+    @POST("contact/canskip")
+    Observable<BaseModel<String>> canskip(@Field("uid") String uid,@Field("tid") String tid);
 }

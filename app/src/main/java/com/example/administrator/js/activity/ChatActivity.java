@@ -8,6 +8,9 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.network.ResponceSubscriber;
+import com.appbaselib.rx.RxHelper;
+import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
 import com.example.administrator.js.constant.EventMessage;
@@ -69,6 +72,7 @@ public class ChatActivity extends BaseActivity {
             }
         }
     }
+
     private void inteMenu() {
 
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
@@ -83,15 +87,44 @@ public class ChatActivity extends BaseActivity {
 //                        .withString("id", targetId)
 //                        .navigation(mContext);
 
-                EventBus.getDefault().postSticky(new EventMessage.ChatButtonClick());
+                yuyue();
 
-                Intent mIntent=new Intent(mContext,MainActivity.class);
-                mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(mIntent);
 
                 return true;
             }
         });
+
+    }
+
+    private void yuyue() {
+
+
+        Http.getDefault().canskip(targetId, UserManager.getInsatance().getUser().id)
+                .as(RxHelper.<String>handleResult(mContext))
+                .subscribe(new ResponceSubscriber<String>(mContext) {
+                    @Override
+                    protected void onSucess(String mS) {
+
+                        if ("1".equals(mS))
+                        {
+
+                            EventBus.getDefault().postSticky(new EventMessage.ChatButtonClick());
+                            Intent mIntent = new Intent(mContext, MainActivity.class);
+                            mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(mIntent);
+                        }
+                        else {
+
+                            showToast("抱歉，您还没购买课程");
+                        }
+                    }
+
+                    @Override
+                    protected void onFail(String message) {
+                        showToast(message);
+                    }
+                });
+
 
     }
 }

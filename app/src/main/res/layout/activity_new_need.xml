@@ -158,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/address"
                         android:drawablePadding="8dp"
-                        android:text="地址"
+                        android:text="上课地址"
                         android:textColor="#4a576a"
                         android:textSize="14sp" />
 
