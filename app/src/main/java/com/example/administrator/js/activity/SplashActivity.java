@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.administrator.js.App;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.locaiton.MainActivity;
 import com.example.administrator.js.me.model.User;
 import com.example.administrator.js.login.LoginActivity;
 import com.foamtrace.photopicker.SelectModel;

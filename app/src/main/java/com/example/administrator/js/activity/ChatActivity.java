@@ -13,6 +13,7 @@ import com.appbaselib.rx.RxHelper;
 import com.example.administrator.js.Http;
 import com.example.administrator.js.R;
 import com.example.administrator.js.UserManager;
+import com.example.administrator.js.activity.locaiton.MainActivity;
 import com.example.administrator.js.constant.EventMessage;
 
 import org.greenrobot.eventbus.EventBus;

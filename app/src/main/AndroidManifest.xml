@@ -100,12 +100,6 @@
         <service android:name=".service.LocationService" />
 
         <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:launchMode="singleTop"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SpalashActivityTheme">
@@ -310,6 +304,7 @@
         <activity android:name=".exercise.YouhuiWorkActivity"></activity>
         <activity android:name=".me.YaoqingmaActivity"></activity>
         <activity android:name=".activity.LookBigImageActivity"></activity>
+        <activity android:name=".activity.locaiton.MainActivity"/>
     </application>
 
 </manifest>

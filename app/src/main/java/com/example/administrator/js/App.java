@@ -309,7 +309,6 @@ public class App extends BaseApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         // 安装tinker
-        Beta.installTinker();
     }
 
     @Override
