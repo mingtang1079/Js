@@ -99,7 +99,7 @@ public class ChatActivity extends BaseActivity {
     private void yuyue() {
 
 
-        Http.getDefault().canskip(targetId, UserManager.getInsatance().getUser().id)
+        Http.getDefault().canskip(UserManager.getInsatance().getUser().id,targetId)
                 .as(RxHelper.<String>handleResult(mContext))
                 .subscribe(new ResponceSubscriber<String>(mContext) {
                     @Override

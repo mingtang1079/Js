@@ -114,6 +114,6 @@ public class MyOrderActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStatusChange(EventMessage.PaySucessResult mPaySucessResult) {
-     mViewpager.setCurrentItem(3);
+     mViewpager.setCurrentItem(2);
     }
 }

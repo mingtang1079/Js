@@ -405,6 +405,6 @@ public class OrderDetailActivity extends BaseActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onStatusChange(EventMessage.PaySucessResult mPaySucessResult) {
-        requestData();
+       finish();
     }
 }

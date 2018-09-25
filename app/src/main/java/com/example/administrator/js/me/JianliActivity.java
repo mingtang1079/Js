@@ -1,6 +1,7 @@
 package com.example.administrator.js.me;
 
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.appbaselib.base.BaseActivity;
+import com.appbaselib.common.SimpleTextWatcher;
 import com.example.administrator.js.R;
 import com.example.administrator.js.me.model.VerifyUser;
 import com.example.administrator.js.me.presenter.ZizhiPresenter;
@@ -52,6 +54,18 @@ public class JianliActivity extends BaseActivity implements ZizhiPresenter.Zizhi
         mToolbar.setTitle("简历自述");
         inteMenu();
         mZizhiPresenter = new ZizhiPresenter(mContext);
+        mEtText.addTextChangedListener(new SimpleTextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence mCharSequence, int mI, int mI1, int mI2) {
+                if (!TextUtils.isEmpty(mCharSequence)) {
+                    mTvTag.setText(mCharSequence.length() + "");
+                } else {
+                    mTvTag.setText("0");
+                }
+                mMenuItem.setEnabled(!TextUtils.isEmpty(mCharSequence));
+            }
+        });
+
         if (mVerifyUser != null) {
             if (mVerifyUser.intro != null)
                 mEtText.setText(mVerifyUser.intro);
@@ -66,7 +80,7 @@ public class JianliActivity extends BaseActivity implements ZizhiPresenter.Zizhi
         mToolbar.inflateMenu(R.menu.toolbar_menu_common);
         mMenuItem = mToolbar.getMenu().findItem(R.id.btn_common);
         mMenuItem.setTitle("保存");
-
+        mMenuItem.setEnabled(false);
         mMenuItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem mMenuItem) {
@@ -76,6 +90,7 @@ public class JianliActivity extends BaseActivity implements ZizhiPresenter.Zizhi
                 return true;
             }
         });
+
 
     }
 
