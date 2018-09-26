@@ -12,6 +12,7 @@ import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,6 +92,12 @@ public class ChooseYuyueTimeActivity extends BaseActivity {
         mButtonSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View mView) {
+
+                if(TextUtils.isEmpty(startdate)||TextUtils.isEmpty(starttime)||TextUtils.isEmpty(time)){
+                    showToast("请选择时间段");
+                    return;
+                }
+
                 Intent intent = new Intent();
                 intent.putExtra("startdate", startdate);
                 intent.putExtra("starttime", starttime);
