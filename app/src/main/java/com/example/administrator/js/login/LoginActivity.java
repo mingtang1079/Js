@@ -44,7 +44,7 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
 
 
     Navigator mNavigator;
-    LoginFragment mLoginFragment;
+    LoginFragmentKt mLoginFragment;
     RegisterFragment mRegisterFragment;
     UserTypeFragment mUserTypeFragment;
 
@@ -55,7 +55,7 @@ public class LoginActivity extends BaseActivity implements OnbackClickListener, 
 
     @Override
     protected void initView() {
-        mLoginFragment = new LoginFragment();
+        mLoginFragment = new LoginFragmentKt();
         mRegisterFragment = new RegisterFragment();
         mUserTypeFragment = new UserTypeFragment();
         mNavigator = new Navigator(getSupportFragmentManager(), R.id.container);
