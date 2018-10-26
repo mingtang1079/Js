@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 def releaseTime() {
     return new Date().format("yyyy-MM-dd", TimeZone.getDefault())
@@ -23,6 +23,11 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [moduleName: project.getName()]
+            }
+        }
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
             }
         }
         ndk {
@@ -120,11 +125,11 @@ dependencies {
     compile(rootProject.ext.dependencies["butterknife"]) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {
+    kapt(rootProject.ext.dependencies["butterknife-compiler"]) {
         exclude module: 'support-annotations'
         exclude module: 'butterknife-annotations'
     }
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    kapt  'com.alibaba:arouter-compiler:1.1.4'
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
     compile(rootProject.ext.dependencies["circleimageview"]) {
     }
